@@ -246,7 +246,6 @@
       }
     },
     "settings": {
-      "webVersion": "Версия веб:",
       "cardVersion": "Версия карты:",
       "walletAddressFor": "Ваш адрес кошелька для",
       "securitySettings": "Настройки безопасности",

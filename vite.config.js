@@ -9,9 +9,7 @@ import vue from '@vitejs/plugin-vue';
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import fs from 'fs';
 import path from 'path';
-import { version } from './package.json'
 import crypto from 'node:crypto';
-import { execSync } from 'node:child_process';
 
 const wasmMiddleware = () => {
   return {
@@ -41,16 +39,7 @@ const wasmMiddleware = () => {
 export default async ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   const env = loadEnv(mode, process.cwd(), '');
-  const environmentName = env.ENVIRONMENT_NAME || process.env.ENVIRONMENT_NAME;
-  const isProductionBuild = environmentName ? environmentName === 'production' : mode === 'production';
-
-  let gitBranch = 'unknown';
-  try {
-    gitBranch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-  } catch (e) {
-    // Fallback if git is not available
-  }
-  const buildBranch = process.env.CI_COMMIT_BRANCH || process.env.CI_COMMIT_REF_NAME || gitBranch;
+  const isProductionBuild = mode === 'production';
 
   let derivedKeyHex = '';
   let legacyDerivedKeyHex = '';
@@ -66,28 +55,12 @@ export default async ({ mode }) => {
       watch: {
         usePolling: true
       },
-      proxy: {
-        '/manifests': {
-          target: "https://united.network",
-          changeOrigin: true,
-          secure: false,
-        },
-        // '^/sdk-proxy/.*': { //AI
-        //   target: "https://sdk.united.network",
-        //   changeOrigin: true,
-        //   secure: false,
-        //   rewrite: (path) => path.replace(/^\/sdk-proxy/, ''),
-        // },
-      },
     },
     define: {
-      ENVIRONMENT: JSON.stringify(env.ENVIRONMENT_NAME),
-      GIT_BRANCH: JSON.stringify(buildBranch),
       UNITED_CARDS_KEY: JSON.stringify(env.UNITED_CARDS_KEY),
       UNITED_CARDS_DERIVED_KEY: JSON.stringify(derivedKeyHex),
       UNITED_CARDS_LEGACY_DERIVED_KEY: JSON.stringify(legacyDerivedKeyHex),
       UNITED_CARDS_IV_KEY: JSON.stringify(env.UNITED_CARDS_IV_KEY),
-      WEB_VERSION: JSON.stringify(`${version}`),
       UNITED_CONNECT_PROJECT_ID: JSON.stringify(env.UNITED_CONNECT_PROJECT_ID || process.env.UNITED_CONNECT_PROJECT_ID || '')
     },
     plugins: [
@@ -181,10 +154,10 @@ export default async ({ mode }) => {
             if (/\.(woff2?|ttf|otf|eot)$/i.test(assetInfo.name)) {
               return 'assets/fonts/[name][extname]';
             }
-            return `assets/[ext]/[name].${version}.[hash][extname]`;
+            return 'assets/[ext]/[name].[hash][extname]';
           },
-          chunkFileNames: `assets/js/chunks/[name].${version}.[hash].js`,
-          entryFileNames: `assets/js/[name].${version}.[hash].js`,
+          chunkFileNames: 'assets/js/chunks/[name].[hash].js',
+          entryFileNames: 'assets/js/[name].[hash].js',
         },
       },
     },

@@ -178,7 +178,7 @@
 
   const isDesktopDevice = (): boolean => !isMobileDevice() && !isTabletDevice()
 
-  export const isDesktop = ENVIRONMENT === 'production' ? isDesktopDevice() : false
+  export const isDesktop = false
   const isMobile = isMobileDevice()
   const isTablet = isTabletDevice()
 

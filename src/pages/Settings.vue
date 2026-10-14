@@ -9,9 +9,6 @@
         :buttonClick=errorHandler
         :buttonName="$t('button.ok')" />
       <div class="settings-menu" v-else-if="state === 'menu'" >
-        <div class="web-version">
-          {{ $t('pages.settings.webVersion') }} {{ WEB_VERSION }}
-        </div>
         <div v-if="storeCardVersion" class="card-version">
           {{ $t('pages.settings.cardVersion') }} {{ getDecodedVersion(storeCardVersion) }}
         </div>
@@ -396,7 +393,7 @@
       return { isLoading, state, accountAddress, error, goAuthorization, errorTitle, errorHandler, errorImg, pinState, pin, pinPre, createNewWallet, 
         showPinChangeHandler, backHandler, showSettingsChangeHandler, pinValid, errorPin, pinNew, pinOld, storeProvider, storeCardVersion, storeUserRegistered, 
         selectedMapOptionValue, updateMap, selectedMethod, defaultOptions, updatePinOld, updatePinNew, getDecodedVersion, nfcIsActive, pinLength, changePinLengthOld, changePinLengthNew, 
-        updatePinPre, confirmPinHandler, attentionIcon, successImg, pinCancelButton, errorSubtitle, nfcHandlerWindow, copied, copyToClip, isWebViewApp, WEB_VERSION,
+        updatePinPre, confirmPinHandler, attentionIcon, successImg, pinCancelButton, errorSubtitle, nfcHandlerWindow, copied, copyToClip, isWebViewApp,
         currentLanguage, setLocale, SettingsExtraItems, NfcSettingsView, onNfcError
       }
     },
@@ -510,10 +507,6 @@
     font-size: 13px;
     text-align: right;
     margin-bottom: 24px;
-  }
-  .web-version {
-    font-size: 13px;
-    text-align: right;
   }
   .public-key-card-group {
     width: calc(100% - 56px);

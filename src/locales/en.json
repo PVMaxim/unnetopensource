@@ -245,7 +245,6 @@
       }
     },
     "settings": {
-      "webVersion": "Web version:",
       "cardVersion": "Card version:",
       "walletAddressFor": "Your wallet address for",
       "securitySettings": "Security settings",
