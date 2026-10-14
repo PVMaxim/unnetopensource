@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0x8c39b1fd0e6260fdf20652fc436d25026832bfea",
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "ticker": "bitcoin"
+    },
+    {
+      "address": "0xf1feebc4376c68b7003450ae66343ae59ab37d3c",
+      "name": "Bridged USDC (COTI)",
+      "symbol": "USDC.e",
+      "decimals": 6,
+      "ticker": "usd-coin"
+    },
+    {
+      "address": "0x7637c7838ec4ec6b85080f28a678f8e234bb83d1",
+      "name": "COTI Treasury Governance Token",
+      "symbol": "gCOTI",
+      "decimals": 18,
+      "ticker": "coti-governance-token"
+    },
+    {
+      "address": "0x639acc80569c5fc83c6fbf2319a6cc38bbfe26d1",
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18,
+      "ticker": "ethereum"
+    },
+    {
+      "address": "0x02d1aebc3987ea473578a1f0c92347bd679bffc0",
+      "name": "Loot Token",
+      "symbol": "Loot",
+      "decimals": 6
+    }
+  ]
+}

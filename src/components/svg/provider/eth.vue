@@ -1,0 +1,27 @@
+<template>
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g filter="url(#filter0_b_1568_460)">
+            <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="#5C79FB"/>
+        </g>
+        <path d="M16.5032 4V12.87L24.0002 16.22L16.5032 4Z" fill="white" fill-opacity="0.602"/>
+        <path d="M16.5014 4L9.00342 16.22L16.5014 12.87V4Z" fill="white"/>
+        <path d="M16.4966 21.9672V27.9942L23.9986 17.6152L16.4966 21.9672Z" fill="white" fill-opacity="0.602"/>
+        <path d="M16.5039 27.9962V21.9682L9.00586 17.6172L16.5039 27.9962Z" fill="white"/>
+        <path d="M16.5032 20.5721L24.0002 16.2202L16.5032 12.873V20.5721Z" fill="white" fill-opacity="0.2"/>
+        <path d="M9.00354 16.2182L16.5015 20.5701V12.8711L9.00354 16.2182Z" fill="white" fill-opacity="0.602"/>
+        <defs>
+            <filter id="filter0_b_1568_460" x="-36.4486" y="-36.4486" width="104.897" height="104.897" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feGaussianBlur in="BackgroundImageFix" stdDeviation="18.2243"/>
+                <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_1568_460"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_1568_460" result="shape"/>
+            </filter>
+        </defs>
+    </svg>
+</template>
+
+<script>
+export default {
+   name: 'ethLogoSvg'
+}
+</script>

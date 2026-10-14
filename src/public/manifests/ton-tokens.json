@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "ticker": "tether"
+    },
+    {
+      "address": "EQAvlWFDxGF2lXm67y4yzC17wYKD9A0guwPkMs1gOsM__NOT",
+      "name": "Notcoin",
+      "symbol": "NOT",
+      "decimals": 9,
+      "ticker": "notcoin"
+    },
+    {
+      "address": "EQCvxJy4eG8hyHBFsZ7eePxrRsUQSFE_jpptRAYBmcG_DOGS",
+      "name": "Dogs",
+      "symbol": "DOGS",
+      "decimals": 9,
+      "ticker": "dogs-2"
+    },
+    {
+      "address": "EQD-cvR0Nz6XAyRBvbhz-abTrRC6sI5tvHvvpeQraV9UAAD7",
+      "name": "Catizen",
+      "symbol": "CATI",
+      "decimals": 9,
+      "ticker": "catizen"
+    },
+    {
+      "address": "EQAJ8uWd7EBqsmpSWaRdf_I-8R8-XHwh3gsNKhy-UrdrPcUo",
+      "name": "Hamster Kombat",
+      "symbol": "HMSTR",
+      "decimals": 9,
+      "ticker": "hamster-kombat"
+    },
+    {
+      "address": "EQA2kCVNwVsil2EM2mB0SkXytxCqQjS4mttjDpnXmwG9T6bO",
+      "name": "STON",
+      "symbol": "STON",
+      "decimals": 9,
+      "ticker": "ston-2"
+    }
+  ]
+}

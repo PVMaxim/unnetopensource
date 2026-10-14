@@ -1,0 +1,1 @@
+export const BITCOIN_NATIVE_DECIMALS = 8;

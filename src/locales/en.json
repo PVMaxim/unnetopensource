@@ -1,0 +1,1223 @@
+{
+  "nav": {
+    "landing": "Main page",
+    "authorization": "Sign in",
+    "dashboard": "My Wallet",
+    "send": "Send",
+    "receive": "Receive",
+    "settings": "Settings",
+    "restore-card": "Restore card",
+    "wallet-connect": "Wallet connect",
+    "connect-to-app": "Connect to app",
+    "connected-apps": "Connected apps",
+    "signOut": "Sign out",
+    "swap": "Swap",
+    "ai-assistant": "AI Assistant",
+    "feedback": "Feedback"
+  },
+  "title": {
+    "landing": "United Network NFC Wallet – Secure & Multi-Chain",
+    "enterprise": "United Network NFC Wallet – Secure & Multi-Chain",
+    "authorization": "Authorization",
+    "restore-card": "Restore card",
+    "registration-wallet": "Wallet registration",
+    "registration-card": "Card registration",
+    "registration": "Registration",
+    "dashboard": "My Wallet",
+    "send": "Send",
+    "receive": "Receive",
+    "settings": "Settings",
+    "not-supported-browser": "Browser not supported",
+    "not-found": "404 Not found",
+    "swap": "Swap",
+    "wallet-connect": "Wallet connect",
+    "connect-to-app": "Connect to app",
+    "connected-apps": "Connected apps",
+    "not-supported-device": "Device not supported",
+    "re-registration-card": "Card reset",
+    "not-supported-browser-only-app": "Use only in app",
+    "token-2049": "Token 2049"
+  },
+  "description": {
+    "landing": "Secure multi-chain crypto hardware wallet with NFC card. Send, receive, and swap crypto. Private keys stay offline on your non-custodial hardware card.",
+    "enterprise": "Secure multi-chain crypto hardware wallet with NFC card. Send, receive, and swap crypto. Private keys stay offline on your non-custodial hardware card.",
+    "restore-card": "Restore card",
+    "registration-wallet": "Wallet registration",
+    "registration-card": "Card registration",
+    "authorization": "Authorization",
+    "registration": "Registration",
+    "dashboard": "My Wallet",
+    "send": "Send",
+    "receive": "Receive",
+    "settings": "Settings",
+    "not-supported-browser": "Browser not supported",
+    "not-supported-device": "Device not supported",
+    "not-found": "404 Not found",
+    "swap": "Swap",
+    "wallet-connect": "Wallet connect",
+    "not-supported-browser-only-app": "Use only in app",
+    "re-registration-card": "Card reset",
+    "token-2049": "Token 2049 - The Largest Crypto Event"
+  },
+  "pages": {
+    "landing": {
+      "demo": "BETA VERSION: United Network is currently in beta testing. Please use with caution.",
+      "application": {
+        "description": "United Network application is available for download",
+        "imgAlt": "United Network application"
+      },
+      "earn": {
+        "title": "Earn While You",
+        "titleHighlight": "Share",
+        "description": "Invite friends to join the United Network community and earn <span class=\"text-white\"> 5 USDT</span> for each card purchase through your referral link.",
+        "button": "Get Referral Link"
+      },
+      "footer": {
+        "feedback": "Feedback",
+        "orderCard": "Order card",
+        "terms": "Terms of Use",
+        "privacy": "Privacy Policy"
+      },
+      "innovative": {
+        "title": "Innovative Features ",
+        "titleHighlight": "for Your Convenience",
+        "wallet": "Fully Non-Custodial Wallet",
+        "card": "Advanced Payment card<div class=\"text-small text-gray\">(NFC + Chip)</div>",
+        "p2p": "Easy P2P Transfers",
+        "app": "Web Wallet & application",
+        "fido": "FIDO Auth for Strong Security",
+        "web3": "Crosschain swaps & WEB3 login"
+      },
+      "next": {
+        "title": "What's coming",
+        "titleHighlight": "next?",
+        "description": "Our <span class=\"text-white\">development roadmap</span> focuses on creating a more inclusive and <span class=\"text-white\">efficient financial ecosystem</span>",
+        "grid1": {
+          "title": "Gasless Transactions",
+          "text": "Eliminating gas fees for everyday transactions, making blockchain technology more accessible for daily use."
+        },
+        "grid2": {
+          "title": "Cross-Border Payments",
+          "text": "Enabling seamless international transfers without traditional banking limitations or excessive fees."
+        },
+        "grid3": {
+          "title": "Financial Inclusion",
+          "text": "Bringing financial services to the unbanked population, creating opportunities for everyone."
+        },
+        "grid4": {
+          "title": "Stablecoins & CBDC",
+          "text": "Facilitating mass adoption of stablecoins and supporting future Central Bank Digital Currencies."
+        }
+      },
+      "next-gen": {
+        "title": "Next-Gen",
+        "titleHighlight": "Hardware Wallet",
+        "description": "Experience the power of non-custodial blockchain technology with our innovative <span class=\"text-white\">NFC card wallet.</span> Just tap your phone to instantly access your hardware wallet",
+        "btnConnect": "Connect Wallet",
+        "btnOrder": "Order Card"
+      },
+      "supported": {
+        "title": "Supported",
+        "titleHighlight": "Blockchains",
+        "blockchains1": "Bitcoin, Ethereum, Tron, ",
+        "blockchains2": "BNB Chain, TON, Solana, Venom, Arbitrum, Base, Polygon, Avalanche, Ripple, COTI"
+      },
+      "white-lable": {
+        "title": "White Label ",
+        "titleHighlight": "Solutions ",
+        "titleEnd": "for Enterprise",
+        "description": "<span class=\"text-white\">Custom-designed NFC cards</span> and <span class=\"text-white\">branded web applications</span> for businesses, institutions, and <span class=\"text-white\">large-scale deployments</span>",
+        "customization": {
+          "title": "Customization",
+          "item1": "Branded card design",
+          "item2": "Custom materials",
+          "item3": "Bulk production",
+          "item4": "Custom Web Interface"
+        },
+        "perfectFor": {
+          "title": "Perfect for",
+          "item1": "Financial Institutions",
+          "item2": "Event Organizes",
+          "item3": "Corporate Programs",
+          "item4": "Loyalty Programs"
+        },
+        "btnContact": "Contact us",
+        "btnFeedback": "Leave your feedback"
+      },
+      "your-secure": {
+        "title": "Setup your card in a",
+        "titleHighlight": "few steps",
+        "altText": "Setup your card in a few steps",
+        "step1": "Tap the card to your phone NFC chip",
+        "step2": "Securely write down a seed phrase<sup>*</sup>",
+        "step3": "Create a PIN code",
+        "step4": "Now you have access to your wallet",
+        "btnGet": "Get Your Wallet Card",
+        "note": "<sup>*</sup>Be sure to securely record your seed phrase, as it is the only way to restore funds if you lose access to your card."
+      }
+    },
+    "notfound": {
+      "title": "Page Not Found",
+      "subtitle": "The page you are looking for not available!"
+    },
+    "notSupportedBrowser": {
+      "title": "This page is only supported in ",
+      "titleSpan": "Chrome, Safari, or the United Network App",
+      "subtitle": "Open in a supported browser or download our app to continue."
+    },
+    "notSupportedBrowserOnlyApp": {
+      "title": "To set up and use the card, please.",
+      "titleSpan": "Download the app from the Google Play Store/AppStore",
+      "subtitle": "in the app to continue."
+    },
+    "notSupportedDevice": {
+      "title": "This page works only on ",
+      "titleSpan": "smartphone with NFC support",
+      "subtitle": "To proceed please scan QR code with your smartphone camera."
+    },
+    "authorization": {
+      "slide1": {
+        "title": "Non-Custodial NFC Card",
+        "description": "Tap your card on the top or back of your phone and hold for a few seconds to authenticate."
+      },
+      "slide2": {
+        "title": "Securely Store your Seed Phrase",
+        "description": "This is the only way to regain your access to the wallet"
+      },
+      "slide3": {
+        "title": "Your Keys. Your Card. Your Funds.",
+        "description": "Get access to your wallet and receive your first crypto"
+      },
+      "slide4": {
+        "title": "Multi Blockchain Support",
+        "description": "Access and manage assets across multiple blockchains"
+      },
+      "slide5": {
+        "title": "Wallet Connect Quick Login",
+        "description": "Effortless and secure login into any App with WalletConnect"
+      },
+      "connectCard": "Connect Card",
+      "restoreCard": "Restore card",
+      "noCard": "No card yet?",
+      "getYours": "Get yours here",
+      "nfc": {
+        "title": "Hold card to your phone",
+        "subtitle": "Keep card at the back of your phone to authorize"
+      },
+      "status": {
+        "wait": "Please wait.",
+        "authorizing": "Authorizing ...",
+        "prepareSign": "Prepare card sign",
+        "waitingSign": "Waiting for card sign",
+        "verificationSign": "Verification card sign",
+        "submitSign": "Card sign submit"
+      },
+      "errors": {
+        "title": "Authorization error.",
+        "subtitle": "Press OK to try again.",
+        "prepareError": "Error prepare card sign.",
+        "walletError": "Wallet address error.",
+        "processError": "Can not process keys.",
+        "validError": "Not valid public keys.",
+        "anotherCard": "You touch another card. to use it, please Sign In"
+      }
+    },
+    "seedPhrase": {
+      "title": "Save the seed phrase",
+      "enterSeedTitle": "Enter seed phrases",
+      "registrationSuccess": "Registration success",
+      "restoreSuccess": "Restore card success",
+      "cardValidation": "Card validation",
+      "tapCardValidation": "Tap your card for validation.",
+      "restoreValidationSubtitle": "Before continue restore your card we need validate it.",
+      "onlyUnitedNetworkValid": "Only United Network seed phrase is valid. Don't try to use seed phrase from other wallets.",
+      "attention": "Attention",
+      "attentionText": "Your seed phrase is crucial for accessing and recovering your account. Please write it down on a piece of paper, store it securely in your notes, or take a screenshot. Do not share it with anyone.",
+      "wroteItDown": "I wrote it down on paper",
+      "copyAllWords": "Copy all words",
+      "inputPlaceholder": "Input seed phrase",
+      "cardResetTitle": "Card reset.",
+      "cardResetSubtitle": "By resetting your wallet, a new seed phrase will be generated for this card. <span class='text-red'>Important: If you have not saved your current seed phrase, you will lose access to all existing tokens permanently.</span>",
+      "resetConfirmTitle": "Are you sure that you want to reset your card?",
+      "reset": "Reset",
+      "confirmationTitle": "Confirmation",
+      "confirmationSubtitle": "Are you sure you’ve saved your seed phrase?",
+      "pressOkToContinue": "Press OK to continue",
+      "status": {
+        "wait": "Please wait.",
+        "creating": "Creating seed phrases ...",
+        "restoring": "Restoring card ...",
+        "errorCreating": "Creating seed phrases error.",
+        "errorRestoring": "Restore card error.",
+        "errorSeed": "Seed create error."
+      },
+      "errors": {
+        "wrongWords": "Phrases has wrong words.",
+        "emptyFields": "Phrases exist empty field.",
+        "authorizationFail": "Authorization fail"
+      }
+    },
+    "connectedApps": {
+      "title": "Wallet Connect Access",
+      "subtitle": "Scan the WalletConnect QR code ",
+      "subtitleSpan": "or paste a link to log in to the desired dApp.",
+      "connect": "Connect",
+      "debug": "Debug",
+      "cameraPermissionError": "Reload a page. You need to grant a camera access permission.",
+      "unableToUseCamera": "Unable to use camera",
+      "cameraPermissionNotGranted": "Camera access permission is not granted",
+      "unableToConnect": "Unable to connect",
+      "obsoleteQrError": "Specified QR or url is obsolete or not valid."
+    },
+    "send": {
+      "title": "Send Tokens",
+      "history": "History",
+      "historyColon": "History:",
+      "pressOkToTryAgain": "Press OK to try again.",
+      "tabs": {
+        "sendTokens": "Send Tokens",
+        "history": "History"
+      },
+      "form": {
+        "selectToken": "Select token to send",
+        "deleteCustomToken": "Delete custom token",
+        "inputWalletPlaceholder": "Input wallet address",
+        "walletAddressLabel": "Wallet address",
+        "amountPlaceholder": "0.00",
+        "amountLabel": "Amount",
+        "amountUsdLabel": "Amount to Send in $",
+        "gasPriceLabel": "Gas Price:"
+      },
+      "modals": {
+        "confirmDeleteTitle": "Would you like to delete?",
+        "notificationTitle": "Notification",
+        "notificationSubtitle": "This application request some browser permissions like: camera, clipboard or NFC. Please check your browser permissions or supporting it.",
+        "transactionComplete": "All set! Your transaction is complete.",
+        "pressOkBack": "Press OK to back"
+      },
+      "status": {
+        "wait": "Please wait.",
+        "gettingData": "Getting data",
+        "prepareSign": "Prepare sign transaction",
+        "processing": "Transaction is being processed."
+      },
+      "historyList": {
+        "receive": "Receive",
+        "send": "Send",
+        "pending": "Pending",
+        "success": "Success",
+        "failed": "Failed",
+        "noHistory": "No transaction history"
+      }
+    },
+    "receive": {
+      "title": "Receive Tokens in",
+      "walletAddress": "Your wallet address:",
+      "status": {
+        "wait": "Please wait.",
+        "gettingData": "Getting data"
+      },
+      "errors": {
+        "title": "Transfer error.",
+        "subtitle": "Press OK to try again.",
+        "receiveError": "Receive token error."
+      }
+    },
+    "selectToken": {
+      "selectToken": "Select Token",
+      "search": "Search",
+      "notFound": "Not found"
+    },
+    "connectToApp": {
+      "scanAppLink": "Scan app connect link:",
+      "specifyManually": "Or specify app connect link manually:",
+      "connect": "Connect",
+      "cameraPermissionError": "Reload a page. You need to grant a camera access permission."
+    },
+    "dashboard": {
+      "tokens": "Tokens",
+      "totalBalance": "Your total balance:",
+      "searchPlaceholder": "Search or add custom token address",
+      "results": "results",
+      "yourBalances": "Your balances",
+      "confirmAddTitle": "Would you like to add?",
+      "disclaimer": "We do not verify or endorse tokens. Verify the contract address and transact at your own risk.",
+      "historyColon": "Transactions on",
+      "status": {
+        "wait": "Please wait.",
+        "gettingBalances": "Getting balances"
+      }
+    },
+    "settings": {
+      "webVersion": "Web version:",
+      "cardVersion": "Card version:",
+      "walletAddressFor": "Your wallet address for",
+      "securitySettings": "Security settings",
+      "changePin": "Change Pin",
+      "cardReset": "Card reset",
+      "changeNFCSettings": "Change NFC Settings",
+      "changeSettings": "Change Settings",
+      "changeLanguage": "Change language",
+      "cardListenerPriority": "Card listener priority",
+      "pinChanged": "Pin changed",
+      "pinChangeError": "Pin change error.",
+      "pressOkToBack": "Press OK to back",
+      "pressOkToTryAgain": "Press OK to try again.",
+      "needsAuthorization": "Needs authorization for change pin code",
+      "cardIsNewRegister": "This card is new, please register it.",
+      "pressOkToAuthorize": "Press OK to try authorize",
+      "incorrectPin": "Incorrect PIN. Please try again"
+    }
+  },
+  "nfcHandler": {
+    "touchYourCard": "Touch your card",
+    "holdYourCard": "Hold your card flat against the back of your device until this window is open.",
+    "transactionSignature": "Transaction signature",
+    "of": "of",
+    "successfullySigned": "Successfully signed.",
+    "pleaseWait": "Please wait {seconds}",
+    "touchCard": "Touch your card.",
+    "holdCardSubtitle": "Hold your card flat against the back of your device until this window is open.",
+    "removeAndTouchAgain": "Please remove the card and touch it again. Do not remove it until this window is closed.",
+    "attempt": "Attempt {n}",
+    "retryCount": "Retry {n} from {max}",
+    "removeAndClickContinue": "Please remove your card and click button Continue.",
+    "errorReadWriteRetry": "An error card read/write occurred. Tap Retry",
+    "attentionStayInstruction": "Attention! Do not remove the card even after the vibration signal, until the window closes or until a new instruction appears.",
+    "exactSpotInstruction": "Place the card on the exact spot of the NFC reader and do not move the card."
+  },
+  "cantonOnboarding": {
+    "title": "Canton Onboarding Required",
+    "description": "If you want to continue working with Canton, you need to create a wallet and to do this you need to sign a transaction with your card.",
+    "buttonCreate": "Create Canton Wallet",
+    "buttonRetry": "Try onboarding again",
+    "statusPreparing": "Preparing onboarding transaction...",
+    "statusSigning": "Please tap your card to sign...",
+    "statusSending": "Sending onboarding transaction...",
+    "errorOccurred": "An error occurred during onboarding. Please make sure to create a wallet and try again.",
+    "stepsTitle": "Canton Wallet Setup Steps",
+    "stepsDescription": "To complete your Canton wallet setup, please sign the following steps using your card:",
+    "stepOf": "Step {current} of {total}",
+    "stepCompleted": "Completed",
+    "stepPending": "Pending signature",
+    "stepInProgress": "Signing...",
+    "steps": {
+      "CREATE_USER": {
+        "title": "Wallet Creation",
+        "description": "Registering user account on Canton Network",
+        "nfcTitle": "Canton Wallet Creation",
+        "nfcSubTitle": "Tap your card to create your wallet"
+      },
+      "MINTING_DELEGATION": {
+        "title": "Delegation of Rights",
+        "description": "Configuring delegation for automatic reward merging",
+        "nfcTitle": "Delegation of Rights",
+        "nfcSubTitle": "Tap your card to configure delegation"
+      },
+      "CC_TRANSFER_PREAPPROVAL": {
+        "title": "Automatic Approval of CC Token Transactions",
+        "description": "Setting up automatic pre-approval for incoming CC transfers",
+        "nfcTitle": "CC Transaction Approval",
+        "nfcSubTitle": "Tap your card to approve CC transactions"
+      }
+    },
+    "pendingTransfersTitle": "Pending Transfers",
+    "pendingTransfersDescription": "You have pending transfers sent to you. You can accept or reject them using your card.",
+    "from": "From:",
+    "statusPreparingAccept": "Preparing to accept transfer...",
+    "statusPreparingReject": "Preparing to reject transfer...",
+    "statusSendingAccept": "Sending accept transaction...",
+    "statusSendingReject": "Sending reject transaction...",
+    "errorTransferSigning": "An error occurred during transfer signing.",
+    "errorFetchData": "Unable to process request at this time, please try again later."
+  },
+  "searchTokens": {
+    "minChars": "min 3 characters required",
+    "errorGetData": "Couldn't get data. Please try again later."
+  },
+  "qr": {
+    "scanQrCode": "Scan QR code"
+  },
+  "errors": {
+    "oldPinIncorrect": "You have entered your old pin code incorrectly.",
+    "wrongPin": "Wrong PIN code.",
+    "cardBlocked": "Your card has been blocked due to multiple incorrect PIN attempts. Please use your seed phrase to restore access.",
+    "networkError": "Can't process request, network error.",
+    "insufficientBalanceForGas": "Insufficient {token} balance to cover gas fees.",
+    "insufficientBalance": "Insufficient {token} balance.",
+    "amountTooSmall": "Too small amount. {amount}",
+    "tooManyDecimals": "Too small amount. {decimals}",
+    "lowDstLimit": "Recipient has limits for this token.",
+    "lowNativeBalance": "Low balance of native coins.",
+    "sameSenderRecipient": "Same sender and recipient.",
+    "walletAlreadyDeployed": "Wallet already deployed.",
+    "internalError": "Internal error.",
+    "invalidCardResponse": "Invalid card response.",
+    "invalidArgument": "Invalid argument.",
+    "walletNotDeployed": "Card wallet is not deployed.",
+    "lowTokenBalance": "Low token balance.",
+    "publicKeyMismatch": "You use another card.",
+    "noIoPublicKey": "Please authorize with card.",
+    "transferError": "Transfer error.",
+    "sendTokenError": "Send token error.",
+    "incorrectToken": "Incorrect token",
+    "balanceError": "Balance error",
+    "insufficientBalanceGeneric": "Insufficient balance.",
+    "tooSmallAmount": "Too small amount.",
+    "minimalAmountIs": "Minimal amount is",
+    "minimalDecimalsIs": "Minimal decimals is",
+    "enteredDataWrong": "Entered data is wrong.",
+    "insufficientBalanceForGasGeneric": "Insufficient balance of {token} for gas.",
+    "wrongAmount": "Wrong amount",
+    "walletAddressError": "Wallet address error",
+    "authorizationError": "Authorization error.",
+    "browserError": "Browser error.",
+    "cardError": "Card error.",
+    "restoreCardError": "Restore card error.",
+    "seedCreateError": "Seed create error.",
+    "tokenTransfer": "Token transfer.",
+    "cardResponse": "Card response.",
+    "gettingData": "Getting data.",
+    "cardRequest": "Card request.",
+    "publicKeyError": "Public key error.",
+    "nfcScanTimeout": "NFC scan timeout!",
+    "nfcPermissionsError": "NFC permissions error.",
+    "noNdefSupport": "No NDEF support.",
+    "noCardResponse": "No card response.",
+    "ndefReadTimeout": "NDEF read timed out.",
+    "ndefWriteTimeout": "NDEF write timed out.",
+    "tokenLimit": "Token limit.",
+    "incorrectAmount": "Incorrect amount.",
+    "stakingError": "Staking error.",
+    "invalidAmount": "Invalid amount."
+  },
+  "pin": {
+    "enterPin": "Enter PIN",
+    "enterOldPin": "Enter old PIN",
+    "enterNewPin": "Enter new PIN",
+    "reEnterNewPin": "Re-enter new PIN",
+    "rememberPinCode": "Remember pin code"
+  },
+  "settings": {
+    "incorrectPin": "Incorrect PIN. Please try again"
+  },
+  "footer": {
+    "allRightsReserved": "All Rights Reserved"
+  },
+  "messages": {
+    "messageXrpMinBalance": "To use XRP, a minimum balance of 1.5 XRP is required."
+  },
+  "button": {
+    "ok": "Ok",
+    "add": "Add",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "copied": "Copied",
+    "process": "Process",
+    "continue": "Continue",
+    "retry": "Retry",
+    "submit": "Submit",
+    "accept": "Accept",
+    "reject": "Reject",
+    "close": "Close"
+  },
+  "yes": "yes",
+  "no": "no",
+  "submit": "submit",
+  "order": "Order",
+  "apple": "Apple app store",
+  "google": "google app store",
+  "presentation_download": "Presentation download",
+  "go_home": "Go home",
+  "swap": {
+    "loader": {
+      "createManager": "Create manager",
+      "createTx": "Create transaction",
+      "createTxHash": "Create transaction hash",
+      "checkingAmounts": "Checking amounts",
+      "getQuote": "Get quote",
+      "createTransaction": "Create transaction",
+      "sendingTransaction": "Sending transaction",
+      "waitingConfirmation": "Waiting for transaction confirmation"
+    },
+    "action": {
+      "pressOk": "Press OK.",
+      "continue": "Continue",
+      "approve": "Approve {amount} {symbol}",
+      "increaseTrustLimit": "Increase trust limit for {symbol}"
+    },
+    "errors": {
+      "invalidAmount": "Incorrect amount."
+    }
+  },
+  "landing_v2": {
+    "hero": {
+      "shippingBadge": "Now shipping worldwide",
+      "titlePart1": "Your assets.",
+      "titlePart2": "Your control.",
+      "titlePart3": "On a card.",
+      "subtitle": "Self-custody hardware wallet — not a payment card. Tap to sign crypto transactions with EAL6+ security. Works with any NFC-enabled smartphone, multichain, no app required.",
+      "buyCta": "Get Your Card — $39",
+      "connectCta": "Connect Wallet",
+      "whiteLabelCta": "White-Label Solutions",
+      "cardAlt": "United Network NFC Wallet Card"
+    },
+    "tractionBar": {
+      "features": {
+        "eal": {
+          "value": "EAL6+",
+          "label": "Secure Element"
+        },
+        "fido": {
+          "value": "FIDO2",
+          "label": "Authentication"
+        },
+        "multichain": {
+          "value": "Multichain",
+          "label": "Support"
+        },
+        "partners": {
+          "value": "20+",
+          "label": "Enterprise Partners"
+        }
+      }
+    },
+    "walletFeatures": {
+      "label": "Full Crypto Wallet",
+      "title": "Your Wallet.",
+      "titleHighlight": "In Your Pocket.",
+      "description": "Send, receive, and swap across multiple blockchains. No app download. Just tap your card to your phone.",
+      "sendTokens": {
+        "title": "Send Tokens",
+        "desc": "Tap to sign transactions. Send crypto to anyone, anywhere. Works with any NFC-enabled smartphone, no app required."
+      },
+      "receiveAssets": {
+        "title": "Receive Assets",
+        "desc": "Generate receive addresses instantly. Multichain support. Your keys, your control."
+      },
+      "multichainSwaps": {
+        "title": "Multichain Swaps",
+        "desc": "Swap tokens across multiple blockchains directly from your card. Cross-chain, seamless, tap to approve."
+      },
+      "walletConnect": {
+        "title": "WalletConnect",
+        "desc": "Link your card to any WalletConnect-compatible dApp. Scan, tap, approve — hardware-level security for every interaction."
+      }
+    },
+    "howItWorks": {
+      "label": "How It Works",
+      "title": "Tap. Confirm.",
+      "titleHighlight": "Done.",
+      "description": "Three steps. No apps, no cables, no complexity.",
+      "step1": {
+        "title": "Tap your card",
+        "desc": "Hold the card to your phone's NFC sensor. No pairing, no Bluetooth, no cables."
+      },
+      "step2": {
+        "title": "Confirm on screen",
+        "desc": "Review the transaction details in your browser wallet. No app download required."
+      },
+      "step3": {
+        "title": "Transaction signed",
+        "desc": "Your keys never leave the card. The signature is sent, your assets stay safe."
+      }
+    },
+    "swapFeature": {
+      "label": "Built-In Swaps",
+      "title": "Multichain Swaps —",
+      "titleHighlight": "With a Tap",
+      "description": "No need to juggle multiple wallets or pay bridge fees. Swap between Ethereum, Solana, Bitcoin, Tron, and more — decentralized, secure, and affordable.",
+      "multichain": {
+        "label": "Multichain",
+        "text": "11+ blockchains in one wallet"
+      },
+      "instant": {
+        "label": "Instant Swaps",
+        "text": "DEX aggregation — tap to confirm"
+      },
+      "lowFees": {
+        "label": "Low Fees",
+        "text": "Best rates across DEXs, no hidden costs"
+      },
+      "selfCustody": {
+        "label": "Self-Custody",
+        "text": "Your keys never leave your card"
+      },
+      "cta": "Try Swaps Now"
+    },
+    "valueProps": {
+      "label": "Why United Network",
+      "title": "Everything you need.",
+      "titleHighlight": "Nothing you don't.",
+      "description": "The most secure, simple, and versatile hardware wallet on the market.",
+      "noApp": {
+        "title": "No App Required",
+        "desc": "Works in any mobile browser. No downloads, no updates, no Play Store or App Store dependency."
+      },
+      "security": {
+        "title": "Bank-Grade Security",
+        "desc": "EAL6+ certified secure element — the same standard trusted by governments and banks worldwide."
+      },
+      "multichain": {
+        "title": "Multichain",
+        "desc": "Ethereum, Solana, Bitcoin, Polygon, and more. One card for all major networks and 20,000+ tokens."
+      },
+      "selfCustody": {
+        "title": "True Self-Custody",
+        "desc": "Your keys never leave the card. No third party ever has access to your assets. Full sovereignty."
+      }
+    },
+    "socialProof": {
+      "label": "Multi-Chain",
+      "title": "Multichain",
+      "titleHighlight": "Support",
+      "description": "Bitcoin, Ethereum, Solana, and more — with new networks added regularly.",
+      "more": "More",
+      "tokens": "+ over 20,000 tokens across all supported networks"
+    },
+    "storageComparison": {
+      "label": "Self-Custody Matters",
+      "title": "How Do You Store",
+      "titleHighlight": "Your Crypto?",
+      "description": "Not all wallets are created equal. See how your current solution stacks up.",
+      "buyNow": "Buy Now",
+      "onExchange": {
+        "title": "On an Exchange",
+        "p1": "Third-party custody",
+        "s1": "Third-party custody",
+        "p2": "Easy to use",
+        "s2": "Easy to use",
+        "p3": "Keys aren't yours",
+        "s3": "Keys aren't yours",
+        "p4": "Vulnerable to hacks",
+        "s4": "Vulnerable to hacks",
+        "p5": "Trust required",
+        "s5": "Trust required",
+        "footer": "Not your keys, not your coins",
+        "footerShort": "Not your keys"
+      },
+      "softwareWallet": {
+        "title": "Software Wallet",
+        "p1": "You control your keys",
+        "s1": "You own your keys",
+        "p2": "Always accessible",
+        "s2": "Always accessible",
+        "p3": "Keys on connected device",
+        "s3": "Keys on device",
+        "p4": "Exposed to malware",
+        "s4": "Exposed to malware",
+        "p5": "One breach = total loss",
+        "s5": "One hack = all lost",
+        "footer": "Keys live on your phone",
+        "footerShort": "Keys live on your phone"
+      },
+      "hardwareWallet": {
+        "title": "Hardware Wallet",
+        "p1": "Keys stored offline",
+        "s1": "Keys stored offline",
+        "p2": "Best security (until now)",
+        "s2": "Strong security",
+        "p3": "Cables & charging needed",
+        "s3": "Cables & charging",
+        "p4": "Bulky, easy to forget",
+        "s4": "Bulky, easy to forget",
+        "p5": "Clunky user experience",
+        "s5": "Clunky UX",
+        "footer": "Secure but inconvenient",
+        "footerShort": "Secure, not handy"
+      },
+      "unitedCard": {
+        "title": "United Network Card",
+        "titleShort": "United Network",
+        "p1": "Keys on EAL6+ chip",
+        "s1": "Keys on EAL6+ chip",
+        "p2": "Tap to sign, no cables",
+        "s2": "Tap to sign, no cables",
+        "p3": "Hardware security, wallet UX",
+        "s3": "Hardware security",
+        "p4": "Fits in your wallet",
+        "s4": "Fits in your wallet",
+        "p5": "Any NFC-enabled phone",
+        "s5": "Any NFC phone",
+        "footer": "The wallet the way it should be",
+        "footerShort": "Wallet as it should be"
+      }
+    },
+    "dualCta": {
+      "label": "Get Started",
+      "title": "Choose Your",
+      "titleHighlight": "Path",
+      "description": "Whether you're an individual or a business, we have a solution for you.",
+      "forUsers": "For Users",
+      "forUsersTitle": "Get Your",
+      "forUsersHighlight": "Card",
+      "forUsersDesc": "One card, multichain, 20,000+ tokens. Cold storage that fits in your wallet. Starting at $39.",
+      "forUsersBtn": "Shop Now — $39",
+      "forPlatforms": "For Platforms",
+      "forPlatformsTitle": "White-Label for",
+      "forPlatformsHighlight": "Your Users",
+      "forPlatformsDesc": "Custom-branded NFC wallet cards for your platform. Your brand, our security infrastructure. Turn-key deployment.",
+      "forPlatformsBtn": "Explore Enterprise"
+    },
+    "appDownload": {
+      "label": "Mobile App",
+      "title": "App or Web —",
+      "titleHighlight": "Your Choice",
+      "heading": "United Network",
+      "headingHighlight": "is available for download",
+      "p1": "The app is ",
+      "p1bold": "not required",
+      "p2": " — your wallet works directly in any mobile browser like Safari or Chrome. Download the app if you prefer a native experience.",
+      "note1": "These are the only official download links, verified by ",
+      "note2": "united.network"
+    },
+    "aboutTeam": {
+      "label": "About Us",
+      "title": "Who We",
+      "titleHighlight": "Are",
+      "description": "A team of hardware engineers, embedded systems specialists, and crypto-natives — bridging traditional manufacturing with Web3 security.",
+      "h1": {
+        "title": "Hardware Manufacturing DNA",
+        "desc": "Rooted in traditional hardware manufacturing, IoT, and microcontroller engineering — we design and produce physical products, not just software."
+      },
+      "h2": {
+        "title": "Security-First Engineering",
+        "desc": "Deep expertise in secure elements, NFC protocols, and cryptographic hardware. Every design decision starts with the question: how could this be attacked?"
+      },
+      "h3": {
+        "title": "25,000+ Cards Shipped",
+        "desc": "Proven at scale with enterprise partners across exchanges, DAOs, and token ecosystems. End-to-end manufacturing and logistics in-house."
+      }
+    },
+    "roadmap": {
+      "label": "Roadmap",
+      "title": "What's coming",
+      "titleHighlight": "next?",
+      "description": "Our development roadmap focuses on creating a more inclusive and efficient financial ecosystem.",
+      "i1": {
+        "title": "Gasless Transactions",
+        "desc": "Zero gas fees for everyday transactions. Making blockchain accessible for daily use."
+      },
+      "i2": {
+        "title": "Cross-Border Payments",
+        "desc": "Instant international transfers without banking limits or excessive fees."
+      },
+      "i3": {
+        "title": "Financial Inclusion",
+        "desc": "Banking the unbanked. Financial services accessible to everyone, everywhere."
+      },
+      "i4": {
+        "title": "Stablecoins & CBDC",
+        "desc": "Supporting stablecoins and future Central Bank Digital Currencies for mass adoption."
+      }
+    },
+    "faq": {
+      "label": "FAQ",
+      "title": "Common",
+      "titleHighlight": "Questions",
+      "feedbackLabel": "Community-Driven",
+      "feedbackTitle": "Help Us",
+      "feedbackHighlight": "Build Better",
+      "feedbackDesc": "Your feedback shapes the future of self-custody. Share your thoughts, report issues, or suggest features.",
+      "btnFeedback": "Share Feedback",
+      "btnEmail": "Email Us",
+      "easterEgg": "We're happy to hear from you.",
+      "q1": {
+        "q": "How does tap-to-sign work?",
+        "a": "Hold the card to your phone's NFC sensor. The card communicates with your browser wallet, signs the transaction on-chip, and sends the signature back. Your private keys never leave the card."
+      },
+      "q2": {
+        "q": "Do I need an app?",
+        "a": "No. United Network works in any mobile browser via Web NFC. No app downloads required. We also offer companion apps on iOS and Android for users who prefer them."
+      },
+      "q3": {
+        "q": "What happens if I lose my card?",
+        "a": "Your assets remain safe. Without your PIN, the card is useless to anyone who finds it. You can recover your wallet onto a new card using your backup phrase."
+      },
+      "q4": {
+        "q": "Which blockchains are supported?",
+        "a": "Bitcoin, Ethereum, Solana, Arbitrum, Avalanche, BASE, Polygon, TON, Venom, BNB Smart Chain, Tron, and more. Plus over 20,000 tokens across these networks."
+      },
+      "q5": {
+        "q": "Do you offer white-label solutions?",
+        "a": "Yes. Web3 projects can order custom-branded cards with their own design. We handle manufacturing, security, and logistics. Visit our Enterprise page for details."
+      }
+    },
+    "header": {
+      "home": "Home",
+      "features": "Features",
+      "howItWorks": "How It Works",
+      "enterprise": "Enterprise",
+      "faq": "FAQ",
+      "shopNow": "Shop Now"
+    },
+    "footer": {
+      "description": "Hardware custody infrastructure for Web3. Built by a team with roots in hardware manufacturing, IoT, and embedded security. 25,000+ cards shipped worldwide.",
+      "product": "Product",
+      "company": "Company",
+      "social": "Social",
+      "contact": "Contact",
+      "rights": "© 2023–2026 United Network. All rights reserved.",
+      "privacyPolicy": "Privacy Policy",
+      "termsOfUse": "Terms of Use"
+    }
+  },
+  "enterprise_v2": {
+    "hero": {
+      "badge": "White-Label Partnership",
+      "titleP1": "Unlock New Revenue Models",
+      "titleP2": "With a Branded Card Wallet.",
+      "subtitle": "White-Label Card Wallet tailored for your Business, Ecosystem, Clients, Users, and Partners — free of hardware development or supply chain headaches.",
+      "micronote": "Flexible Package Offerings · Custom Integration Opportunities",
+      "ctaPrimary": "Schedule a Partnership Call",
+      "ctaSecondary": "Email Us",
+      "trust1": "25,000+ cards shipped",
+      "trust2": "20+ active partnerships",
+      "trust3": "EAL6+ certified"
+    },
+    "whatWeOffer": {
+      "label": "What We Offer",
+      "title": "Your brand.",
+      "titleHighlight": "Everywhere it matters.",
+      "f1": {
+        "title": "End-to-End Solution",
+        "desc": "A complete, end-to-end hybrid solution — ready to deliver and distribute from day one."
+      },
+      "f2": {
+        "title": "Full White-Label",
+        "desc": "Customization across card wallet, packaging, and app interface — logo, colors, and design, completely yours."
+      },
+      "f3": {
+        "title": "Custom Integration",
+        "desc": "Plug it into your existing product or launch it as a standalone branded experience. Custom software integration included."
+      }
+    },
+    "b2bValueProps": {
+      "label": "Why Partner With Us",
+      "title": "Everything to launch.",
+      "titleHighlight": "Nothing to build.",
+      "description": "We've already solved the hard parts of hardware wallet deployment — so you don't have to.",
+      "items": {
+        "turnkey": {
+          "title": "Turn-Key Solution",
+          "desc": "We handle everything — card manufacturing, secure element provisioning, firmware, and global logistics. You focus on your users."
+        },
+        "brand": {
+          "title": "Your Brand, Our Tech",
+          "desc": "Fully custom-branded cards with your logo, colors, and design. Your users see your brand — powered by our proven security infrastructure."
+        },
+        "pricing": {
+          "title": "Enterprise Pricing",
+          "desc": "Volume-based pricing that makes hardware wallets accessible for your entire user base. Contact us for a custom quote tailored to your scale."
+        },
+        "traction": {
+          "title": "Proven Traction",
+          "desc": "25,000+ cards deployed across exchanges, blockchain ecosystems, and Web3 infrastructure platforms. Battle-tested at scale."
+        }
+      }
+    },
+    "whatYouGain": {
+      "label": "What You Gain",
+      "title": "Six reasons to",
+      "titleHighlight": "partner.",
+      "mysteryTitle": "Reason #6",
+      "mysteryDesc": "This one's best explained in person. We'll let you discover it yourself — but trust us, it's worth the conversation.",
+      "mysteryCta": "Schedule a Call",
+      "items": {
+        "revenue": {
+          "title": "New Revenue Streams",
+          "desc": "Turn your brand into an on-chain revenue engine. Every user interaction within your ecosystem becomes a monetization opportunity — with fees flowing back to you across integrated financial services and third-party connections. Net-positive ROI, from day one.",
+          "highlight": "Net-positive ROI"
+        },
+        "onboarding": {
+          "title": "User Onboarding",
+          "desc": "A familiar card format removes the barrier to Web3 entry. No cables required — just tap. FIDO2-secured NFC makes self-custody as simple as a payment, bringing any user onchain under 30 secs.",
+          "highlight": "Onchain under 30 secs"
+        },
+        "retention": {
+          "title": "User Retention, LTV & Engagement",
+          "desc": "Hardware ownership creates a physical bond between your user and your brand. Tap-to-sign transactions, dApp connectivity, and multichain access keep users active, engaged, and coming back — long after the first interaction.",
+          "highlight": "Physical brand bond"
+        },
+        "exposure": {
+          "title": "Brand Exposure",
+          "desc": "From fully branded card wallet and packaging to a custom-domain front-end (wallet.yourbrand.com / brandedwallet.xyz) and your own AppStore / Play Market listing — your identity is present at every touchpoint. On the desk, in the hand, and on the screen.",
+          "highlight": "Every touchpoint"
+        },
+        "product": {
+          "title": "Product Offering",
+          "desc": "Expand what your business delivers. Embed the wallet interface into your existing product, make a cross-software integration or launch it as a standalone branded solution — hardware-backed, multichain-ready, and built for stablecoins, RWAs, DID verification, NFTs, token-gated access and even CBDCs.",
+          "highlight": "Multichain-ready"
+        }
+      }
+    },
+    "useCases": {
+      "label": "Use Cases",
+      "title": "Built for",
+      "titleHighlight": "every vertical.",
+      "description": "From exchanges to ecosystems, our white-label solution adapts to your needs.",
+      "items": {
+        "exchanges": {
+          "title": "Crypto Exchanges",
+          "desc": "Offer branded hardware wallets as a premium add-on for your users. Increase retention and reduce withdrawal-related support tickets."
+        },
+        "ecosystems": {
+          "title": "Blockchain Ecosystems",
+          "desc": "Distribute branded cards to your community. Perfect for ecosystem grants, conference giveaways, and developer incentive programs."
+        },
+        "projects": {
+          "title": "Token Projects",
+          "desc": "Branded wallet cards for your token holders. Physical engagement with your digital community. Ideal for loyalty programs and airdrops."
+        },
+        "infra": {
+          "title": "Web3 Infrastructure",
+          "desc": "Integrate NFC wallet cards into your platform's security layer. Browser SDK and open API for seamless integration with your existing stack."
+        }
+      }
+    },
+    "techSpecs": {
+      "label": "Technical Specs",
+      "title": "Enterprise-grade",
+      "titleHighlight": "infrastructure.",
+      "description": "Built for security-first organizations that don't compromise.",
+      "items": {
+        "security": {
+          "label": "Security",
+          "value": "EAL6+",
+          "desc": "Common Criteria certified secure element — the highest standard used by government and military applications."
+        },
+        "auth": {
+          "label": "Authentication",
+          "value": "FIDO2",
+          "desc": "Passwordless authentication standard. Your users can use the same card for Web3 signing and Web2 login."
+        },
+        "chains": {
+          "label": "Blockchains",
+          "value": "13+",
+          "desc": "Bitcoin, Ethereum, Solana, Polygon, Arbitrum, Avalanche, BASE, TON, BNB, Tron, Venom, and growing."
+        },
+        "integration": {
+          "label": "Integration",
+          "value": "SDK",
+          "desc": "Browser-based Web NFC SDK. Integrate tap-to-sign into your dApp or platform in days, not months."
+        },
+        "tokens": {
+          "label": "Tokens",
+          "value": "20,000+",
+          "desc": "Support for ERC-20, SPL, BEP-20, and native tokens across all supported blockchains."
+        },
+        "connectivity": {
+          "label": "Connectivity",
+          "value": "NFC",
+          "desc": "No cables, no Bluetooth, no batteries. Tap-to-sign via Web NFC works with any modern smartphone."
+        }
+      }
+    },
+    "positioning": {
+      "label": "Your Business, Your Way",
+      "title": "You know your business — ",
+      "titleHighlight": "you decide how you position it.",
+      "items": {
+        "ecosystem": {
+          "title": "Ecosystem Product",
+          "desc": "Embed the wallet into your existing platform as a native feature. Seamless integration with your product, your UX, your user accounts. The card becomes part of your ecosystem — enhancing what you already offer."
+        },
+        "techyMerch": {
+          "title": "Techy-Merch",
+          "desc": "Card-as-merch for events, launches, and community building. Branded hardware your users actually use daily — not another t-shirt that sits in a drawer. Real utility meets premium brand presence."
+        },
+        "standalone": {
+          "title": "Standalone Turnkey Business",
+          "desc": "Launch a complete wallet business under your brand. Your domain, your app listing, your revenue stream. We handle manufacturing, provisioning, and infrastructure — you focus on growth."
+        }
+      }
+    },
+    "pricing": {
+      "label": "Pricing",
+      "title": "Volume",
+      "titleHighlight": "Pricing",
+      "description": "Transparent partnership tiers. All plans include manufacturing, security, and logistics.",
+      "tiers": {
+        "starter": {
+          "name": "Starter",
+          "volume": "100–499 units",
+          "price": "Contact us",
+          "f1": "Custom card design",
+          "f2": "Standard packaging",
+          "f3": "Browser SDK access",
+          "f4": "Email support"
+        },
+        "growth": {
+          "name": "Growth",
+          "volume": "500–4,999 units",
+          "price": "Contact us",
+          "f1": "Everything in Starter",
+          "f2": "Custom packaging",
+          "f3": "Co-branded app",
+          "f4": "Dedicated account manager",
+          "f5": "24hr response SLA"
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "volume": "5,000+ units",
+          "price": "Contact us",
+          "f1": "Everything in Growth",
+          "f2": "Full white-label app",
+          "f3": "Custom integrations",
+          "f4": "On-site support",
+          "f5": "NDA & exclusivity options"
+        }
+      }
+    },
+    "distribution": {
+      "label": "Distribution Partnership",
+      "title": "Distribute Under",
+      "titleHighlight": "United Network Brand",
+      "description": "Don't want to build your own brand? Become a distribution partner and sell United Network cards directly to your audience. We handle product, support, and branding — you focus on sales.",
+      "cta": "Become a Distribution Partner",
+      "items": {
+        "retail": {
+          "title": "Retail Partnership",
+          "desc": "Carry United Network cards in your physical or online store. Wholesale pricing, drop-shipping available, zero inventory risk."
+        },
+        "regional": {
+          "title": "Regional Distribution",
+          "desc": "Become the exclusive United Network distributor in your country or region. Territory rights, marketing support, co-branded materials."
+        },
+        "benefits": {
+          "title": "Partnership Benefits",
+          "desc": "Attractive margins, ready-to-sell product, established brand trust, full technical support, and marketing materials provided."
+        }
+      }
+    },
+    "merch": {
+      "label": "Exclusive Pack",
+      "title": "Card-as-a-Merch:",
+      "titleHighlight": "Beyond White-Label",
+      "taglineMain": "A familiar card becomes a unique merch item that empowers brands with a Web3 tool.",
+      "taglineSub": "Launch your own branded merch item that won't be left in a warehouse or discarded after your event. Your branded NFC card-wallet provides real value: a secure, convenient self-custody wallet.",
+      "includedHeader": "What's Included",
+      "whyTitle": "Why Card-as-a-Merch?",
+      "whyDesc": "Launch unique merch that won't be left in a warehouse — your branded NFC card-wallet provides <span class='font-semibold text-text-primary'>real value</span> and extends your personalized ecosystem.",
+      "cta": "Request Merch Pack Info",
+      "steps": {
+        "s1": {
+          "title": "A la carte service",
+          "desc": "Full-cycle support from pilot to rollout — just submit your request and approve your design."
+        },
+        "s2": {
+          "title": "Branded NFC card",
+          "desc": "Transform a standard card form factor into a unique merch item that engages your audience and boosts loyalty."
+        },
+        "s3": {
+          "title": "Custom packaging",
+          "desc": "Make your merch exclusive with branded envelopes or pouches — turning your card into a premium gift with real utility."
+        },
+        "s4": {
+          "title": "Next-level engagement",
+          "desc": "Turn every wallet interaction into personalized on-chain experiences, unlocking a whole new level of community engagement."
+        }
+      },
+      "benefits": {
+        "b1": {
+          "label": "Not forgotten merch",
+          "text": "Functional hardware that users keep and use"
+        },
+        "b2": {
+          "label": "Brand loyalty",
+          "text": "Every transaction reminds them of your brand"
+        },
+        "b3": {
+          "label": "Community utility",
+          "text": "Token-gated access, rewards, exclusive experiences"
+        },
+        "b4": {
+          "label": "Premium positioning",
+          "text": "Hardware merch = perceived value far above cost"
+        }
+      }
+    },
+    "cta": {
+      "label": "Get Started",
+      "title": "Ready to explore a ",
+      "titleHighlight": "partnership?",
+      "description": "Whether you're deploying 1,000 cards or 100,000, we'll tailor a solution to your platform. Let's talk.",
+      "btnPrimary": "Schedule a Call",
+      "btnSecondary": "Email Us",
+      "note": "Typical response time: 24 hours. NDA available on request."
+    }
+  },
+  "permissions": {
+    "title": "Wallet Permissions",
+    "subtitle": "Grant permissions to enable instant deposit notifications, sound chimes, QR code scanning, and hardware NFC cards.",
+    "enableAll": "Enable All Permissions",
+    "notNow": "Not Now",
+    "dontAskAgain": "Don't Ask Again",
+    "notificationsTitle": "Push Notifications",
+    "notificationsDesc": "Instant alerts for incoming transactions and token transfers",
+    "audioTitle": "Sound & Chimes",
+    "audioDesc": "Audible bell chime when new deposits arrive",
+    "cameraTitle": "Camera & QR Scanner",
+    "cameraDesc": "Instant QR code scanning for wallet addresses & WalletConnect",
+    "nfcTitle": "NFC Card Reader",
+    "nfcDesc": "Tap & scan hardware crypto NFC cards directly on mobile/browser",
+    "clipboardTitle": "Clipboard Access",
+    "clipboardDesc": "Quick paste wallet addresses and transaction data from clipboard",
+    "blockedHintGeneral": "Some permissions are blocked. Tap the 🔒 icon in the address bar or check app permissions in your phone settings.",
+    "blockedHint_notifications": "Notifications permission is blocked. Enable notifications in device Settings (Settings → Apps → Chrome → Notifications) or tap the 🔒 icon in the address bar.",
+    "blockedHint_camera": "Camera access is blocked. Allow camera access via the 🔒 icon in the address bar or in device Settings (Settings → Apps → Chrome → Permissions → Camera).",
+    "blockedHint_nfc": "NFC access is blocked or NFC is turned off. Turn on NFC in device Settings or allow access via the 🔒 icon in the address bar.",
+    "blockedHint_clipboard": "Clipboard access is blocked. Allow clipboard access via the 🔒 icon in the browser address bar.",
+    "blockedHint_audio": "Audio playback is restricted. Allow audio autoplay in site settings."
+  },
+  "chat": {
+    "noTokens": "No tokens found",
+    "amountLabel": "Amount",
+    "toLabel": "To",
+    "networkLabel": "Network",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "redirectingToSend": "Redirecting to Send page...",
+    "cancelled": "Action cancelled",
+    "reset": "Reset",
+    "loadingAssistant": "Loading assistant...",
+    "placeholder": "Ask anything or send a command...",
+    "placeholderLoading": "Assistant is thinking...",
+    "status": {
+      "loading": "Loading...",
+      "ready": "Ready",
+      "error": "Error"
+    },
+    "welcomeMessage": "Hello! I am your AI assistant. How can I help you today?",
+    "loadFailed": "Failed to load assistant"
+  },
+  "settingsExtra": {
+    "tokenDetector": "Incoming Transfer Detector",
+    "soundEffects": "Sound Effects",
+    "newsNotifications": "News Notifications",
+    "on": "On",
+    "off": "Off"
+  },
+  "staking": {
+    "title": "Staking & Yield",
+    "deposit": "Stake Deposit",
+    "withdraw": "Withdraw Stake",
+    "amountToDeposit": "Deposit Amount",
+    "amountToWithdraw": "Withdraw Amount",
+    "walletBalance": "Wallet Balance",
+    "stakedBalance": "Staked Balance",
+    "currentValue": "Current Value",
+    "apy": "Annual Yield (APY)",
+    "estMonthlyYield": "Est. Monthly Yield",
+    "max": "Max",
+    "approveAction": "Approve & Deposit",
+    "withdrawAction": "Withdraw Funds",
+    "successTitle": "Operation Successful",
+    "unsupportedNetwork": "Unsupported Network",
+    "unsupportedNetworkDesc": "Staking is available on supported EVM networks",
+    "noVaults": "No vaults available",
+    "tvl": "Total Value Locked (TVL)",
+    "yourStake": "Your Stake",
+    "manage": "Manage"
+  }
+}

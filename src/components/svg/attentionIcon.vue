@@ -1,0 +1,29 @@
+<template>
+    <svg width="101" height="101" viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M50.4072 100.173C78.0215 100.173 100.407 77.7876 100.407 50.1733C100.407 22.5591 78.0215 0.17334 50.4072 0.17334C22.793 0.17334 0.407227 22.5591 0.407227 50.1733C0.407227 77.7876 22.793 100.173 50.4072 100.173Z" fill="url(#paint0_linear_3443_1074)"/>
+    <g filter="url(#filter0_d_3443_1074)">
+        <path d="M42.9461 63.5133V16.4733H54.9461V63.5133H42.9461ZM48.9941 84.9213C46.9781 84.9213 45.2661 84.2173 43.8581 82.8093C42.4821 81.4013 41.7941 79.6733 41.7941 77.6253C41.7941 75.6413 42.4821 73.9613 43.8581 72.5853C45.2661 71.2093 46.9781 70.5213 48.9941 70.5213C50.9781 70.5213 52.6581 71.2093 54.0341 72.5853C55.4101 73.9613 56.0981 75.6413 56.0981 77.6253C56.0981 79.6733 55.4101 81.4013 54.0341 82.8093C52.6581 84.2173 50.9781 84.9213 48.9941 84.9213Z" fill="white"/>
+    </g>
+    <defs>
+    <filter id="filter0_d_3443_1074" x="36.7941" y="16.4734" width="24.3041" height="79.448" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+    <feOffset dy="6"/>
+    <feGaussianBlur stdDeviation="2.5"/>
+    <feComposite in2="hardAlpha" operator="out"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 0.89349 0 0 0 0 0.434384 0 0 0 0 0 0 0 0 1 0"/>
+    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3443_1074"/>
+    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3443_1074" result="shape"/>
+    </filter>
+    <linearGradient id="paint0_linear_3443_1074" x1="50.4072" y1="0.17334" x2="50.4072" y2="100.173" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#FCA100"/>
+    <stop offset="1" stop-color="#FD7B00"/>
+    </linearGradient>
+    </defs>
+    </svg>
+</template>
+<script>
+        export default {
+        name: 'BackIconSvg'
+        }
+</script>

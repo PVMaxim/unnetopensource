@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0xee7d8bcfb72bc1880d0cf19822eb0a2e6577ab62",
+      "name": "Vault Bridge ETH",
+      "symbol": "vbETH",
+      "decimals": 18,
+      "ticker": "vaultbridge-bridged-eth-katana"
+    },
+    {
+      "address": "0x0913da6da4b42f538b445599b46bb4622342cf52",
+      "name": "Vault Bridge WBTC",
+      "symbol": "vbWBTC",
+      "decimals": 8,
+      "ticker": "vaultbridge-bridged-wbtc-katana"
+    },
+    {
+      "address": "0x203a662b0bd271a6ed5a60edfbd04bfce608fd36",
+      "name": "Vault Bridge USDC",
+      "symbol": "vbUSDC",
+      "decimals": 6,
+      "ticker": "vaultbridge-bridged-usdc-katana"
+    },
+    {
+      "address": "0x2dca96907fde857dd3d816880a0df407eeb2d2f2",
+      "name": "Vault Bridge USDT",
+      "symbol": "vbUSDT",
+      "decimals": 6,
+      "ticker": "vaultbridge-bridged-usdt-katana"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0x8729438eb15e2c8b576fcc6aecda6a148776c0f5",
+      "name": "BENQI",
+      "symbol": "QI",
+      "decimals": 18,
+      "ticker": "benqi"
+    },
+    {
+      "address": "0x60781c2586d68229fde47564546784ab3faca982",
+      "name": "Pangolin",
+      "symbol": "PNG",
+      "decimals": 18,
+      "ticker": "pangolin"
+    },
+    {
+      "address": "0xd586e7f844cea2f87f50152665bcbc2c279d8d70",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "ticker": "avalanche-bridged-dai-avalanche"
+    },
+    {
+      "address": "0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "ticker": "usd-coin"
+    },
+    {
+      "address": "0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7",
+      "name": "TetherToken",
+      "symbol": "USDT",
+      "decimals": 6,
+      "ticker": "tether"
+    },
+    {
+      "address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd",
+      "name": "JoeToken",
+      "symbol": "JOE",
+      "decimals": 18,
+      "ticker": "joe"
+    },
+    {
+      "address": "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
+      "name": "USD Coin",
+      "symbol": "USDC.E",
+      "decimals": 6,
+      "ticker": "usd-coin-avalanche-bridged-usdc-e"
+    },
+    {
+      "address": "0x62edc0692bd897d2295872a9ffcac5425011c661",
+      "name": "GMX",
+      "symbol": "GMX",
+      "decimals": 18,
+      "ticker": "gmx"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "settingsExtra": {
+    "tokenDetector": "Transaction notifications",
+    "soundEffects": "Sound notifications",
+    "newsNotifications": "News & alerts",
+    "on": "On",
+    "off": "Off"
+  }
+}

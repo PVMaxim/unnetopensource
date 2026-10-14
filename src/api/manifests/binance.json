@@ -1,0 +1,130 @@
+{
+    "version": 1,
+    "name": "Binance Smart Chain",
+    "type": "evm",
+
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "binance-smart-chain",
+        "url": "https://coingecko.worker.united.network"
+    },
+
+    "nativeToken": {
+        "name": "BNB",
+        "symbol": "BNB",
+        "ticker": "binancecoin"
+    },
+
+    "tokens": {
+        "mandatory": [
+            {
+                "address": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+                "name": "BTCB Token",
+                "symbol": "BTCB",
+                "decimals": 18,
+                "ticker": "binance-bitcoin"
+            },
+            {
+                "address": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+                "name": "Dai Token",
+                "symbol": "DAI",
+                "decimals": 18,
+                "ticker": "binance-peg-dai"
+            },
+            {
+                "address": "0x55d398326f99059ff775485246999027b3197955",
+                "name": "Tether USD",
+                "symbol": "USDT",
+                "decimals": 18,
+                "ticker": "binance-bridged-usdt-bnb-smart-chain"
+            },
+            {
+                "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+                "name": "PancakeSwap Token",
+                "symbol": "CAKE",
+                "decimals": 18,
+                "ticker": "pancakeswap-token"
+            },
+            {
+                "address": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+                "name": "Ethereum Token",
+                "symbol": "ETH",
+                "decimals": 18,
+                "ticker": "binance-peg-weth"
+            },
+            {
+                "address": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+                "name": "Uniswap",
+                "symbol": "UNI",
+                "decimals": 18,
+                "ticker": "uniswap"
+            },
+            {
+                "address": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+                "name": "ChainLink Token",
+                "symbol": "LINK",
+                "decimals": 18,
+                "ticker": "chainlink"
+            },
+            {
+                "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+                "name": "USD Coin",
+                "symbol": "USDC",
+                "decimals": 18,
+                "ticker": "binance-bridged-usdc-bnb-smart-chain"
+            },
+            {
+                "address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+                "name": "Wrapped BNB",
+                "symbol": "WBNB",
+                "decimals": 18,
+                "ticker": "wbnb"
+            },
+            {
+                "address": "0xf4c8e32eadec4bfe97e0f595add0f4450a863a11",
+                "name": "THENA",
+                "symbol": "THE",
+                "decimals": 18,
+                "ticker": "thena"
+            },
+            {
+                "address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+                "name": "World Liberty Financial USD",
+                "symbol": "USD1",
+                "decimals": 18,
+                "ticker": "usd1-wlfi"
+            },
+            {
+                "address": "0x47474747477b199288bf72a1d702f7fe0fb1deea",
+                "name": "World Liberty Financial",
+                "symbol": "WLFI",
+                "decimals": 18,
+                "ticker": "world-liberty-financial"
+            },
+            {
+                "address": "0x000ae314e2a2172a039b26378814c252734f556a",
+                "name": "Aster",
+                "symbol": "ASTER",
+                "decimals": 18,
+                "ticker": "aster-2"
+            },
+            {
+                "address": "0xce24439f2d9c6a2289f741120fe202248b666666",
+                "name": "United Stables",
+                "symbol": "U",
+                "decimals": 18,
+                "ticker": "united-stables"
+            }
+        ],
+        "all": "https://united.network/manifests/binance-tokens.json"
+    },
+
+    "blockExplorer": {
+        "transaction": "https://bscscan.com/tx/{id}"
+    },
+
+    "chainId": 56,
+    "rpcUrl": "https://bsc.worker.united.network",
+    "scannerApiUrl": "https://bscscan.worker.united.network",
+    "multicallAddress": "0xcA11bde05977b3631167028862bE2a173976CA11"
+}

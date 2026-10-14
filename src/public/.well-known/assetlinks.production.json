@@ -1,0 +1,82 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B",
+        "E7:C5:D6:A3:D5:C1:E4:95:56:36:DF:2F:3B:C5:86:C2:5D:1F:E4:94:72:A0:5E:BE:33:7A:23:23:9E:17:58:1E"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "test.united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "swap.united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "swap2.united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "store.united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B"
+      ]
+    }
+  },
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "united.network",
+      "site": "fidotest.united.network",
+      "sha256_cert_fingerprints": [
+        "CB:A5:F5:97:4D:96:FE:03:14:59:E7:D0:08:91:C1:A6:4D:7C:0A:B9:1D:22:17:87:42:B3:10:8B:21:6D:14:5B"
+      ]
+    }
+  }
+]

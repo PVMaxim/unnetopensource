@@ -1,0 +1,341 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 6,
+      "ticker": "usd-coin"
+    },
+    {
+      "address": "0x0bb217e40f8a5cb79adf04e1aab60e5abd0dfc1e",
+      "name": "SwftCoin",
+      "symbol": "SWFTC",
+      "decimals": 8,
+      "ticker": "swftcoin"
+    },
+    {
+      "address": "0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202",
+      "name": "Kyber Network Crystal v2",
+      "symbol": "KNC",
+      "decimals": 18,
+      "ticker": "kyber-network-crystal"
+    },
+    {
+      "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+      "name": "0x Protocol Token",
+      "symbol": "ZRX",
+      "decimals": 18,
+      "ticker": "0x"
+    },
+    {
+      "address": "0x41e5560054824ea6b0732e656e3ad64e20e94e45",
+      "name": "Civic",
+      "symbol": "CVC",
+      "decimals": 8,
+      "ticker": "civic"
+    },
+    {
+      "address": "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
+      "name": "Basic Attention Token",
+      "symbol": "BAT",
+      "decimals": 18,
+      "ticker": "basic-attention-token"
+    },
+    {
+      "address": "0x6b175474e89094c44da98b954eedeac495271d0f",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "ticker": "dai"
+    },
+    {
+      "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "ticker": "tether"
+    },
+    {
+      "address": "0x0000000000085d4780b73119b644ae5ecd22b376",
+      "name": "TrueUSD",
+      "symbol": "TUSD",
+      "decimals": 18,
+      "ticker": "true-usd"
+    },
+    {
+      "address": "0xde7d85157d9714eadf595045cc12ca4a5f3e2adb",
+      "name": "STPT",
+      "symbol": "STPT",
+      "decimals": 18,
+      "ticker": "stp-network"
+    },
+    {
+      "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+      "name": "ChainLink Token",
+      "symbol": "LINK",
+      "decimals": 18,
+      "ticker": "chainlink"
+    },
+    {
+      "address": "0xba11d00c5f74255f56a5e366f4f77f5a186d7f55",
+      "name": "BandToken",
+      "symbol": "BAND",
+      "decimals": 18,
+      "ticker": "band-protocol"
+    },
+    {
+      "address": "0x88df592f8eb5d7bd38bfef7deb0fbc02cf3778a0",
+      "name": "Tellor Tributes",
+      "symbol": "TRB",
+      "decimals": 18,
+      "ticker": "tellor"
+    },
+    {
+      "address": "0xc00e94cb662c3520282e6f5717214004a7f26888",
+      "name": "Compound",
+      "symbol": "COMP",
+      "decimals": 18,
+      "ticker": "compound-governance-token"
+    },
+    {
+      "address": "0xba100000625a3754423978a60c9317c58a424e3d",
+      "name": "Balancer",
+      "symbol": "BAL",
+      "decimals": 18,
+      "ticker": "balancer"
+    },
+    {
+      "address": "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e",
+      "name": "yearn.finance",
+      "symbol": "YFI",
+      "decimals": 18,
+      "ticker": "yearn-finance"
+    },
+    {
+      "address": "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2",
+      "name": "SushiToken",
+      "symbol": "SUSHI",
+      "decimals": 18,
+      "ticker": "sushi"
+    },
+    {
+      "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+      "name": "Uniswap",
+      "symbol": "UNI",
+      "decimals": 18,
+      "ticker": "uniswap"
+    },
+    {
+      "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+      "name": "Aave Token",
+      "symbol": "AAVE",
+      "decimals": 18,
+      "ticker": "aave"
+    },
+    {
+      "address": "0x7dd9c5cba05e151c895fde1cf355c9a1d5da6429",
+      "name": "Golem Network Token",
+      "symbol": "GLM",
+      "decimals": 18,
+      "ticker": "golem"
+    },
+    {
+      "address": "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
+      "name": "Decentraland MANA",
+      "symbol": "MANA",
+      "decimals": 18,
+      "ticker": "decentraland"
+    },
+    {
+      "address": "0x111111111117dc0aa78b770fa6a738034120c302",
+      "name": "1INCH Token",
+      "symbol": "1INCH",
+      "decimals": 18,
+      "ticker": "1inch"
+    },
+    {
+      "address": "0xa1faa113cbe53436df28ff0aee54275c13b40975",
+      "name": "AlphaToken",
+      "symbol": "ALPHA",
+      "decimals": 18,
+      "ticker": "alpha-finance"
+    },
+    {
+      "address": "0x5cf04716ba20127f1e2297addcf4b5035000c9eb",
+      "name": "NKN",
+      "symbol": "NKN",
+      "decimals": 18,
+      "ticker": "nkn"
+    },
+    {
+      "address": "0x4575f41308ec1483f3d399aa9a2826d74da13deb",
+      "name": "Orchid",
+      "symbol": "OXT",
+      "decimals": 18,
+      "ticker": "orchid-protocol"
+    },
+    {
+      "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+      "name": "SHIBA INU",
+      "symbol": "SHIB",
+      "decimals": 18,
+      "ticker": "shiba-inu"
+    },
+    {
+      "address": "0x0258f474786ddfd37abce6df6bbb1dd5dfc4434a",
+      "name": "Orion Protocol",
+      "symbol": "ORN",
+      "decimals": 8,
+      "ticker": "orion-protocol"
+    },
+    {
+      "address": "0xa0246c9032bc3a600820415ae600c6388619a14d",
+      "name": "FARM Reward Token",
+      "symbol": "FARM",
+      "decimals": 18,
+      "ticker": "harvest-finance"
+    },
+    {
+      "address": "0x579cea1889991f68acc35ff5c3dd0621ff29b0c9",
+      "name": "Everipedia IQ",
+      "symbol": "IQ",
+      "decimals": 18,
+      "ticker": "everipedia"
+    },
+    {
+      "address": "0xc18360217d8f7ab5e7c516566761ea12ce7f9d72",
+      "name": "Ethereum Name Service",
+      "symbol": "ENS",
+      "decimals": 18,
+      "ticker": "ethereum-name-service"
+    },
+    {
+      "address": "0x7a58c0be72be218b41c608b7fe7c5bb630736c71",
+      "name": "ConstitutionDAO",
+      "symbol": "PEOPLE",
+      "decimals": 18,
+      "ticker": "constitutiondao"
+    },
+    {
+      "address": "0xf57e7e7c23978c3caec3c3548e3d615c346e79ff",
+      "name": "Immutable X",
+      "symbol": "IMX",
+      "decimals": 18,
+      "ticker": "immutable-x"
+    },
+    {
+      "address": "0xb62132e35a6c13ee1ee0f84dc5d40bad8d815206",
+      "name": "Nexo",
+      "symbol": "NEXO",
+      "decimals": 18,
+      "ticker": "nexo"
+    },
+    {
+      "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18,
+      "ticker": "weth"
+    },
+    {
+      "address": "0x607f4c5bb672230e8672085532f7e901544a7375",
+      "name": "iEx.ec Network Token",
+      "symbol": "RLC",
+      "decimals": 9,
+      "ticker": "iexec-rlc"
+    },
+    {
+      "address": "0x595832f8fc6bf59c85c527fec3740a1b7a361269",
+      "name": "PowerLedger",
+      "symbol": "POWR",
+      "decimals": 6,
+      "ticker": "power-ledger"
+    },
+    {
+      "address": "0x4d224452801aced8b2f0aebe155379bb5d594381",
+      "name": "ApeCoin",
+      "symbol": "APE",
+      "decimals": 18,
+      "ticker": "apecoin"
+    },
+    {
+      "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+      "name": "Quant",
+      "symbol": "QNT",
+      "decimals": 18,
+      "ticker": "quant-network"
+    },
+    {
+      "address": "0xcdf7028ceab81fa0c6971208e83fa7872994bee5",
+      "name": "Threshold Network Token",
+      "symbol": "T",
+      "decimals": 18,
+      "ticker": "threshold-network-token"
+    },
+    {
+      "address": "0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d",
+      "name": "StaFi",
+      "symbol": "FIS",
+      "decimals": 18,
+      "ticker": "stafi"
+    },
+    {
+      "address": "0x6982508145454ce325ddbe47a25d4ec3d2311933",
+      "name": "Pepe",
+      "symbol": "PEPE",
+      "decimals": 18,
+      "ticker": "pepe"
+    },
+    {
+      "address": "0xcf0c122c6b73ff809c693db761e7baebe62b6a2e",
+      "name": "FLOKI",
+      "symbol": "FLOKI",
+      "decimals": 9,
+      "ticker": "floki"
+    },
+    {
+      "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "ticker": "wrapped-bitcoin"
+    },
+    {
+      "address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+      "name": "World Liberty Financial USD",
+      "symbol": "USD1",
+      "decimals": 18,
+      "ticker": "usd1-wlfi"
+    },
+    {
+      "address": "0xda5e1988097297dcdc1f90d4dfe7909e847cbef6",
+      "name": "World Liberty Financial",
+      "symbol": "WLFI",
+      "decimals": 18,
+      "ticker": "world-liberty-financial"
+    },
+    {
+      "address": "0x3b37a9caf74ead14e521d46af0bf00737d827828",
+      "name": "History of Pepe",
+      "symbol": "HOPE",
+      "decimals": 18,
+      "ticker": "history-of-pepe"
+    },
+    {
+      "address": "0x3fa55eb91be2c5d72890da11a4c0269e7f786555",
+      "name": "Prophet of Ethereum",
+      "symbol": "PROPHET",
+      "decimals": 18,
+      "ticker": "prophet-of-ethereum"
+    },
+    {
+      "address": "0x289ff00235d2b98b0145ff5d4435d3e92f9540a6",
+      "name": "Book of Ethereum",
+      "symbol": "BOOE",
+      "decimals": 18,
+      "ticker": "book-of-ethereum"
+    }
+  ]
+}

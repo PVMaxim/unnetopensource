@@ -1,0 +1,6210 @@
+[
+  {
+    "symbol": "ETH",
+    "name": "ETH(ERC20)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "eth"
+  },
+  {
+    "symbol": "USDC",
+    "name": "USDC(ERC20)",
+    "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "usdc"
+  },
+  {
+    "symbol": "SWFTC",
+    "name": "SWFTC(ERC20)",
+    "address": "0x0bb217E40F8a5Cb79Adf04E1aAb60E5abd0dfC1e",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "swftc"
+  },
+  {
+    "symbol": "KNC",
+    "name": "KNC(ERC20)",
+    "address": "0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "knc"
+  },
+  {
+    "symbol": "ZRX",
+    "name": "ZRX(ERC20)",
+    "address": "0xe41d2489571d322189246dafa5ebde1f4699f498",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "zrx"
+  },
+  {
+    "symbol": "CVC",
+    "name": "CVC(ERC20)",
+    "address": "0x41e5560054824ea6b0732e656e3ad64e20e94e45",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "cvc"
+  },
+  {
+    "symbol": "GOOCHAIN(ERC20)",
+    "name": "GOOCHAIN(ERC20)",
+    "address": "0xDcB9FF81013c31FF686154B4502eF6BFaA102D2D",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "BAT",
+    "name": "BAT(ERC20)",
+    "address": "0x0d8775f648430679a709e98d2b0cb6250d2887ef",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "bat"
+  },
+  {
+    "symbol": "DAI",
+    "name": "DAI(ERC20)",
+    "address": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "dai"
+  },
+  {
+    "symbol": "USDT(ERC20)",
+    "name": "USDT(ERC20)",
+    "address": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "usdt20"
+  },
+  {
+    "symbol": "TUSD",
+    "name": "TUSD(ERC20)",
+    "address": "0x0000000000085d4780B73119b644AE5ecd22b376",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "tusd"
+  },
+  {
+    "symbol": "LINK",
+    "name": "LINK(ERC20)",
+    "address": "0x514910771af9ca656af840dff83e8264ecf986ca",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "link"
+  },
+  {
+    "symbol": "BAND",
+    "name": "BAND(ERC20)",
+    "address": "0xba11d00c5f74255f56a5e366f4f77f5a186d7f55",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "band"
+  },
+  {
+    "symbol": "TRB",
+    "name": "TRB(ERC20)",
+    "address": "0x88dF592F8eb5D7Bd38bFeF7dEb0fBc02cf3778a0",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "trb"
+  },
+  {
+    "symbol": "COMP",
+    "name": "COMP(ERC20)",
+    "address": "0xc00e94cb662c3520282e6f5717214004a7f26888",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "comp"
+  },
+  {
+    "symbol": "BAL",
+    "name": "BAL(ERC20)",
+    "address": "0xba100000625a3754423978a60c9317c58a424e3d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "bal"
+  },
+  {
+    "symbol": "YFI",
+    "name": "YFI(ERC20)",
+    "address": "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "yfi"
+  },
+  {
+    "symbol": "SUSHI",
+    "name": "SUSHI(ERC20)",
+    "address": "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "sushi"
+  },
+  {
+    "symbol": "UNI",
+    "name": "UNI(ERC20)",
+    "address": "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "uni"
+  },
+  {
+    "symbol": "AAVE",
+    "name": "AAVE(ERC20)",
+    "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "aave"
+  },
+  {
+    "symbol": "GLM",
+    "name": "GLM(ERC20)",
+    "address": "0x7dd9c5cba05e151c895fde1cf355c9a1d5da6429",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "glm"
+  },
+  {
+    "symbol": "MANA",
+    "name": "MANA(ERC20)",
+    "address": "0x0f5d2fb29fb7d3cfee444a200298f468908cc942",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "mana"
+  },
+  {
+    "symbol": "1INCH",
+    "name": "1INCH(ERC20)",
+    "address": "0x111111111117dc0aa78b770fa6a738034120c302",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "1inch"
+  },
+  {
+    "symbol": "ALPHA",
+    "name": "ALPHA(ERC20)",
+    "address": "0xa1faa113cbe53436df28ff0aee54275c13b40975",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "alpha"
+  },
+  {
+    "symbol": "NKN(ERC20)",
+    "name": "NKN(ERC20)",
+    "address": "0x5cf04716ba20127f1e2297addcf4b5035000c9eb",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "OXT",
+    "name": "OXT(ERC20)",
+    "address": "0x4575f41308EC1483f3d399aa9a2826d74Da13Deb",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "oxt"
+  },
+  {
+    "symbol": "SHIB",
+    "name": "SHIB(ERC20)",
+    "address": "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "shib"
+  },
+  {
+    "symbol": "ORN",
+    "name": "ORN(ERC20)",
+    "address": "0x0258F474786DdFd37ABCE6df6BBb1Dd5dfC4434a",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "FARM",
+    "name": "FARM(ERC20)",
+    "address": "0xa0246c9032bC3A600820415aE600c6388619A14D",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "farm"
+  },
+  {
+    "symbol": "IQ",
+    "name": "IQ(ERC20)",
+    "address": "0x579cea1889991f68acc35ff5c3dd0621ff29b0c9",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ENS",
+    "name": "ENS(ERC20)",
+    "address": "0xc18360217d8f7ab5e7c516566761ea12ce7f9d72",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "ens"
+  },
+  {
+    "symbol": "PEOPLE",
+    "name": "PEOPLE(ERC20)",
+    "address": "0x7a58c0be72be218b41c608b7fe7c5bb630736c71",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "people"
+  },
+  {
+    "symbol": "IMX",
+    "name": "IMX(ERC20)",
+    "address": "0xf57e7e7c23978c3caec3c3548e3d615c346e79ff",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "imx"
+  },
+  {
+    "symbol": "NEXO",
+    "name": "NEXO(ERC20)",
+    "address": "0xb62132e35a6c13ee1ee0f84dc5d40bad8d815206",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "nexo"
+  },
+  {
+    "symbol": "WETH",
+    "name": "WETH(ERC20)",
+    "address": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "weth"
+  },
+  {
+    "symbol": "RLC",
+    "name": "RLC(ERC20)",
+    "address": "0x607F4C5BB672230e8672085532f7e901544a7375",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "rlc"
+  },
+  {
+    "symbol": "POWR",
+    "name": "POWR(ERC20)",
+    "address": "0x595832F8FC6BF59c85C527fEC3740A1b7a361269",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "powr"
+  },
+  {
+    "symbol": "APE",
+    "name": "APE(ERC20)",
+    "address": "0x4d224452801aced8b2f0aebe155379bb5d594381",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "ape"
+  },
+  {
+    "symbol": "QNT",
+    "name": "QNT(ERC20)",
+    "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "qnt"
+  },
+  {
+    "symbol": "T",
+    "name": "T(ERC20)",
+    "address": "0xcdf7028ceab81fa0c6971208e83fa7872994bee5",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "t"
+  },
+  {
+    "symbol": "FIS",
+    "name": "FIS(ERC20)",
+    "address": "0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "PEPE",
+    "name": "PEPE(ERC20)",
+    "address": "0x6982508145454Ce325dDbE47a25d4ec3d2311933",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "pepe"
+  },
+  {
+    "symbol": "FLOKI",
+    "name": "FLOKI(ERC20)",
+    "address": "0xcf0C122c6b73ff809C693DB761e7BaeBe62b6a2E",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "flokieth"
+  },
+  {
+    "symbol": "WBTC(ERC20)",
+    "name": "WBTC(ERC20)",
+    "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "wbtc"
+  },
+  {
+    "symbol": "MEPE",
+    "name": "MEPE(ERC20)",
+    "address": "0xC80285cbE1B73aa6B7f984AbDc7EE85CCed6dF43",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "PENDLE",
+    "name": "PENDLE(ERC20)",
+    "address": "0x808507121B80c02388fAd14726482e061B8da827",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "pendle"
+  },
+  {
+    "symbol": "WLD(ERC20)",
+    "name": "WLD(ERC20)",
+    "address": "0x163f8C2467924be0ae7B5347228CABF260318753",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "wldeth"
+  },
+  {
+    "symbol": "ETE(ERC20)",
+    "name": "ETE(ERC20)",
+    "address": "0x000000e29fa2bd3E5C215fFc71aA66b29c9769A2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "MEME(ERC20)",
+    "name": "MEME(ERC20)",
+    "address": "0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "meme"
+  },
+  {
+    "symbol": "XVG(ERC20)",
+    "name": "XVG(ERC20)",
+    "address": "0x85614A474dBeED440d5BBDB8aC50b0f22367F997",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ETHC(ERC20)",
+    "name": "ETHC(ERC20)",
+    "address": "0x6cabcf2B777DB604539C46a329E2f793656f6a16",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "MEMO(ERC20)",
+    "name": "MEMO(ERC20)",
+    "address": "0xeB8eec5a2dBf6e6f4Cc542ad31CCe706f8f80419",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "FORK(ERC20)",
+    "name": "FORK(ERC20)",
+    "address": "0x7D225c4cc612E61d26523B099b0718d03152eDEf",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "DCE(ERC20)",
+    "name": "DCE(ERC20)",
+    "address": "0xAF6acA2769Be86b9910165bff78FEA643c086C61",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ETHFI(ERC20)",
+    "name": "ETHFI(ERC20)",
+    "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "ethfi"
+  },
+  {
+    "symbol": "BRAINERS(ERC20)",
+    "name": "BRAINERS(ERC20)",
+    "address": "0x5044d567F7B30891639d982A05726A6BFE8Bae6A",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "N(ERC20)",
+    "name": "N(ERC20)",
+    "address": "0xc7bb03ddD9311fc0338bE013E7B523254092Fda9",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "HEM(ERC20)",
+    "name": "HEM(ERC20)",
+    "address": "0xD0054b65B683Dbdd324B51F5F1F16AadEB99a74B",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "EIGEN(ERC20)",
+    "name": "EIGEN(ERC20)",
+    "address": "0xec53bF9167f50cDEB3Ae105f56099aaaB9061F83",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "eigen"
+  },
+  {
+    "symbol": "PUFFER(ERC20)",
+    "name": "PUFFER(ERC20)",
+    "address": "0x4d1C297d39C5c1277964D0E3f8Aa901493664530",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "CRIPPL(ERC20)",
+    "name": "CRIPPL(ERC20)",
+    "address": "0xBb712C77b69256934cDf2f630a2317ac82570388",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "NGTG(ERC20)",
+    "name": "NGTG(ERC20)",
+    "address": "0x810296898a4F870619B015C0B13C8c6E65b305e3",
+    "decimals": 2,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "MOVE(ERC20)",
+    "name": "MOVE(ERC20)",
+    "address": "0x3073f7aAA4DB83f95e9FFf17424F71D4751a3073",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "move"
+  },
+  {
+    "symbol": "SYNERA(ERC20)",
+    "name": "SYNERA(ERC20)",
+    "address": "0xFb8c782D491a365c3fba6E27180fc647fFa12D41",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "GRT(ERC20)",
+    "name": "GRT(ERC20)",
+    "address": "0xc944E90C64B2c07662A292be6244BDf05Cda44a7",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "grt"
+  },
+  {
+    "symbol": "STORJ(ERC20)",
+    "name": "STORJ(ERC20)",
+    "address": "0xB64ef51C888972c908CFacf59B47C1AfBC0Ab8aC",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "storj"
+  },
+  {
+    "symbol": "ANKR(ERC20)",
+    "name": "ANKR(ERC20)",
+    "address": "0x8290333ceF9e6D528dD5618Fb97a76f268f3EDD4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "ankr"
+  },
+  {
+    "symbol": "FET(ERC20)",
+    "name": "FET(ERC20)",
+    "address": "0xaea46A60368A7bD060eec7DF8CBa43b7EF41Ad85",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "RSR(ERC20)",
+    "name": "RSR(ERC20)",
+    "address": "0x320623b8E4fF03373931769A31Fc52A4E78B5d70",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "rsr"
+  },
+  {
+    "symbol": "HXAI(ERC20)",
+    "name": "HXAI(ERC20)",
+    "address": "0x384EFd1e8B05c23dC392a40cB4E515E2229a5243",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "AIOZ(ERC20)",
+    "name": "AIOZ(ERC20)",
+    "address": "0x626E8036dEB333b408Be468F951bdB42433cBF18",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH",
+    "changellyTicker": "aioz"
+  },
+  {
+    "symbol": "USD1(ERC20)",
+    "name": "USD1(ERC20)",
+    "address": "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "UDS(ERC20)",
+    "name": "UDS(ERC20)",
+    "address": "0x712bd4beb54c6b958267d9db0259abdbb0bff606",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ELON",
+    "name": "ELON",
+    "address": "0x761d38e5ddf6ccf6cf7c55759d5210750b5d60f3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/elon.png",
+    "chain": "ETH",
+    "changellyTicker": "elon"
+  },
+  {
+    "symbol": "VANRY",
+    "name": "VANRY",
+    "address": "0x8de5b80a0c1b02fe4976851d030b36122dbb8624",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/vanry.png",
+    "chain": "ETH",
+    "changellyTicker": "vanry"
+  },
+  {
+    "symbol": "GODS",
+    "name": "GODS",
+    "address": "0xccc8cb5229b0ac8069c51fd58367fd1e622afd97",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gods.png",
+    "chain": "ETH",
+    "changellyTicker": "gods"
+  },
+  {
+    "symbol": "SLP",
+    "name": "SLP",
+    "address": "0xcc8fa225d80b9c7d42f96e9570156c65d6caaa25",
+    "decimals": 0,
+    "logoURI": "https://cdn.changelly.com/icons/slp.png",
+    "chain": "ETH",
+    "changellyTicker": "slp"
+  },
+  {
+    "symbol": "LRC",
+    "name": "LRC",
+    "address": "0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lrc.png",
+    "chain": "ETH",
+    "changellyTicker": "lrc"
+  },
+  {
+    "symbol": "GALA",
+    "name": "GALA",
+    "address": "0xd1d2Eb1B1e90B638588728b4130137D262C87cae",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/gala.png",
+    "chain": "ETH",
+    "changellyTicker": "gala"
+  },
+  {
+    "symbol": "ONDO",
+    "name": "ONDO",
+    "address": "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ondo.png",
+    "chain": "ETH",
+    "changellyTicker": "ondo"
+  },
+  {
+    "symbol": "EPIC",
+    "name": "EPIC",
+    "address": "0x94314a14df63779c99c0764a30e0cd22fa78fc0e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/epic.png",
+    "chain": "ETH",
+    "changellyTicker": "epic"
+  },
+  {
+    "symbol": "BEAMX",
+    "name": "BEAMX",
+    "address": "0x62D0A8458eD7719FDAF978fe5929C6D342B0bFcE",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/beamx.png",
+    "chain": "ETH",
+    "changellyTicker": "beamx"
+  },
+  {
+    "symbol": "G",
+    "name": "G",
+    "address": "0x9C7BEBa8F6eF6643aBd725e45a4E8387eF260649",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/g.png",
+    "chain": "ETH",
+    "changellyTicker": "g"
+  },
+  {
+    "symbol": "ARKM",
+    "name": "ARKM",
+    "address": "0x6e2a43be0b1d33b726f0ca3b8de60b3482b8b050",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/arkm.png",
+    "chain": "ETH",
+    "changellyTicker": "arkm"
+  },
+  {
+    "symbol": "TOWER",
+    "name": "TOWER",
+    "address": "0x1c9922314ed1415c95b9fd453c3818fd41867d0b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tower.png",
+    "chain": "ETH",
+    "changellyTicker": "tower"
+  },
+  {
+    "symbol": "BIO",
+    "name": "BIO",
+    "address": "0xcb1592591996765ec0efc1f92599a19767ee5ffa",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bio.png",
+    "chain": "ETH",
+    "changellyTicker": "bio"
+  },
+  {
+    "symbol": "ZRC",
+    "name": "ZRC",
+    "address": "0xfd418e42783382e86ae91e445406600ba144d162",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zrc.png",
+    "chain": "ETH",
+    "changellyTicker": "zrc"
+  },
+  {
+    "symbol": "APRS",
+    "name": "APRS",
+    "address": "0x95b4b8cad3567b5d7ef7399c2ae1d7070692ab0d",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/aprs.png",
+    "chain": "ETH",
+    "changellyTicker": "aprs"
+  },
+  {
+    "symbol": "WMOXY",
+    "name": "WMOXY",
+    "address": "0x695afdb42edff97af470a15920a66df81a234c0e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/wmoxy.png",
+    "chain": "ETH",
+    "changellyTicker": "wmoxy"
+  },
+  {
+    "symbol": "WAS",
+    "name": "WAS",
+    "address": "0x0c572544a4ee47904d54aaa6a970af96b6f00e1b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/was.png",
+    "chain": "ETH",
+    "changellyTicker": "was"
+  },
+  {
+    "symbol": "L3",
+    "name": "L3",
+    "address": "0x88909d489678dd17aa6d9609f89b0419bf78fd9a",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/l3.png",
+    "chain": "ETH",
+    "changellyTicker": "l3"
+  },
+  {
+    "symbol": "PLU",
+    "name": "PLU",
+    "address": "0xD8912C10681D8B21Fd3742244f44658dBA12264E",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/plu.png",
+    "chain": "ETH",
+    "changellyTicker": "plu"
+  },
+  {
+    "symbol": "VRA",
+    "name": "VRA",
+    "address": "0xf411903cbc70a74d22900a5de66a2dda66507255",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/vra.png",
+    "chain": "ETH",
+    "changellyTicker": "vra"
+  },
+  {
+    "symbol": "SUKU",
+    "name": "SUKU",
+    "address": "0x0763fdCCF1aE541A5961815C0872A8c5Bc6DE4d7",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/suku.png",
+    "chain": "ETH",
+    "changellyTicker": "suku"
+  },
+  {
+    "symbol": "CYBER",
+    "name": "CYBER",
+    "address": "0x14778860e937f509e651192a90589de711fb88a9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cyber.png",
+    "chain": "ETH",
+    "changellyTicker": "cyber"
+  },
+  {
+    "symbol": "OMG",
+    "name": "OMG",
+    "address": "0xd26114cd6EE289AccF82350c8d8487fedB8A0C07",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/omg.png",
+    "chain": "ETH",
+    "changellyTicker": "omg"
+  },
+  {
+    "symbol": "SSV",
+    "name": "SSV",
+    "address": "0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ssv.png",
+    "chain": "ETH",
+    "changellyTicker": "ssv"
+  },
+  {
+    "symbol": "TURBO",
+    "name": "TURBO",
+    "address": "0xa35923162c49cf95e6bf26623385eb431ad920d3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/turbo.png",
+    "chain": "ETH",
+    "changellyTicker": "turbo"
+  },
+  {
+    "symbol": "YGG",
+    "name": "YGG",
+    "address": "0x25f8087ead173b73d6e8b84329989a8eea16cf73",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ygg.png",
+    "chain": "ETH",
+    "changellyTicker": "ygg"
+  },
+  {
+    "symbol": "SYRUP",
+    "name": "SYRUP",
+    "address": "0x643c4e15d7d62ad0abec4a9bd4b001aa3ef52d66",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/syrup.png",
+    "chain": "ETH",
+    "changellyTicker": "syrup"
+  },
+  {
+    "symbol": "MORPHO",
+    "name": "MORPHO",
+    "address": "0x58d97b57bb95320f9a05dc918aef65434969c2b2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/morpho.png",
+    "chain": "ETH",
+    "changellyTicker": "morpho"
+  },
+  {
+    "symbol": "ALI",
+    "name": "ALI",
+    "address": "0x6b0b3a982b4634ac68dd83a4dbf02311ce324181",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ali.png",
+    "chain": "ETH",
+    "changellyTicker": "ali"
+  },
+  {
+    "symbol": "SYN",
+    "name": "SYN",
+    "address": "0x0f2D719407FdBeFF09D87557AbB7232601FD9F29",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/syn.png",
+    "chain": "ETH",
+    "changellyTicker": "syn"
+  },
+  {
+    "symbol": "WOLF",
+    "name": "WOLF",
+    "address": "0x67466be17df832165f8c80a5a120ccc652bd7e69",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/wolf.png",
+    "chain": "ETH",
+    "changellyTicker": "wolf"
+  },
+  {
+    "symbol": "UTK",
+    "name": "UTK",
+    "address": "0xdc9ac3c20d1ed0b540df9b1fedc10039df13f99c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/utk.png",
+    "chain": "ETH",
+    "changellyTicker": "utk"
+  },
+  {
+    "symbol": "KCS",
+    "name": "KCS",
+    "address": "0xf34960d9d60be18cc1d5afc1a6f012a723a28811",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/kcs.png",
+    "chain": "ETH",
+    "changellyTicker": "kcs"
+  },
+  {
+    "symbol": "GFI",
+    "name": "GFI",
+    "address": "0xdab396ccf3d84cf2d07c4454e10c8a6f5b008d2b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gfi.png",
+    "chain": "ETH",
+    "changellyTicker": "gfi"
+  },
+  {
+    "symbol": "OGN",
+    "name": "OGN",
+    "address": "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ogn.png",
+    "chain": "ETH",
+    "changellyTicker": "ogn"
+  },
+  {
+    "symbol": "STMX",
+    "name": "STMX",
+    "address": "0xa62cc35625b0c8dc1faea39d33625bb4c15bd71c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/stmx.png",
+    "chain": "ETH",
+    "changellyTicker": "stmx"
+  },
+  {
+    "symbol": "SWELL",
+    "name": "SWELL",
+    "address": "0x0a6E7Ba5042B38349e437ec6Db6214AEC7B35676",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/swell.png",
+    "chain": "ETH",
+    "changellyTicker": "swell"
+  },
+  {
+    "symbol": "D",
+    "name": "D",
+    "address": "0x33b481cbbf3c24f2b3184ee7cb02daad1c4f49a8",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/d.png",
+    "chain": "ETH",
+    "changellyTicker": "d"
+  },
+  {
+    "symbol": "IDEX",
+    "name": "IDEX",
+    "address": "0xb705268213d593b8fd88d3fdeff93aff5cbdcfae",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/idex.png",
+    "chain": "ETH",
+    "changellyTicker": "idex"
+  },
+  {
+    "symbol": "FLIP",
+    "name": "FLIP",
+    "address": "0x826180541412D574cf1336d22c0C0a287822678A",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/flip.png",
+    "chain": "ETH",
+    "changellyTicker": "flip"
+  },
+  {
+    "symbol": "POND",
+    "name": "POND",
+    "address": "0x57b946008913b82e4df85f501cbaed910e58d26c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/pond.png",
+    "chain": "ETH",
+    "changellyTicker": "pond"
+  },
+  {
+    "symbol": "SWEAT",
+    "name": "SWEAT",
+    "address": "0xb4b9dc1c77bdbb135ea907fd5a08094d98883a35",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sweat.png",
+    "chain": "ETH",
+    "changellyTicker": "sweat"
+  },
+  {
+    "symbol": "TRU",
+    "name": "TRU",
+    "address": "0x4c19596f5aaff459fa38b0f7ed92f11ae6543784",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/tru.png",
+    "chain": "ETH",
+    "changellyTicker": "tru"
+  },
+  {
+    "symbol": "CLV",
+    "name": "CLV",
+    "address": "0x80c62fe4487e1351b47ba49809ebd60ed085bf52",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/clv.png",
+    "chain": "ETH",
+    "changellyTicker": "clv"
+  },
+  {
+    "symbol": "FLT",
+    "name": "FLT",
+    "address": "0x236501327e701692a281934230af0b6be8df3353",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/flt.png",
+    "chain": "ETH",
+    "changellyTicker": "flt"
+  },
+  {
+    "symbol": "RED",
+    "name": "RED",
+    "address": "0xc43c6bfeda065fe2c4c11765bf838789bd0bb5de",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/red.png",
+    "chain": "ETH",
+    "changellyTicker": "red"
+  },
+  {
+    "symbol": "RSS3",
+    "name": "RSS3",
+    "address": "0xc98d64da73a6616c42117b582e832812e7b8d57f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rss3.png",
+    "chain": "ETH",
+    "changellyTicker": "rss3"
+  },
+  {
+    "symbol": "MLN",
+    "name": "MLN",
+    "address": "0xec67005c4e498ec7f55e092bd1d35cbc47c91892",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mln.png",
+    "chain": "ETH",
+    "changellyTicker": "mln"
+  },
+  {
+    "symbol": "LEO",
+    "name": "LEO",
+    "address": "0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/leo.png",
+    "chain": "ETH",
+    "changellyTicker": "leo"
+  },
+  {
+    "symbol": "ZENT",
+    "name": "ZENT",
+    "address": "0xdbb7a34bf10169d6d2d0d02a6cbb436cf4381bfa",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zent.png",
+    "chain": "ETH",
+    "changellyTicker": "zent"
+  },
+  {
+    "symbol": "PRO",
+    "name": "PRO",
+    "address": "0x226bb599a12c826476e3a771454697ea52e9e220",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/pro.png",
+    "chain": "ETH",
+    "changellyTicker": "pro"
+  },
+  {
+    "symbol": "USDR",
+    "name": "USDR",
+    "address": "0x7B43E3875440B44613DC3bC08E7763e6Da63C8f8",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/usdr.png",
+    "chain": "ETH",
+    "changellyTicker": "usdr"
+  },
+  {
+    "symbol": "SHIRO",
+    "name": "SHIRO",
+    "address": "0xb0ac2b5a73da0e67a8e5489ba922b3f8d582e058",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/shiro.png",
+    "chain": "ETH",
+    "changellyTicker": "shiro"
+  },
+  {
+    "symbol": "SKL",
+    "name": "SKL",
+    "address": "0x00c83aecc790e8a4453e5dd3b0b4b3680501a7a7",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/skl.png",
+    "chain": "ETH",
+    "changellyTicker": "skl"
+  },
+  {
+    "symbol": "BORG",
+    "name": "BORG",
+    "address": "0x64d0f55cd8c7133a9d7102b13987235f486f2224",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/borg.png",
+    "chain": "ETH",
+    "changellyTicker": "borg"
+  },
+  {
+    "symbol": "AEVO",
+    "name": "AEVO",
+    "address": "0xB528edBef013aff855ac3c50b381f253aF13b997",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/aevo.png",
+    "chain": "ETH",
+    "changellyTicker": "aevo"
+  },
+  {
+    "symbol": "ACH",
+    "name": "ACH(ERC20)",
+    "address": "0xed04915c23f00a313a544955524eb7dbd823143d",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "ach",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ELF",
+    "name": "ELF",
+    "address": "0xbf2179859fc6d5bee9bf9158632dc51678a4100e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/elf.png",
+    "chain": "ETH",
+    "changellyTicker": "elf"
+  },
+  {
+    "symbol": "USDP",
+    "name": "USDP",
+    "address": "0x8E870D67F660D95d5be530380D0eC0bd388289E1",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/usdp.png",
+    "chain": "ETH",
+    "changellyTicker": "usdp"
+  },
+  {
+    "symbol": "HEI",
+    "name": "HEI",
+    "address": "0xf8f173e20e15f3b6cb686fb64724d370689de083",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hei.png",
+    "chain": "ETH",
+    "changellyTicker": "hei"
+  },
+  {
+    "symbol": "AGLD",
+    "name": "AGLD",
+    "address": "0x32353a6c91143bfd6c7d363b546e62a9a2489a20",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/agld.png",
+    "chain": "ETH",
+    "changellyTicker": "agld"
+  },
+  {
+    "symbol": "BNT",
+    "name": "BNT",
+    "address": "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bnt.png",
+    "chain": "ETH",
+    "changellyTicker": "bnt"
+  },
+  {
+    "symbol": "CREAM",
+    "name": "CREAM",
+    "address": "0x2ba592f78db6436527729929aaf6c908497cb200",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cream.png",
+    "chain": "ETH",
+    "changellyTicker": "cream"
+  },
+  {
+    "symbol": "BOND",
+    "name": "BOND",
+    "address": "0x0391d2021f89dc339f60fff84546ea23e337750f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bond.png",
+    "chain": "ETH",
+    "changellyTicker": "bond"
+  },
+  {
+    "symbol": "APU",
+    "name": "APU",
+    "address": "0x594daad7d77592a2b97b725a7ad59d7e188b5bfa",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/apu.png",
+    "chain": "ETH",
+    "changellyTicker": "apu"
+  },
+  {
+    "symbol": "D2T",
+    "name": "D2T",
+    "address": "0x4Dd942bAa75810a3C1E876e79d5cD35E09C97A76",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/d2t.png",
+    "chain": "ETH",
+    "changellyTicker": "d2t"
+  },
+  {
+    "symbol": "NMR",
+    "name": "NMR",
+    "address": "0x1776e1f26f98b1a5df9cd347953a26dd3cb46671",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/nmr.png",
+    "chain": "ETH",
+    "changellyTicker": "nmr"
+  },
+  {
+    "symbol": "REN",
+    "name": "REN",
+    "address": "0x408e41876cccdc0f92210600ef50372656052a38",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ren.png",
+    "chain": "ETH",
+    "changellyTicker": "ren"
+  },
+  {
+    "symbol": "MYRIA",
+    "name": "MYRIA",
+    "address": "0xa0ef786bf476fe0810408caba05e536ac800ff86",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/myria.png",
+    "chain": "ETH",
+    "changellyTicker": "myria"
+  },
+  {
+    "symbol": "GOMINING",
+    "name": "GOMINING",
+    "address": "0x7Ddc52c4De30e94Be3A6A0A2b259b2850f421989",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gomining.png",
+    "chain": "ETH",
+    "changellyTicker": "gomining"
+  },
+  {
+    "symbol": "NYM",
+    "name": "NYM",
+    "address": "0x525A8F6F3Ba4752868cde25164382BfbaE3990e1",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/nym.png",
+    "chain": "ETH",
+    "changellyTicker": "nym"
+  },
+  {
+    "symbol": "PERP",
+    "name": "PERP",
+    "address": "0xbC396689893D065F41bc2C6EcbeE5e0085233447",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/perp.png",
+    "chain": "ETH",
+    "changellyTicker": "perp"
+  },
+  {
+    "symbol": "ID",
+    "name": "ID",
+    "address": "0x2dfF88A56767223A5529eA5960Da7A3F5f766406",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/id.png",
+    "chain": "ETH",
+    "changellyTicker": "id"
+  },
+  {
+    "symbol": "ANDYETH",
+    "name": "ANDYETH",
+    "address": "0x68bbed6a47194eff1cf514b50ea91895597fc91e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/andyeth.png",
+    "chain": "ETH",
+    "changellyTicker": "andyeth"
+  },
+  {
+    "symbol": "LDO",
+    "name": "LDO",
+    "address": "0x5a98fcbea516cf06857215779fd812ca3bef1b32",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ldo.png",
+    "chain": "ETH",
+    "changellyTicker": "ldo"
+  },
+  {
+    "symbol": "TRAC",
+    "name": "TRAC",
+    "address": "0xaa7a9ca87d3694b5755f213b5d04094b8d0f0a6f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/trac.png",
+    "chain": "ETH",
+    "changellyTicker": "trac"
+  },
+  {
+    "symbol": "COTI",
+    "name": "COTI",
+    "address": "0xddb3422497e61e13543bea06989c0789117555c5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/coti.png",
+    "chain": "ETH",
+    "changellyTicker": "coti"
+  },
+  {
+    "symbol": "WOO",
+    "name": "WOO",
+    "address": "0x4691937a7508860f876c9c0a2a617e7d9e945d4b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/woo.png",
+    "chain": "ETH",
+    "changellyTicker": "woo"
+  },
+  {
+    "symbol": "ATH",
+    "name": "ATH",
+    "address": "0xbe0ed4138121ecfc5c0e56b40517da27e6c5226b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ath.png",
+    "chain": "ETH",
+    "changellyTicker": "ath"
+  },
+  {
+    "symbol": "CHZ",
+    "name": "CHZ",
+    "address": "0x3506424f91fd33084466f402d5d97f05f8e3b4af",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/chz.png",
+    "chain": "ETH",
+    "changellyTicker": "chz"
+  },
+  {
+    "symbol": "SAFE",
+    "name": "SAFE",
+    "address": "0x5afe3855358e112b5647b952709e6165e1c1eeee",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/safe.png",
+    "chain": "ETH",
+    "changellyTicker": "safe"
+  },
+  {
+    "symbol": "XYO",
+    "name": "XYO",
+    "address": "0x55296f69f40ea6d20e478533c15a6b08b654e758",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/xyo.png",
+    "chain": "ETH",
+    "changellyTicker": "xyo"
+  },
+  {
+    "symbol": "LAI",
+    "name": "LAI",
+    "address": "0x168e209d7b2f58f1f24b8ae7b7d35e662bbf11cc",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lai.png",
+    "chain": "ETH",
+    "changellyTicker": "lai"
+  },
+  {
+    "symbol": "AERGO",
+    "name": "AERGO",
+    "address": "0x91af0fbb28aba7e31403cb457106ce79397fd4e6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/aergo.png",
+    "chain": "ETH",
+    "changellyTicker": "aergo"
+  },
+  {
+    "symbol": "FDUSDETH",
+    "name": "FDUSDETH",
+    "address": "0xc5f0f7b66764f6ec8c8dff7ba683102295e16409",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/fdusdeth.png",
+    "chain": "ETH",
+    "changellyTicker": "fdusdeth"
+  },
+  {
+    "symbol": "VR",
+    "name": "VR",
+    "address": "0x7d5121505149065b562c789a0145ed750e6e8cdd",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/vr.png",
+    "chain": "ETH",
+    "changellyTicker": "vr"
+  },
+  {
+    "symbol": "ALEPH",
+    "name": "ALEPH",
+    "address": "0x27702a26126e0b3702af63ee09ac4d1a084ef628",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/aleph.png",
+    "chain": "ETH",
+    "changellyTicker": "aleph"
+  },
+  {
+    "symbol": "LOOM",
+    "name": "LOOM",
+    "address": "0x42476F744292107e34519F9c357927074Ea3F75D",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/loom.png",
+    "chain": "ETH",
+    "changellyTicker": "loom"
+  },
+  {
+    "symbol": "LINA",
+    "name": "LINA",
+    "address": "0x3e9bc21c9b189c09df3ef1b824798658d5011937",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lina.png",
+    "chain": "ETH",
+    "changellyTicker": "lina"
+  },
+  {
+    "symbol": "MASK",
+    "name": "MASK",
+    "address": "0x69af81e73a73b40adf4f3d4223cd9b1ece623074",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mask.png",
+    "chain": "ETH",
+    "changellyTicker": "mask"
+  },
+  {
+    "symbol": "LOOKS",
+    "name": "LOOKS",
+    "address": "0xf4d2888d29d722226fafa5d9b24f9164c092421e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/looks.png",
+    "chain": "ETH",
+    "changellyTicker": "looks"
+  },
+  {
+    "symbol": "ALT",
+    "name": "ALT",
+    "address": "0x8457ca5040ad67fdebbcc8edce889a335bc0fbfb",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/alt.png",
+    "chain": "ETH",
+    "changellyTicker": "alt"
+  },
+  {
+    "symbol": "DSYNC",
+    "name": "DSYNC",
+    "address": "0xf94e7d0710709388bce3161c32b4eea56d3f91cc",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dsync.png",
+    "chain": "ETH",
+    "changellyTicker": "dsync"
+  },
+  {
+    "symbol": "AST",
+    "name": "AST",
+    "address": "0x27054b13b1b798b345b591a4d22e6562d47ea75a",
+    "decimals": 4,
+    "logoURI": "https://cdn.changelly.com/icons/ast.png",
+    "chain": "ETH",
+    "changellyTicker": "ast"
+  },
+  {
+    "symbol": "GNO",
+    "name": "GNO",
+    "address": "0x6810e776880c02933d47db1b9fc05908e5386b96",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gno.png",
+    "chain": "ETH",
+    "changellyTicker": "gno"
+  },
+  {
+    "symbol": "CBBTC",
+    "name": "CBBTC",
+    "address": "0xcbb7c0000ab88b473b1f5afd9ef808440eed33bf",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/cbbtc.png",
+    "chain": "ETH",
+    "changellyTicker": "cbbtc"
+  },
+  {
+    "symbol": "C98",
+    "name": "C98",
+    "address": "0xae12c5930881c53715b369cec7606b70d8eb229f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/c98.png",
+    "chain": "ETH",
+    "changellyTicker": "c98"
+  },
+  {
+    "symbol": "GEMS",
+    "name": "GEMS",
+    "address": "0x3010ccb5419f1ef26d40a7cd3f0d707a0fa127dc",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gems.png",
+    "chain": "ETH",
+    "changellyTicker": "gems"
+  },
+  {
+    "symbol": "COMBO",
+    "name": "COMBO",
+    "address": "0xc03fbf20a586fa89c2a5f6f941458e1fbc40c661",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/combo.png",
+    "chain": "ETH",
+    "changellyTicker": "combo"
+  },
+  {
+    "symbol": "ENA",
+    "name": "ENA",
+    "address": "0x57e114b691db790c35207b2e685d4a43181e6061",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ena.png",
+    "chain": "ETH",
+    "changellyTicker": "ena"
+  },
+  {
+    "symbol": "ABT",
+    "name": "ABT",
+    "address": "0xb98d4c97425d9908e66e53a6fdf673acca0be986",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/abt.png",
+    "chain": "ETH",
+    "changellyTicker": "abt"
+  },
+  {
+    "symbol": "PAXG",
+    "name": "PAXG",
+    "address": "0x45804880de22913dafe09f4980848ece6ecbaf78",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/paxg.png",
+    "chain": "ETH",
+    "changellyTicker": "paxg"
+  },
+  {
+    "symbol": "ZIG",
+    "name": "ZIG",
+    "address": "0xb2617246d0c6c0087f18703d576831899ca94f01",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zig.png",
+    "chain": "ETH",
+    "changellyTicker": "zig"
+  },
+  {
+    "symbol": "SFPETH",
+    "name": "SFPETH",
+    "address": "0x12e2b8033420270db2f3b328e32370cb5b2ca134",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sfpeth.png",
+    "chain": "ETH",
+    "changellyTicker": "sfpeth"
+  },
+  {
+    "symbol": "YFII",
+    "name": "YFII",
+    "address": "0xa1d0E215a23d7030842FC67cE582a6aFa3CCaB83",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/yfii.png",
+    "chain": "ETH",
+    "changellyTicker": "yfii"
+  },
+  {
+    "symbol": "USDQ",
+    "name": "USDQ",
+    "address": "0xc83e27f270cce0A3A3A29521173a83F402c1768b",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/usdq.png",
+    "chain": "ETH",
+    "changellyTicker": "usdq"
+  },
+  {
+    "symbol": "EURI",
+    "name": "EURI",
+    "address": "0x9d1a7a3191102e9f900faa10540837ba84dcbae7",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/euri.png",
+    "chain": "ETH",
+    "changellyTicker": "euri"
+  },
+  {
+    "symbol": "LPT",
+    "name": "LPT",
+    "address": "0x58b6a8a3302369daec383334672404ee733ab239",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lpt.png",
+    "chain": "ETH",
+    "changellyTicker": "lpt"
+  },
+  {
+    "symbol": "KARRAT",
+    "name": "KARRAT",
+    "address": "0xAcd2c239012D17BEB128B0944D49015104113650",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/karrat.png",
+    "chain": "ETH",
+    "changellyTicker": "karrat"
+  },
+  {
+    "symbol": "BANANA",
+    "name": "BANANA",
+    "address": "0x38e68a37e401f7271568cecaac63c6b1e19130b4",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/banana.png",
+    "chain": "ETH",
+    "changellyTicker": "banana"
+  },
+  {
+    "symbol": "AMP",
+    "name": "AMP(ERC20)",
+    "address": "0xff20817765cb7f73d4bde2e66e067e58d11095c2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "amp",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "TREAT",
+    "name": "TREAT",
+    "address": "0xa02c49da76a085e4e1ee60a6b920ddbc8db599f4",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/treat.png",
+    "chain": "ETH",
+    "changellyTicker": "treat"
+  },
+  {
+    "symbol": "STG",
+    "name": "STG",
+    "address": "0xAf5191B0De278C7286d6C7CC6ab6BB8A73bA2Cd6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/stg.png",
+    "chain": "ETH",
+    "changellyTicker": "stg"
+  },
+  {
+    "symbol": "LQTY",
+    "name": "LQTY",
+    "address": "0x6DEA81C8171D0bA574754EF6F8b412F2Ed88c54D",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lqty.png",
+    "chain": "ETH",
+    "changellyTicker": "lqty"
+  },
+  {
+    "symbol": "BADGER",
+    "name": "BADGER",
+    "address": "0x3472a5a71965499acd81997a54bba8d852c6e53d",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/badger.png",
+    "chain": "ETH",
+    "changellyTicker": "badger"
+  },
+  {
+    "symbol": "USDE",
+    "name": "USDE",
+    "address": "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/usde.png",
+    "chain": "ETH",
+    "changellyTicker": "usde"
+  },
+  {
+    "symbol": "MX",
+    "name": "MX",
+    "address": "0x11eef04c884e24d9b7b4760e7476d06ddf797f36",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mx.png",
+    "chain": "ETH",
+    "changellyTicker": "mx"
+  },
+  {
+    "symbol": "CTC",
+    "name": "CTC",
+    "address": "0xa3ee21c306a700e682abcdfe9baa6a08f3820419",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ctc.png",
+    "chain": "ETH",
+    "changellyTicker": "ctc"
+  },
+  {
+    "symbol": "LOCUS",
+    "name": "LOCUS",
+    "address": "0xc64500dd7b0f1794807e67802f8abbf5f8ffb054",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/locus.png",
+    "chain": "ETH",
+    "changellyTicker": "locus"
+  },
+  {
+    "symbol": "DATA",
+    "name": "DATA",
+    "address": "0x8f693ca8d21b157107184d29d398a8d082b38b76",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/data.png",
+    "chain": "ETH",
+    "changellyTicker": "data"
+  },
+  {
+    "symbol": "REZ",
+    "name": "REZ",
+    "address": "0x3b50805453023a91a8bf641e279401a0b23fa6f9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rez.png",
+    "chain": "ETH",
+    "changellyTicker": "rez"
+  },
+  {
+    "symbol": "MKR",
+    "name": "MKR",
+    "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mkr.png",
+    "chain": "ETH",
+    "changellyTicker": "mkr"
+  },
+  {
+    "symbol": "CAPS",
+    "name": "CAPS",
+    "address": "0x03be5c903c727ee2c8c4e9bc0acc860cca4715e2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/caps.png",
+    "chain": "ETH",
+    "changellyTicker": "caps"
+  },
+  {
+    "symbol": "ILV",
+    "name": "ILV",
+    "address": "0x767fe9edc9e0df98e07454847909b5e959d7ca0e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ilv.png",
+    "chain": "ETH",
+    "changellyTicker": "ilv"
+  },
+  {
+    "symbol": "EURR",
+    "name": "EURR",
+    "address": "0x50753cfaf86c094925bf976f218d043f8791e408",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/eurr.png",
+    "chain": "ETH",
+    "changellyTicker": "eurr"
+  },
+  {
+    "symbol": "PIXEL",
+    "name": "PIXEL",
+    "address": "0x3429d03c6f7521aec737a0bbf2e5ddcef2c3ae31",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/pixel.png",
+    "chain": "ETH",
+    "changellyTicker": "pixel"
+  },
+  {
+    "symbol": "JASMY",
+    "name": "JASMY(ERC20)",
+    "address": "0x7420B4b9a0110cdC71fB720908340C03F9Bc03EC",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "jasmy",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "OMNI",
+    "name": "OMNI",
+    "address": "0x36e66fbbce51e4cd5bd3c62b637eb411b18949d4",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/omni.png",
+    "chain": "ETH",
+    "changellyTicker": "omni"
+  },
+  {
+    "symbol": "POLS",
+    "name": "POLS",
+    "address": "0x83e6f1e41cdd28eaceb20cb649155049fac3d5aa",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/pols.png",
+    "chain": "ETH",
+    "changellyTicker": "pols"
+  },
+  {
+    "symbol": "PRIME",
+    "name": "PRIME",
+    "address": "0xb23d80f5FefcDDaa212212F028021B41DEd428CF",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/prime.png",
+    "chain": "ETH",
+    "changellyTicker": "prime"
+  },
+  {
+    "symbol": "POLETH",
+    "name": "POLETH",
+    "address": "0x455e53cbb86018ac2b8092fdcd39d8444affc3f6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/poleth.png",
+    "chain": "ETH",
+    "changellyTicker": "poleth"
+  },
+  {
+    "symbol": "GTC",
+    "name": "GTC",
+    "address": "0xde30da39c46104798bb5aa3fe8b9e0e1f348163f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gtc.png",
+    "chain": "ETH",
+    "changellyTicker": "gtc"
+  },
+  {
+    "symbol": "ORBS",
+    "name": "ORBS",
+    "address": "0xff56cc6b1e6ded347aa0b7676c85ab0b3d08b0fa",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/orbs.png",
+    "chain": "ETH",
+    "changellyTicker": "orbs"
+  },
+  {
+    "symbol": "MNT",
+    "name": "MNT",
+    "address": "0x3c3a81e81dc49a522a592e7622a7e711c06bf354",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mnt.png",
+    "chain": "ETH",
+    "changellyTicker": "mnt"
+  },
+  {
+    "symbol": "BICO",
+    "name": "BICO",
+    "address": "0xf17e65822b568b3903685a7c9f496cf7656cc6c2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bico.png",
+    "chain": "ETH",
+    "changellyTicker": "bico"
+  },
+  {
+    "symbol": "MOCA",
+    "name": "MOCA",
+    "address": "0xf944e35f95e819e752f3ccb5faf40957d311e8c5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/moca.png",
+    "chain": "ETH",
+    "changellyTicker": "moca"
+  },
+  {
+    "symbol": "TEL",
+    "name": "TEL",
+    "address": "0x467bccd9d29f223bce8043b84e8c8b282827790f",
+    "decimals": 2,
+    "logoURI": "https://cdn.changelly.com/icons/tel.png",
+    "chain": "ETH",
+    "changellyTicker": "tel"
+  },
+  {
+    "symbol": "RARI",
+    "name": "RARI",
+    "address": "0xfca59cd816ab1ead66534d82bc21e7515ce441cf",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rari.png",
+    "chain": "ETH",
+    "changellyTicker": "rari"
+  },
+  {
+    "symbol": "BOSON",
+    "name": "BOSON",
+    "address": "0xC477D038d5420C6A9e0b031712f61c5120090de9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/boson.png",
+    "chain": "ETH",
+    "changellyTicker": "boson"
+  },
+  {
+    "symbol": "AUCTION",
+    "name": "AUCTION",
+    "address": "0xa9b1eb5908cfc3cdf91f9b8b3a74108598009096",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/auction.png",
+    "chain": "ETH",
+    "changellyTicker": "auction"
+  },
+  {
+    "symbol": "OPUL",
+    "name": "OPUL",
+    "address": "0x80d55c03180349fff4a229102f62328220a96444",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/opul.png",
+    "chain": "ETH",
+    "changellyTicker": "opul"
+  },
+  {
+    "symbol": "SNX",
+    "name": "SNX(ERC20)",
+    "address": "0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "snx",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "PORTAL",
+    "name": "PORTAL",
+    "address": "0x1bbe973bef3a977fc51cbed703e8ffdefe001fed",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/portal.png",
+    "chain": "ETH",
+    "changellyTicker": "portal"
+  },
+  {
+    "symbol": "CPOOL",
+    "name": "CPOOL",
+    "address": "0x66761Fa41377003622aEE3c7675Fc7b5c1C2FaC5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cpool.png",
+    "chain": "ETH",
+    "changellyTicker": "cpool"
+  },
+  {
+    "symbol": "OKB",
+    "name": "OKB",
+    "address": "0x75231f58b43240c9718dd58b4967c5114342a86c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/okb.png",
+    "chain": "ETH",
+    "changellyTicker": "okb"
+  },
+  {
+    "symbol": "LEVER",
+    "name": "LEVER",
+    "address": "0x4B5f49487ea7B3609b1aD05459BE420548789f1f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lever.png",
+    "chain": "ETH",
+    "changellyTicker": "lever"
+  },
+  {
+    "symbol": "VIRTUAL(ERC20)",
+    "name": "VIRTUAL(ERC20)",
+    "address": "0x44ff8620b8cA30902395A7bD3F2407e1A091BF73",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "virtualeth",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "ANIME",
+    "name": "ANIME",
+    "address": "0x4dc26fc5854e7648a064a4abd590bbe71724c277",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/anime.png",
+    "chain": "ETH",
+    "changellyTicker": "anime"
+  },
+  {
+    "symbol": "MASA",
+    "name": "MASA",
+    "address": "0x944824290cc12f31ae18ef51216a223ba4063092",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/masa.png",
+    "chain": "ETH",
+    "changellyTicker": "masa"
+  },
+  {
+    "symbol": "DENT",
+    "name": "DENT",
+    "address": "0x3597bfd533a99c9aa083587b074434e61eb0a258",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/dent.png",
+    "chain": "ETH",
+    "changellyTicker": "dent"
+  },
+  {
+    "symbol": "HIFI",
+    "name": "HIFI",
+    "address": "0x4b9278b94a1112cad404048903b8d343a810b07e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hifi.png",
+    "chain": "ETH",
+    "changellyTicker": "hifi"
+  },
+  {
+    "symbol": "PAAL",
+    "name": "PAAL",
+    "address": "0x14fee680690900ba0cccfc76ad70fd1b95d10e16",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/paal.png",
+    "chain": "ETH",
+    "changellyTicker": "paal"
+  },
+  {
+    "symbol": "METIS",
+    "name": "METIS",
+    "address": "0x9E32b13ce7f2E80A01932B42553652E053D6ed8e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/metis.png",
+    "chain": "ETH",
+    "changellyTicker": "metis"
+  },
+  {
+    "symbol": "CVX",
+    "name": "CVX",
+    "address": "0x4e3fbd56cd56c3e72c1403e103b45db9da5b9d2b",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cvx.png",
+    "chain": "ETH",
+    "changellyTicker": "cvx"
+  },
+  {
+    "symbol": "XAUT",
+    "name": "XAUT",
+    "address": "0x68749665FF8D2d112Fa859AA293F07A622782F38",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/xaut.png",
+    "chain": "ETH",
+    "changellyTicker": "xaut"
+  },
+  {
+    "symbol": "AUDIO",
+    "name": "AUDIO",
+    "address": "0x18aaa7115705e8be94bffebde57af9bfc265b998",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/audio.png",
+    "chain": "ETH",
+    "changellyTicker": "audio"
+  },
+  {
+    "symbol": "RPL",
+    "name": "RPL",
+    "address": "0xd33526068d116ce69f19a9ee46f0bd304f21a51f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rpl.png",
+    "chain": "ETH",
+    "changellyTicker": "rpl"
+  },
+  {
+    "symbol": "VGX",
+    "name": "VGX",
+    "address": "0x3C4B6E6e1eA3D4863700D7F76b36B7f3D3f13E3d",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/vgx.png",
+    "chain": "ETH",
+    "changellyTicker": "vgx"
+  },
+  {
+    "symbol": "BONE",
+    "name": "BONE",
+    "address": "0x9813037ee2218799597d83D4a5B6F3b6778218d9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bone.png",
+    "chain": "ETH",
+    "changellyTicker": "bone"
+  },
+  {
+    "symbol": "SNT",
+    "name": "SNT",
+    "address": "0x744d70fdbe2ba4cf95131626614a1763df805b9e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/snt.png",
+    "chain": "ETH",
+    "changellyTicker": "snt"
+  },
+  {
+    "symbol": "RARE",
+    "name": "RARE",
+    "address": "0xba5BDe662c17e2aDFF1075610382B9B691296350",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rare.png",
+    "chain": "ETH",
+    "changellyTicker": "rare"
+  },
+  {
+    "symbol": "LSK",
+    "name": "LSK",
+    "address": "0x6033f7f88332b8db6ad452b7c6d5bb643990ae3f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lsk.png",
+    "chain": "ETH",
+    "changellyTicker": "lsk"
+  },
+  {
+    "symbol": "AXL",
+    "name": "AXL",
+    "address": "0x467719aD09025FcC6cF6F8311755809d45a5E5f3",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/axl.png",
+    "chain": "ETH",
+    "changellyTicker": "axl"
+  },
+  {
+    "symbol": "XCN",
+    "name": "XCN",
+    "address": "0xA2cd3D43c775978A96BdBf12d733D5A1ED94fb18",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/xcn.png",
+    "chain": "ETH",
+    "changellyTicker": "xcn"
+  },
+  {
+    "symbol": "HFT",
+    "name": "HFT",
+    "address": "0xb3999F658C0391d94A37f7FF328F3feC942BcADC",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hft.png",
+    "chain": "ETH",
+    "changellyTicker": "hft"
+  },
+  {
+    "symbol": "UMA",
+    "name": "UMA",
+    "address": "0x04Fa0d235C4abf4BcF4787aF4CF447DE572eF828",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/uma.png",
+    "chain": "ETH",
+    "changellyTicker": "uma"
+  },
+  {
+    "symbol": "API3",
+    "name": "API3",
+    "address": "0x0b38210ea11411557c13457D4dA7dC6ea731B88a",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/api3.png",
+    "chain": "ETH",
+    "changellyTicker": "api3"
+  },
+  {
+    "symbol": "DF",
+    "name": "DF",
+    "address": "0x431ad2ff6a9c365805ebad47ee021148d6f7dbe0",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/df.png",
+    "chain": "ETH",
+    "changellyTicker": "df"
+  },
+  {
+    "symbol": "BFC",
+    "name": "BFC",
+    "address": "0x0c7D5ae016f806603CB1782bEa29AC69471CAb9c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bfc.png",
+    "chain": "ETH",
+    "changellyTicker": "bfc"
+  },
+  {
+    "symbol": "GT",
+    "name": "GT",
+    "address": "0xe66747a101bff2dba3697199dcce5b743b454759",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/gt.png",
+    "chain": "ETH",
+    "changellyTicker": "gt"
+  },
+  {
+    "symbol": "CELR",
+    "name": "CELR",
+    "address": "0x4f9254c83eb525f9fcf346490bbb3ed28a81c667",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/celr.png",
+    "chain": "ETH",
+    "changellyTicker": "celr"
+  },
+  {
+    "symbol": "FXS",
+    "name": "FXS",
+    "address": "0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/fxs.png",
+    "chain": "ETH",
+    "changellyTicker": "fxs"
+  },
+  {
+    "symbol": "ZRO",
+    "name": "ZRO",
+    "address": "0x6985884C4392D348587B19cb9eAAf157F13271cd",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zro.png",
+    "chain": "ETH",
+    "changellyTicker": "zro"
+  },
+  {
+    "symbol": "SPEC",
+    "name": "SPEC",
+    "address": "0xadf7c35560035944e805d98ff17d58cde2449389",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/spec.png",
+    "chain": "ETH",
+    "changellyTicker": "spec"
+  },
+  {
+    "symbol": "NEIROETH",
+    "name": "NEIROETH",
+    "address": "0xee2a03aa6dacf51c18679c516ad5283d8e7c2637",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/neiroeth.png",
+    "chain": "ETH",
+    "changellyTicker": "neiroeth"
+  },
+  {
+    "symbol": "PHA",
+    "name": "PHA",
+    "address": "0x6c5bA91642F10282b576d91922Ae6448C9d52f4E",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/pha.png",
+    "chain": "ETH",
+    "changellyTicker": "pha"
+  },
+  {
+    "symbol": "ALICE",
+    "name": "ALICE",
+    "address": "0xAC51066d7bEC65Dc4589368da368b212745d63E8",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/alice.png",
+    "chain": "ETH",
+    "changellyTicker": "alice"
+  },
+  {
+    "symbol": "MDT",
+    "name": "MDT",
+    "address": "0x814e0908b12a99fecf5bc101bb5d0b8b5cdf7d26",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mdt.png",
+    "chain": "ETH",
+    "changellyTicker": "mdt"
+  },
+  {
+    "symbol": "DODO",
+    "name": "DODO",
+    "address": "0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dodo.png",
+    "chain": "ETH",
+    "changellyTicker": "dodo"
+  },
+  {
+    "symbol": "FORTH",
+    "name": "FORTH",
+    "address": "0x77fba179c79de5b7653f68b5039af940ada60ce0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/forth.png",
+    "chain": "ETH",
+    "changellyTicker": "forth"
+  },
+  {
+    "symbol": "RAD",
+    "name": "RAD",
+    "address": "0x31c8eacbffdd875c74b94b077895bd78cf1e64a3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/rad.png",
+    "chain": "ETH",
+    "changellyTicker": "rad"
+  },
+  {
+    "symbol": "SPELL",
+    "name": "SPELL(ERC20)",
+    "address": "0x090185f2135308bad17527004364ebcc2d37e5f6",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "spell",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "PUNDIX",
+    "name": "PUNDIX",
+    "address": "0x0fd10b9899882a6f2fcb5c371e17e70fdee00c38",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/pundix.png",
+    "chain": "ETH",
+    "changellyTicker": "pundix"
+  },
+  {
+    "symbol": "DEXE",
+    "name": "DEXE",
+    "address": "0xde4EE8057785A7e8e800Db58F9784845A5C2Cbd6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dexe.png",
+    "chain": "ETH",
+    "changellyTicker": "dexe"
+  },
+  {
+    "symbol": "OPEN",
+    "name": "OPEN",
+    "address": "0x4123a133ae3c521fd134d7b13a2dec35b56c2463",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/open.png",
+    "chain": "ETH",
+    "changellyTicker": "open"
+  },
+  {
+    "symbol": "DUEL",
+    "name": "DUEL",
+    "address": "0x943af2ece93118b973c95c2f698ee9d15002e604",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/duel.png",
+    "chain": "ETH",
+    "changellyTicker": "duel"
+  },
+  {
+    "symbol": "LOKA",
+    "name": "LOKA",
+    "address": "0x61e90a50137e1f645c9ef4a0d3a4f01477738406",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/loka.png",
+    "chain": "ETH",
+    "changellyTicker": "loka"
+  },
+  {
+    "symbol": "AXS",
+    "name": "AXS(ERC20)",
+    "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "axs",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "BIGTIME",
+    "name": "BIGTIME",
+    "address": "0x64Bc2cA1Be492bE7185FAA2c8835d9b824c8a194",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bigtime.png",
+    "chain": "ETH",
+    "changellyTicker": "bigtime"
+  },
+  {
+    "symbol": "zkj",
+    "name": "zkj",
+    "address": "0xc71b5f631354be6853efe9c3ab6b9590f8302e81",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zkj.png",
+    "chain": "ETH",
+    "changellyTicker": "zkj"
+  },
+  {
+    "symbol": "EURS",
+    "name": "EURS",
+    "address": "0xdB25f211AB05b1c97D595516F45794528a807ad8",
+    "decimals": 2,
+    "logoURI": "https://cdn.changelly.com/icons/eurs.png",
+    "chain": "ETH",
+    "changellyTicker": "eurs"
+  },
+  {
+    "symbol": "EURQ",
+    "name": "EURQ",
+    "address": "0x8dF723295214Ea6f21026eeEb4382d475f146F9f",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/eurq.png",
+    "chain": "ETH",
+    "changellyTicker": "eurq"
+  },
+  {
+    "symbol": "SPX",
+    "name": "SPX",
+    "address": "0xe0f63a424a4439cbe457d80e4f4b51ad25b2c56c",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/spx.png",
+    "chain": "ETH",
+    "changellyTicker": "spx"
+  },
+  {
+    "symbol": "KRL",
+    "name": "KRL",
+    "address": "0x464eBE77c293E473B48cFe96dDCf88fcF7bFDAC0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/krl.png",
+    "chain": "ETH",
+    "changellyTicker": "krl"
+  },
+  {
+    "symbol": "ORAI",
+    "name": "ORAI",
+    "address": "0x4c11249814f11b9346808179cf06e71ac328c1b5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/orai.png",
+    "chain": "ETH",
+    "changellyTicker": "orai"
+  },
+  {
+    "symbol": "MVL",
+    "name": "MVL",
+    "address": "0xa849eaae994fb86afa73382e9bd88c2b6b18dc71",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mvl.png",
+    "chain": "ETH",
+    "changellyTicker": "mvl"
+  },
+  {
+    "symbol": "AVA",
+    "name": "AVA",
+    "address": "0xa6C0c097741D55ECd9a3A7DeF3A8253fD022ceB9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ava.png",
+    "chain": "ETH",
+    "changellyTicker": "ava"
+  },
+  {
+    "symbol": "HOT",
+    "name": "HOT",
+    "address": "0x6c6ee5e31d828de241282b9606c8e98ea48526e2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hot.png",
+    "chain": "ETH",
+    "changellyTicker": "hot"
+  },
+  {
+    "symbol": "FUN",
+    "name": "FUN",
+    "address": "0x419d0d8bdd9af5e606ae2232ed285aff190e711b",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/fun.png",
+    "chain": "ETH",
+    "changellyTicker": "fun"
+  },
+  {
+    "symbol": "COW",
+    "name": "COW",
+    "address": "0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cow.png",
+    "chain": "ETH",
+    "changellyTicker": "cow"
+  },
+  {
+    "symbol": "HT",
+    "name": "HT",
+    "address": "0x6f259637dcd74c767781e37bc6133cd6a68aa161",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ht.png",
+    "chain": "ETH",
+    "changellyTicker": "ht"
+  },
+  {
+    "symbol": "MATH",
+    "name": "MATH",
+    "address": "0x08d967bb0134f2d07f7cfb6e246680c53927dd30",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/math.png",
+    "chain": "ETH",
+    "changellyTicker": "math"
+  },
+  {
+    "symbol": "AZUR",
+    "name": "AZUR",
+    "address": "0x9e6be44cc1236eef7e1f197418592d363bedcd5a",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/azur.png",
+    "chain": "ETH",
+    "changellyTicker": "azur"
+  },
+  {
+    "symbol": "ARPA",
+    "name": "ARPA",
+    "address": "0xba50933c268f567bdc86e1ac131be072c6b0b71a",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/arpa.png",
+    "chain": "ETH",
+    "changellyTicker": "arpa"
+  },
+  {
+    "symbol": "BOBA",
+    "name": "BOBA",
+    "address": "0x42bbfa2e77757c645eeaad1655e0911a7553efbc",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/boba.png",
+    "chain": "ETH",
+    "changellyTicker": "boba"
+  },
+  {
+    "symbol": "UOS",
+    "name": "UOS",
+    "address": "0xd13c7342e1ef687c5ad21b27c2b65d772cab5c8c",
+    "decimals": 4,
+    "logoURI": "https://cdn.changelly.com/icons/uos.png",
+    "chain": "ETH",
+    "changellyTicker": "uos"
+  },
+  {
+    "symbol": "CRV",
+    "name": "CRV",
+    "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/crv.png",
+    "chain": "ETH",
+    "changellyTicker": "crv"
+  },
+  {
+    "symbol": "CHR",
+    "name": "CHR",
+    "address": "0x8a2279d4a90b6fe1c4b30fa660cc9f926797baa2",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/chr.png",
+    "chain": "ETH",
+    "changellyTicker": "chr"
+  },
+  {
+    "symbol": "BLUR",
+    "name": "BLUR(ERC20)",
+    "address": "0x5283D291DBCF85356A21bA090E6db59121208b44",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "changellyTicker": "blur",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "STETH",
+    "name": "STETH",
+    "address": "0xae7ab96520de3a18e5e111b5eaab095312d7fe84",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/steth.png",
+    "chain": "ETH",
+    "changellyTicker": "steth"
+  },
+  {
+    "symbol": "ZCX",
+    "name": "ZCX",
+    "address": "0xc52c326331e9ce41f04484d3b5e5648158028804",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/zcx.png",
+    "chain": "ETH",
+    "changellyTicker": "zcx"
+  },
+  {
+    "symbol": "TOMI",
+    "name": "TOMI",
+    "address": "0x4385328cc4d643ca98dfea734360c0f596c83449",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tomi.png",
+    "chain": "ETH",
+    "changellyTicker": "tomi"
+  },
+  {
+    "symbol": "OM",
+    "name": "OM",
+    "address": "0x3593D125a4f7849a1B059E64F4517A86Dd60c95d",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/om.png",
+    "chain": "ETH",
+    "changellyTicker": "om"
+  },
+  {
+    "symbol": "DFI",
+    "name": "DFI",
+    "address": "0x8fc8f8269ebca376d046ce292dc7eac40c8d358a",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/dfi.png",
+    "chain": "ETH",
+    "changellyTicker": "dfi"
+  },
+  {
+    "symbol": "USUAL",
+    "name": "USUAL",
+    "address": "0xc4441c2be5d8fa8126822b9929ca0b81ea0de38e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/usual.png",
+    "chain": "ETH",
+    "changellyTicker": "usual"
+  },
+  {
+    "symbol": "DIA",
+    "name": "DIA",
+    "address": "0x84ca8bc7997272c7cfb4d0cd3d55cd942b3c9419",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dia.png",
+    "chain": "ETH",
+    "changellyTicker": "dia"
+  },
+  {
+    "symbol": "ALCX",
+    "name": "ALCX",
+    "address": "0xdbdb4d16eda451d0503b854cf79d55697f90c8df",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/alcx.png",
+    "chain": "ETH",
+    "changellyTicker": "alcx"
+  },
+  {
+    "symbol": "BEL",
+    "name": "BEL",
+    "address": "0xa91ac63d040deb1b7a5e4d4134ad23eb0ba07e14",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bel.png",
+    "chain": "ETH",
+    "changellyTicker": "bel"
+  },
+  {
+    "symbol": "PYUSD",
+    "name": "PYUSD",
+    "address": "0x6c3ea9036406852006290770bedfcaba0e23a0e8",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/pyusd.png",
+    "chain": "ETH",
+    "changellyTicker": "pyusd"
+  },
+  {
+    "symbol": "SAND",
+    "name": "SAND",
+    "address": "0x3845badAde8e6dFF049820680d1F14bD3903a5d0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sand.png",
+    "chain": "ETH",
+    "changellyTicker": "sand"
+  },
+  {
+    "symbol": "FTT",
+    "name": "FTT",
+    "address": "0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ftt.png",
+    "chain": "ETH",
+    "changellyTicker": "ftt"
+  },
+  {
+    "symbol": "CEL",
+    "name": "CEL",
+    "address": "0xaaaebe6fe48e54f431b0c390cfaf0b017d09d42d",
+    "decimals": 4,
+    "logoURI": "https://cdn.changelly.com/icons/cel.png",
+    "chain": "ETH",
+    "changellyTicker": "cel"
+  },
+  {
+    "symbol": "AGI",
+    "name": "AGI",
+    "address": "0x7dA2641000Cbb407C329310C461b2cB9c70C3046",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/agi.png",
+    "chain": "ETH",
+    "changellyTicker": "agi"
+  },
+  {
+    "symbol": "REQ",
+    "name": "REQ",
+    "address": "0x8f8221afbb33998d8584a2b05749ba73c37a938a",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/req.png",
+    "chain": "ETH",
+    "changellyTicker": "req"
+  },
+  {
+    "symbol": "FIRSTNEIROETH",
+    "name": "FIRSTNEIROETH",
+    "address": "0x812ba41e071c7b7fa4ebcfb62df5f45f6fa853ee",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/firstneiroeth.png",
+    "chain": "ETH",
+    "changellyTicker": "firstneiroeth"
+  },
+  {
+    "symbol": "KERNEL",
+    "name": "KERNEL",
+    "address": "0x3f80b1c54ae920be41a77f8b902259d48cf24ccf",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/kernel.png",
+    "chain": "ETH",
+    "changellyTicker": "kernel"
+  },
+  {
+    "symbol": "DUSK",
+    "name": "DUSK",
+    "address": "0x940a2db1b7008b6c776d4faaca729d6d4a4aa551",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dusk.png",
+    "chain": "ETH",
+    "changellyTicker": "dusk"
+  },
+  {
+    "symbol": "BLZ",
+    "name": "BLZ",
+    "address": "0x5732046a883704404f284ce41ffadd5b007fd668",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/blz.png",
+    "chain": "ETH",
+    "changellyTicker": "blz"
+  },
+  {
+    "symbol": "DOPETH",
+    "name": "DOPETH",
+    "address": "0x97A9a15168C22B3C137E6381037E1499C8ad0978",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dopeth.png",
+    "chain": "ETH",
+    "changellyTicker": "dopeth"
+  },
+  {
+    "symbol": "GHST",
+    "name": "GHST",
+    "address": "0x3F382DbD960E3a9bbCeaE22651E88158d2791550",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ghst.png",
+    "chain": "ETH",
+    "changellyTicker": "ghst"
+  },
+  {
+    "symbol": "NCT",
+    "name": "NCT",
+    "address": "0x9e46a38f5daabe8683e10793b06749eef7d733d1",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/nct.png",
+    "chain": "ETH",
+    "changellyTicker": "nct"
+  },
+  {
+    "symbol": "DAO",
+    "name": "DAO",
+    "address": "0x0f51bb10119727a7e5ea3538074fb341f56b09ad",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/dao.png",
+    "chain": "ETH",
+    "changellyTicker": "dao"
+  },
+  {
+    "symbol": "STND",
+    "name": "STND",
+    "address": "0x9040e237C3bF18347bb00957Dc22167D0f2b999d",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/stnd.png",
+    "chain": "ETH",
+    "changellyTicker": "stnd"
+  },
+  {
+    "symbol": "NEST",
+    "name": "NEST(ERC20)",
+    "address": "0x04abeda201850ac0124161f037efd70c74ddc74c",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "DYDX(ERC20)",
+    "name": "DYDX(ERC20)",
+    "address": "0x92d6c1e31e14520e676a687f0a93788b716beff5",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "WICC",
+    "name": "WICC(ERC20)",
+    "address": "0x4f878c0852722b0976a955d68b376e4cd4ae99e5",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "ETH",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "ETH"
+  },
+  {
+    "symbol": "BNB(BSC)",
+    "name": "BNB(BSC)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "bnbbsc"
+  },
+  {
+    "symbol": "BTCB",
+    "name": "BTCB(BSC)",
+    "address": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "DAI(BSC)",
+    "name": "DAI(BSC)",
+    "address": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "USDT(BSC)",
+    "name": "USDT(BSC)",
+    "address": "0x55d398326f99059ff775485246999027b3197955",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "usdtbsc"
+  },
+  {
+    "symbol": "CAKE(BSC)",
+    "name": "CAKE(BSC)",
+    "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "cake"
+  },
+  {
+    "symbol": "ETH(BSC)",
+    "name": "ETH(BSC)",
+    "address": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "ethbsc"
+  },
+  {
+    "symbol": "UNI(BSC)",
+    "name": "UNI(BSC)",
+    "address": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "unibsc"
+  },
+  {
+    "symbol": "LINK(BSC)",
+    "name": "LINK(BSC)",
+    "address": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "linkbsc"
+  },
+  {
+    "symbol": "DOT(BSC)",
+    "name": "DOT(BSC)",
+    "address": "0x7083609fce4d1d8dc0c979aab8c869ea2c873402",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "USDC(BSC)",
+    "name": "USDC(BSC)",
+    "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "usdcbsc"
+  },
+  {
+    "symbol": "SWFTC(BSC)",
+    "name": "SWFTC(BSC)",
+    "address": "0xe64e30276c2f826febd3784958d6da7b55dfbad3",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "BEL(BSC)",
+    "name": "BEL(BSC)",
+    "address": "0x8443f091997f06a61670b735ed92734f5628692f",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "TKO(BSC)",
+    "name": "TKO(BSC)",
+    "address": "0x9f589e3eabe42ebc94a44727b3f3531c0c877809",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "WBNB(BSC)",
+    "name": "WBNB(BSC)",
+    "address": "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "wbnb"
+  },
+  {
+    "symbol": "AVAX(BSC)",
+    "name": "AVAX(BSC)",
+    "address": "0x1ce0c2827e2ef14d5c4f29a091d735a204794041",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "TXS(BSC)",
+    "name": "TXS(BSC)",
+    "address": "0x8b298c5fbf0a8d4cd65ae524c8792b8cdfd9fbe9",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "MBOX(BSC)",
+    "name": "MBOX(BSC)",
+    "address": "0x3203c9e46ca618c8c1ce5dc67e7e9d75f5da2377",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "mbox"
+  },
+  {
+    "symbol": "ILV(BSC)",
+    "name": "ILV(BSC)",
+    "address": "0x4d5ac5cc4f8abdf2ec2cb986c00c382369f787d4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "FLUX(BSC)",
+    "name": "FLUX(BSC)",
+    "address": "0xaff9084f2374585879e8b434c399e29e80cce635",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "flux"
+  },
+  {
+    "symbol": "MDT(BSC)",
+    "name": "MDT(BSC)",
+    "address": "0x668db7aa38eac6b40c9d13dbe61361dc4c4611d1",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "GRIMACE(BSC)",
+    "name": "GRIMACE(BSC)",
+    "address": "0xC6759a4Fc56B3ce9734035a56B36e8637c45b77E",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "SPACEPI(BSC)",
+    "name": "SPACEPI(BSC)",
+    "address": "0x69b14e8D3CEBfDD8196Bfe530954A0C226E5008E",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "C98(BSC)",
+    "name": "C98(BSC)",
+    "address": "0xaec945e04baf28b135fa7c640f624f8d90f1c3a6",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "MTRG(BSC)",
+    "name": "MTRG(BSC)",
+    "address": "0xbd2949f67dcdc549c6ebe98696449fa79d988a9f",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "FWC(BSC)",
+    "name": "FWC(BSC)",
+    "address": "0x6d3a160b86edcd46d8f9bba25c2f88cccade19fc",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "THE(BSC)",
+    "name": "THE(BSC)",
+    "address": "0xF4C8E32EaDEC4BFe97E0F595AdD0f4450a863a11",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "the"
+  },
+  {
+    "symbol": "KAKI(BSC)",
+    "name": "KAKI(BSC)",
+    "address": "0x42414624C55A9CBa80789f47c8F9828A7974e40f",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "WALV(BSC)",
+    "name": "WALV(BSC)",
+    "address": "0x256D1fCE1b1221e8398f65F9B36033CE50B2D497",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "PEPEBNB(BSC)",
+    "name": "PEPEBNB(BSC)",
+    "address": "0x47Fd014706081068448b89Fc6bAca2730977216a",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "FREN(BSC)",
+    "name": "FREN(BSC)",
+    "address": "0xE6A768464B042a6d029394dB1fdeF360Cb60bbEb",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "LCT(BSC)",
+    "name": "LCT(BSC)",
+    "address": "0x2b8f0750c7849f7311967f4faa4d48f694195e58",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "HPXT(BSC)",
+    "name": "HPXT(BSC)",
+    "address": "0x50363c8Db819733070f50E145E12F439BA9c6DF0",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "JFIVE(BSC)",
+    "name": "JFIVE(BSC)",
+    "address": "0x845705db1623b8363a6d9813f33b73ec50cea0a2",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "PMT(BSC)",
+    "name": "PMT(BSC)",
+    "address": "0x68Ae2F202799be2008c89e2100257e66F77DA1f3",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "MLUT(BSC)",
+    "name": "MLUT(BSC)",
+    "address": "0x7358cDa6a5db35ce11a3a79a61145Ec93b63EeD4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "DOGEMOB(BSC)",
+    "name": "DOGEMOB(BSC)",
+    "address": "0xC44F8508E1dE753e7c523F98639132eeF2AD8EA5",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "CRICKETS(BSC)",
+    "name": "CRICKETS(BSC)",
+    "address": "0xad4C689Dcb380A94F7e13400Bd03FD998CF7aF7a",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "NBD(BSC)",
+    "name": "NBD(BSC)",
+    "address": "0x199D07aa6723e9324F44f89885101FF79e11919A",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "314(BSC)",
+    "name": "314(BSC)",
+    "address": "0xc7d4515Ba4c82c98a5a81d2A5eF98dcf35314314",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "PRX(BSC)",
+    "name": "PRX(BSC)",
+    "address": "0x51Bd0D0853B7596B6F1aCa8D2BE6816774271733",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "BABYCZHAO(BSC)",
+    "name": "BABYCZHAO(BSC)",
+    "address": "0x74D7d34DfE7B5E6A437823E7f38A6Fb87c55A879",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "TANUKI(BSC)",
+    "name": "TANUKI(BSC)",
+    "address": "0x5a32f7Eef0e88565ba534F82fAc32e12F3E08e03",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "COOKIE(BSC)",
+    "name": "COOKIE(BSC)",
+    "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "cookiebsc"
+  },
+  {
+    "symbol": "PLO(BSC)",
+    "name": "PLO(BSC)",
+    "address": "0xb6b999a4d9a8a7ba3549995c8ec95fca751f5060",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "GOOCHAIN(BSC)",
+    "name": "GOOCHAIN(BSC)",
+    "address": "0xb877daabd6a30348071814d9aad8cc1bbefbd5a2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "USD1(BSC)",
+    "name": "USD1(BSC)",
+    "address": "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC",
+    "changellyTicker": "usd1"
+  },
+  {
+    "symbol": "IVPAY",
+    "name": "IVPAY",
+    "address": "0xde5bdcbd4d7dfa86e527fef9971bd6ca6a76eefb",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ivpay.png",
+    "chain": "BSC",
+    "changellyTicker": "ivpay"
+  },
+  {
+    "symbol": "TPT",
+    "name": "TPT",
+    "address": "0xeca41281c24451168a37211f0bc2b8645af45092",
+    "decimals": 4,
+    "logoURI": "https://cdn.changelly.com/icons/tpt.png",
+    "chain": "BSC",
+    "changellyTicker": "tpt"
+  },
+  {
+    "symbol": "BAKE",
+    "name": "BAKE",
+    "address": "0xE02dF9e3e622DeBdD69fb838bB799E3F168902c5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bake.png",
+    "chain": "BSC",
+    "changellyTicker": "bake"
+  },
+  {
+    "symbol": "FORM",
+    "name": "FORM",
+    "address": "0x5b73a93b4e5e4f1fd27d8b3f8c97d69908b5e284",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/form.png",
+    "chain": "BSC",
+    "changellyTicker": "form"
+  },
+  {
+    "symbol": "XVS",
+    "name": "XVS",
+    "address": "0xcf6bb5389c92bdda8a3747ddb454cb7a64626c63",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/xvs.png",
+    "chain": "BSC",
+    "changellyTicker": "xvs"
+  },
+  {
+    "symbol": "HIGH",
+    "name": "HIGH",
+    "address": "0x5f4Bde007Dc06b867f86EBFE4802e34A1fFEEd63",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/high.png",
+    "chain": "BSC",
+    "changellyTicker": "high"
+  },
+  {
+    "symbol": "AITECH",
+    "name": "AITECH",
+    "address": "0x2d060ef4d6bf7f9e5edde373ab735513c0e4f944",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/aitech.png",
+    "chain": "BSC",
+    "changellyTicker": "aitech"
+  },
+  {
+    "symbol": "BSW",
+    "name": "BSW",
+    "address": "0x965f527d9159dce6288a2219db51fc6eef120dd1",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bsw.png",
+    "chain": "BSC",
+    "changellyTicker": "bsw"
+  },
+  {
+    "symbol": "NULS",
+    "name": "NULS",
+    "address": "0x8cd6e29d3686d24d3c2018cee54621ea0f89313b",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/nuls.png",
+    "chain": "BSC",
+    "changellyTicker": "nuls"
+  },
+  {
+    "symbol": "SFP",
+    "name": "SFP",
+    "address": "0xd41fdb03ba84762dd66a0af1a6c8540ff1ba5dfb",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sfp.png",
+    "chain": "BSC",
+    "changellyTicker": "sfp"
+  },
+  {
+    "symbol": "BMT",
+    "name": "BMT",
+    "address": "0x7d814b9ed370ec0a502edc3267393bf62d891b62",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bmt.png",
+    "chain": "BSC",
+    "changellyTicker": "bmt"
+  },
+  {
+    "symbol": "SIGN",
+    "name": "SIGN",
+    "address": "0x868fced65edbf0056c4163515dd840e9f287a4c3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sign.png",
+    "chain": "BSC",
+    "changellyTicker": "sign"
+  },
+  {
+    "symbol": "HGPT",
+    "name": "HGPT",
+    "address": "0x529c79f6918665ebe250f32eeeaa1d410a0798c6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hgpt.png",
+    "chain": "BSC",
+    "changellyTicker": "hgpt"
+  },
+  {
+    "symbol": "TUSDBSC",
+    "name": "TUSDBSC",
+    "address": "0x40af3827F39D0EAcBF4A168f8D4ee67c121D11c9",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tusdbsc.png",
+    "chain": "BSC",
+    "changellyTicker": "tusdbsc"
+  },
+  {
+    "symbol": "AI",
+    "name": "AI",
+    "address": "0xbda011d7f8ec00f66c1923b049b94c67d148d8b2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ai.png",
+    "chain": "BSC",
+    "changellyTicker": "ai"
+  },
+  {
+    "symbol": "ATA",
+    "name": "ATA",
+    "address": "0xa2120b9e674d3fc3875f415a7df52e382f141225",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ata.png",
+    "chain": "BSC",
+    "changellyTicker": "ata"
+  },
+  {
+    "symbol": "CSIX",
+    "name": "CSIX",
+    "address": "0x04756126F044634C9a0f0E985e60c88a51ACC206",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/csix.png",
+    "chain": "BSC",
+    "changellyTicker": "csix"
+  },
+  {
+    "symbol": "HOOK",
+    "name": "HOOK",
+    "address": "0xa260E12d2B924cb899AE80BB58123ac3fEE1E2F0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hook.png",
+    "chain": "BSC",
+    "changellyTicker": "hook"
+  },
+  {
+    "symbol": "BANANAS31",
+    "name": "BANANAS31",
+    "address": "0x3d4f0513e8a29669b960f9dbca61861548a9a760",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/bananas31.png",
+    "chain": "BSC",
+    "changellyTicker": "bananas31"
+  },
+  {
+    "symbol": "TLM",
+    "name": "TLM",
+    "address": "0x2222227e22102fe3322098e4cbfe18cfebd57c95",
+    "decimals": 4,
+    "logoURI": "https://cdn.changelly.com/icons/tlm.png",
+    "chain": "BSC",
+    "changellyTicker": "tlm"
+  },
+  {
+    "symbol": "CGPT",
+    "name": "CGPT",
+    "address": "0x9840652DC04fb9db2C43853633f0F62BE6f00f98",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cgpt.png",
+    "chain": "BSC",
+    "changellyTicker": "cgpt"
+  },
+  {
+    "symbol": "PARTI",
+    "name": "PARTI",
+    "address": "0x59264f02d301281f3393e1385c0aefd446eb0f00",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/parti.png",
+    "chain": "BSC",
+    "changellyTicker": "parti"
+  },
+  {
+    "symbol": "NEAR",
+    "name": "NEAR",
+    "address": "0x1fa4a73a3f0133f0025378af00236f3abdee5d63",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/near.png",
+    "chain": "BSC",
+    "changellyTicker": "near"
+  },
+  {
+    "symbol": "LAZIO",
+    "name": "LAZIO",
+    "address": "0x77d547256a2cd95f32f67ae0313e450ac200648d",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/lazio.png",
+    "chain": "BSC",
+    "changellyTicker": "lazio"
+  },
+  {
+    "symbol": "PORTO",
+    "name": "PORTO",
+    "address": "0x49f2145d6366099e13B10FbF80646C0F377eE7f6",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/porto.png",
+    "chain": "BSC",
+    "changellyTicker": "porto"
+  },
+  {
+    "symbol": "CAT",
+    "name": "CAT",
+    "address": "0x6894CDe390a3f51155ea41Ed24a33A4827d3063D",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cat.png",
+    "chain": "BSC",
+    "changellyTicker": "cat"
+  },
+  {
+    "symbol": "CHESS",
+    "name": "CHESS",
+    "address": "0x20de22029ab63cf9A7Cf5fEB2b737Ca1eE4c82A6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/chess.png",
+    "chain": "BSC",
+    "changellyTicker": "chess"
+  },
+  {
+    "symbol": "EPT",
+    "name": "EPT",
+    "address": "0x3dc8e2d80b6215a1bccae4d38715c3520581e77c",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ept.png",
+    "chain": "BSC",
+    "changellyTicker": "ept"
+  },
+  {
+    "symbol": "HELLO",
+    "name": "HELLO",
+    "address": "0x0F1cBEd8EFa0E012AdbCCB1638D0aB0147D5Ac00",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hello.png",
+    "chain": "BSC",
+    "changellyTicker": "hello"
+  },
+  {
+    "symbol": "EXIT",
+    "name": "EXIT",
+    "address": "0xdebd6e2da378784a69dc6ec99fe254223b312287",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/exit.png",
+    "chain": "BSC",
+    "changellyTicker": "exit"
+  },
+  {
+    "symbol": "RACA",
+    "name": "RACA",
+    "address": "0x12bb890508c125661e03b09ec06e404bc9289040",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/raca.png",
+    "chain": "BSC",
+    "changellyTicker": "raca"
+  },
+  {
+    "symbol": "CHEEMS",
+    "name": "CHEEMS",
+    "address": "0x0df0587216a4a1bb7d5082fdc491d93d2dd4b413",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cheems.png",
+    "chain": "BSC",
+    "changellyTicker": "cheems"
+  },
+  {
+    "symbol": "FLOKI",
+    "name": "FLOKI",
+    "address": "0xfb5b838b6cfeedc2873ab27866079ac55363d37e",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/floki.png",
+    "chain": "BSC",
+    "changellyTicker": "floki"
+  },
+  {
+    "symbol": "GMTBSC",
+    "name": "GMTBSC",
+    "address": "0x3019BF2a2eF8040C242C9a4c5c4BD4C81678b2A1",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/gmtbsc.png",
+    "chain": "BSC",
+    "changellyTicker": "gmtbsc"
+  },
+  {
+    "symbol": "SFUND",
+    "name": "SFUND",
+    "address": "0x477bc8d23c634c154061869478bce96be6045d12",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sfund.png",
+    "chain": "BSC",
+    "changellyTicker": "sfund"
+  },
+  {
+    "symbol": "LISTA",
+    "name": "LISTA",
+    "address": "0xfceb31a79f71ac9cbdcf853519c1b12d379edc46",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lista.png",
+    "chain": "BSC",
+    "changellyTicker": "lista"
+  },
+  {
+    "symbol": "BROCCOLI",
+    "name": "BROCCOLI",
+    "address": "0x6d5ad1592ed9d6d1df9b93c793ab759573ed6714",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/broccoli.png",
+    "chain": "BSC",
+    "changellyTicker": "broccoli"
+  },
+  {
+    "symbol": "CTSI",
+    "name": "CTSI",
+    "address": "0x8da443f84fea710266c8eb6bc34b71702d033ef2",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ctsi.png",
+    "chain": "BSC",
+    "changellyTicker": "ctsi"
+  },
+  {
+    "symbol": "SHELL",
+    "name": "SHELL",
+    "address": "0xf2c88757f8d03634671208935974B60a2a28Bdb3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/shell.png",
+    "chain": "BSC",
+    "changellyTicker": "shell"
+  },
+  {
+    "symbol": "PROM",
+    "name": "PROM",
+    "address": "0xaf53d56ff99f1322515e54fdde93ff8b3b7dafd5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/prom.png",
+    "chain": "BSC",
+    "changellyTicker": "prom"
+  },
+  {
+    "symbol": "XEN",
+    "name": "XEN",
+    "address": "0x2AB0e9e4eE70FFf1fB9D67031E44F6410170d00e",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/xen.png",
+    "chain": "BSC",
+    "changellyTicker": "xen"
+  },
+  {
+    "symbol": "TT",
+    "name": "TT",
+    "address": "0x990e7154bb999faa9b2fa5ed29e822703311ea85",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tt.png",
+    "chain": "BSC",
+    "changellyTicker": "tt"
+  },
+  {
+    "symbol": "PHB",
+    "name": "PHB",
+    "address": "0x0409633A72D846fc5BBe2f98D88564D35987904D",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/phb.png",
+    "chain": "BSC",
+    "changellyTicker": "phb"
+  },
+  {
+    "symbol": "TUT",
+    "name": "TUT",
+    "address": "0xcaae2a2f939f51d97cdfa9a86e79e3f085b799f3",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tut.png",
+    "chain": "BSC",
+    "changellyTicker": "tut"
+  },
+  {
+    "symbol": "LIME",
+    "name": "LIME",
+    "address": "0x7bc75e291e656e8658d66be1cc8154a3769a35dd",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lime.png",
+    "chain": "BSC",
+    "changellyTicker": "lime"
+  },
+  {
+    "symbol": "TST",
+    "name": "TST",
+    "address": "0x86bb94ddd16efc8bc58e6b056e8df71d9e666429",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/tst.png",
+    "chain": "BSC",
+    "changellyTicker": "tst"
+  },
+  {
+    "symbol": "ALPACA",
+    "name": "ALPACA",
+    "address": "0x8f0528ce5ef7b51152a59745befdd91d97091d2f",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/alpaca.png",
+    "chain": "BSC",
+    "changellyTicker": "alpaca"
+  },
+  {
+    "symbol": "SOLV",
+    "name": "SOLV",
+    "address": "0xabe8e5cabe24cb36df9540088fd7ce1175b9bc52",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/solv.png",
+    "chain": "BSC",
+    "changellyTicker": "solv"
+  },
+  {
+    "symbol": "FDUSD",
+    "name": "FDUSD",
+    "address": "0xc5f0f7b66764F6ec8C8Dff7BA683102295E16409",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/fdusd.png",
+    "chain": "BSC",
+    "changellyTicker": "fdusd"
+  },
+  {
+    "symbol": "STO",
+    "name": "STO",
+    "address": "0xdaf1695c41327b61b9b9965ac6a5843a3198cf07",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/sto.png",
+    "chain": "BSC",
+    "changellyTicker": "sto"
+  },
+  {
+    "symbol": "MLT",
+    "name": "MLT",
+    "address": "0xb72a20c7b8bd666f80ac053b0f4de20a787080f5",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mlt.png",
+    "chain": "BSC",
+    "changellyTicker": "mlt"
+  },
+  {
+    "symbol": "CHEEL",
+    "name": "CHEEL",
+    "address": "0x1f1c90aeb2fd13ea972f0a71e35c0753848e3db0",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/cheel.png",
+    "chain": "BSC",
+    "changellyTicker": "cheel"
+  },
+  {
+    "symbol": "DOGEBSC",
+    "name": "DOGEBSC",
+    "address": "0xba2ae424d960c26247dd6c32edc70b295c744c43",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/dogebsc.png",
+    "chain": "BSC",
+    "changellyTicker": "dogebsc"
+  },
+  {
+    "symbol": "NFP",
+    "name": "NFP",
+    "address": "0x551897f8203bd131b350601d3ac0679ba0fc0136",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/nfp.png",
+    "chain": "BSC",
+    "changellyTicker": "nfp"
+  },
+  {
+    "symbol": "LEE",
+    "name": "LEE",
+    "address": "0xe37dbf20a4fff3b88233e456355dc49b76b6fe19",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/lee.png",
+    "chain": "BSC",
+    "changellyTicker": "lee"
+  },
+  {
+    "symbol": "SANTOS",
+    "name": "SANTOS",
+    "address": "0xA64455a4553C9034236734FadDAddbb64aCE4Cc7",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/santos.png",
+    "chain": "BSC",
+    "changellyTicker": "santos"
+  },
+  {
+    "symbol": "HYPER",
+    "name": "HYPER",
+    "address": "0xc9d23ed2adb0f551369946bd377f8644ce1ca5c4",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/hyper.png",
+    "chain": "BSC",
+    "changellyTicker": "hyper"
+  },
+  {
+    "symbol": "MDAO",
+    "name": "MDAO",
+    "address": "0x60322971a672b81bcce5947706d22c19daecf6fb",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mdao.png",
+    "chain": "BSC",
+    "changellyTicker": "mdao"
+  },
+  {
+    "symbol": "BRISE",
+    "name": "BRISE",
+    "address": "0x8fff93e810a2edaafc326edee51071da9d398e83",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/brise.png",
+    "chain": "BSC",
+    "changellyTicker": "brise"
+  },
+  {
+    "symbol": "ARTY",
+    "name": "ARTY",
+    "address": "0x617Cab4aAae1f8dfb3eE138698330776a1e1b324",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/arty.png",
+    "chain": "BSC",
+    "changellyTicker": "arty"
+  },
+  {
+    "symbol": "ADABSC",
+    "name": "ADABSC",
+    "address": "0x3ee2200efb3400fabb9aacf31297cbdd1d435d47",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/adabsc.png",
+    "chain": "BSC",
+    "changellyTicker": "adabsc"
+  },
+  {
+    "symbol": "EDU",
+    "name": "EDU",
+    "address": "0xbdeae1ca48894a1759a8374d63925f21f2ee2639",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/edu.png",
+    "chain": "BSC",
+    "changellyTicker": "edu"
+  },
+  {
+    "symbol": "ACE",
+    "name": "ACE",
+    "address": "0xc27A719105A987b4c34116223CAE8bd8F4B5def4",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/ace.png",
+    "chain": "BSC",
+    "changellyTicker": "ace"
+  },
+  {
+    "symbol": "CHMB",
+    "name": "CHMB",
+    "address": "0x5492Ef6aEebA1A3896357359eF039a8B11621b45",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/chmb.png",
+    "chain": "BSC",
+    "changellyTicker": "chmb"
+  },
+  {
+    "symbol": "TWT",
+    "name": "TWT",
+    "address": "0x4b0f1812e5df2a09796481ff14017e6005508003",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/twt.png",
+    "chain": "BSC",
+    "changellyTicker": "twt"
+  },
+  {
+    "symbol": "MUBARAK",
+    "name": "MUBARAK",
+    "address": "0x5c85d6c6825ab4032337f11ee92a72df936b46f6",
+    "decimals": 18,
+    "logoURI": "https://cdn.changelly.com/icons/mubarak.png",
+    "chain": "BSC",
+    "changellyTicker": "mubarak"
+  },
+  {
+    "symbol": "ID(BSC)",
+    "name": "ID(BSC)",
+    "address": "0x2dfF88A56767223A5529eA5960Da7A3F5f766406",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "INJ(BSC)",
+    "name": "INJ(BSC)",
+    "address": "0xa2B726B1145A4773F68593CF171187d8EBe4d495",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BSC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BSC"
+  },
+  {
+    "symbol": "BTC",
+    "name": "BTC(BTC)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "BTC",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "BTC",
+    "changellyTicker": "btc"
+  },
+  {
+    "symbol": "SOL",
+    "name": "SOL(SOL)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "sol"
+  },
+  {
+    "symbol": "USDC(SOL)",
+    "name": "USDC(SOL)",
+    "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "usdcsol"
+  },
+  {
+    "symbol": "WSOL",
+    "name": "Wrapped SOL",
+    "address": "So11111111111111111111111111111111111111112",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "USDT(SOL)",
+    "name": "USDT(SOL)",
+    "address": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "usdtsol"
+  },
+  {
+    "symbol": "KITTY(SOL)",
+    "name": "KITTY(SOL)",
+    "address": "8yJ15ee2AUQmwbWPxXLTTeBTzyMGn4MtSRKMqVHw1J1G",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "FECES(SOL)",
+    "name": "FECES(SOL)",
+    "address": "5j2shkkzascw33QpW6RRqfRkacLkn7QwwV1e7jX36nyn",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "CHUMP(SOL)",
+    "name": "CHUMP(SOL)",
+    "address": "HJ8WWpsheTMKwuoFkvEuhAzdqqUTgqdS7JVR37rxgnFS",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "SCOT(SOL)",
+    "name": "SCOT(SOL)",
+    "address": "EoJEyppNNpycP1ZoPnWq6cxwA7mSYpr9T1WXPFyjEzEy",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "LAB(SOL)",
+    "name": "LAB(SOL)",
+    "address": "2Pp6ebUvEL9YRTauUTmGTwYZKRfyQXGM9jE4S8WPDtEy",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "BULL(SOL)",
+    "name": "BULL(SOL)",
+    "address": "7ZYeCVdsXRFfh7TC5JRfBaZxQ6UhF5nNNdNtRzrdsDYF",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "YEEHAW(SOL)",
+    "name": "YEEHAW(SOL)",
+    "address": "AhwJjMyCqb6jWnvFr5hDTurSAZirKoofg6vFzhG8N71o",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "BABYGOAT(SOL)",
+    "name": "BABYGOAT(SOL)",
+    "address": "F4aLcMxQy6CPcXAuER3J5QgB89n4fqBMs2bcrqQBpump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "RENDER(SOL)",
+    "name": "RENDER(SOL)",
+    "address": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "render"
+  },
+  {
+    "symbol": "AID(SOL)",
+    "name": "AID(SOL)",
+    "address": "HuXXFCWArVDShSinjxtboW9vEtqyZoKuLKPBVA7K2Udh",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "RAT(SOL)",
+    "name": "RAT(SOL)",
+    "address": "3vJenGaGsuKG5shPhi7rjnuy3MV6xjmBTGjYqYzXpump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "PNUT(SOL)",
+    "name": "PNUT(SOL)",
+    "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "pnut"
+  },
+  {
+    "symbol": "ME(SOL)",
+    "name": "ME(SOL)",
+    "address": "MEFNBXixkEbait3xn9bkm8WsJzXtVsaJEn4c8Sam21u",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "me"
+  },
+  {
+    "symbol": "SONIC(SOL)",
+    "name": "SONIC(SOL)",
+    "address": "SonicxvLud67EceaEzCLRnMTBqzYUUYNr93DBkBdDES",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "SWARMS(SOL)",
+    "name": "SWARMS(SOL)",
+    "address": "74SBV4zDXxTRgv1pEMoECskKBkZHc2yGPnc7GYVepump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "swarms"
+  },
+  {
+    "symbol": "GRASS(SOL)",
+    "name": "GRASS(SOL)",
+    "address": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "grass"
+  },
+  {
+    "symbol": "FARTCOIN",
+    "name": "FARTCOIN",
+    "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/fartcoin.png",
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 1000,
+    "chainId": "",
+    "changellyTicker": "fartcoin"
+  },
+  {
+    "symbol": "TRUMP(SOL)",
+    "name": "TRUMP(SOL)",
+    "address": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "trump"
+  },
+  {
+    "symbol": "MELANIA(SOL)",
+    "name": "MELANIA(SOL)",
+    "address": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "melania"
+  },
+  {
+    "symbol": "TAAM(SOL)",
+    "name": "TAAM(SOL)",
+    "address": "HcGV8zdbCg3agEDG1Wg66phHJbLgfnBKxs9PnJd2kPEf",
+    "decimals": 2,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "VINE(SOL)",
+    "name": "VINE(SOL)",
+    "address": "6AJcP7wuLwmRYLBNbi825wgguaPsWzPBEHcHndpRpump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "vine"
+  },
+  {
+    "symbol": "JELLYJELLY(SOL)",
+    "name": "JELLYJELLY(SOL)",
+    "address": "FeR8VBqNRSUD5NtXAj2n3j1dAHkZHfyDktKuLXD4pump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "BROKE(SOL)",
+    "name": "BROKE(SOL)",
+    "address": "Ga4oZoNRLkZkruJpS8NLwa8DJCwKP9hbTBSNDQZ9V43v",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "FARTSQUD(SOL)",
+    "name": "FARTSQUD(SOL)",
+    "address": "5HfaB7KeZi349kf4VtezP7rqg42Vcnw49YDiXC3PgtdM",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "TRUMPJR(SOL)",
+    "name": "TRUMPJR(SOL)",
+    "address": "HX5EpJxT61cbJg177Pi9ZKe15HWAn4aJCmPVuz6pyp36",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "GOHOME(SOL)",
+    "name": "GOHOME(SOL)",
+    "address": "2Wu1g2ft7qZHfTpfzP3wLdfPeV1is4EwQ3CXBfRYAciD",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "AI16Z(SOL)",
+    "name": "AI16Z(SOL)",
+    "address": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL",
+    "changellyTicker": "ai16z"
+  },
+  {
+    "symbol": "RADX(SOL)",
+    "name": "RADX(SOL)",
+    "address": "FVFZxEewzrXooU8n8PjGPWKHHzouDjPfW6rzVaeXqGvY",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "ALGOAI(SOL)",
+    "name": "ALGOAI(SOL)",
+    "address": "4b83cYeo4BYfP9NfFUQQWRQYfomJjjChfsV64m5MqifY",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "WFTT(SOL)",
+    "name": "WFTT(SOL)",
+    "address": "7ezgmsi9nbENBbZ9YhenDMEMKnaK5RuE9h3FQN2cJBAX",
+    "decimals": 4,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "GIGA",
+    "name": "GIGA",
+    "address": "63LfDmNb3MQ8mw9MtZ2To9bEA2M71kZUUGq5tiJxcqj9",
+    "decimals": 5,
+    "logoURI": "https://cdn.changelly.com/icons/giga.png",
+    "chain": "SOLANA",
+    "changellyTicker": "giga"
+  },
+  {
+    "symbol": "ACT",
+    "name": "ACT",
+    "address": "GJAFwWjJ3vnTsrQVabjBVK2TYB1YtRCQXRDfDgUnpump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/act.png",
+    "chain": "SOLANA",
+    "changellyTicker": "act"
+  },
+  {
+    "symbol": "GME",
+    "name": "GME",
+    "address": "8wXtPeU6557ETkp9WHFY1n1EcU6NxDvbAggHGsMYiHsB",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/gme.png",
+    "chain": "SOLANA",
+    "changellyTicker": "gme"
+  },
+  {
+    "symbol": "POLIS",
+    "name": "POLIS",
+    "address": "poLisWXnNRwC6oBu1vHiuKQzFjGL4XDSu4g9qjz9qVk",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/polis.png",
+    "chain": "SOLANA",
+    "changellyTicker": "polis"
+  },
+  {
+    "symbol": "WEN",
+    "name": "WEN",
+    "address": "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk",
+    "decimals": 5,
+    "logoURI": "https://cdn.changelly.com/icons/wen.png",
+    "chain": "SOLANA",
+    "changellyTicker": "wen"
+  },
+  {
+    "symbol": "ORCA",
+    "name": "ORCA",
+    "address": "orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/orca.png",
+    "chain": "SOLANA",
+    "changellyTicker": "orca"
+  },
+  {
+    "symbol": "CHILLGUY",
+    "name": "CHILLGUY",
+    "address": "Df6yfrKC8kZE3KNkrHERKzAetSxbrWeniQfyJY4Jpump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/chillguy.png",
+    "chain": "SOLANA",
+    "changellyTicker": "chillguy"
+  },
+  {
+    "symbol": "PUNDU",
+    "name": "PUNDU",
+    "address": "WskzsKqEW3ZsmrhPAevfVZb6PuuLzWov9mJWZsfDePC",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/pundu.png",
+    "chain": "SOLANA",
+    "changellyTicker": "pundu"
+  },
+  {
+    "symbol": "PRCL",
+    "name": "PRCL",
+    "address": "4LLbsb5ReP3yEtYzmXewyGjcir5uXtKFURtaEUVC2AHs",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/prcl.png",
+    "chain": "SOLANA",
+    "changellyTicker": "prcl"
+  },
+  {
+    "symbol": "TNSR",
+    "name": "TNSR",
+    "address": "TNSRxcUxoT9xBG3de7PiJyTDYu7kskLqcpddxnEJAS6",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/tnsr.png",
+    "chain": "SOLANA",
+    "changellyTicker": "tnsr"
+  },
+  {
+    "symbol": "SLIM",
+    "name": "SLIM",
+    "address": "xxxxa1sKNGwFtw2kFn8XauW9xq8hBZ5kVtcSesTT9fW",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/slim.png",
+    "chain": "SOLANA",
+    "changellyTicker": "slim"
+  },
+  {
+    "symbol": "W",
+    "name": "W",
+    "address": "85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/w.png",
+    "chain": "SOLANA",
+    "changellyTicker": "w"
+  },
+  {
+    "symbol": "HUMA",
+    "name": "HUMA",
+    "address": "HUMA1821qVDKta3u2ovmfDQeW2fSQouSKE8fkF44wvGw",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/huma.png",
+    "chain": "SOLANA",
+    "changellyTicker": "huma"
+  },
+  {
+    "symbol": "MOODENG",
+    "name": "MOODENG",
+    "address": "ED5nyyWEzpPPiWimP8vYm7sD7TD3LAt3Q3gRTWHzPJBY",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/moodeng.png",
+    "chain": "SOLANA",
+    "changellyTicker": "moodeng"
+  },
+  {
+    "symbol": "LAYER",
+    "name": "LAYER",
+    "address": "LAYER4xPpTCb3QL8S9u41EAhAX7mhBn8Q6xMTwY2Yzc",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/layer.png",
+    "chain": "SOLANA",
+    "changellyTicker": "layer"
+  },
+  {
+    "symbol": "NYAN",
+    "name": "NYAN",
+    "address": "NYANpAp9Cr7YarBNrby7Xx4xU6No6JKTBuohNA3yscP",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/nyan.png",
+    "chain": "SOLANA",
+    "changellyTicker": "nyan"
+  },
+  {
+    "symbol": "RAY(SOL)",
+    "name": "RAY(SOL)",
+    "address": "4k3Dyjzvzp8eMZWUXbBCjEvwSkkk59S5iCNLY3QrkX6R",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "changellyTicker": "ray",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "ATLAS",
+    "name": "ATLAS",
+    "address": "ATLASXmbPQxBUYbxPsV97usA3fPQYEqzQBUHgiFCUsXx",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/atlas.png",
+    "chain": "SOLANA",
+    "changellyTicker": "atlas"
+  },
+  {
+    "symbol": "PIPPIN",
+    "name": "PIPPIN",
+    "address": "Dfh5DzRgSvvCFDoYc2ciTkMrbDfRKybA4SoFbPmApump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/pippin.png",
+    "chain": "SOLANA",
+    "changellyTicker": "pippin"
+  },
+  {
+    "symbol": "BENDOG",
+    "name": "BENDOG",
+    "address": "AHW5N8iqZobTcBepkSJzZ61XtAuSzBDcpxtrLG6KUKPk",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/bendog.png",
+    "chain": "SOLANA",
+    "changellyTicker": "bendog"
+  },
+  {
+    "symbol": "NEON",
+    "name": "NEON",
+    "address": "NeonTjSjsuo3rexg9o6vHuMXw62f9V7zvmu8M8Zut44",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/neon.png",
+    "chain": "SOLANA",
+    "changellyTicker": "neon"
+  },
+  {
+    "symbol": "GOAT(SOL)",
+    "name": "GOAT(SOL)",
+    "address": "CzLSujWBLFsSjncfkh59rUFqvafWcY5tzedWJSuypump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "changellyTicker": "goat",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "MYRO",
+    "name": "MYRO",
+    "address": "HhJpBhRRn4g56VsyLuT8DL5Bv31HkXqsrahTTUCZeZg4",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/myro.png",
+    "chain": "SOLANA",
+    "changellyTicker": "myro"
+  },
+  {
+    "symbol": "MEW",
+    "name": "MEW",
+    "address": "MEW1gQWJ3nEXg2qgERiKu7FAFj79PHvQVREQUzScPP5",
+    "decimals": 5,
+    "logoURI": "https://cdn.changelly.com/icons/mew.png",
+    "chain": "SOLANA",
+    "changellyTicker": "mew"
+  },
+  {
+    "symbol": "JTO",
+    "name": "JTO",
+    "address": "jtojtomepa8beP8AuQc6eXt5FriJwfFMwQx2v2f9mCL",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/jto.png",
+    "chain": "SOLANA",
+    "changellyTicker": "jto"
+  },
+  {
+    "symbol": "SAROS",
+    "name": "SAROS",
+    "address": "SarosY6Vscao718M4A778z4CGtvcwcGef5M9MEH1LGL",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/saros.png",
+    "chain": "SOLANA",
+    "changellyTicker": "saros"
+  },
+  {
+    "symbol": "ZEUS",
+    "name": "ZEUS",
+    "address": "ZEUS1aR7aX8DFFJf5QjWj2ftDDdNTroMNGo8YoQm3Gq",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/zeus.png",
+    "chain": "SOLANA",
+    "changellyTicker": "zeus"
+  },
+  {
+    "symbol": "BAN",
+    "name": "BAN",
+    "address": "9PR7nCP9DpcUotnDPVLUBUZKu5WAYkwrCUx9wDnSpump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/ban.png",
+    "chain": "SOLANA",
+    "changellyTicker": "ban"
+  },
+  {
+    "symbol": "ACS",
+    "name": "ACS",
+    "address": "5MAYDfq5yxtudAhtfyuMBuHZjgAbaS9tbEyEQYAhDS5y",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/acs.png",
+    "chain": "SOLANA",
+    "changellyTicker": "acs"
+  },
+  {
+    "symbol": "ZEREBRO",
+    "name": "ZEREBRO",
+    "address": "8x5VqbHA8D7NkD52uNuS5nnt3PwA8pLD34ymskeSo2Wn",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/zerebro.png",
+    "chain": "SOLANA",
+    "changellyTicker": "zerebro"
+  },
+  {
+    "symbol": "GRIFFAIN",
+    "name": "GRIFFAIN",
+    "address": "KENJSUYLASHUMfHyy5o4Hp2FdNqZg1AsUPhfH2kYvEP",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/griffain.png",
+    "chain": "SOLANA",
+    "changellyTicker": "griffain"
+  },
+  {
+    "symbol": "BONK",
+    "name": "BONK",
+    "address": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+    "decimals": 5,
+    "logoURI": "https://cdn.changelly.com/icons/bonk.png",
+    "chain": "SOLANA",
+    "changellyTicker": "bonk"
+  },
+  {
+    "symbol": "SLERF",
+    "name": "SLERF",
+    "address": "7BgBvyjrZX1YKz4oh9mjb8ZScatkkwb8DzFx7LoiVkM3",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/slerf.png",
+    "chain": "SOLANA",
+    "changellyTicker": "slerf"
+  },
+  {
+    "symbol": "GMT",
+    "name": "GMT",
+    "address": "7i5KKsX2weiTkry7jA4ZwSuXGhs5eJBEjY8vVxR4pfRx",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/gmt.png",
+    "chain": "SOLANA",
+    "changellyTicker": "gmt"
+  },
+  {
+    "symbol": "DBR",
+    "name": "DBR",
+    "address": "DBRiDgJAMsM95moTzJs7M9LnkGErpbv9v6CUR1DXnUu5",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/dbr.png",
+    "chain": "SOLANA",
+    "changellyTicker": "dbr"
+  },
+  {
+    "symbol": "BUZZ",
+    "name": "BUZZ",
+    "address": "9DHe3pycTuymFk4H4bbPoAJ4hQrr2kaLDF6J6aAKpump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/buzz.png",
+    "chain": "SOLANA",
+    "changellyTicker": "buzz"
+  },
+  {
+    "symbol": "JUP",
+    "name": "JUP",
+    "address": "JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/jup.png",
+    "chain": "SOLANA",
+    "changellyTicker": "jup"
+  },
+  {
+    "symbol": "PENGU",
+    "name": "PENGU",
+    "address": "2zMMhcVQEXDtdE6vsFS7S7D5oUodfJHE8vd1gnBouauv",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/pengu.png",
+    "chain": "SOLANA",
+    "changellyTicker": "pengu"
+  },
+  {
+    "symbol": "NOS",
+    "name": "NOS",
+    "address": "nosXBVoaCTtYdLvKY6Csb4AC8JCdQKKAaWYtx2ZMoo7",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/nos.png",
+    "chain": "SOLANA",
+    "changellyTicker": "nos"
+  },
+  {
+    "symbol": "WIF(SOL)",
+    "name": "WIF(SOL)",
+    "address": "EKpQGSJtjMFqKZ9KQanSqYXRcF8fBopzLHYxdM65zcjm",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "changellyTicker": "wif",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "SRMSOL",
+    "name": "SRMSOL",
+    "address": "SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/srmsol.png",
+    "chain": "SOLANA",
+    "changellyTicker": "srmsol"
+  },
+  {
+    "symbol": "FIDA(SOL)",
+    "name": "FIDA(SOL)",
+    "address": "EchesyfXePKdLtoiZSL8pBe8Myagyy8ZRqsACNCFGnvp",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "changellyTicker": "fida",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "IO",
+    "name": "IO",
+    "address": "BZLbGTNCSFfoth2GYDtwr7e4imWzpR5jqcUuGEwr646K",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/io.png",
+    "chain": "SOLANA",
+    "changellyTicker": "io"
+  },
+  {
+    "symbol": "PONKE",
+    "name": "PONKE",
+    "address": "5z3EqYQo9HiCEs3R84RCDMu2n7anpDMxRhdK8PSWmrRC",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/ponke.png",
+    "chain": "SOLANA",
+    "changellyTicker": "ponke"
+  },
+  {
+    "symbol": "PYTH(SOL)",
+    "name": "PYTH(SOL)",
+    "address": "HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "changellyTicker": "pyth",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "KMNO",
+    "name": "KMNO",
+    "address": "KMNo3nJsBXfcpJTVhZcXLW7RmTwTt4GVFE7suUBo9sS",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/kmno.png",
+    "chain": "SOLANA",
+    "changellyTicker": "kmno"
+  },
+  {
+    "symbol": "MOBILE",
+    "name": "MOBILE",
+    "address": "mb1eu7TzEc71KxDpsmsKoucSSuuoGLv1drys1oP2jh6",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/mobile.png",
+    "chain": "SOLANA",
+    "changellyTicker": "mobile"
+  },
+  {
+    "symbol": "HNT",
+    "name": "HNT",
+    "address": "hntyVP6YFm1Hg25TN9WGLqM12b8TQmcknKrdu1oxWux",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/hnt.png",
+    "chain": "SOLANA",
+    "changellyTicker": "hnt"
+  },
+  {
+    "symbol": "DRIFT",
+    "name": "DRIFT",
+    "address": "DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/drift.png",
+    "chain": "SOLANA",
+    "changellyTicker": "drift"
+  },
+  {
+    "symbol": "DADDY",
+    "name": "DADDY",
+    "address": "4Cnk9EPnW5ixfLZatCPJjDB1PUtcRpVVgTQukm9epump",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/daddy.png",
+    "chain": "SOLANA",
+    "changellyTicker": "daddy"
+  },
+  {
+    "symbol": "POPCAT",
+    "name": "POPCAT",
+    "address": "7GCihgDB8fe6KNjn2MYtkzZcRjQy3t9GHdC8uHYmW2hr",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/popcat.png",
+    "chain": "SOLANA",
+    "changellyTicker": "popcat"
+  },
+  {
+    "symbol": "BOME",
+    "name": "BOME",
+    "address": "ukHH6c7mMyiWCf1b9pnWe25TSpkDDt3H5pQZgZ74J82",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/bome.png",
+    "chain": "SOLANA",
+    "changellyTicker": "bome"
+  },
+  {
+    "symbol": "DOOD",
+    "name": "DOOD",
+    "address": "DvjbEsdca43oQcw2h3HW1CT7N3x5vRcr3QrvTUHnXvgV",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/dood.png",
+    "chain": "SOLANA",
+    "changellyTicker": "dood"
+  },
+  {
+    "symbol": "COMFY(SOL)",
+    "name": "COMFY(SOL)",
+    "address": "FbJpd8yhrGGkWVL1Ujf7qFvTw4uD4675k8CYk82LEKvZ",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "BABYBTC(SOL)",
+    "name": "BABYBTC(SOL)",
+    "address": "8467ssuj6Gkw15ABv6BvxJAKnGJALXJu6dxDxt4upump",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "SOLANA",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "SOL"
+  },
+  {
+    "symbol": "TON",
+    "name": "TON(TON)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "ton"
+  },
+  {
+    "symbol": "USDT(TON)",
+    "name": "USDT(TON)",
+    "address": "EQCxE6mUtQJKFnGfaROTKOt1lZbDiiX1kCixRv7Nw2Id_sDs",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "usdton"
+  },
+  {
+    "symbol": "STON(TON)",
+    "name": "STON(TON)",
+    "address": "EQA2kCVNwVsil2EM2mB0SkXytxCqQjS4mttjDpnXmwG9T6bO",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON"
+  },
+  {
+    "symbol": "NOT(TON)",
+    "name": "NOT(TON)",
+    "address": "EQAvlWFDxGF2lXm67y4yzC17wYKD9A0guwPkMs1gOsM__NOT",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "not"
+  },
+  {
+    "symbol": "DOGS(TON)",
+    "name": "DOGS(TON)",
+    "address": "EQCvxJy4eG8hyHBFsZ7eePxrRsUQSFE_jpptRAYBmcG_DOGS",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "dogs"
+  },
+  {
+    "symbol": "CATI(TON)",
+    "name": "CATI(TON)",
+    "address": "EQD-cvR0Nz6XAyRBvbhz-abTrRC6sI5tvHvvpeQraV9UAAD7",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "cati"
+  },
+  {
+    "symbol": "HMSTR(TON)",
+    "name": "HMSTR(TON)",
+    "address": "EQAJ8uWd7EBqsmpSWaRdf_I-8R8-XHwh3gsNKhy-UrdrPcUo",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "TON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TON",
+    "changellyTicker": "hmstr"
+  },
+  {
+    "symbol": "X",
+    "name": "X",
+    "address": "EQB4zZusHsbU2vVTPqjhlokIOoiZhEdCMT703CWEzhTOo__X",
+    "decimals": 9,
+    "logoURI": "https://cdn.changelly.com/icons/x.png",
+    "chain": "TON",
+    "changellyTicker": "x"
+  },
+  {
+    "symbol": "TRX",
+    "name": "TRX(TRON)",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "trx"
+  },
+  {
+    "symbol": "USDT(TRON)",
+    "name": "USDT(TRON)",
+    "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "usdtrx"
+  },
+  {
+    "symbol": "JST",
+    "name": "JST(TRON)",
+    "address": "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "jst"
+  },
+  {
+    "symbol": "WIN(TRON)",
+    "name": "WIN(TRON)",
+    "address": "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "win"
+  },
+  {
+    "symbol": "TUSD(TRON)",
+    "name": "TUSD(TRON)",
+    "address": "TUpMhErZL2fhh4sVNULAbNKLokS4GjC1F4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "tusdtrx"
+  },
+  {
+    "symbol": "USDD(TRON)",
+    "name": "USDD(TRON)",
+    "address": "TXDk8mbtRbXeYuMNS83CfKPaYYT8XWv9Hz",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "HTX(TRON)",
+    "name": "HTX(TRON)",
+    "address": "TUPM7K8REVzD2UdV4R5fe5M8XbnR2DdoJ6",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "SUNCAT(TRON)",
+    "name": "SUNCAT(TRON)",
+    "address": "TAwAg9wtQzTMFsijnSFotJrpxhMm3AqW1d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "SUNPEPE(TRON)",
+    "name": "SUNPEPE(TRON)",
+    "address": "TAzpJHxxgJd8f5AKjzndEndH3S9pzNUM5W",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "CORA(TRON)",
+    "name": "CORA(TRON)",
+    "address": "TPKQHydsnBJFpBVGrqup9Zr6BC4pa68Mx2",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "SUNDOG(TRON)",
+    "name": "SUNDOG(TRON)",
+    "address": "TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "sundog"
+  },
+  {
+    "symbol": "USDJ(TRON)",
+    "name": "USDJ(TRON)",
+    "address": "TMwFHYXLJaRUPeW6421aqXL4ZEzPRFGkGT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX"
+  },
+  {
+    "symbol": "SUN(TRON)",
+    "name": "SUN(TRON)",
+    "address": "TSSMHYeV2uE9qYH95DqyoCuNCzEL1NvU3S",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "sun"
+  },
+  {
+    "symbol": "BTT(TRON)",
+    "name": "BTT(TRON)",
+    "address": "TAFjULxiVgT4qWk6UZwjqwZXTSaGaqnVp4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "TRON",
+    "isCrossEnable": 1,
+    "withdrawGas": 0,
+    "chainId": "TRX",
+    "changellyTicker": "btt"
+  },
+  {
+    "symbol": "WBT",
+    "name": "WBT",
+    "address": "TFptbWaARrWTX5Yvy3gNG5Lm8BmhPx82Bt",
+    "decimals": 8,
+    "logoURI": "https://cdn.changelly.com/icons/wbt.png",
+    "chain": "TRON",
+    "changellyTicker": "wbt"
+  },
+  {
+    "symbol": "NFT",
+    "name": "NFT",
+    "address": "TFczxzPhnThNSqr5by8tvxsdCFRRz6cPNq",
+    "decimals": 6,
+    "logoURI": "https://cdn.changelly.com/icons/nft.png",
+    "chain": "TRON",
+    "changellyTicker": "nft"
+  },
+  {
+    "symbol": "VENOM",
+    "name": "VENOM",
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "VENOM",
+    "changellyTicker": "venom"
+  },
+  {
+    "symbol": "WVENOM",
+    "name": "WVENOM",
+    "address": "0:77d36848bb159fa485628bc38dc37eadb74befa514395e09910f601b841f749e",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "USDT",
+    "name": "USDT",
+    "address": "0:8a4ed4483500caf2d4bb4b56c84df41009cc3d0ed6a9de05d853e26a30faeced",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "WETH",
+    "name": "WETH",
+    "address": "0:60b3ebf994515df7985cb62a9d141467edf2f869272baf507dc83d9ba2e1b199",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "WBTC",
+    "name": "WBTC",
+    "address": "0:4ff3c0f078889cbda817a5f5f2651824dea11a84f3857df27e76fee37d541877",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "WBNB",
+    "name": "WBNB",
+    "address": "0:0a75b9ad65982b02493491b00454b34dcecb9e63700d560fc001473659297661",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "USDC",
+    "name": "USDC",
+    "address": "0:cda5e8d5953e1a09ffeb9f62316f2994019f10abe83c8f1b0aadfbc997bd79e6",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "DAI",
+    "name": "DAI",
+    "address": "0:0447c738d8549c5ea92f1c945628367db4adcc706685f760c93f8b236bf8e7e4",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "W3W",
+    "name": "W3W",
+    "address": "0:a53178ec8c6fe0c62413edd9eed25508f357cfba8bf8a7dbfad9290413b2e6be",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "DRAGONZ",
+    "name": "DRAGONZ",
+    "address": "0:1c5ebbde66ef5c2e7bcd49fd3d37762204d225762b03b37cac9c9fd0a5e70f0b",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "stVenom",
+    "name": "stVenom",
+    "address": "0:74604c7a56419477d67329848d754d205f31870025a7135909e90e1726ad9a54",
+    "decimals": 9,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "symbol": "AVAX",
+    "name": "AVAX",
+    "address": "0:10d6d5c11f7ce319842b9ceb8bc9ee4d64f317cd99f1f4ce17985e7ef50e2d2d",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "VENOM"
+  },
+  {
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "AVAX",
+    "symbol": "AVAX",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "avaxc"
+  },
+  {
+    "address": "0x8729438EB15e2C8B576fCc6AeCdA6A148776C0F5",
+    "name": "QI",
+    "symbol": "QI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "qi"
+  },
+  {
+    "address": "0x60781c2586d68229fde47564546784ab3faca982",
+    "name": "PNG",
+    "symbol": "PNG",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "png"
+  },
+  {
+    "address": "0xd586e7f844cea2f87f50152665bcbc2c279d8d70",
+    "name": "DAI",
+    "symbol": "DAI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE"
+  },
+  {
+    "address": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+    "name": "USDC",
+    "symbol": "USDC",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "usdcavac"
+  },
+  {
+    "address": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
+    "name": "USDT",
+    "symbol": "USDT",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "usdtavac"
+  },
+  {
+    "address": "0x6e84a6216ea6dacc71ee8e6b0a5b7322eebc0fdd",
+    "name": "JOE",
+    "symbol": "JOE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "joe"
+  },
+  {
+    "address": "0xa7d7079b0fead91f3e65f86e8915cb59c1a4c664",
+    "name": "USDC.E",
+    "symbol": "USDC.E",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "AVALANCHE"
+  },
+  {
+    "address": "0x62edc0692BD897D2295872a9FFCac5425011c661",
+    "name": "GMX",
+    "symbol": "GMX",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "gmx"
+  },
+  {
+    "address": "0xd402298a793948698b9a63311404FBBEe944eAfD",
+    "name": "SHRAP",
+    "symbol": "SHRAP",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "shrap"
+  },
+  {
+    "address": "0x26debd39d5ed069770406fca10a0e4f8d2c743eb",
+    "name": "GUN",
+    "symbol": "GUN",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "gun"
+  },
+  {
+    "address": "0x5e0e90e268bc247cc850c789a0db0d5c7621fb59",
+    "name": "NXPC",
+    "symbol": "NXPC",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "nxpc"
+  },
+  {
+    "address": "0x420fca0121dc28039145009570975747295f2329",
+    "name": "COQ",
+    "symbol": "COQ",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "coq"
+  },
+  {
+    "address": "0x714f020c54cc9d104b6f4f6998c63ce2a31d1888",
+    "name": "FITFI",
+    "symbol": "FITFI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE",
+    "changellyTicker": "fitfi"
+  },
+  {
+    "address": "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
+    "name": "WAVAX",
+    "symbol": "WAVAX",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "AVALANCHE"
+  },
+  {
+    "address": "0x98d0baa52b2d063e780de12f615f963fe8537553",
+    "name": "KAITO",
+    "symbol": "KAITO",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "kaito"
+  },
+  {
+    "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+    "name": "COOKIE",
+    "symbol": "COOKIE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "cookie"
+  },
+  {
+    "address": "0xBC45647eA894030a4E9801Ec03479739FA2485F0",
+    "name": "BENJI",
+    "symbol": "BENJI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "benji"
+  },
+  {
+    "address": "0x4bfaa776991e85e5f8b1255461cbbd216cfc714f",
+    "name": "HOME",
+    "symbol": "HOME",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "home"
+  },
+  {
+    "address": "0x4f9fd6be4a90f2620860d680c0d4d5fb53d1a825",
+    "name": "AIXBT",
+    "symbol": "AIXBT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "aixbt"
+  },
+  {
+    "address": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+    "name": "USDCBASE",
+    "symbol": "USDCBASE",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "usdcbase"
+  },
+  {
+    "address": "0x532f27101965dd16442e59d40670faf5ebb142e4",
+    "name": "BRETT",
+    "symbol": "BRETT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "brett"
+  },
+  {
+    "address": "0x940181a94a35a4569e4529a3cdfb74e38fd98631",
+    "name": "AERO",
+    "symbol": "AERO",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "aero"
+  },
+  {
+    "address": "0xb3b32f9f8827d4634fe7d973fa1034ec9fddb3b3",
+    "name": "B3",
+    "symbol": "B3",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "b3"
+  },
+  {
+    "address": "0xc08cd26474722ce93f4d0c34d16201461c10aa8c",
+    "name": "CARV",
+    "symbol": "CARV",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "carv"
+  },
+  {
+    "address": "0x6985884c4392d348587b19cb9eaaf157f13271cd",
+    "name": "ZROBASE",
+    "symbol": "ZROBASE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "zrobase"
+  },
+  {
+    "address": "0xa2c22252cdc8b7cddee1b0b2e242818509fcf7b8",
+    "name": "SXT",
+    "symbol": "SXT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "sxt"
+  },
+  {
+    "address": "0x24fcfc492c1393274b6bcd568ac9e225bec93584",
+    "name": "MAVIA",
+    "symbol": "MAVIA",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "mavia"
+  },
+  {
+    "address": "0x4ed4e862860bed51a9570b96d89af5e1b0efefed",
+    "name": "DEGEN",
+    "symbol": "DEGEN",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "degen"
+  },
+  {
+    "address": "0x1b4617734c43f6159f3a70b7e06d883647512778",
+    "name": "AWE",
+    "symbol": "AWE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "awe"
+  },
+  {
+    "address": "0x1111111111166b7fe7bd91427724b487980afc69",
+    "name": "ZORA",
+    "symbol": "ZORA",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "zora"
+  },
+  {
+    "address": "0xac1bd2486aaf3b5c0fc3fd868558b082a531b2b4",
+    "name": "TOSHI",
+    "symbol": "TOSHI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "toshi"
+  },
+  {
+    "address": "0xf6e932ca12afa26665dc4dde7e27be02a7c02e50",
+    "name": "MOCHI",
+    "symbol": "MOCHI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "mochi"
+  },
+  {
+    "address": "0x0b3e328455c4059eeb9e3f84b5543f74e24e7e1b",
+    "name": "VIRTUAL",
+    "symbol": "VIRTUAL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "virtual"
+  },
+  {
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "ETH(BASE)",
+    "symbol": "ETHBASE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "ethbase"
+  },
+  {
+    "address": "0xe061Aa40Be525A13296CB4Bf69f513242349D708",
+    "name": "XVGBASE(BASE)",
+    "symbol": "XVGBASE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE"
+  },
+  {
+    "address": "0x02537463e57a44f861ee861ba4f590c413f984a6",
+    "name": "BROAK",
+    "symbol": "BROAK",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "broak"
+  },
+  {
+    "address": "0xba12bc7b210e61e5d3110b997a63ea216e0e18f7",
+    "name": "Chainbase",
+    "symbol": "Chainbase",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE",
+    "changellyTicker": "c"
+  },
+  {
+    "address": "0x4200000000000000000000000000000000000006",
+    "name": "WETH(BASE)",
+    "symbol": "WETHBASE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "BASE"
+  },
+  {
+    "address": "0x1337420ded5adb9980cfc35f8f2b054ea86f8ab1",
+    "name": "SQD",
+    "symbol": "SQD",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "sqd"
+  },
+  {
+    "address": "0x539bdE0d7Dbd336b79148AA742883198BBF60342",
+    "name": "MAGIC",
+    "symbol": "MAGIC",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "magic"
+  },
+  {
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "ETH(ARB)",
+    "symbol": "ETH(ARB)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "etharb"
+  },
+  {
+    "address": "0x4Cb9a7AE498CEDcBb5EAe9f25736aE7d428C9D66",
+    "name": "XAI",
+    "symbol": "XAI",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "xai"
+  },
+  {
+    "address": "0xaf88d065e77c8cc2239327c5edb3a432268e5831",
+    "name": "USDC(ARB)",
+    "symbol": "USDC(ARB)",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "usdcarb"
+  },
+  {
+    "address": "0x61a1ff55c5216b636a294a07d77c6f4df10d3b56",
+    "name": "APEX",
+    "symbol": "APEX",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "apex"
+  },
+  {
+    "address": "0x1a6b3a62391eccaaa992ade44cd4afe6bec8cff1",
+    "name": "UXLINK",
+    "symbol": "UXLINK",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "uxlink"
+  },
+  {
+    "address": "0x3082cc23568ea640225c2467653db90e9250aaa0",
+    "name": "RDNT",
+    "symbol": "RDNT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "rdnt"
+  },
+  {
+    "address": "0x6985884c4392d348587b19cb9eaaf157f13271cd",
+    "name": "ZROARB",
+    "symbol": "ZROARB",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "zroarb"
+  },
+  {
+    "address": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+    "name": "ARB",
+    "symbol": "ARB",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "arb"
+  },
+  {
+    "address": "0x5575552988a3a80504bbaeb1311674fcfd40ad4b",
+    "name": "SPA",
+    "symbol": "SPA",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "spa"
+  },
+  {
+    "address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+    "name": "USDT(ARB)",
+    "symbol": "USDT(ARB)",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "usdtarb"
+  },
+  {
+    "address": "0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a",
+    "name": "GMXARB",
+    "symbol": "GMXARB",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "gmxarb"
+  },
+  {
+    "address": "0x09e18590e8f76b6cf471b3cd75fe1a1a9d2b2c2b",
+    "name": "AIDOGE",
+    "symbol": "AIDOGE",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "ARBITRUM",
+    "changellyTicker": "aidoge"
+  },
+  {
+    "address": "0x0c880f6761F1af8d9Aa9C466984b80DAb9a8c9e8",
+    "name": "PENDLE(ARB)",
+    "symbol": "PENDLE(ARB)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM"
+  },
+  {
+    "address": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+    "name": "WETH(ARB)",
+    "symbol": "WETH(ARB)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "ARBITRUM"
+  },
+  {
+    "address": "0x5f32abeebd3c2fac1e7459a27e1ae9f1c16cccca",
+    "name": "FAR",
+    "symbol": "FAR",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "far"
+  },
+  {
+    "address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+    "name": "USDT(POLYGON)",
+    "symbol": "USDT",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "usdtpolygon"
+  },
+  {
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "POL",
+    "symbol": "POL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "pol"
+  },
+  {
+    "address": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+    "name": "DAI(POLYGON)",
+    "symbol": "DAI(POLYGON)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": ""
+  },
+  {
+    "address": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+    "name": "USDC(POLYGON)",
+    "symbol": "USDC(POLYGON)",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "usdcmatic"
+  },
+  {
+    "address": "0xd0258a3fd00f38aa8090dfee343f10a9d4d30d3f",
+    "name": "VOXEL",
+    "symbol": "VOXEL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "voxel"
+  },
+  {
+    "address": "0x311434160d7537be358930def317afb606c0d737",
+    "name": "NAKA",
+    "symbol": "NAKA",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "naka"
+  },
+  {
+    "address": "0x692ac1e363ae34b6b489148152b12e2785a3d8d6",
+    "name": "TRADE",
+    "symbol": "TRADE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "trade"
+  },
+  {
+    "address": "0x7b12598e3616261df1c05ec28de0d2fb10c1f206",
+    "name": "COCA",
+    "symbol": "COCA",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "coca"
+  },
+  {
+    "address": "0xb5c064f955d8e7f38fe0460c556a72987494ee17",
+    "name": "QUICK",
+    "symbol": "QUICK",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "quick"
+  },
+  {
+    "address": "0xe5417af564e4bfda1c483642db72007871397896",
+    "name": "GNS",
+    "symbol": "GNS",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON",
+    "changellyTicker": "gns"
+  },
+  {
+    "address": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+    "name": "WETH(POL)",
+    "symbol": "WETH(POL)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON"
+  },
+  {
+    "address": "0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270",
+    "name": "WPOL",
+    "symbol": "WPOL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "POLYGON"
+  },
+  {
+    "address": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "name": "XRP",
+    "symbol": "XRP",
+    "decimals": 6,
+    "logoURI": null,
+    "chain": "XRP",
+    "changellyTicker": "xrp"
+  },
+  {
+    "address": "rsoLo2S1kiGeCcn6hCUXVrCpGMWLrRrLZz",
+    "name": "SOLO",
+    "symbol": "SOLO",
+    "decimals": 8,
+    "logoURI": null,
+    "chain": "XRP",
+    "changellyTicker": "solo",
+    "currencyCode": "534F4C4F00000000000000000000000000000000"
+  },
+  {
+    "address": "rLqUC2eCPohYvJCEBJ77eCCqVL2uEiczjA",
+    "name": "XRDOGE",
+    "symbol": "XRDOGE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5852646F67650000000000000000000000000000"
+  },
+  {
+    "address": "rPxw83ZP6thv7KmG5DpAW4cDW55DZRZ9wu",
+    "name": "SCHMECKLES",
+    "symbol": "SCHMECKLES",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5363686D65636B6C657300000000000000000000"
+  },
+  {
+    "address": "rJMtvf5B3GbuFMrqybh5wYVXEH4QE8VyU1",
+    "name": "XOGE",
+    "symbol": "XOGE",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "586F676500000000000000000000000000000000"
+  },
+  {
+    "address": "rHXuEaRYnnJHbDeuBH5w8yPh5uwNVh5zAg",
+    "name": "ELS",
+    "symbol": "ELS",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "ELS"
+  },
+  {
+    "address": "rJSTh1VLk52tFC3VRXkNWu7Q4nYmfZv7BZ",
+    "name": "ICOIN",
+    "symbol": "ICOIN",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "69636F696E000000000000000000000000000000"
+  },
+  {
+    "address": "rNgsoCk6mjBq5jcqitBpg1gdfYhKajXsM2",
+    "name": "GZX",
+    "symbol": "GZX",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "GZX"
+  },
+  {
+    "address": "rN3EeRSxh9tLHAUDmL7Chh3vYYoUafAyyM",
+    "name": "XRSHIB",
+    "symbol": "XRSHIB",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5852534849420000000000000000000000000000"
+  },
+  {
+    "address": "rNqGa93B8ewQP9mUwpwqA19SApbf62U7PY",
+    "name": "CAL",
+    "symbol": "CAL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "43616C6F72696500000000000000000000000000"
+  },
+  {
+    "address": "rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr",
+    "name": "CSC",
+    "symbol": "CSC",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "CSC"
+  },
+  {
+    "address": "raq7pGaYrLZRa88v6Py9V5oWMYEqPYr8Tz",
+    "name": "SWISSTECH",
+    "symbol": "SWISSTECH",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5377697373546563680000000000000000000000"
+  },
+  {
+    "address": "r9rRLst96Ue4YTDQkWWkX1ePB6p6Ye4FkA",
+    "name": "XRPAYNET",
+    "symbol": "XRPAYNET",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "58525061794E6574000000000000000000000000"
+  },
+  {
+    "address": "rnRXAnVZTyattZXEpKpgTyvdm17DpjrzSZ",
+    "name": "SHIBANFT",
+    "symbol": "SHIBANFT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "53686962614E4654000000000000000000000000"
+  },
+  {
+    "address": "rMy6sCaDVF1C2BT3qmNG6kgjVDZqZ74uoF",
+    "name": "XGBL",
+    "symbol": "XGBL",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5847424C00000000000000000000000000000000"
+  },
+  {
+    "address": "raP6XZypcFR1WkDzaKjv91FtYRCURvePWW",
+    "name": "IGC",
+    "symbol": "IGC",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "IGC"
+  },
+  {
+    "address": "rKcmW712NbLw2h29BMr47cwX2HAUNEbwrt",
+    "name": "XMP",
+    "symbol": "XMP",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "XMP"
+  },
+  {
+    "address": "rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+    "name": "RLUSD",
+    "symbol": "RLUSD",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "524C555344000000000000000000000000000000"
+  },
+  {
+    "address": "rM957DcfnfEQBatTNZXh42WrfBURZPh75h",
+    "name": "RADIANT",
+    "symbol": "RADIANT",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "52616469616E7400000000000000000000000000"
+  },
+  {
+    "address": "rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE",
+    "name": "USDC(XRP)",
+    "symbol": "USDC(XRP)",
+    "decimals": 18,
+    "logoURI": null,
+    "chain": "XRP",
+    "currencyCode": "5553444300000000000000000000000000000000"
+  }
+]

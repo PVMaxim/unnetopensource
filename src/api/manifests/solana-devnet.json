@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "name": "Solana (devnet)",
+  "type": "solana",
+
+  "priceProvider": {
+    "type": "coingecko",
+    "blockchain": "_",
+    "url": "https://coingecko.worker.united.network"
+  },
+
+  "nativeToken": {
+    "name": "SOL",
+    "symbol": "SOL",
+    "ticker": "solana"
+  },
+
+  "blockExplorer": {
+    "transaction": "https://solscan.io/tx/{id}?cluster=devnet"
+  },
+
+  "rpcUrl": "https://api.devnet.solana.com"
+}

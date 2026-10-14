@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "ticker": "tether"
+    },
+    {
+      "address": "TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
+      "name": "JUST GOV v1.0",
+      "symbol": "JST",
+      "decimals": 18,
+      "ticker": "just"
+    },
+    {
+      "address": "TLa2f6VPqDgRE67v1736s7bJ8Ray5wYjU7",
+      "name": "WINK",
+      "symbol": "WIN",
+      "decimals": 6,
+      "ticker": "wink"
+    },
+    {
+      "address": "TUpMhErZL2fhh4sVNULAbNKLokS4GjC1F4",
+      "name": "TrueUSD",
+      "symbol": "TUSD",
+      "decimals": 18,
+      "ticker": "true-usd"
+    },
+    {
+      "address": "TXDk8mbtRbXeYuMNS83CfKPaYYT8XWv9Hz",
+      "name": "Usdd Stablecoin",
+      "symbol": "USDD",
+      "decimals": 18,
+      "ticker": "usdd"
+    },
+    {
+      "address": "TAwAg9wtQzTMFsijnSFotJrpxhMm3AqW1d",
+      "name": "SUNCAT",
+      "symbol": "SUNCAT",
+      "decimals": 18,
+      "ticker": "suncat"
+    },
+    {
+      "address": "TPFqcBAaaUMCSVRCqPaQ9QnzKhmuoLR6Rc",
+      "name": "World Liberty Financial USD",
+      "symbol": "USD1",
+      "decimals": 18,
+      "ticker": "usd1-wlfi"
+    }
+  ]
+}

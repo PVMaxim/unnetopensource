@@ -1,0 +1,26 @@
+$color-white: rgba(255, 255, 255, 1);
+$color-gray: rgba(255, 255, 255, 0.4);
+$color-gray-dark: rgba(38, 38, 38, 1);
+$color-black-dark: rgba(58, 58, 58, 1);
+$color-black-light: rgba(29, 29, 31, 1);
+$color-black: rgba(17, 17, 17, 1);
+$color-orange: rgba(255, 152, 0, 1);
+$color-orange-hover: rgba(255, 152, 0, .2);
+$color-orange-disable: rgba(138, 88, 27, 1);
+$color-yellow: rgba(247, 205, 0, 1);
+$color-black-10: rgba(10, 10, 10, 1);
+$color-black-17: rgba(17, 17, 17, 1);
+$color-black-23: rgba(23, 23, 23, 1);
+$color-black-24: rgba(24, 24, 24, 1);
+$color-black-32: rgba(32, 32, 32, 1);
+$color-black-34: rgba(34, 34, 34, 1);
+$color-black-38: rgba(38, 38, 38, 1);
+$color-black-40: rgba(40, 40, 40, 1);
+$color-black-60: rgba(60, 60, 60, 1);
+$color-black-136: rgba(136, 136, 136, 1);
+
+$color-green: rgba(31, 219, 85, 1);
+$color-red: rgba(255, 61, 61, 1);
+
+$fontSizeTitle: clamp(32px, calc(33px + (71 - 33) * (100vw - 700px)/(1100 - 700)), 72px);
+$fontSizeTextBig: clamp(18px, calc(19px + (21 - 19) * (100vw - 700px)/(1100 - 700)), 22px);

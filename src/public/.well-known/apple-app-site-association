@@ -1,0 +1,21 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "F4PBM37X28.united.network", "F4PBM37X28.test.united.network", "F4PBM37X28.swap.united.network", "F4PBM37X28.swap2.united.network", "F4PBM37X28.store.united.network", "F4PBM37X28.fidotest.united.network" ],
+             "components": [
+               {
+                  "/": "/*",
+                  "comment": ""
+               }
+             ]
+           }
+       ]
+   },
+   "webcredentials": {
+      "apps": [ "F4PBM37X28.united.network" ]
+   },
+   "appclips": {
+      "apps": ["F4PBM37X28.united.network.UnNfcApp.Clip"]
+   }
+}

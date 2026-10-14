@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c",
+      "name": "BTCB Token",
+      "symbol": "BTCB",
+      "decimals": 18,
+      "ticker": "binance-bitcoin"
+    },
+    {
+      "address": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+      "name": "Dai Token",
+      "symbol": "DAI",
+      "decimals": 18,
+      "ticker": "binance-peg-dai"
+    },
+    {
+      "address": "0x55d398326f99059ff775485246999027b3197955",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 18,
+      "ticker": "binance-bridged-usdt-bnb-smart-chain"
+    },
+    {
+      "address": "0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82",
+      "name": "PancakeSwap Token",
+      "symbol": "CAKE",
+      "decimals": 18,
+      "ticker": "pancakeswap-token"
+    },
+    {
+      "address": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+      "name": "Ethereum Token",
+      "symbol": "ETH",
+      "decimals": 18,
+      "ticker": "binance-peg-weth"
+    },
+    {
+      "address": "0xbf5140a22578168fd562dccf235e5d43a02ce9b1",
+      "name": "Uniswap",
+      "symbol": "UNI",
+      "decimals": 18,
+      "ticker": "uniswap"
+    },
+    {
+      "address": "0xf8a0bf9cf54bb92f17374d9e9a321e6a111a51bd",
+      "name": "ChainLink Token",
+      "symbol": "LINK",
+      "decimals": 18,
+      "ticker": "chainlink"
+    },
+    {
+      "address": "0x7083609fce4d1d8dc0c979aab8c869ea2c873402",
+      "name": "Polkadot Token",
+      "symbol": "DOT",
+      "decimals": 18,
+      "ticker": "binance-peg-polkadot"
+    },
+    {
+      "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+      "name": "USD Coin",
+      "symbol": "USDC",
+      "decimals": 18,
+      "ticker": "binance-bridged-usdc-bnb-smart-chain"
+    },
+    {
+      "address": "0xe64e30276c2f826febd3784958d6da7b55dfbad3",
+      "name": "SwftCoin",
+      "symbol": "SWFTC",
+      "decimals": 18,
+      "ticker": "swftcoin"
+    },
+    {
+      "address": "0x8443f091997f06a61670b735ed92734f5628692f",
+      "name": "Bella Protocol",
+      "symbol": "BEL",
+      "decimals": 18,
+      "ticker": "bella-protocol"
+    },
+    {
+      "address": "0x9f589e3eabe42ebc94a44727b3f3531c0c877809",
+      "name": "Tokocrypto Token",
+      "symbol": "TKO",
+      "decimals": 18,
+      "ticker": "tokocrypto"
+    },
+    {
+      "address": "0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c",
+      "name": "Wrapped BNB",
+      "symbol": "WBNB",
+      "decimals": 18,
+      "ticker": "wbnb"
+    },
+    {
+      "address": "0x1ce0c2827e2ef14d5c4f29a091d735a204794041",
+      "name": "Avalanche",
+      "symbol": "AVAX",
+      "decimals": 18,
+      "ticker": "binance-peg-avalanche"
+    },
+    {
+      "address": "0x3203c9e46ca618c8c1ce5dc67e7e9d75f5da2377",
+      "name": "Mobox",
+      "symbol": "MBOX",
+      "decimals": 18,
+      "ticker": "mobox"
+    },
+    {
+      "address": "0xaec945e04baf28b135fa7c640f624f8d90f1c3a6",
+      "name": "Coin98",
+      "symbol": "C98",
+      "decimals": 18,
+      "ticker": "coin98"
+    },
+    {
+      "address": "0xbd2949f67dcdc549c6ebe98696449fa79d988a9f",
+      "name": "Wrapped MTRG on BSC by Meter.io",
+      "symbol": "MTRG",
+      "decimals": 18,
+      "ticker": "meter"
+    },
+    {
+      "address": "0x6d3a160b86edcd46d8f9bba25c2f88cccade19fc",
+      "name": "QATAR 2022 TOKEN",
+      "symbol": "FWC",
+      "decimals": 9,
+      "ticker": "football-world-community"
+    },
+    {
+      "address": "0xf4c8e32eadec4bfe97e0f595add0f4450a863a11",
+      "name": "THENA",
+      "symbol": "THE",
+      "decimals": 18,
+      "ticker": "thena"
+    },
+    {
+      "address": "0x42414624c55a9cba80789f47c8f9828a7974e40f",
+      "name": "Doge KaKi",
+      "symbol": "KAKI",
+      "decimals": 18,
+      "ticker": "doge-kaki"
+    },
+    {
+      "address": "0x256d1fce1b1221e8398f65f9b36033ce50b2d497",
+      "name": "Alvey Chain",
+      "symbol": "WALV",
+      "decimals": 18,
+      "ticker": "alvey-chain"
+    },
+    {
+      "address": "0x47fd014706081068448b89fc6baca2730977216a",
+      "name": "Pepe The Frog",
+      "symbol": "PEPEBNB",
+      "decimals": 9,
+      "ticker": "pepe-the-frog"
+    },
+    {
+      "address": "0x845705db1623b8363a6d9813f33b73ec50cea0a2",
+      "name": "Jonny Five",
+      "symbol": "JFIVE",
+      "decimals": 9,
+      "ticker": "jonny-five"
+    },
+    {
+      "address": "0x68ae2f202799be2008c89e2100257e66f77da1f3",
+      "name": "Public Meme Token",
+      "symbol": "PMT",
+      "decimals": 18,
+      "ticker": "public-meme-token"
+    },
+    {
+      "address": "0xc44f8508e1de753e7c523f98639132eef2ad8ea5",
+      "name": "DOGEMOB",
+      "symbol": "DOGEMOB",
+      "decimals": 18,
+      "ticker": "dogemob"
+    },
+    {
+      "address": "0x51bd0d0853b7596b6f1aca8d2be6816774271733",
+      "name": "PAREX",
+      "symbol": "PRX",
+      "decimals": 18,
+      "ticker": "parex"
+    },
+    {
+      "address": "0x74d7d34dfe7b5e6a437823e7f38a6fb87c55a879",
+      "name": "Baby Czhao",
+      "symbol": "BABYCZHAO",
+      "decimals": 9,
+      "ticker": "baby-czhao"
+    },
+    {
+      "address": "0xc0041ef357b183448b235a8ea73ce4e4ec8c265f",
+      "name": "Cookie",
+      "symbol": "COOKIE",
+      "decimals": 18,
+      "ticker": "cookie"
+    },
+    {
+      "address": "0x8d0d000ee44948fc98c9b98a4fa4921476f08b0d",
+      "name": "World Liberty Financial USD",
+      "symbol": "USD1",
+      "decimals": 18,
+      "ticker": "usd1-wlfi"
+    },
+    {
+      "address": "0x47474747477b199288bf72a1d702f7fe0fb1deea",
+      "name": "World Liberty Financial",
+      "symbol": "WLFI",
+      "decimals": 18,
+      "ticker": "world-liberty-financial"
+    },
+    {
+      "address": "0x000ae314e2a2172a039b26378814c252734f556a",
+      "name": "Aster",
+      "symbol": "ASTER",
+      "decimals": 18,
+      "ticker": "aster-2"
+    },
+    {
+      "address": "0xce24439f2d9c6a2289f741120fe202248b666666",
+      "name": "United Stables",
+      "symbol": "U",
+      "decimals": 18,
+      "ticker": "united-stables"
+    }
+  ]
+}

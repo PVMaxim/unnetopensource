@@ -1,0 +1,9 @@
+{
+  "settingsExtra": {
+    "tokenDetector": "Уведомления о транзакциях",
+    "soundEffects": "Звуковые уведомления",
+    "newsNotifications": "Новости и оповещения",
+    "on": "Вкл",
+    "off": "Выкл"
+  }
+}

@@ -1,0 +1,25 @@
+{
+    "version": 1,
+    "name": "Canton (localnet)",
+    "type": "canton",
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "canton-network",
+        "url": "https://coingecko.worker.united.network"
+    },
+    "nativeToken": {
+        "address": "DSO::1220bcac19753ad34b410d69c26dc3632a11f3bb4b7858a8d96c1263fa0cf60f9167|Amulet",
+        "name": "Canton",
+        "symbol": "CC",
+        "ticker": "canton-network"
+    },
+    "blockExplorer": {
+        "transaction": "https://cc.modo.link/testnet/updates/{id}"
+    },
+    "authServerUrl": "https://canton-localnet.auth.united.network",
+    "ledgerUrl": "https://canton-localnet.worker.united.network/ledger",
+    "validatorUrl": "https://canton-localnet.worker.united.network/validator/api/validator",
+    "registries": [
+        "https://canton-localnet.worker.united.network"
+    ]
+}

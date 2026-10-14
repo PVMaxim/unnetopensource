@@ -1,0 +1,30 @@
+{
+  "nav": {
+    "staking": "Staking"
+  },
+  "title": {
+    "staking": "Staking"
+  },
+  "staking": {
+    "title": "Staking & Yield",
+    "unsupportedNetwork": "Network not supported",
+    "unsupportedNetworkDesc": "Staking is currently not supported on the active network. Please switch to Ethereum, Arbitrum, Base, BNB Chain, or Avalanche in your wallet settings to participate in Yield Vaults.",
+    "noVaults": "No active vaults found for this network.",
+    "apy": "APY",
+    "tvl": "TVL",
+    "yourStake": "Your Stake",
+    "manage": "Manage",
+    "deposit": "Deposit",
+    "withdraw": "Withdraw",
+    "amountToDeposit": "Amount to Deposit",
+    "amountToWithdraw": "Amount to Withdraw",
+    "walletBalance": "Wallet",
+    "stakedBalance": "Staked",
+    "max": "Max",
+    "estMonthlyYield": "Est. Monthly Yield",
+    "currentValue": "Current Value",
+    "approveAction": "Approve",
+    "withdrawAction": "Withdraw / Unstake",
+    "successTitle": "Transaction Complete"
+  }
+}

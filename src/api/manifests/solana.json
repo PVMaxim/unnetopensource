@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "name": "Solana",
+  "type": "solana",
+
+  "priceProvider": {
+    "type": "coingecko",
+    "blockchain": "solana",
+    "url": "https://coingecko.worker.united.network"
+  },
+
+  "nativeToken": {
+    "name": "SOL",
+    "symbol": "SOL",
+    "ticker": "solana"
+  },
+
+  "tokens": {
+    "mandatory": [
+      {
+        "address": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+        "name": "USD Coin",
+        "symbol": "USDC",
+        "decimals": 6,
+        "ticker": "usd-coin"
+      },
+      {
+        "address": "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB",
+        "name": "USDT",
+        "symbol": "USDT",
+        "decimals": 6,
+        "ticker": "tether"
+      },
+      {
+        "address": "rndrizKT3MK1iimdxRdWabcF7Zg7AR5T4nud4EkHBof",
+        "name": "Render Token",
+        "symbol": "RENDER",
+        "decimals": 8,
+        "ticker": "render-token"
+      },
+      {
+        "address": "2qEHjDLDLbuBgRYvsxhc5D6uDWAivNFZGan56P1tpump",
+        "name": "Peanut the Squirrel ",
+        "symbol": "PNUT",
+        "decimals": 6,
+        "ticker": "peanut-the-squirrel"
+      },
+      {
+        "address": "MEFNBXixkEbait3xn9bkm8WsJzXtVsaJEn4c8Sam21u",
+        "name": "Magic Eden",
+        "symbol": "ME",
+        "decimals": 6,
+        "ticker": "magic-eden"
+      },
+      {
+        "address": "SonicxvLud67EceaEzCLRnMTBqzYUUYNr93DBkBdDES",
+        "name": "Sonic SVM",
+        "symbol": "SONIC",
+        "decimals": 9,
+        "ticker": "sonic-svm"
+      },
+      {
+        "address": "Grass7B4RdKfBCjTKgSqnXkqjwiGvQyFbuSCUJr3XXjs",
+        "name": "Grass",
+        "symbol": "GRASS",
+        "decimals": 9,
+        "ticker": "grass"
+      },
+      {
+        "address": "9BB6NFEcjBCtnNLFko2FqVQBq8HHM13kCyYcdQbgpump",
+        "name": "Fartcoin ",
+        "symbol": "FARTCOIN",
+        "decimals": 6,
+        "ticker": "fartcoin"
+      },
+      {
+        "address": "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+        "name": "OFFICIAL TRUMP",
+        "symbol": "TRUMP",
+        "decimals": 6,
+        "ticker": "official-trump"
+      },
+      {
+        "address": "FUAfBo2jgks6gB4Z4LfZkqSZgzNucisEHqnNebaRxM1P",
+        "name": "Melania Meme",
+        "symbol": "MELANIA",
+        "decimals": 6,
+        "ticker": "melania-meme"
+      },
+      {
+        "address": "6AJcP7wuLwmRYLBNbi825wgguaPsWzPBEHcHndpRpump",
+        "name": "Vine Coin",
+        "symbol": "VINE",
+        "decimals": 6,
+        "ticker": "vine"
+      },
+      {
+        "address": "61V8vBaqAGMpgDQi4JcAwo1dmBGHsyhzodcPqnEVpump",
+        "name": "AI Rig Complex",
+        "symbol": "ARC",
+        "decimals": 6,
+        "ticker": "ai-rig-complex"
+      },
+      {
+        "address": "HeLp6NuQkmYB4pYWo2zYs22mESHXPQYzXbB8n4V98jwC",
+        "name": "ai16z",
+        "symbol": "AI16Z",
+        "decimals": 9,
+        "ticker": "ai16z"
+      },
+      {
+        "address": "7vfCXTUXx5WJV5JADk17DUJ4ksgau7utNKj4b963voxs",
+        "name": "Wrapped Ether (Wormhole)",
+        "symbol": "ETH",
+        "decimals": 8,
+        "ticker": "ethereum-wormhole"
+      },
+      {
+        "address": "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh",
+        "name": "Wrapped BTC (Wormhole)",
+        "symbol": "WBTC",
+        "decimals": 8,
+        "ticker": "wrapped-btc-wormhole"
+      },
+      {
+        "address": "So11111111111111111111111111111111111111112",
+        "name": "Wrapped SOL",
+        "symbol": "WSOL",
+        "decimals": 9,
+        "ticker": "wrapped-solana"
+      },
+      {
+        "address": "USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB",
+        "name": "World Liberty Financial USD",
+        "symbol": "USD1",
+        "decimals": 6,
+        "ticker": "usd1-wlfi"
+      },
+      {
+        "address": "WLFinEv6ypjkczcS83FZqFpgFZYwQXutRbxGe7oC16g",
+        "name": "World Liberty Financial",
+        "symbol": "WLFI",
+        "decimals": 6,
+        "ticker": "world-liberty-financial"
+      }
+    ],
+    "all": "https://united.network/manifests/solana-tokens.json"
+  },
+
+  "blockExplorer": {
+    "transaction": "https://solscan.io/tx/{id}"
+  },
+
+  "rpcUrl": "https://solana.worker.united.network",
+  "rpcWsUrl": "wss://solana-websocket.worker.united.network",
+  "scannerApiUrl": "https://solscan.worker.united.network/"
+}

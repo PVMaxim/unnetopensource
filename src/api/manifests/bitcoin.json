@@ -1,0 +1,24 @@
+{
+    "version": 1,
+    "name": "Bitcoin",
+    "type": "bitcoin",
+
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "bitcoin",
+        "url": "https://coingecko.worker.united.network"
+    },
+
+    "nativeToken": {
+        "name": "BTC",
+        "symbol": "BTC",
+        "ticker": "bitcoin"
+    },
+
+    "blockExplorer": {
+        "transaction": "https://mempool.space/tx/{id}"
+    },
+
+    "apiBaseUrl": "https://mempool.space",
+    "network": "mainnet"
+}

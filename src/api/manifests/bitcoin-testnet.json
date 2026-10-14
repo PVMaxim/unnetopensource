@@ -1,0 +1,24 @@
+{
+    "version": 1,
+    "name": "Bitcoin (testnet)",
+    "type": "bitcoin",
+
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "bitcoin-ecosystem",
+        "url": "https://coingecko.worker.united.network"
+    },
+
+    "nativeToken": {
+        "name": "BTC",
+        "symbol": "BTC",
+        "ticker": "bitcoin"
+    },
+
+    "blockExplorer": {
+        "transaction": "https://mempool.space/testnet/tx/{id}"
+    },
+
+    "apiBaseUrl": "https://mempool.space/testnet/",
+    "network": "testnet"
+}

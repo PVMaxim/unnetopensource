@@ -1,0 +1,121 @@
+{
+    "version": 1,
+    "name": "Polygon",
+    "type": "evm",
+
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "polygon-pos",
+        "url": "https://coingecko.worker.united.network"
+    },
+
+    "nativeToken": {
+        "name": "POL",
+        "symbol": "POL",
+        "ticker": "polygon-ecosystem-token"
+    },
+
+    "tokens": {
+        "mandatory": [
+            {
+                "address": "0x5f32abeebd3c2fac1e7459a27e1ae9f1c16cccca",
+                "name": "FAR",
+                "symbol": "FAR",
+                "decimals": 18,
+                "ticker": "farcana"
+            },
+            {
+                "address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+                "name": "USDTPOLYGON",
+                "symbol": "USDT",
+                "decimals": 6,
+                "ticker": "polygon-bridged-usdt-polygon"
+            },
+            {
+                "address": "0x8f3cf7ad23cd3cadbd9735aff958023239c6a063",
+                "name": "DAIPOLYGON",
+                "symbol": "DAI",
+                "decimals": 18,
+                "ticker": "polygon-pos-bridged-dai-polygon-pos"
+            },
+            {
+                "address": "0x3c499c542cef5e3811e1192ce70d8cc03d5c3359",
+                "name": "USDCMATIC",
+                "symbol": "USDC",
+                "decimals": 6,
+                "ticker": "usd-coin"
+            },
+            {
+                "address": "0x7f67639ffc8c93dd558d452b8920b28815638c44",
+                "name": "LIMEPOLY",
+                "symbol": "LIME",
+                "decimals": 18
+            },
+            {
+                "address": "0xd0258a3fd00f38aa8090dfee343f10a9d4d30d3f",
+                "name": "VOXEL",
+                "symbol": "VOXEL",
+                "decimals": 18,
+                "ticker": "voxies"
+            },
+            {
+                "address": "0x311434160d7537be358930def317afb606c0d737",
+                "name": "NAKA",
+                "symbol": "NAKA",
+                "decimals": 18,
+                "ticker": "nakamoto-games"
+            },
+            {
+                "address": "0x692ac1e363ae34b6b489148152b12e2785a3d8d6",
+                "name": "TRADE",
+                "symbol": "TRADE",
+                "decimals": 18,
+                "ticker": "polytrade"
+            },
+            {
+                "address": "0x7b12598e3616261df1c05ec28de0d2fb10c1f206",
+                "name": "COCA",
+                "symbol": "COCA",
+                "decimals": 18,
+                "ticker": "coca"
+            },
+            {
+                "address": "0xb5c064f955d8e7f38fe0460c556a72987494ee17",
+                "name": "QUICK",
+                "symbol": "QUICK",
+                "decimals": 18,
+                "ticker": "quickswap"
+            },
+            {
+                "address": "0xe5417af564e4bfda1c483642db72007871397896",
+                "name": "GNS",
+                "symbol": "GNS",
+                "decimals": 18,
+                "ticker": "gains-network"
+            },
+            {
+                "address": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619",
+                "name": "WETH",
+                "symbol": "WETH",
+                "decimals": 18,
+                "ticker": "polygon-pos-bridged-weth-polygon-pos"
+            },
+            {
+                "address": "0xe061aa40be525a13296cb4bf69f513242349d708",
+                "name": "XVGPOLY",
+                "symbol": "XVGPOLY",
+                "decimals": 18
+            }
+        ],
+        "all": "https://united.network/manifests/polygon-tokens.json"
+    },
+
+    "blockExplorer": {
+        "transaction": "https://polygonscan.com/tx/{id}"
+    },
+
+    "chainId": 137,
+    "rpcUrl": "https://polygon.worker.test.united.network",
+    "scannerApiUrl": "https://etherscan.worker.test.united.network/?chainid=137",
+    "multicallAddress": "0xcA11bde05977b3631167028862bE2a173976CA11"
+}

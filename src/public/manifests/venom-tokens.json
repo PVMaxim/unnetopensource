@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "tokens": [
+    {
+      "address": "0:a53178ec8c6fe0c62413edd9eed25508f357cfba8bf8a7dbfad9290413b2e6be",
+      "name": "Web3World",
+      "symbol": "W3W",
+      "decimals": 9,
+      "ticker": "web3-world"
+    },
+    {
+      "address": "0:10d6d5c11f7ce319842b9ceb8bc9ee4d64f317cd99f1f4ce17985e7ef50e2d2d",
+      "name": "Wrapped AVAX",
+      "symbol": "AVAX",
+      "decimals": 18,
+      "ticker": "avalanche-2"
+    },
+    {
+      "address": "0:0447c738d8549c5ea92f1c945628367db4adcc706685f760c93f8b236bf8e7e4",
+      "name": "Dai Stablecoin",
+      "symbol": "DAI",
+      "decimals": 18,
+      "ticker": "dai"
+    },
+    {
+      "address": "0:1c5ebbde66ef5c2e7bcd49fd3d37762204d225762b03b37cac9c9fd0a5e70f0b",
+      "name": "DRAGONZ LAND",
+      "symbol": "DRAGONZ",
+      "decimals": 9,
+      "ticker": "dragonz"
+    },
+    {
+      "address": "0:74604c7a56419477d67329848d754d205f31870025a7135909e90e1726ad9a54",
+      "name": "Staked VENOM",
+      "symbol": "stVenom",
+      "decimals": 9
+    },
+    {
+      "address": "0:60b3ebf994515df7985cb62a9d141467edf2f869272baf507dc83d9ba2e1b199",
+      "name": "Wrapped Ether",
+      "symbol": "WETH",
+      "decimals": 18,
+      "ticker": "ethereum"
+    },
+    {
+      "address": "0:4ff3c0f078889cbda817a5f5f2651824dea11a84f3857df27e76fee37d541877",
+      "name": "Wrapped BTC",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "ticker": "bitcoin"
+    },
+    {
+      "address": "0:0a75b9ad65982b02493491b00454b34dcecb9e63700d560fc001473659297661",
+      "name": "Wrapped BNB",
+      "symbol": "WBNB",
+      "decimals": 18,
+      "ticker": "binancecoin"
+    },
+    {
+      "address": "0:8a4ed4483500caf2d4bb4b56c84df41009cc3d0ed6a9de05d853e26a30faeced",
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "decimals": 6,
+      "ticker": "tether"
+    },
+    {
+      "address": "0:cda5e8d5953e1a09ffeb9f62316f2994019f10abe83c8f1b0aadfbc997bd79e6",
+      "name": "USDC",
+      "symbol": "USDC",
+      "decimals": 6,
+      "ticker": "usd-coin"
+    },
+    {
+      "address": "0:77d36848bb159fa485628bc38dc37eadb74befa514395e09910f601b841f749e",
+      "name": "Wrapped VENOM",
+      "symbol": "WVENOM",
+      "decimals": 9,
+      "ticker": "wrapped-venom"
+    }
+  ]
+}

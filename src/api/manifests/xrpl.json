@@ -1,0 +1,34 @@
+{
+    "version": 1,
+    "name": "XRP Ledger",
+    "type": "xrpl",
+
+    "priceProvider": {
+        "type": "coingecko",
+        "blockchain": "xrp",
+        "url": "https://coingecko.worker.united.network"
+    },
+
+    "nativeToken": {
+        "name": "XRP",
+        "symbol": "XRP",
+        "ticker": "ripple"
+    },
+
+    "tokens": {
+        "mandatory": [
+            {
+                "address": "524C555344000000000000000000000000000000.rMxCKbEDwqr76QuheSUMdEGf4B9xJ8m5De",
+                "name": "RLUSD",
+                "symbol": "RLUSD",
+                "ticker": "ripple-usd"
+            }
+        ]
+    },
+
+    "blockExplorer": {
+        "transaction": "https://livenet.xrpl.org/transactions/{id}"
+    },
+
+    "rpcUrl": "wss://xrplcluster.com/"
+}
