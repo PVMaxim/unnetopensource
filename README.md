@@ -125,6 +125,31 @@ The application will be accessible at:
 
 ---
 
+## 🔑 Canton Network & JWKS (`/.well-known/jwks.json`)
+
+The file [`src/public/.well-known/jwks.json`](src/public/.well-known/jwks.json) provides a standard **JSON Web Key Set (RFC 7517)** served directly at `https://<your-domain>/.well-known/jwks.json`.
+
+### What it contains
+It exposes **public** RSA keys (`kty: "RSA"`, `alg: "RS256"`, `use: "sig"`) used for verifying JWT (JSON Web Token) digital signatures. It contains **no private keys or secrets**.
+
+### Purpose in this project
+- **Canton Network & Ledger API Authentication:** Nodes and validators in the Canton ecosystem require incoming requests to provide a signed JWT bearer token.
+- **Signature Verification (JWKS Discovery):** Canton validators fetch `https://<domain>/.well-known/jwks.json` to verify that JWT tokens were signed by the authorized RSA private key matching the token's `kid` (Key ID).
+
+### How to use or customize it
+- **Default usage:** If connecting to an existing Canton network / auth server, this file is static and harmless.
+- **Self-hosted Canton Validator:** If you run your own auth server and sign your own JWTs:
+  1. Generate an RSA keypair:
+     ```bash
+     openssl genrsa -out private.pem 2048
+     openssl rsa -in private.pem -pubout -out public.pem
+     ```
+  2. Convert your public key into JWK format and place it into `src/public/.well-known/jwks.json`.
+  3. Configure your Canton validator's `jwks-url` to point to `https://<your-domain>/.well-known/jwks.json`.
+- **If Canton is not used:** If your setup does not interact with Canton Network or your validator uses an external auth provider endpoint, this file is optional and can safely be removed.
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to open an Issue or submit a Pull Request.
