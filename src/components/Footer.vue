@@ -2,14 +2,11 @@
   <footer>
     <div class="container-main">
       <div class="footer-title">
-        United Network 
+        United Wallet 
       </div>
       <div class="footer-copyright">
         ©2024 - {{new Date().getUTCFullYear()}} {{ $t('footer.allRightsReserved') }}
       </div>
-      <a class="united-site" href="//united.network">
-        united.network
-      </a>
     </div>
   </footer>
 </template>

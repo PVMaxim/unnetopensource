@@ -2,9 +2,6 @@
     <main>
       <div class="container-main">
         <div class="panel">
-          <div class="icon">
-            <MobileApps />
-          </div>
           <div class="title">
             {{ $t('pages.notSupportedBrowser.title') }} <span class="text-orange">{{ $t('pages.notSupportedBrowser.titleSpan') }}</span>.
           </div>
@@ -17,14 +14,9 @@
   </template>
     
 <script>
-  import MobileApps from "@/components/MobileApps.vue";
-
   export default {
     name: 'NotSupportedBrowser',
     layout: 'NotSupported',
-    components: {
-      MobileApps
-    },
     setup() {
       return { }
     }

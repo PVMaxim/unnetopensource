@@ -221,8 +221,8 @@ export const setLocaleAlternate = (locales: string[]) => {
   });
 };
 
-export const setCanonical = (to = null as null) => {
-  const url = `https://united.network${to?.fullPath}`;
+export const setCanonical = (to = null as any) => {
+  const url = typeof window !== 'undefined' ? `${window.location.origin}${to?.fullPath || ''}` : '';
     const preconnectLink = document.querySelector(
       `link[rel="canonical"]`
     );

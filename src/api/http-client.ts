@@ -17,7 +17,7 @@ export class HttpClient {
         baseUrl: string | URL,
         timeout?: number,
     }) {
-        this.baseUrl = new URL(args.baseUrl, globalThis.window?.location?.origin ?? "https://united.network");
+        this.baseUrl = new URL(args.baseUrl, globalThis.window?.location?.origin ?? "http://localhost");
         this._timeout = args.timeout ?? DEFAULT_TIMEOUT;
     }
 

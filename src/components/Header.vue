@@ -41,10 +41,6 @@
 
             <template v-if="isUserRegistered">
               <li class="nav-item" @click="toggleMenu">
-                <a href="https://feedback.united.network/" target="_blank" class="nav-link">{{ $t('nav.feedback') }}</a>
-              </li>
-              
-              <li class="nav-item" @click="toggleMenu">
                 <div class="nav-link" @click="handleSignOut">
                   {{ $t('nav.signOut') }}
                 </div>
@@ -53,11 +49,10 @@
           </ul>
 
           <div class="main-menu-footer">
-            <div class="footer-title">United Network</div>
+            <div class="footer-title">United Wallet</div>
             <div class="footer-copyright">
               ©2024 - {{ new Date().getUTCFullYear() }} {{ $t('footer.allRightsReserved') }}
             </div>
-            <a class="united-site" href="//united.network" target="_blank">united.network</a>
           </div>
         </nav>
       </div>
@@ -133,7 +128,6 @@ import { useEventsBus } from '@/plugins/eventBus.js';
 import { runApplicationChecks } from '@/api/updatesChainResponsability';
 import Logo from '@/components/svg/logo.vue';
 import Multiselect from '@/components/multiselect';
-import { navigationLinks } from '@/modules/registry';
 
 export default defineComponent({
   name: 'Header',
@@ -153,7 +147,7 @@ export default defineComponent({
       { name: 'send', label: 'nav.send' },
       { name: 'receive', label: 'nav.receive' },
       { name: 'swap', label: 'nav.swap' },
-      ...navigationLinks.value,
+      { name: 'wallet-connect', label: 'nav.wallet-connect' },
     ]);
 
     const storePublicKeyCard = computed(() => store.state.user.publicKeyCard);
@@ -354,13 +348,6 @@ header {
         margin-bottom: 77px;
         align-items: center;
         font-size: 13px;
-
-        .united-site {
-          margin-top: 5px;
-          padding: 7px 13px;
-          color: $color-orange;
-          &:hover { color: $color-orange-hover; }
-        }
       }
     }
   }

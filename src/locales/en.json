@@ -11,7 +11,6 @@
     "connected-apps": "Connected apps",
     "signOut": "Sign out",
     "swap": "Swap",
-    "ai-assistant": "AI Assistant",
     "feedback": "Feedback"
   },
   "title": {
@@ -59,7 +58,7 @@
     },
     "notSupportedBrowser": {
       "title": "This page is only supported in ",
-      "titleSpan": "Chrome, Safari, or the United Network App",
+      "titleSpan": "Chrome, Safari, or the United Wallet App",
       "subtitle": "Open in a supported browser or download our app to continue."
     },
     "notSupportedBrowserOnlyApp": {
@@ -127,7 +126,7 @@
       "cardValidation": "Card validation",
       "tapCardValidation": "Tap your card for validation.",
       "restoreValidationSubtitle": "Before continue restore your card we need validate it.",
-      "onlyUnitedNetworkValid": "Only United Network seed phrase is valid. Don't try to use seed phrase from other wallets.",
+      "onlyUnitedNetworkValid": "Only United Wallet seed phrase is valid. Don't try to use seed phrase from other wallets.",
       "attention": "Attention",
       "attentionText": "Your seed phrase is crucial for accessing and recovering your account. Please write it down on a piece of paper, store it securely in your notes, or take a screenshot. Do not share it with anyone.",
       "wroteItDown": "I wrote it down on paper",
@@ -657,17 +656,17 @@
     "distribution": {
       "label": "Distribution Partnership",
       "title": "Distribute Under",
-      "titleHighlight": "United Network Brand",
-      "description": "Don't want to build your own brand? Become a distribution partner and sell United Network cards directly to your audience. We handle product, support, and branding — you focus on sales.",
+      "titleHighlight": "United Wallet Brand",
+      "description": "Don't want to build your own brand? Become a distribution partner and sell United Wallet cards directly to your audience. We handle product, support, and branding — you focus on sales.",
       "cta": "Become a Distribution Partner",
       "items": {
         "retail": {
           "title": "Retail Partnership",
-          "desc": "Carry United Network cards in your physical or online store. Wholesale pricing, drop-shipping available, zero inventory risk."
+          "desc": "Carry United Wallet cards in your physical or online store. Wholesale pricing, drop-shipping available, zero inventory risk."
         },
         "regional": {
           "title": "Regional Distribution",
-          "desc": "Become the exclusive United Network distributor in your country or region. Territory rights, marketing support, co-branded materials."
+          "desc": "Become the exclusive United Wallet distributor in your country or region. Territory rights, marketing support, co-branded materials."
         },
         "benefits": {
           "title": "Partnership Benefits",
@@ -754,55 +753,5 @@
     "blockedHint_nfc": "NFC access is blocked or NFC is turned off. Turn on NFC in device Settings or allow access via the 🔒 icon in the address bar.",
     "blockedHint_clipboard": "Clipboard access is blocked. Allow clipboard access via the 🔒 icon in the browser address bar.",
     "blockedHint_audio": "Audio playback is restricted. Allow audio autoplay in site settings."
-  },
-  "chat": {
-    "noTokens": "No tokens found",
-    "amountLabel": "Amount",
-    "toLabel": "To",
-    "networkLabel": "Network",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "redirectingToSend": "Redirecting to Send page...",
-    "cancelled": "Action cancelled",
-    "reset": "Reset",
-    "loadingAssistant": "Loading assistant...",
-    "placeholder": "Ask anything or send a command...",
-    "placeholderLoading": "Assistant is thinking...",
-    "status": {
-      "loading": "Loading...",
-      "ready": "Ready",
-      "error": "Error"
-    },
-    "welcomeMessage": "Hello! I am your AI assistant. How can I help you today?",
-    "loadFailed": "Failed to load assistant"
-  },
-  "settingsExtra": {
-    "tokenDetector": "Incoming Transfer Detector",
-    "soundEffects": "Sound Effects",
-    "newsNotifications": "News Notifications",
-    "on": "On",
-    "off": "Off"
-  },
-  "staking": {
-    "title": "Staking & Yield",
-    "deposit": "Stake Deposit",
-    "withdraw": "Withdraw Stake",
-    "amountToDeposit": "Deposit Amount",
-    "amountToWithdraw": "Withdraw Amount",
-    "walletBalance": "Wallet Balance",
-    "stakedBalance": "Staked Balance",
-    "currentValue": "Current Value",
-    "apy": "Annual Yield (APY)",
-    "estMonthlyYield": "Est. Monthly Yield",
-    "max": "Max",
-    "approveAction": "Approve & Deposit",
-    "withdrawAction": "Withdraw Funds",
-    "successTitle": "Operation Successful",
-    "unsupportedNetwork": "Unsupported Network",
-    "unsupportedNetworkDesc": "Staking is available on supported EVM networks",
-    "noVaults": "No vaults available",
-    "tvl": "Total Value Locked (TVL)",
-    "yourStake": "Your Stake",
-    "manage": "Manage"
   }
 }

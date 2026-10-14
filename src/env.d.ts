@@ -16,7 +16,6 @@ declare const UNITED_CONNECT_PROJECT_ID: string;
 declare const WORKER_SHARED_SECRET: string;
 
 interface ImportMetaEnv {
-  readonly VITE_WS_WORKER_SECRET?: string;
   readonly WORKER_SHARED_SECRET?: string;
 }
 

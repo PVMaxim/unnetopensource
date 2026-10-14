@@ -5,13 +5,11 @@ import { store } from './store/index';
 import i18n, { initI18n } from "./plugins/i18n";
 import router from './router/index';
 import { registerLayouts } from './layouts/index';
-import { bootstrapModules } from '@/modules';
 //import { registerTokensIcon } from './components/svg/provider/index';
 
 const app = createApp(App);
 app.use(store);
 app.use(i18n);
-bootstrapModules(app, router, store);
 app.use(router);
 registerLayouts(app);
 //registerTokensIcon(app);
@@ -38,6 +36,9 @@ nextTick(async () => {
   const { runApplicationChecks } = await import('@/api/updatesChainResponsability');
   await initI18n();
   runApplicationChecks();
+
+  const { initWalletConnectHelper } = await import('@/api/wallet-connect/wcHelper');
+  initWalletConnectHelper().catch(err => console.error('[WalletConnect] Init failed:', err));
 
   let viewportHeight = window.innerHeight;
   let doc = document.documentElement;

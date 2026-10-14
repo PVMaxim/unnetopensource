@@ -12,24 +12,21 @@
       <Loading />
     </div>
   </Transition>
-  <component
-    v-for="comp in globalComponents"
-    :key="comp.name"
-    :is="comp.component"
-  />
+  <WalletConnectRequestModalSocket />
 </template>
 
 <script>
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 import Loading from '@/components/Loading.vue';
+import WalletConnectRequestModalSocket from '@/components/wallet-connect/modals/WalletConnectRequestModalSocket.vue';
 import { errorReload } from '@/plugins/vitePreloadError.ts';
-import { globalComponents } from '@/modules/registry';
 import { isRouteLoading } from '@/router/index';
 
 export default defineComponent({
   name: 'App',
   components: { 
     Loading,
+    WalletConnectRequestModalSocket,
   },
   setup() {
     const handlePreloadError = (e) => {
@@ -57,7 +54,6 @@ export default defineComponent({
     return {
       handleResolve,
       handleFallback,
-      globalComponents,
       isRouteLoading
     };
   },

@@ -234,6 +234,32 @@ export const router = createRouter({
       }
     },
     {
+      path: '/wallet-connect',
+      name: 'wallet-connect',
+      beforeEnter: (to, from, next) => {
+        if (isDesktop) {
+          next({ name: 'NotSupportedDevice' });
+        } else if ((!isWebViewApp() && !supportedBrowser())) {
+          next({ name: 'NotSupportedBrowser' });
+        } else if (deniteAndroid201()) {
+          next({ name: 'NotSupportedBrowserOnlyApp' });
+        } else if (isCardRegistered()) {
+          next();
+        } else if (isCardIsNew()) {
+          next({ name: 'registration-card' });
+        } else {
+          next({ name: 'authorization' });
+        }
+      },
+      component: () => import('@/components/wallet-connect/ConnectedApps.vue'),
+      meta: {
+        layout: 'Dashboard',
+        title: i18n.global.t('title.wallet-connect'),
+        description: i18n.global.t('description.wallet-connect'),
+        follow: false
+      }
+    },
+    {
       path: '/not-supported-device',
       name: 'NotSupportedDevice',
       component: () => import('../pages/NotSupportedDevice.vue'),
@@ -301,8 +327,8 @@ router.beforeEach(async (to, from, next) => {
 
   setCanonical(to);
   setTitle(to.meta?.title ?
-    to.name === 'authorization' ? `${to.meta?.title}` : `United Network | ${to.meta?.title}` :
-    'United Network');
+    to.name === 'authorization' ? `${to.meta?.title}` : `United Wallet | ${to.meta?.title}` :
+    'United Wallet');
   setDescription(to.meta?.description);
   setFollow(to.meta?.follow);
   setCurrentUrl();

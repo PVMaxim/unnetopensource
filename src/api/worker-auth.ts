@@ -83,7 +83,7 @@ export function getWorkerSecret(): string {
     if (typeof process !== 'undefined' && process.env?.WORKER_SHARED_SECRET) {
         return process.env.WORKER_SHARED_SECRET;
     }
-    return (import.meta as any).env?.VITE_WS_WORKER_SECRET || '';
+    return (import.meta as any).env?.WORKER_SHARED_SECRET || '';
 }
 
 /**

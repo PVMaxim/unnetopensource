@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue';
 import { PermissionItem, PermissionStatus } from './types';
 import { useEventsBus } from '@/plugins/eventBus';
-import { soundNotifier } from '@/modules/token-detector/services/SoundNotifierService';
 import { isSafariBrowser, isFirefoxBrowser } from '@/plugins/checkDevice';
 
 // --- Extracted Permission Functions ---
@@ -85,10 +84,6 @@ export const checkAudioPermission = async (): Promise<PermissionStatus> => {
 };
 export const requestAudioPermission = async () => {
   try {
-    if (soundNotifier) {
-      soundNotifier.unlockAudio();
-      console.log("[PermissionManager] Audio request: Audio unlocked.");
-    }
     return true;
   } catch (e: any) {
     console.warn('[PermissionManager] Audio request: Error:', e.message);

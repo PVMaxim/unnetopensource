@@ -2,14 +2,11 @@
     <main>
       <div class="container-main">
         <div class="panel">
-          <div class="icon">
-            <MobileApps />
-          </div>
           <div class="title">
             {{ $t('pages.notSupportedBrowserOnlyApp.title') }} <div class="text-orange">{{ $t('pages.notSupportedBrowserOnlyApp.titleSpan') }}</div>
           </div>
           <div class="subtitle">
-            <a href="unitednetwork://https://united.network/">{{ $t('pages.notSupportedBrowserOnlyApp.subtitle') }}</a> 
+            <span>{{ $t('pages.notSupportedBrowserOnlyApp.subtitle') }}</span> 
           </div>
         </div>
       </div>
@@ -17,14 +14,9 @@
   </template>
     
 <script>
-  import MobileApps from "@/components/MobileApps.vue";
-
   export default {
     name: 'NotSupportedBrowserOnlyApp',
     layout: 'NotSupported',
-    components: {
-      MobileApps
-    },
     setup() {
       return { }
     }

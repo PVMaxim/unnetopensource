@@ -1,4 +1,4 @@
-# United Network — Non-Custodial Multi-Chain Wallet & Swap
+# United Wallet — Non-Custodial Multi-Chain Wallet & Swap
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Vue 3](https://img.shields.io/badge/Vue-3.5-brightgreen.svg)](https://vuejs.org/)
@@ -63,9 +63,10 @@ cp .env.example .env
 ```
 
 Open `.env` and set your configuration values:
+- `UNITED_CONNECT_PROJECT_ID`: Your WalletConnect Cloud Project ID (e.g. `a63fbec4294db4608b7ad03d159949f2` or obtain one from [cloud.walletconnect.com](https://cloud.walletconnect.com)). **Required for WalletConnect v2 pairing and dApp communication.**
 - `UNITED_CARDS_KEY`: A secure random string for client-side localStorage encryption.
 - `UNITED_CARDS_IV_KEY`: A 32-character string used for cryptographic initialization.
-- `UNITED_CONNECT_PROJECT_ID`: Your WalletConnect Cloud Project ID ([cloud.walletconnect.com](https://cloud.walletconnect.com)).
+- `VITE_WALLET_CONNECT_URL`: Optional application URL for WalletConnect metadata (defaults to current browser origin).
 
 ### 5. Run Local Development Server
 
@@ -101,7 +102,6 @@ The application will be accessible at:
 │   ├── features/         # Feature-specific modules (e.g. swap form)
 │   ├── layouts/          # Page layouts (navigation, header, sidebar)
 │   ├── locales/          # Localization JSON files (en, ru, etc.)
-│   ├── modules/          # Core modules (WalletConnect, token detector, chat)
 │   ├── pages/            # Application views and routing pages
 │   ├── plugins/          # Vue plugins (i18n, directives, helpers)
 │   ├── public/           # Static assets, webmanifest, favicons, audio

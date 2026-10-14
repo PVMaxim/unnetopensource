@@ -119,7 +119,6 @@
             buttonType="transparent"
             @onClick="restoreHandler()"
           />
-          <div class="get-card">{{ $t('pages.authorization.noCard') }} <a class="get-card-link" href="//shop.united.network/products/nfc-card-wallet">{{ $t('pages.authorization.getYours') }}</a></div>
         </div>
       </div>
       <div class="panel" v-show="nfcIsActive">

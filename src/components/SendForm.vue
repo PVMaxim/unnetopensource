@@ -494,9 +494,6 @@ export default defineComponent({
       }
 
       onMounted(async() => {
-        // const route = useRoute(); //AI
-        // if (route.query.chatAmount) formData.amount = String(route.query.chatAmount);
-        // if (route.query.chatTo) formData.wallet = String(route.query.chatTo);
         getEstimateFee(formData.amount);
       });
 

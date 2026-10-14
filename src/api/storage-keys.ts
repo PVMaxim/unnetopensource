@@ -1,24 +1,24 @@
 export const STORAGE_KEYS = {
-  PUBLIC_KEY_CARD:  'Kjg23sN2f3j8',
-  ACCOUNT_ADDRESS:  'u1QuPLGWe586',
-  REGISTERED:       'd4sDs6CTf1El',
-  TOKEN_BALANCE:    'TuBwG057ACWs',
-  SELECTED_TOKEN:   '9kUVL9KCl8fl',
-  TOKENS_DATA:      'tuL64A382L9A',
-  PIN_PUBLIC_KEY:   'y2820FR7oiGg',
-  SEED_PHRASE:      'gG321rRkhVMd',
+  PUBLIC_KEY_CARD:  'WvX4DJEJZ9Js',
+  ACCOUNT_ADDRESS:  'ejkCCDcY91pB',
+  REGISTERED:       'Y0pypvEKaVtx',
+  TOKEN_BALANCE:    'yZlG7kHI1QOZ',
+  SELECTED_TOKEN:   'Ban0QWr54QcB',
+  TOKENS_DATA:      'pPvEbe1V4DWv',
+  PIN_PUBLIC_KEY:   'DYgpijNClpF7',
+  SEED_PHRASE:      'Dc8Ql0oAQ5mi',
 
-  PIN_HASH:         '4zioC53UCYgT',
+  PIN_HASH:         'gvvVMtnfbCjO',
 
-  CARD_READER_PRIORITY: 'wZUyoYW3d70q',
-  RPC_PROVIDER:         '5B2Dyi6z8aF4',
-  CARD_VERSION:         'jd0VL7OX3L1E',
+  CARD_READER_PRIORITY: 'mHSKyzGGVGxq',
+  RPC_PROVIDER:         '9pRjnOHTuwGe',
+  CARD_VERSION:         'J8r81QyQw6Oz',
 
-  LANG:                 'lang',
-  SWAP_HISTORY:         'transactions-history',
-  SWAP_BALANCES:        'swap-balances',
-  TOKEN_DETECTOR_ENABLED: 't0k3nD3t3ct0rEn4bl3d',
-  SOUND_NOTIFIER_ENABLED: 's0undN0t1f13rEn4bl3d',
+  LANG:                 '6PjG4QuZL6rm',
+  SWAP_HISTORY:         '7FZBhcIVI83N',
+  SWAP_BALANCES:        'ZR4zJbC352Xb',
+  TOKEN_DETECTOR_ENABLED: 'YOc2uaprYFvv',
+  SOUND_NOTIFIER_ENABLED: 'ji1xWeWqetVJ',
 } as const;
 
 export const MIGRATABLE_KEYS: readonly string[] = [
@@ -41,11 +41,11 @@ export const MIGRATABLE_KEYS: readonly string[] = [
 ];
 
 export const DYNAMIC_KEYS = {
-  CUSTOM_TOKEN:     'kd3dW1vV3S37',
-  PIN_LENGTH:       'vT4l36ZyHe51',
-  COTI_SECRET_KEY:  'Qb3v10wRj84Y',
-  RPC_LIST_HISTORY: 'gvFck0063CrR',
-  TX_NOTIFICATIONS: 'txN0t1f1c4t10ns',
+  CUSTOM_TOKEN:     'r5vDYIkWMwJT',
+  PIN_LENGTH:       'UsAxkH60aXCo',
+  COTI_SECRET_KEY:  'BxXsZZRZzbMx',
+  RPC_LIST_HISTORY: 'RczLbUSJz5Ft',
+  TX_NOTIFICATIONS: 'HDIVy6LlE3YY',
 } as const;
 
 export const DYNAMIC_KEYS_SUFFIXES: readonly string[] = [

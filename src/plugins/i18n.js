@@ -14,15 +14,9 @@ export const i18n = createI18n({
   globalInjection: true,
 });
 
-import { registeredLocales } from '@/modules/registry';
-
 export const loadLocaleMessages = async (locale) => {
   const messages = await import(`@/locales/${locale}.json`);
   i18n.global.setLocaleMessage(locale, messages.default);
-  
-  if (registeredLocales.value[locale]) {
-    i18n.global.mergeLocaleMessage(locale, registeredLocales.value[locale]);
-  }
   
   i18n.mode === 'legacy' ? i18n.global.locale = locale : i18n.global.locale.value = locale;
 
