@@ -21,7 +21,6 @@ import { CantonStandardToken } from "./standard-token";
 import { CantonUserManager } from "./user-manager";
 import { MintingDelegationManager } from "./minting-delegation";
 import { TransferPreapprovalManager } from "./transfer-preapproval";
-import { initUnifiedWorkerAuth } from "../worker-auth";
 import { CantonHistoryReader } from "./history";
 import { HttpClient } from "../http-client";
 import { z } from "zod";
@@ -90,8 +89,6 @@ export class CantonManager extends BlockchainManagerBase implements BlockchainMa
             priceProvider: args.priceProvider,
             tokenManifest: args.tokenManifest,
         });
-
-        initUnifiedWorkerAuth();
 
         this._ledgerUrl = args.ledgerUrl;
         this._validatorUrl = args.validatorUrl;

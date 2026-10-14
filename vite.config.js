@@ -88,8 +88,7 @@ export default async ({ mode }) => {
       UNITED_CARDS_LEGACY_DERIVED_KEY: JSON.stringify(legacyDerivedKeyHex),
       UNITED_CARDS_IV_KEY: JSON.stringify(env.UNITED_CARDS_IV_KEY),
       WEB_VERSION: JSON.stringify(`${version}`),
-      UNITED_CONNECT_PROJECT_ID: JSON.stringify(env.UNITED_CONNECT_PROJECT_ID || process.env.UNITED_CONNECT_PROJECT_ID || ''),
-      WORKER_SHARED_SECRET: JSON.stringify(env.WORKER_SHARED_SECRET || '')
+      UNITED_CONNECT_PROJECT_ID: JSON.stringify(env.UNITED_CONNECT_PROJECT_ID || process.env.UNITED_CONNECT_PROJECT_ID || '')
     },
     plugins: [
       vue(),
