@@ -62,11 +62,14 @@ Copy the example configuration file:
 cp .env.example .env
 ```
 
-Open `.env` and set your configuration values:
-- `UNITED_CONNECT_PROJECT_ID`: Your WalletConnect Cloud Project ID (e.g. `a63fbec4294db4608b7ad03d159949f2` or obtain one from [cloud.walletconnect.com](https://cloud.walletconnect.com)). **Required for WalletConnect v2 pairing and dApp communication.**
-- `UNITED_CARDS_KEY`: A secure random string for client-side localStorage encryption.
-- `UNITED_CARDS_IV_KEY`: A 32-character string used for cryptographic initialization.
-- `VITE_WALLET_CONNECT_URL`: Optional application URL for WalletConnect metadata (defaults to current browser origin).
+Open `.env` and configure the following variables:
+
+| Variable | Required | Description | Example |
+|---|---|---|---|
+| `UNITED_CONNECT_PROJECT_ID` | **Yes** | WalletConnect Cloud Project ID. Required for WalletConnect v2 relay protocol, pairing with dApps, and signing sessions. Get a free project ID at [cloud.walletconnect.com](https://cloud.walletconnect.com). | `a63fbec4294db4608b7ad03d159949f2` |
+| `UNITED_CARDS_KEY` | **Yes** | Master passphrase used by PBKDF2 to derive 256-bit AES-CBC encryption keys for card secrets in browser localStorage. In production, provide a strong random secret (32+ chars). | `your-secure-encryption-passphrase-32+` |
+| `UNITED_CARDS_IV_KEY` | **Yes** | 32-character string used as a fallback initialization vector (IV) for local decryption compatibility. | `example-iv-fallback-32-chars-long!` |
+| `VITE_WALLET_CONNECT_URL` | Optional | Custom origin/URL broadcasted in WalletConnect session metadata. If left blank, it automatically defaults to `window.location.origin`. | `https://your-wallet-domain.com` |
 
 ### 5. Run Local Development Server
 
@@ -114,6 +117,149 @@ The application will be accessible at:
 ├── tsconfig.json         # TypeScript configuration
 └── vite.config.js        # Vite bundler configuration & plugins
 ```
+
+---
+
+## 🌐 Blockchain Manifests & Network Configuration (`src/api/manifests/`)
+
+United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all supported blockchains. Instead of hardcoding node endpoints, block explorers, and asset lists inside UI components, every blockchain is completely configured via a self-contained JSON manifest in [`src/api/manifests/`](src/api/manifests/) and validated at runtime using Zod schemas in [`src/api/manifests.ts`](src/api/manifests.ts).
+
+### 📋 Supported Chains & Manifest Mapping
+
+| Blockchain | RPC Identifier | Manifest File | Network Type (`type`) |
+|---|---|---|---|
+| **Ethereum** | `ETH` | [`src/api/manifests/ethereum.json`](src/api/manifests/ethereum.json) | `evm` |
+| **BNB Smart Chain** | `BSC` | [`src/api/manifests/binance.json`](src/api/manifests/binance.json) | `evm` |
+| **Polygon** | `POLYGON` | [`src/api/manifests/polygon.json`](src/api/manifests/polygon.json) | `evm` |
+| **Arbitrum One** | `ARBITRUM` | [`src/api/manifests/arbitrum.json`](src/api/manifests/arbitrum.json) | `evm` |
+| **Base** | `BASE` | [`src/api/manifests/base.json`](src/api/manifests/base.json) | `evm` |
+| **Avalanche C-Chain** | `AVALANCHE` | [`src/api/manifests/avalanche.json`](src/api/manifests/avalanche.json) | `evm` |
+| **Katana** | `KATANA` | [`src/api/manifests/katana.json`](src/api/manifests/katana.json) | `evm` |
+| **Solana** | `SOLANA` | [`src/api/manifests/solana.json`](src/api/manifests/solana.json) | `solana` |
+| **Solana Devnet** | `SOLANA_DEVNET` | [`src/api/manifests/solana-devnet.json`](src/api/manifests/solana-devnet.json) | `solana` |
+| **TON Network** | `TON` | [`src/api/manifests/ton.json`](src/api/manifests/ton.json) | `ton` |
+| **TRON** | `TRON` | [`src/api/manifests/tron.json`](src/api/manifests/tron.json) | `tron` |
+| **Bitcoin** | `BTC` | [`src/api/manifests/bitcoin.json`](src/api/manifests/bitcoin.json) | `bitcoin` |
+| **Bitcoin Testnet** | `BTC_TESTNET` | [`src/api/manifests/bitcoin-testnet.json`](src/api/manifests/bitcoin-testnet.json) | `bitcoin` |
+| **XRP Ledger** | `XRP` | [`src/api/manifests/xrpl.json`](src/api/manifests/xrpl.json) | `xrpl` |
+| **Venom** | `VENOM` | [`src/api/manifests/venom.json`](src/api/manifests/venom.json) | `venom` |
+| **COTI** | `COTI` | [`src/api/manifests/coti.json`](src/api/manifests/coti.json) | `coti` |
+| **Canton (Devnet / Testnet)** | `CANTON_DEV` / `CANTON_TEST` | [`src/api/manifests/canton-devnet.json`](src/api/manifests/canton-devnet.json) | `canton` |
+| **Cross-Chain Swap Assets** | — | [`src/api/manifests/swap-tokens.json`](src/api/manifests/swap-tokens.json) | Aggregated catalog |
+
+---
+
+### 🧩 Manifest JSON Structure & Schema
+
+Each manifest conforms to `BlockchainManifestSchema` ([`src/api/manifests.ts`](src/api/manifests.ts)):
+
+#### 1. Common Fields (Required across all chains)
+
+```json
+{
+  "version": 1,
+  "name": "Ethereum",
+  "type": "evm",
+  "priceProvider": {
+    "type": "coingecko",
+    "blockchain": "ethereum",
+    "url": "https://api.coingecko.com/api/v3"
+  },
+  "nativeToken": {
+    "name": "Ether",
+    "symbol": "ETH",
+    "ticker": "ethereum"
+  },
+  "tokens": {
+    "mandatory": [
+      {
+        "address": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+        "name": "USD Coin",
+        "symbol": "USDC",
+        "decimals": 6,
+        "ticker": "usd-coin"
+      }
+    ],
+    "all": "https://tokens.uniswap.org"
+  },
+  "blockExplorer": {
+    "transaction": "https://etherscan.io/tx/{id}"
+  }
+}
+```
+
+- **`priceProvider`**: Defines where token and coin market prices are fetched from (`type: "coingecko"`, `blockchain`: platform ID on CoinGecko, `url`: price API URL).
+- **`nativeToken`**: Native currency metadata used for primary account balances and gas estimations.
+- **`tokens.mandatory`**: An array of tokens automatically displayed on the main dashboard for all users.
+- **`tokens.all`**: Either an array of token objects or a remote URL pointing to a standard token list JSON (e.g. Uniswap token list format).
+- **`blockExplorer.transaction`**: URL pattern used for "View in Explorer" links; `{id}` is replaced with the transaction hash/ID.
+
+#### 2. Network-Specific Fields (`type`)
+
+Depending on `"type"`, specific connectivity parameters are required:
+
+##### `type: "evm"` (Ethereum, BSC, Polygon, Arbitrum, Base, Avalanche, Katana)
+- **`chainId`**: Numeric network chain ID (e.g. `1` for Ethereum, `56` for BSC, `137` for Polygon).
+- **`rpcUrl`**: JSON-RPC HTTP endpoint (e.g. Infura, Alchemy, QuickNode, or public RPC).
+- **`scannerApiUrl`**: Etherscan-compatible REST API endpoint (used for transaction history and token balance indexing).
+- **`multicallAddress`** *(optional)*: Contract address of Multicall3 for batched balance queries.
+
+##### `type: "solana"`
+- **`rpcUrl`**: Solana JSON-RPC endpoint (e.g. `https://api.mainnet-beta.solana.com`).
+- **`rpcWsUrl`** *(optional)*: Solana WebSocket endpoint for real-time subscription updates.
+- **`scannerApiUrl`** *(optional)*: Explorer API host (e.g. Solscan API).
+
+##### `type: "ton"`
+- **`apiBaseUrl`**: TON HTTP API v2 / TonCenter endpoint (e.g. `https://toncenter.com/api/v2/jsonRPC`).
+
+##### `type: "tron"`
+- **`rpcUrl`**: TronGrid / FullNode HTTP endpoint (e.g. `https://api.trongrid.io`).
+- **`scannerApiHost`**: TronScan API host (e.g. `https://apilist.tronscanapi.com`).
+- **`multicallAddress`** *(optional)*: Multicall smart contract address.
+
+##### `type: "bitcoin"`
+- **`apiBaseUrl`**: Esplora / Mempool.space REST API URL (e.g. `https://mempool.space/api`).
+- **`network`**: `"mainnet"` or `"testnet"`.
+
+##### `type: "xrpl"`
+- **`rpcUrl`**: Ripple WebSocket or JSON-RPC endpoint (e.g. `wss://xrplcluster.com/` or `https://s1.ripple.com:51234`).
+
+##### `type: "venom"`
+- **`rpcUrl`**: Venom JRPC / GraphQL endpoint (e.g. `https://jrpc.venom.foundation/rpc`).
+
+##### `type: "canton"`
+- **`authServerUrl`**: Canton OAuth/Auth server URL.
+- **`ledgerUrl`**: Canton Ledger API endpoint.
+- **`validatorUrl`**: Canton Validator API endpoint.
+- **`registries`**: Array of Canton participant registry URLs.
+
+---
+
+### 🔧 How to Configure Blockchains for Independent Operation
+
+To run the wallet completely independently without reliance on third-party proxies, configure the manifests to point directly to your preferred node providers:
+
+#### 1. Setting Custom RPC Endpoints
+Open the target manifest file (e.g., [`src/api/manifests/ethereum.json`](src/api/manifests/ethereum.json)) and replace `rpcUrl` with your private RPC provider or public node:
+```json
+"rpcUrl": "https://mainnet.infura.io/v3/YOUR_INFURA_KEY",
+"scannerApiUrl": "https://api.etherscan.io/api"
+```
+
+#### 2. Adding or Modifying Default Tokens
+Add any ERC-20 / SPL / TRC-20 / Jetton token to `tokens.mandatory`:
+```json
+{
+  "address": "0xYourTokenContractAddress",
+  "name": "My Custom Token",
+  "symbol": "MCT",
+  "decimals": 18,
+  "ticker": "my-custom-token"
+}
+```
+
+#### 3. Custom Token Lists (`tokens.all`)
+By default, extended token lists can be loaded from any public token registry or self-hosted static JSON file conforming to `TokenManifestSchema` (e.g., Uniswap token lists or local JSON files).
 
 ---
 
