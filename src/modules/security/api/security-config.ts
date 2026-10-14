@@ -30,8 +30,8 @@ export const currentEnv: AppEnvironment = (
 
 export const SECURITY_CONFIG: SecurityModuleConfig = {
   domainGuard: {
-    enabled: true,
-    strictEnvironments: ['production']
+    enabled: false,
+    strictEnvironments: []
   },
   antiTamper: {
     enabled: true,

@@ -6,7 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 import { nodePolyfills } from 'vite-plugin-node-polyfill';
 import vue from '@vitejs/plugin-vue';
-import { obfuscate } from "javascript-obfuscator";
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
 import fs from 'fs';
 import path from 'path';
@@ -36,52 +35,6 @@ const wasmMiddleware = () => {
         next();
       });
     },
-  };
-};
-
-const customObfuscatorPlugin = () => {
-  return {
-    name: 'custom-obfuscator',
-    enforce: 'post',
-    apply: 'build',
-    transform(code, id) {
-      if (id.includes('node_modules')) return null;
-      if (id.includes('type=style') || id.endsWith('.css') || id.endsWith('.scss') || id.endsWith('.sass') || id.endsWith('.json') || id.endsWith('.wasm')) return null;
-      if (id.includes('/components/svg/') || id.includes('/assets/')) return null;
-
-      const cleanId = id.split('?')[0];
-      const isAppSource = cleanId.includes('/src/') && /\.(vue|ts|js|jsx|tsx)$/.test(cleanId);
-
-      if (!isAppSource) return null;
-
-      try {
-        const result = obfuscate(code, {
-          compact: true,
-          disableConsoleOutput: true,
-          ignoreImports: true,
-          stringArray: true,
-          stringArrayEncoding: ['base64'],
-          stringArrayThreshold: 1,
-          transformObjectKeys: true,
-          rotateStringArray: true,
-          selfDefending: true,
-          debugProtection: true,
-          log: false,
-          reservedStrings: [
-            '^__VITE_ASSET__.*__$',
-            '^__VITE_PUBLIC_ASSET__.*__$',
-          ],
-        });
-
-        return {
-          code: result.getObfuscatedCode(),
-          map: result.getSourceMap() ? result.getSourceMap().toString() : null,
-        };
-      } catch (err) {
-        console.error(`[Obfuscator] Failed to obfuscate file ${cleanId}:`, err);
-        return null;
-      }
-    }
   };
 };
 
@@ -149,7 +102,6 @@ export default async ({ mode }) => {
         strictMessage: false,
         escapeHtml: false
       }),
-      isProductionBuild && customObfuscatorPlugin(),
     ],
     resolve: {
       alias: {

@@ -58,11 +58,6 @@
               ©2024 - {{ new Date().getUTCFullYear() }} {{ $t('footer.allRightsReserved') }}
             </div>
             <a class="united-site" href="//united.network" target="_blank">united.network</a>
-            <div class="hide-link">
-              <a class="united-site-test" href="//test.united.network"></a>
-              <a class="united-site-swap" href="//swap2.united.network"></a>
-              <a class="united-site-swap" href="//swap.united.network"></a>
-            </div>
           </div>
         </nav>
       </div>
@@ -121,7 +116,7 @@
         </multiselect>
       </div>
 
-      <div class="logo-mobile" @click="handleDebugClick"></div>
+      <div class="logo-mobile"></div>
     </div>
   </header>
 </template>
@@ -131,7 +126,7 @@ import { defineComponent, ref, computed, onMounted, onUnmounted } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { rpcList } from '@/api/constants-types';
-import { clearUserSettings, getWallet, getStorePrefix, setupEruda } from '@/api/ApiHandler';
+import { clearUserSettings, getWallet, getStorePrefix } from '@/api/ApiHandler';
 import { isCardRegistered } from '@/api/check-guards';
 import { getTokenIcon } from '@/api/token-icons';
 import { useEventsBus } from '@/plugins/eventBus.js';
@@ -151,7 +146,6 @@ export default defineComponent({
     const router = useRouter();
     const menuOpen = ref(false);
     const providerIsOpen = ref(false);
-    const debugClicks = ref(0);
     const rpcSelected = ref(store.state.settings.rpcProvider);
 
     const authenticatedLinks = computed(() => [
@@ -213,12 +207,6 @@ export default defineComponent({
       runApplicationChecks();
     };
 
-    const handleDebugClick = () => {
-      debugClicks.value++;
-      if (debugClicks.value === 5) {
-        setupEruda().catch(console.error);
-      }
-    };
 
     onMounted(() => {
       const unwatch = store.watch(
@@ -242,7 +230,6 @@ export default defineComponent({
       providerIsOpen,
       getTokenIcon,
       isCardRegistered,
-      handleDebugClick,
       prefixStore,
       isUserRegistered,
       authenticatedLinks
@@ -373,19 +360,6 @@ header {
           padding: 7px 13px;
           color: $color-orange;
           &:hover { color: $color-orange-hover; }
-        }
-
-        .hide-link {
-          display: flex;
-          flex-direction: row;
-          width: 100%;
-          margin-top: 12px;
-          justify-content: space-between;
-
-          .united-site-test, .united-site-swap {
-            width: 36px;
-            height: 36px;
-          }
         }
       }
     }

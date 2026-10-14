@@ -26,7 +26,7 @@
       const backgroundImg = new URL(`@/assets/images/RadialBackgroundWithoutText.svg`, import.meta.url).href;
 
       const pushOnRootPage = () => {
-        router.push({ name: 'landing' });
+        router.push({ name: 'authorization' });
       }
 
       return { backgroundImg, pushOnRootPage };

@@ -3,7 +3,7 @@ import { store } from '@/store/index';
 import { ensureInitialized } from '@/api/init';
 import { createRouter, createWebHistory } from 'vue-router';
 import { i18n, setI18nLanguage } from '@/plugins/i18n';
-import { isCardRegistered, isCardIsNew, isTagHash } from '@/api/check-guards';
+import { isCardRegistered, isCardIsNew } from '@/api/check-guards';
 import { setTitle, setDescription, setFollow, setCurrentUrl, setCanonical } from '@/plugins/metaTags';
 import { isWebViewApp, deniteAndroid201 } from '@/api/sub-utils';
 import { isDesktop, supportedBrowser } from '@/plugins/checkDevice';
@@ -44,33 +44,7 @@ export const router = createRouter({
   routes: [
     {
       path: '/:publicKey([a-fA-F0-9]{134})?',
-      name: 'landing',
-      beforeEnter: (to, from, next) => {
-        if (isTagHash(to.params.publicKey)) {
-          next({ name: 'authorization', params: { publicKey: to.params.publicKey }, query: to.query })
-        } else {
-          next();
-        }
-      },
-      component: () => import('../pages/Landing2.vue'),
-      meta: {
-        layout: 'Default',
-        title: i18n.global.t('title.landing'),
-        description: i18n.global.t('description.landing')
-      }
-    },
-    {
-      path: '/enterprise',
-      name: 'enterprise',
-      component: () => import('../pages/Enterprise2.vue'),
-      meta: {
-        layout: 'Default',
-        title: i18n.global.t('title.enterprise'),
-        description: i18n.global.t('description.enterprise')
-      }
-    },
-    {
-      path: '/sign-in/:publicKey?',
+      alias: '/sign-in/:publicKey?',
       name: 'authorization',
       beforeEnter: (to, from, next) => {
         if (isDesktop) {
@@ -289,16 +263,7 @@ export const router = createRouter({
         description: i18n.global.t('description.not-supported-browser-only-app')
       }
     },
-    {
-      path: '/token2049',
-      name: 'Token2049',
-      component: () => import('../pages/token2049.vue'),
-      meta: {
-        layout: 'NotSupported',
-        title: i18n.global.t('title.token-2049'),
-        description: i18n.global.t('description.token-2049')
-      }
-    },
+
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
@@ -336,7 +301,7 @@ router.beforeEach(async (to, from, next) => {
 
   setCanonical(to);
   setTitle(to.meta?.title ?
-    to.name === 'landing' ? `${to.meta?.title}` : `United Network | ${to.meta?.title}` :
+    to.name === 'authorization' ? `${to.meta?.title}` : `United Network | ${to.meta?.title}` :
     'United Network');
   setDescription(to.meta?.description);
   setFollow(to.meta?.follow);
@@ -345,14 +310,8 @@ router.beforeEach(async (to, from, next) => {
   next();
 })
 
-router.afterEach((to) => {
+router.afterEach(() => {
   isRouteLoading.value = false;
-  if (to.path === '/enterprise') {
-    const scrollOpts = { top: 0, behavior: 'instant' };
-    window.scrollTo(scrollOpts);
-    document.body.scrollTo(scrollOpts);
-    document.documentElement.scrollTo(scrollOpts);
-  }
 });
 
 router.onError((error) => {

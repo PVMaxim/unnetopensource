@@ -8,9 +8,9 @@
 
 <script>
 import { defineComponent } from 'vue';
-import GooglePlay from '@/components/svg/landing/app-googleplay.vue';
-import AppStore from '@/components/svg/landing/app-appstore.vue';
-import Apk from '@/components/svg/landing/app-apk.vue';
+import GooglePlay from '@/components/svg/app-googleplay.vue';
+import AppStore from '@/components/svg/app-appstore.vue';
+import Apk from '@/components/svg/app-apk.vue';
 
 export default defineComponent({
   name: 'Mobile Applications',

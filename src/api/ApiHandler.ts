@@ -29,13 +29,6 @@ import { isCardRegistered, isCardIsNew, isCardBroken } from '../api/check-guards
 import { registerCustomTokenStore } from '../store/modules/dynamicCustomToken.js';
 import i18n from "../plugins/i18n";
 
-export async function setupEruda(): Promise<any> {
-  const erudaModule = await import('eruda');
-  const eruda = erudaModule.default || erudaModule;
-  eruda.init();
-  return eruda;
-}
-
 export const getHost = (): string => {
   switch (window.location.hostname) {
     case 'bitrend.com':
