@@ -7,12 +7,8 @@ import { BasicTokenMetadata, GenericTokenBase } from "../token-base";
 import { LazyValue, fromBlockchainUnits, toBlockchainUnits } from "../utils";
 import { UniTonCore, base64ToSafe } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const JETTON_DEFAULT_DECIMALS = 9;
 
-
-///////////////////////////////////////////////////////////////////////////////
 const JettonMetadataSchema = z.object({
     uri: z.string().url().optional(),
     name: z.string().optional(),
@@ -25,8 +21,6 @@ const JettonMetadataSchema = z.object({
     render_type: z.string().optional(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 const JettonMastersResponseSchema = z.object({
     jetton_masters: z.object({
         address: z.string(),
@@ -44,8 +38,6 @@ const JettonMastersResponseSchema = z.object({
     })),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 const JettonTransferResponseSchema = z.object({
     jetton_transfers: z.object({
         query_id: z.string(),
@@ -69,8 +61,6 @@ const JettonTransferResponseSchema = z.object({
     })),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Jetton extends GenericTokenBase implements Token {
 
     private readonly MAX_TRANSACTIONS = 50;
@@ -156,7 +146,6 @@ export class Jetton extends GenericTokenBase implements Token {
                 jetton_master: safeMaster,
                 limit: this.MAX_TRANSACTIONS.toString(),
                 sort: "desc",
-                // todo: use offset
             },
         });
 
@@ -196,7 +185,7 @@ export class Jetton extends GenericTokenBase implements Token {
         const queryId = 0;
         const decimals = await this.getAndVerifyDecimals();
         const jettonAmount = toBlockchainUnits(args.amount, decimals);
-        const forwardAmount = 1;    // use minimal amount just to send notification
+        const forwardAmount = 1;
 
         const walletContract = this._core.client.open(JettonWallet.create(jettonWalletAddress));
         const balance = await walletContract.getBalance();
@@ -206,21 +195,19 @@ export class Jetton extends GenericTokenBase implements Token {
         }
 
         const cell = beginCell()
-            .storeUint(0xf8a7ea5, 32)       // request_transfer op
+            .storeUint(0xf8a7ea5, 32)
             .storeUint(queryId, 64)
             .storeCoins(jettonAmount)
             .storeAddress(toAddress)
             .storeAddress(owner)
-            .storeBit(false)                // null custom_payload
+            .storeBit(false)
             .storeCoins(forwardAmount)
-            .storeBit(false)                // null forward_payload
+            .storeBit(false)
             .endCell();
-
-        // todo: check deployment
 
         const message = internal({
             to: jettonWalletAddress,
-            value: toNano("0.1"),       // todo: -> const
+            value: toNano("0.1"),
             bounce: true,
             body: cell,
         });
@@ -329,8 +316,6 @@ export class Jetton extends GenericTokenBase implements Token {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function getJettonTransactions(args: {
     core: UniTonCore,
     owner: string,

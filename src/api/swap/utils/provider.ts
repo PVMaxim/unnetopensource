@@ -4,7 +4,7 @@ import { SWAP_CHAINS } from "../../constants-types";
 import { Chain } from "../types";
 
 export const createProviderManager = (chain: Chain, isForced = false):BlockchainManager => {
- 
+
   switch (chain) {
     case SWAP_CHAINS.ETH: {
       const manager = initialEvmManager(isForced);

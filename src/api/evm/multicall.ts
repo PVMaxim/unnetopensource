@@ -2,8 +2,6 @@ import { ethers } from "ethers";
 import { UniError } from "../errors";
 import { wrapEthersErrors } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface MulticallCall {
     target: string,
     interface: ethers.Interface,
@@ -22,8 +20,6 @@ export interface Multicall {
     execute(calls: MulticallCall[]): Promise<MulticallCallResult[]>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmMulticall implements Multicall {
 
     readonly contract: ethers.Contract;
@@ -85,10 +81,7 @@ export class EvmMulticall implements Multicall {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const MulticallABI = [
-    // https://github.com/mds1/multicall
     "function aggregate3(tuple(address target, bool allowFailure, bytes callData)[] calls) payable returns (tuple(bool success, bytes returnData)[] returnData)",
     "function getBlockNumber() view returns (uint256 blockNumber)",
     "function getEthBalance(address addr) view returns (uint256 balance)",

@@ -18,15 +18,15 @@
     </select>
   </div>
 </template>
-  
+
   <script>
     import { computed, defineComponent } from 'vue'
-  
+
     export default defineComponent({
       name: 'SelectOptions',
-  
+
       emits: ['update:modelValue'],
-  
+
       props: {
         modelValue: String,
         options: {
@@ -49,7 +49,7 @@
           default: ''
         }
       },
-  
+
       setup(props, { emit }) {
         function onChanged(e) {
           emit('update:modelValue', e.currentTarget.value);
@@ -60,13 +60,13 @@
             return props.modelValue.length > 0 ? 'valid' : '';
             }
         );
-  
+
         return {
           onChanged, formReadyToSubmit
         }
       }
     })
-  </script>
+</script>
 
 <style scoped lang="scss">
 .input-container {

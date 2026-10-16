@@ -2,8 +2,6 @@ import { z } from "zod";
 import { UniError } from "../errors";
 import { HttpClient } from "../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const RecommendedFeesSchema = z.object({
     fastestFee: z.number().positive(),
     halfHourFee: z.number().positive(),
@@ -37,7 +35,7 @@ const TransactionSchema = z.object({
     size: z.number().int(),
     weight: z.number().int(),
     fee: z.number().int(),
-    status: z.object({      // todo: make common
+    status: z.object({
         confirmed: z.boolean(),
         block_height: z.number().int().positive().optional(),
         block_hash: z.string().optional(),
@@ -53,7 +51,6 @@ const TransactionSchema = z.object({
             scriptpubkey_address: z.string().optional(),
             value: z.number().int().nonnegative().pipe(z.coerce.bigint()),
         }).nullish(),
-        // todo: witness
         scriptsig: z.string(),
         scriptsig_asm: z.string(),
         is_coinbase: z.boolean(),
@@ -71,17 +68,11 @@ const TransactionSchema = z.object({
 const AddressUtxoListSchema = z.array(UtxoSchema);
 const AddressTransactionsSchema = z.array(TransactionSchema);
 
-
-///////////////////////////////////////////////////////////////////////////////
 export type Utxo = z.infer<typeof UtxoSchema>;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class MempoolClient {
 
     private readonly _httpClient: HttpClient;
-
-    // todo: cache
 
     constructor(host: string) {
         this._httpClient = new HttpClient({baseUrl: host});

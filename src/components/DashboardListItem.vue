@@ -159,20 +159,14 @@ export default defineComponent({
           value: tokenData.value,
         })
         .then(() => {
-          // console.log(`goToSendHandler rpcProviderName data is ${props.rpcProviderName} token is ${tokenData.value}`);
           router.push({ name: 'send' });
         })
         .catch((error) => {
-          console.error('Error selecting token:', error);
         });
       }
     };
 
-    // if token exist in store
-    // console.log(`Isset token in store data is ${Object.keys(tokenData.value).length > 0 } token is ${tokenData.value} token is ${props.tokenId}`);
     if (Object.keys(tokenData.value).length > 0) {
-      // console.log(`Isset token in store data is Entered to update token`);
-      console.log(`setTokenBalance props.tokenId data is ${props.tokenId} props.rpcProviderName is ${props.rpcProviderName}`);
       setTokenBalance(props.tokenId, props.rpcProviderName );
     }
 
@@ -188,7 +182,6 @@ export default defineComponent({
           keys: store.state.user.publicKeyCard,
         })
       } catch(err) {
-        console.log(`allowUseToken ERROR:  ${JSON.stringify(err)}`);
         unlockXrpTokenButton.value = false;
         if (err.message === 'Account not found.') {
           throw new Error('Token limit allow.', { cause: {errorSubtitle: 'XRP token balances mast been more than 1 XRP', errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
@@ -199,7 +192,6 @@ export default defineComponent({
         'token_id': props.tokenId,
         'request':  trustLimitRequest.value
       }
-      console.log(`allowUseToken = ${(trustLimitObject.value)}`);
       emit( 'approveTokenLimit', trustLimitObject.value);
       unlockXrpTokenButton.value = false;
     }
@@ -224,12 +216,9 @@ export default defineComponent({
     }
 
     watchEffect(async() => {
-      console.log(`props.rpcProviderChange before ${props.rpcProviderChange}`);
       if ( props.rpcProviderChange === true ) {
-        console.log(`setTokenBalance rpcProviderChange props.tokenId data is ${props.tokenId} props.rpcProviderName is ${props.rpcProviderName}`);
         setTokenBalance(props.tokenId, props.rpcProviderName);
         emit('update:rpcProviderChange', false );
-        console.log(`props.rpcProviderChange after ${props.rpcProviderChange}`);
       }
     });
 
@@ -274,7 +263,7 @@ export default defineComponent({
     display: flex;
     flex-direction: row;
     align-items: center;
-    
+
     &.first {
       flex-grow: 1;
       flex-basis: 0;
@@ -386,7 +375,6 @@ export default defineComponent({
   }
 }
 .token-item.attention {
-  //padding-left: 46px;
 }
 .token-item.attentionline {
   border-color: $color-red;

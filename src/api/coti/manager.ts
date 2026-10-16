@@ -7,8 +7,6 @@ import { CotiCore } from "./core";
 import { CotiNativeCoin } from "./native-coin";
 import { CotiErc20Token } from "./erc20-token";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "coti";
@@ -108,7 +106,6 @@ export class CotiManager extends BlockchainManagerBase implements BlockchainMana
         const offset = args.offset ?? 0;
         const nativeTxs = await this.core.history.getNativeTransactions(args.owner);
         const tokenTxs = await this.core.history.getAllTokenTransactions(args.owner);
-        // todo: include secure tokens
 
         const txs = [
             ...tokenTxs.filter(x => allowedTokens.includes(x.tokenId)),

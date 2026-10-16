@@ -5,24 +5,18 @@ import { store } from './store/index';
 import i18n, { initI18n } from "./plugins/i18n";
 import router from './router/index';
 import { registerLayouts } from './layouts/index';
-//import { registerTokensIcon } from './components/svg/provider/index';
 
 const app = createApp(App);
 app.use(store);
 app.use(i18n);
 app.use(router);
 registerLayouts(app);
-//registerTokensIcon(app);
 
 router.isReady().then(() => {
   app.mount('#united-network');
 });
 
-
 nextTick(async () => {
-
-  //const { registerTokensIcon } = await import('./components/svg/provider/index');
-  //registerTokensIcon(app);
 
   const { default: vIntersect } = await import('./plugins/intersect');
   app.directive('intersect', vIntersect);
@@ -38,7 +32,7 @@ nextTick(async () => {
   runApplicationChecks();
 
   const { initWalletConnectHelper } = await import('@/api/wallet-connect/wcHelper');
-  initWalletConnectHelper().catch(err => console.error('[WalletConnect] Init failed:', err));
+  initWalletConnectHelper().catch(err => {});
 
   let viewportHeight = window.innerHeight;
   let doc = document.documentElement;

@@ -93,7 +93,6 @@ export default {
 
     const onChangeSearchText = (event) => {
       searchText.value = event.target.value;
-      console.log(searchText.value);
     };
 
     const toggleModal = () => {
@@ -163,7 +162,6 @@ export default {
 
     const filteredTokens = computed(() => {
       if (!searchText.value) {
-        console.log("filteredTokens", tokens.value);
         return tokens.value;
       }
       return tokens.value.filter(

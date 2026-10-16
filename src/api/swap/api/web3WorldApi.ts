@@ -89,8 +89,6 @@ export type TransactionsResponse = {
   totalCount: number;
 };
 
-
-
 export const web3WorlApi = () =>  {
     const apiUrlPrefix = 'https://api.web3.world/v2';
     const defaultHeaders = { 'Content-Type': 'application/json' };
@@ -104,7 +102,7 @@ export const web3WorlApi = () =>  {
         });
         return response.json();
     }
-     
+
     const getTransactionsHistory = async (params: GetHistoryParams): Promise<TransactionsResponse> => {
         const response = await fetch(apiUrlPrefix + '/transactions', {
             method: 'POST',

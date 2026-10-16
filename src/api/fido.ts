@@ -1,12 +1,8 @@
 import { Buffer } from "buffer";
 const { crypto } = globalThis;
 
+const FIDO_DEFAULT_TIMEOUT       = 60;
 
-///////////////////////////////////////////////////////////////////////////////
-const FIDO_DEFAULT_TIMEOUT       = 60;   // seconds
-
-
-///////////////////////////////////////////////////////////////////////////////
 export function buildFidoRequest(args: {
     hostname: string, 
     data: Uint8Array,
@@ -32,8 +28,6 @@ export function buildFidoRequest(args: {
     };
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function toBase64Url(data: Uint8Array): string {
     return Buffer.from(data)
         .toString("base64")

@@ -2,8 +2,6 @@ import { Buffer } from "buffer";
 import { UniError } from "../errors";
 import { Keystore, Signer } from "everscale-standalone-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CustomKeyStore implements Keystore {
     private readonly _signers: Map<string, Signer>;
 
@@ -28,9 +26,6 @@ export class CustomKeyStore implements Keystore {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
-// Dummy signer that stores signature id
 export class DummySIDSigner implements Signer {
     lastSignatureId?: number;
 

@@ -3,16 +3,12 @@ import { UniError } from "./errors";
 import { PriceProvider } from "./pricing";
 import { LazyValue } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface BasicTokenMetadata {
     name: string,
     symbol: string,
     decimals: number,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export abstract class NativeTokenBase {
 
     readonly id = "_";
@@ -73,8 +69,6 @@ export abstract class NativeTokenBase {
     abstract getBalance(owner: string): Promise<string>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export abstract class GenericTokenBase<MetadataType extends BasicTokenMetadata = BasicTokenMetadata> {
 
     readonly id: string;
@@ -169,7 +163,6 @@ export abstract class GenericTokenBase<MetadataType extends BasicTokenMetadata =
         const decimals = await this.getDecimals();
         const metadata = await this._lazyMetadata.get();
 
-        // verify decimals in case it was overridden with invalid value
         if( decimals !== metadata.decimals ) {
             throw new UniError(
                 "INTERNAL_ERROR",

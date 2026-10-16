@@ -9,8 +9,6 @@ import { UniError, UniLowBalanceError, UniAmountTooSmallError } from "../errors"
 import { Secp256k1RequestChunk } from "../request-chunks";
 import { fromBlockchainUnits } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class XrplRequest implements Request {
     readonly chunks: Secp256k1RequestChunk[];
 
@@ -29,7 +27,7 @@ export class XrplRequest implements Request {
         removeTrailingZeros(this._tx);
 
         const encodedTx = xrpl.encodeForSigning(this._tx);
-        const hash = sha512(hexToBytes(encodedTx)).subarray(0, 32);     // sha512half
+        const hash = sha512(hexToBytes(encodedTx)).subarray(0, 32);
 
         this.chunks = [
             new Secp256k1RequestChunk({
@@ -141,8 +139,6 @@ export class XrplRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function removeTrailingZeros(tx: xrpl.Transaction): void {
     if( tx.TransactionType === "Payment" &&
         typeof tx.Amount !== "string" &&

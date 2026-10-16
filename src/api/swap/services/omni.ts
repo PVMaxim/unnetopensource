@@ -22,8 +22,6 @@ import { getHistoryStatus } from "../utils/serviceStatuses";
 
 const OMNI_CONTRACT_ADDRESS = "0xB685760EBD368a891F27ae547391F4E2A289895b";
 
-
-
 const getChainByCoinCode = (coinCode: string): string => {
   const match = coinCode.match(/\(([^)]+)\)/);
   const result = match ? match[1] : coinCode;
@@ -48,7 +46,7 @@ const getChainByCoinCode = (coinCode: string): string => {
     case "BASE":
       return SWAP_CHAINS.BASE;
     default:
-      return SWAP_CHAINS.ETH; // Default to ETH for other cases
+      return SWAP_CHAINS.ETH;
   }
 };
 class OmniBridgeService extends SwapService implements ISwapService {
@@ -159,12 +157,10 @@ class OmniBridgeService extends SwapService implements ISwapService {
     const {
       data: { orderId, platformAddr },
     } = await omniBridgeApi().createOrder(paramsCreateOrder);
-    console.log({ orderId, platformAddr });
     const { token } = await createProviderManagerAndToken(
       fromProvider,
       fromToken
     );
-    console.log({ token });
 
     const tx = await token.transfer({
       recipient: platformAddr,
@@ -181,7 +177,6 @@ class OmniBridgeService extends SwapService implements ISwapService {
       depositTxid: hash,
     };
     const res = await omniBridgeApi().uploadTransactionHash(params);
-    console.log({ res });
     if (res.resCode !== "800") {
       throw new Error("Transaction hash upload failed");
     }

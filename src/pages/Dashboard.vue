@@ -137,7 +137,6 @@
       const storeProvider = computed(() => { return store.state.settings.rpcProvider });
       const tokensBalance = computed(() => { return store.state.user.tokensData?.[store.state.settings.rpcProvider?.name]?.providerUSDBalance;});
       const historyElementComp = computed(() => { 
-        console.log(`historyElementComp: ${historyElement.value?.clientHeight}`)
         if ( historyElement.value?.clientHeight ) {
           return `${Number((historyElement.value?.clientHeight - 108).toFixed())}px`;
         }
@@ -145,7 +144,6 @@
       });
       const historyBox = ref(null);
       const historyPageLimit = computed(() => { 
-        console.log(`historyPageLimit:  type is ${typeof historyBox.value?.clientHeight} data is ${JSON.stringify(historyBox.value?.clientHeight)}`);
         if ( historyBox.value?.clientHeight ) {
           return Number(roundNumberIntMin((historyBox.value?.clientHeight - 69) / 50));
         }
@@ -176,7 +174,6 @@
       ];
 
       const errorHandler = () => {
-        console.log(`errorHandler`);
         error.value = false;
         titleLoad.value = t('pages.dashboard.status.wait');
         messageLoad.value = t('pages.dashboard.status.gettingBalances');
@@ -190,7 +187,6 @@
       }
 
       const alertAddTokenConfirm = (e) => {
-        console.log(`alertAddTokenConfirm TRUE`);
         useEventsBus().emit('confirmedAddToken', JSON.stringify(tokenObject.value));
         tokenObject.value = null;
         isShowConfirm.value = false;
@@ -205,15 +201,13 @@
       }
 
       useEventsBus().on('confirmAddToken',  (payload) => {
-        console.log(`confirmAddToken `);
         tokenObject.value = JSON.parse(payload);
         isShowConfirm.value = true;
-        console.log(`rpcProviderChange Enter if`);
       });
 
       useEventsBus().on('tokenBalanceUpdated', (payload) => {
         if (payload === 'newToken') { 
-          searchTokens.value = null; // can work not property when search window is open and it closed when some token updated
+          searchTokens.value = null;
           searchTokensLength.value = 0;
           searchComponent.value.clearInput();
         }
@@ -229,35 +223,25 @@
 
       const refreshHandler = () => {
         loadingRefresh.value = true
-        console.log(`loadingRefresh: ${loadingRefresh.value}`);
         setTokensBalances();
         loadingRefresh.value = false
-        console.log(`loadingRefresh: ${loadingRefresh.value}`);
       }
 
       onMounted( async () => {
         if ( store.state.user?.seedPhrase !== null ) {
           store.dispatch('user/resetSeedPhrase');
         }
-        console.log(`store.state.user.publicKeyCard: ${JSON.stringify(store.state.user.publicKeyCard)}`);
-        // if (!store.state.user.publicKeyCard || store.state.user.publicKeyCard.ed25519 === '0000000000000000000000000000000000000000000000000000000000000000') {
-        //   router.push({ name: 'authorization' });
-        // }
         balance.value = store.state.user.tokenBalance;
       });
 
       onErrorCaptured(async(err) => {
-        console.log(`onErrorCaptured:  type is ${typeof err} data is ${typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}`);
-        console.log(`onErrorCaptured:  message is ${err?.message}`);
         const {title, message} = await getErrorMessage(err);
         error.value = true;
         errorTitle.value = title ?? t('errors.sendTokenError');
         errorSubtitle.value = message ?? t('pages.send.pressOkToTryAgain');
-        console.log(`errorBody = ${err?.cause?.errorBody}`);
         const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
           + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
           + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-        console.log(messageConsole);
         isLoading.value = false;
         return false;
       });
@@ -381,7 +365,6 @@
   width: calc(100% - 40px);
   min-height: calc(100% - 52px);
   height: initial;
-  // min-width: 264px;
   padding: 20px 20px 0px;
   border-radius: 16px;
   border: 1px solid $color-black-40;
@@ -396,7 +379,6 @@
 
 .history-group {
   width: 100%;
-  //margin-top: 24px;
   height: initial;
   min-height: v-bind(historyElementComp);
 

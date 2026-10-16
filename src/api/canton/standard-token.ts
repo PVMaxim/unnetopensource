@@ -9,8 +9,6 @@ import { LazyValue } from "../utils";
 import { CantonCore, CantonAsset } from "./core";
 import { CantonHistoryReader } from "./history";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonStandardToken implements Token {
 
     readonly id: string;
@@ -28,7 +26,7 @@ export class CantonStandardToken implements Token {
     private _priceProvider: PriceProvider;
 
     constructor(args: {
-        instrument: string,     // packed instrument id : <instrument-admin>|<instrument-id>
+        instrument: string,
         coreFactory: () => Promise<CantonCore>,
         txUrlFormatter: (id: string) => string,
         priceProvider: PriceProvider,
@@ -142,7 +140,6 @@ export class CantonStandardToken implements Token {
             if( utxo.interfaceViewValue.instrumentId.admin === this.instrument.admin &&
                 utxo.interfaceViewValue.instrumentId.id === this.instrument.id
             ) {
-                console.log(utxo.contractId)
                 result = result.plus(utxo.interfaceViewValue.amount);
             }
         }

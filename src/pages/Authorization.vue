@@ -8,19 +8,7 @@
         :iconUrl=errorImg
         :buttonClick=errorHandler
         :buttonName="$t('button.ok')" />
-      <!-- <Panel  v-else  
-        title="Card authorization" 
-        subtitle="Press a button and tap your card to authorize your account"
-        :buttonClick=authorizationHandler
-        buttonName="Authorization" 
-        :buttonSubClick=restoreHandler
-        buttonSubName="Restore card" 
-      > -->
       <div v-show="!error && !isLoading" class="container-app">
-        <!-- <div class="logo-group">
-					<LogoShortSvg class="logo" />
-					<Logo class="logo-text" />
-				</div> -->
         <div></div>
         <div class="slide-box">
         <div class="embla" ref="slideImageRef">
@@ -37,9 +25,6 @@
             <div class="embla__slide card-box">
               <MultiBlockchainSvg />
             </div>
-            <!-- <div class="embla__slide card-box">
-              <CrosschainSvg />
-            </div> -->
             <div class="embla__slide card-box">
               <WalletConnectSvg />
             </div>
@@ -82,14 +67,6 @@
                 {{ $t('pages.authorization.slide4.description') }}
               </div>
             </div>
-            <!-- <div class="embla__slide card-text">
-              <div class="card-title">
-                Сrosschain crypto swaps
-              </div>
-              <div class="card-description">
-                Seamless asset exchange across multiple blockchains
-              </div>
-            </div> -->
             <div class="embla__slide card-text">
               <div class="card-title">
                 {{ $t('pages.authorization.slide5.title') }}
@@ -101,13 +78,7 @@
           </div>
         </div>
         </div>
-        <!-- <div class="">
-          <div class="slidePrev" @click=buttonClickPrev>Prev {{ buttonClickPrevCan }}</div>
-          <div class="slideNext" @click=buttonClickNext>Next {{ buttonClickNextCan }}</div>
-        </div> -->
         <div class="button-group">
-          <!-- <button class="button-main submit subButton main" @click=authorizationHandler()>Authorization</button>
-          <button class="button-main button-second sub subButton main" @click=restoreHandler()>Restore card</button> -->
           <Button
             :buttonName="$t('pages.authorization.connectCard')"
             buttonType="main"
@@ -241,7 +212,6 @@
         }
 
       const onSelect = () => {
-          console.log(`onSelect`);
           slideNodes.value[1]?.classList.remove('next-init');
           textNodes.value[1]?.classList.remove('next-init');
           dotsContainer.value.children[0]?.classList.remove('active');
@@ -323,13 +293,12 @@
         const resultPrepareNFC = ref(null);
         const resultAuth = ref(undefined);
         const resultPrepareAuthenticate = ref(undefined);
-        
+
         messageLoad.value = t('pages.authorization.status.prepareSign');
         setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
         try {
           resultPrepareNFC.value = await CmdGetInfo.buildRequest();
         } catch (err) {
-          console.info('Error during NFC process', err);
           throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
         }
 
@@ -337,14 +306,11 @@
           messageLoad.value = t('pages.authorization.status.waitingSign');
           resultAuth.value = await nfcHandlerWindow.value?.nfcProgressHandler(resultPrepareNFC.value, CmdGetInfo, false);
           messageLoad.value = t('pages.authorization.status.verificationSign');
-          console.log(`CmdGetInfo.parseResponse SUCCESS all: ${JSON.stringify(resultAuth.value)}`);
           messageLoad.value = t('pages.authorization.status.submitSign');
           publicKeyCard.value = resultAuth.value?.keys;
           if (resultAuth.value?.version) {
             store.dispatch('settings/setCardVersion',  resultAuth.value?.version ).then(() => {
-              console.log(`settings/setCardVersion typeof: ${typeof resultAuth.value?.version} data ${JSON.stringify(resultAuth.value?.version)}`);
             }).catch((err) => {
-              console.log(`settings/setCardVersion ERROR typeof: ${typeof err} data ${JSON.stringify(err)}`);
             });
           }
           if (resultAuth.value?.isNewCard !== undefined) {
@@ -356,12 +322,10 @@
 
         if (publicKeyCard.value !== null && publicKeyCard.value?.ioPublicKey) {
           store.dispatch('user/setPinPublicKey',  publicKeyCard.value?.ioPublicKey ).then(() => {
-            console.log(`user/setPinPublicKey typeof: ${typeof publicKeyCard.value?.ioPublicKey} data ${JSON.stringify(publicKeyCard.value?.ioPublicKey)}`);
           });
         }
 
         store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
-          console.log(`user/setPublicKeyCard typeof: ${typeof publicKeyCard.value} data ${JSON.stringify(publicKeyCard.value)}`);
         }).catch((err) => {
           throw new Error(t('errors.authorizationError'),{ cause: {errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
         });
@@ -375,13 +339,11 @@
         if (!isCardIsNew() && !isCardBroken()) {
           try {
             accountAddress.value = await getWallet( store.state.user.publicKeyCard, true );
-            console.log(`accountAddress.value typeof: ${typeof accountAddress.value} data ${JSON.stringify(accountAddress.value)}`);
           } catch(err) {
             throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody:err}});
           }
 
           store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
-            console.log(`user/setAccountAddress typeof: ${typeof accountAddress.value} data ${JSON.stringify(accountAddress.value)}`);
           }).catch((err) => {
             throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
           });
@@ -397,7 +359,6 @@
        }
 
       useEventsBus().on('useAnotherCard', (payload) => {
-        console.log(`ou touch another card. to use it, please Sign In"`);
         throw new Error(t('errors.cardError'),{ cause: {errorSubtitle: t('pages.authorization.errors.anotherCard')}});
       });
 
@@ -414,8 +375,6 @@
 
       const initCarusel = () => {   
         if (slideImageApi.value) {
-          console.log(`enter initCarusel`)
-          //dotsContainer.value.children[1]?.classList.add('active');
           slideNodes.value = slideImageApi.value.slideNodes();
           textNodes.value = slideTextApi.value.slideNodes();
           slideImageApi.value.on('select', onSelect)
@@ -427,10 +386,9 @@
                         .on('reInit', onReInit2)
         }
       }
-     
+
       watchEffect(() => {
         if ( isLoading.value === false && error.value === false && slideImageRef !== null && slideTextRef !== null ) {
-          console.log(`initCarusel`);
           initCarusel();
         }
       });
@@ -460,21 +418,15 @@
         return result;
       }
 
-
-
       onMounted(() => {
-        detectNfcCapabilities().then(console.log);
+        detectNfcCapabilities().then(() => {});
         checkAndSetVersionFromUrl(route.query);
 
         if (route.params.publicKey ) {
           try {
             publicKeyCard.value = parsePublicKeyHexList(route.params.publicKey);
-            console.log(`route.params.publicKey: ${JSON.stringify(publicKeyCard.value)}`)
-            console.log(`publicKeyCard secp256k1 66: data ${publicKeyCard.value.secp256k1}, all 0 ${/^[0]{66}$/.test(publicKeyCard.value.secp256k1)}, all 16bit ${/^[a-fA-F0-9]{66}$/.test(publicKeyCard.value.secp256k1)}`);
-            console.log(`publicKeyCard ed25519 64: data ${publicKeyCard.value.ed25519}, all 0 ${/^[a-fA-F0-9]{64}$/.test(publicKeyCard.value.ed25519)}, all 16bit ${/^[a-fA-F0-9]{64}$/.test(publicKeyCard.value.ed25519)}`);
             authorizationHandler();
           } catch(err) {
-            console.log(`key parsing fail: ${err}`)
           }
         }
         initCarusel();
@@ -486,11 +438,9 @@
         error.value = true;
         errorTitle.value = title ?? t('pages.authorization.errors.title');
         errorSubtitle.value = message ?? t('pages.authorization.errors.subtitle');
-        console.log(`errorBody = ${err?.cause?.errorBody}`);
         const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
           + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
           + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-        console.log(messageConsole);
         isLoading.value = false;
         return false;
       });
@@ -525,11 +475,10 @@
 
   .embla {
     overflow: hidden;
-  
+
     .embla__container {
       display: flex;
       touch-action: pan-y pinch-zoom;
-      //margin-left: calc(1rem * -1);
     }
     .card-box {
       display: flex;
@@ -639,7 +588,7 @@
     .get-card {
       display: flex;
       flex-direction: row;
-      
+
       .get-card-link {
         color: $color-orange;
         margin-left: 5px;

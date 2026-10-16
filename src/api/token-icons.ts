@@ -6,7 +6,6 @@ import { rpcList, SWAP_NATIVE_ADDRESS } from '@/api/constants-types';
 const providerIcons = import.meta.glob('../components/svg/provider/*.vue');
 const tokenIcons = import.meta.glob('../components/svg/tokens/*/*.vue');
 
-// 1. Pre-index provider components
 const providerComponentsMap = new Map<string, any>();
 for (const [path, loader] of Object.entries(providerIcons)) {
   const match = path.match(/\/([^/]+)\.vue$/);
@@ -15,7 +14,6 @@ for (const [path, loader] of Object.entries(providerIcons)) {
   }
 }
 
-// 2. Pre-index token components
 const tokenComponentsMap = new Map<string, any>();
 for (const [path, loader] of Object.entries(tokenIcons)) {
   const match = path.match(/tokens\/([^/]+)\/([^/]+)\.vue$/);
@@ -25,7 +23,6 @@ for (const [path, loader] of Object.entries(tokenIcons)) {
   }
 }
 
-// 3. Pre-index alias lookups for O(1) matching
 const aliasToProviderKey = new Map<string, string>();
 for (const rpc of rpcList) {
   const target = rpc.name.toLowerCase();
@@ -34,13 +31,9 @@ for (const rpc of rpcList) {
   if (rpc.displayName) aliasToProviderKey.set(rpc.displayName.toLowerCase(), target);
 }
 
-// 4. Memoize lookups (including negative / null lookups to prevent repeated scanning)
 const localResolutionCache = new Map<string, any>();
 const remoteComponentCache = new Map<string, any>();
 
-/**
- * Resolves a local SVG component synchronously if available.
- */
 function resolveLocalTokenIcon(arg: any): any {
   if (!arg) return null;
 
@@ -73,16 +66,6 @@ function resolveLocalTokenIcon(arg: any): any {
   return null;
 }
 
-/**
- * Returns a token icon component or URL.
- * 1. Checks Cache
- * 2. Checks Local SVG
- * 3. Checks CoinGecko via Manager
- *
- * @param arg Token object or chain string
- * @param isOnlyUrl If true, returns a Promise<string> (URL only)
- * @param isOnlyLocal If true, prevents falling back to CoinGecko
- */
 export function getTokenIcon(arg: any, isOnlyUrl: boolean = false, isOnlyLocal: boolean = false): any {
   if (!arg) return null;
 
@@ -104,7 +87,6 @@ export function getTokenIcon(arg: any, isOnlyUrl: boolean = false, isOnlyLocal: 
     return remoteComponentCache.get(key);
   }
 
-  // Fallback to CoinGecko URL but return as a cached Vue component
   const remoteUrlPromise = getRemoteTokenIconUrl(arg);
   const comp = markRaw(
     defineAsyncComponent(async () => {
@@ -130,12 +112,6 @@ const unknownTokenIcon = () =>
 const urlCache = new Map<string, string | null>();
 const fetchingMap = new Map<string, Promise<string | null>>();
 
-/**
- * Converts a currency code or symbol to canonical XRPL format.
- * - 3 chars: standard code (e.g. 'USD')
- * - 40 hex chars: canonical hex
- * - 1..20 chars: UTF-8 encoded hex padded to 40 chars
- */
 export function toXrplCanonicalCurrencyCode(rawCode: string): string {
   if (!rawCode) return '';
   const clean = rawCode.replace(/\s*\([^)]*\)/g, '').trim();
@@ -161,14 +137,11 @@ export function toXrplCanonicalCurrencyCode(rawCode: string): string {
   return '';
 }
 
-/**
- * Generates a consistent cache key for token objects or strings.
- */
 function getCacheKey(arg: any): string {
   if (typeof arg === 'string') {
     return arg.toLowerCase().trim();
   }
-  
+
   if (typeof arg === 'object' && arg !== null) {
     const directIcon = arg.iconUrl || arg.logoURI || arg.icon || arg.image || arg.imageUrl;
     if (typeof directIcon === 'string' && directIcon.trim()) {
@@ -206,7 +179,7 @@ function getCacheKey(arg: any): string {
     if (chain) return chain;
     if (symbol) return symbol;
   }
-  
+
   return 'unknown';
 }
 
@@ -227,26 +200,20 @@ function resolveRpcName(raw: string): string | null {
   return matched ? matched.name : null;
 }
 
-/**
- * Returns a remote CoinGecko URL asynchronously via the manager.
- */
 export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
   if (!arg) return unknownTokenIcon();
 
-  // 1. Direct custom token icon URL if present
   if (typeof arg === 'object' && arg !== null) {
     const directIcon = arg.iconUrl || arg.logoURI || arg.icon || arg.image || arg.imageUrl;
     if (typeof directIcon === 'string' && directIcon.trim()) {
       return directIcon.trim();
     }
 
-    // Direct tip3 / token instance
     if (typeof arg.tip3?.getIconUrl === 'function') {
       try {
         const icon = await arg.tip3.getIconUrl();
         if (icon) return icon;
       } catch {
-        // ignore
       }
     }
     if (typeof arg.token?.getIconUrl === 'function') {
@@ -254,18 +221,16 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
         const icon = await arg.token.getIconUrl();
         if (icon) return icon;
       } catch {
-        // ignore
       }
     }
   }
 
   const key = getCacheKey(arg);
-  
+
   if (urlCache.has(key)) {
     return urlCache.get(key) || unknownTokenIcon();
   }
 
-  // Prevent multiple identical requests at the same time
   if (fetchingMap.has(key)) {
     const result = await fetchingMap.get(key);
     return result || unknownTokenIcon();
@@ -283,7 +248,6 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
               if (iconUrl) return iconUrl;
             }
           } catch {
-            // Ignore manager error
           }
         }
         return getCoinGeckoIconUrl(arg);
@@ -293,7 +257,7 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
         const chain = arg.chain || arg.rpcName;
         let address = arg.address;
         const rpcName = (chain ? resolveRpcName(chain) : null) || chain;
-        
+
         if (rpcName) {
           try {
             const mgr = getOrCreateManager(rpcName, false);
@@ -304,7 +268,6 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
               String(rpcName).toLowerCase() === 'xrp' ||
               String(rpcName).toLowerCase() === 'xrpl';
 
-            // Format XRP trustline address: currencyCode.issuer
             if (isXrplChain && address) {
               if (address.includes('.')) {
                 const parts = address.split('.');
@@ -319,16 +282,13 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
               }
             }
 
-            // Native token
             if (!address || address === '_' || address === 'native' || address === SWAP_NATIVE_ADDRESS || address === '0x0000000000000000000000000000000000000000' || address === '0:77d36848bb159fa485628bc38dc37eadb74befa514395e09910f601b841f749e') {
               if (mgr.nativeCoin) {
                 iconUrl = await mgr.nativeCoin.getIconUrl();
               }
             } else {
-              // 1. Get Token instance directly by address
               let token = mgr.getToken(address);
 
-              // 2. If not found and XRPL, check if any token in mgr.getTokens() matches issuer address or symbol
               if (!token && isXrplChain && typeof mgr.getTokens === 'function') {
                 const allTokens = mgr.getTokens();
                 token = allTokens.find((t: any) => {
@@ -338,7 +298,6 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
                 });
               }
 
-              // 3. If still not in memory, create it dynamically
               if (!token && typeof mgr.createToken === 'function') {
                 try {
                   token = mgr.createToken({
@@ -348,7 +307,6 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
                     decimals: arg.decimals || 0,
                   });
                 } catch {
-                  // Ignore creation failure for malformed address
                 }
               }
 
@@ -361,17 +319,15 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
               return iconUrl;
             }
           } catch {
-            // Fall through to ticker fallback
           }
         }
 
-        // Fallback ONLY to explicit CoinGecko ticker if available (do not guess arbitrary symbols to prevent 500 errors)
         const ticker = arg.ticker || arg.coinGeckoId || arg.coingeckoId;
         if (typeof ticker === 'string' && ticker.trim()) {
           return getCoinGeckoIconUrl(ticker.toLowerCase().trim());
         }
       }
-      
+
       return null;
     } catch {
       return null;

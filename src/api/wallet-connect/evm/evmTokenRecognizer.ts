@@ -70,7 +70,6 @@ class EvmTokenRecognizer {
         return recognizedToken;
       }
     } catch (error) {
-      console.error('token recognition error', error);
       return undefined;
     }
   }

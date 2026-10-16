@@ -28,86 +28,44 @@ import { roundNumber } from '@/api/sub-utils';
 import TokenIcon from "@/components/TokenIcon.vue";
 import CoingeckoIcon from '@/components/svg/coingecko.vue';
 
-/**
- * A generic confirmation modal window. It is controlled by v-model and can be configured
- * with a title, subtitle, token information, and custom button texts. It emits events
- * on user actions (confirm/cancel).
- * @vue-component
- */
 export default defineComponent({
   name: 'AlertConfirm',
-  /**
-   * @emits update:modelValue - Emitted to update the v-model value, effectively closing the modal.
-   * @emits onConfirm - Emitted when the user clicks the confirm button. Payload: `{ value: true, srcEvent: 'confirmButton' }`.
-   * @emits onCancel - Emitted when the user clicks the cancel button. Payload: `{ value: true, srcEvent: 'cancelButton' }`.
-   */
   emits: ['update:modelValue', 'onConfirm', 'onCancel'],
     props: {
-      /**
-       * Controls the visibility of the modal. Supports `v-model`.
-       */
       modelValue: [Boolean, false],
-      /**
-       * The main title of the modal. Can contain HTML via `v-html`.
-       */
       title: {
         type: [String, null],
         default: null,
         required: false
       },
-      /**
-       * The subtitle/description text of the modal. Can contain HTML via `v-html`.
-       */
       subTitle: {
         type: [String, null],
         default: null,
         required: false
       },
-      /**
-       * Text for the confirm button. If not provided, the button is not rendered.
-       */
       buttonConfirmText: {
         type: [String, null],
         default: null
       },
-      /**
-       * Text for the cancel button. If not provided, the button is not rendered.
-       */
       buttonCancelText: {
         type: [String, null],
         default: null
       },
-      /**
-       * An object representing a token to be displayed in the modal.
-       * @type {Object | null}
-       * @property {string} symbol - The symbol of the token (e.g., 'ETH').
-       * @property {string} iconUrl - The URL of the token's icon.
-       */
       token: {
         type: [Object, null],
         default: null
       },
-      /**
-       * If true, displays the CoinGecko attribution next to the token.
-       */
       isShowCoingecko: {
         type: [Boolean],
         default: false
       },
     },
-    /**
-     * @slot disclaimer - A slot for adding disclaimer text at the bottom of the modal, below the buttons.
-     */
     components: {
       TokenIcon,
       CoingeckoIcon
     },
 
     setup(props, { emit }) {
-      /**
-       * Handles the click on the confirm button.
-       * Emits 'onConfirm' and 'update:modelValue' to close the modal.
-       */
       const buttonConfirm= () => {
         emit('onConfirm', {
           value: true,
@@ -116,10 +74,6 @@ export default defineComponent({
         emit('update:modelValue', false);
       }
 
-      /**
-       * Handles the click on the cancel button.
-       * Emits 'onCancel' and 'update:modelValue' to close the modal.
-       */
       const buttonCancel = () => {
         emit('onCancel', {
           value: true,
@@ -204,10 +158,6 @@ export default defineComponent({
         display: flex;
         flex-direction: column;
         margin-left: 9px;
-
-        // .balance-token {
-          
-        // }
 
         .coingecko-text {
           display: flex;

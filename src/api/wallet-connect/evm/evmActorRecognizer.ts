@@ -30,7 +30,6 @@ class EvmActorRecognizer {
     return result;
   }
 
-  
 }
 
 export const evmActorRecognizer = new EvmActorRecognizer();

@@ -86,7 +86,7 @@
       </div>
     </main>
   </template>
-  
+
   <script>
     import { ref, onMounted, onErrorCaptured, computed } from 'vue';
     import { useStore } from 'vuex';
@@ -103,7 +103,7 @@
     import NFCHandlerWindow from '@/components/NFCHandlerWindow.vue';
     import PinCode from '@/components/PinCode.vue';
     import InputText from '@/components/InputText.vue'
-    
+
     export default {
       name: 'Seed phrase',
       layout: 'Dashboard',
@@ -129,21 +129,9 @@
         const errorTitle = ref(t('pages.seedPhrase.status.errorRestoring'));
         const errorSubtitle = ref(t('pages.send.pressOkToTryAgain'));
         const publicKeyCard = ref(undefined);
-        //const registered = ref(undefined);
         const accountAddress = ref(undefined);
-        //const pinLengthData = ref(4);
-        // const pinLength = computed({
-        //   get: () => {if ( typeof store.state[`${prefixStore.value}.customtoken`]?.pinLength !== undefined && isCardRegistered() ) {
-        //     return store.state[`${prefixStore.value}.customtoken`]?.pinLength
-        //   } else {
-        //     return pinLengthData.value;
-        //   }},
-        //   set: (value) => {
-        //     pinLengthData.value = value;
-        //   },
-        // })
         const pinLength = ref(4);
- 
+
         const pinState = ref(false);
         const pinCodeNew = ref(undefined);
         const pinCodePre = ref(undefined);
@@ -176,7 +164,6 @@
         const prePin = () => {
           if (pinCodePre.value !== undefined && pinCodeNew.value === pinCodePre.value) {
             pinValid.value = true;
-            console.log('pinCode - ' + pinCodePre.value);
           } else if (pinCodeNew.value?.length === pinCodePre.value?.length) {
             errorPin.value = t('pages.settings.incorrectPin');
             pinValid.value = false;
@@ -186,9 +173,6 @@
         }
 
         const changePinLength = (event) => {
-          // if (isCardIsNew()) {
-          //   pinLength.value = event;
-          // }
           pinLength.value = event;
           pinState.value = 'PIN_NEW';
           pinCodeNew.value = undefined;
@@ -209,7 +193,6 @@
         }
 
         const NFCWindowCancel = () => {
-          console.log(`Click Cancel NFC window button.`);
           nfcCancel.value = true;
           errorHandler();
         }
@@ -218,19 +201,14 @@
           errorHandler();
           router.push({ name: 'dashboard' });
         }
-       
+
         const createSeed = () => {
-          console.log('seedPhrasesArray - ' + JSON.stringify(seedPhrasesArray.value ))
           const seedPhrasesStringLowercase = seedPhrasesArray.value.map(word => word?.trim().toLowerCase());
           seedPhrasesString.value = seedPhrasesStringLowercase.join(' ');
-          console.log('seedPhrasesString - ' + JSON.stringify(seedPhrasesString.value ))
-          
+
           try {
             seedPhrasesDerive.value = deriveSeedFromMnemonic(seedPhrasesString.value );
-            console.log('deriveSeedFromMnemonic OK : ' + JSON.stringify(seedPhrasesDerive.value));
           } catch(err) {
-            console.log("deriveSeedFromMnemonic error", err);
-            console.log("deriveSeedFromMnemonic error submit");
             error.value = true;
             errorSubtitle.value = t('pages.seedPhrase.errors.wrongWords');
             return;
@@ -260,21 +238,17 @@
 
           const resultAuth = ref(undefined);
           const resultPrepare = ref(null);
-          
+
           messageLoad.value = 'Prepare card sign';
           setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
           try {
             resultPrepare.value = await CmdGetInfo.buildRequest();
           } catch (err) {
-            console.error('Error during NFC process', err);
             throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: err}});
           }
           messageLoad.value = 'Waiting for card sign';
           resultAuth.value  = await nfcHandlerWindow.value?.nfcProgressHandler(resultPrepare.value, CmdGetInfo, false);
-          //resultAuth.value  = {"version":"00000202","keys":{"ioPublicKey":"0278e7a28e5c381628f0455469fe747e028a3ae583d99c932f53c89a417e07de8d","secp256k1":"000000000000000000000000000000000000000000000000000000000000000000","ed25519":"0000000000000000000000000000000000000000000000000000000000000000"},"isNewCard":true};
-            console.log(`CmdGetInfo.parseResponse SUCCESS all: ${JSON.stringify(resultAuth.value)}`);
             publicKeyCard.value = resultAuth.value?.keys;
-            console.log(`publicKeyCard: ${publicKeyCard.value}`);
 
             if (publicKeyCard.value !== null && publicKeyCard.value?.ioPublicKey) {
             store.dispatch('user/setPinPublicKey',  publicKeyCard.value?.ioPublicKey).then(() => {
@@ -282,7 +256,6 @@
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
             });
             store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
-              console.log(`authorizeCard setPublicKeyCard ${typeof publicKeyCard.value} data is ${JSON.stringify(publicKeyCard.value)}`);
             }).catch((err) => {
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
             });
@@ -292,8 +265,6 @@
               pinLength.value = store.state[`${prefixStore.value}.customtoken`]?.pinLength;
             }
           }
-          console.log(`store.state.user.publicKeyCard typeof: ${typeof store.state.user.publicKeyCard} data ${JSON.stringify(store.state.user.publicKeyCard)}`);
-          console.log(`/^[a-fA-F0-9]{64,66}$/.test(store.state.user.publicKeyCard.ed25519)  data ${/^[a-fA-F0-9]{64,66}$/.test(store.state.user.publicKeyCard.ed25519)}`);
           if (isCardBroken()) {
             throw new Error(t('errors.cardError'),{ cause: {errorSubtitle: t('pages.authorization.errors.validError')}});
           }
@@ -315,13 +286,6 @@
           const signRequestPrepare = ref(undefined);
           const result = ref(null);
           setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
-          console.log(`signRequestPrepare PREPARE:   data is ${JSON.stringify(
-            {
-              "seed": seedPhrasesDerive.value,
-              "keys": store.state.user.publicKeyCard,
-              "pin": pinCodePre.value,
-            }
-          )}`);
           try {
             signRequestPrepare.value = await CmdInit.buildRequest(
               {
@@ -330,26 +294,17 @@
                 "pin": pinCodePre.value,
               }
             );
-            console.log(`signRequestPrepare NFC:  type is ${typeof signRequestPrepare.value} data is ${JSON.stringify(signRequestPrepare.value)}`);
           } catch(err) {
-            console.log(`signRequestPrepare NFC ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`);
             throw new Error(t('errors.seedCreateError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: err}});
           }
           messageLoad.value = 'Waiting for card sign';
           result.value = await nfcHandlerWindow.value?.nfcProgressHandler(signRequestPrepare.value, CmdInit, false);
-          //result.value = {"errorCode":0,"keys":{"ioPublicKey":"0278e7a28e5c381628f0455469fe747e028a3ae583d99c932f53c89a417e07de8d","secp256k1":"025fa10385c36d65d06183705e8d6f5708e1230b60e5320b095875254df7c3f9f1","ed25519":"58677b99233621ad746b145f586be681547c4ad22834f06604565d36b0c2bfdf"}};
-          console.log(`nfcHandlerWindow: ${JSON.stringify(result.value)}`);
-          console.log(`setPublicKeyCard BEFORE: ${JSON.stringify(result.value?.keys)}`);
-          console.log(`nfcCancel: ${nfcCancel.value}`);
           if (result.value === null || nfcCancel.value === true) { 
             return false;
           }
-          console.log(`pinLength.value: ${pinLength.value}`);
           isTheSamePublicKey(result.value?.keys);
           store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
-            console.log(`writeSeed setPublicKeyCard ${typeof result.value?.keys} data is ${JSON.stringify(result.value?.keys)}`);
           }).catch((err) => {
-            console.log(`setPublicKeyCard ERROR: ${JSON.stringify(err)}`);
             throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
           });
           if (result.value?.ioPublicKey) {
@@ -358,37 +313,27 @@
               throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
             });
           }
-          console.log(`pinLength.value: ${pinLength.value}`);
           getStorePrefix();
           try {
             accountAddress.value = await getWallet(result.value?.keys);
           } catch(err) {
-            console.log(`walletAddress ERROR: ${err}`);
             throw new Error(t('errors.seedCreateError'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody:err}});
           }
-          console.log(`walletAddress: ${JSON.stringify(accountAddress.value)}`);
-          
+
           store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
           }).catch((error) => {
             throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
           });
-          console.log(`prefixStore.value: ${prefixStore.value}`);
-          console.log(`pinLength.value: ${pinLength.value}`);
           if (store.hasModule(`${prefixStore.value}.customtoken`)) {
             store.dispatch(`${prefixStore.value}.customtoken/setPinLength`, Number(pinLength.value));
           }
 
           isLoading.value = false;
-          console.log(`write speed success`);
           successMessage.value = t('pages.seedPhrase.pressOkToContinue');
           success.value = true;
         }
 
         onMounted(() => {
-          console.log(`onMounted store.state.user?.publicKeyCard ${typeof store.state.user?.publicKeyCard} data is ${JSON.stringify(store.state.user?.publicKeyCard)}`);
-          // if (!store.state.user?.publicKeyCard?.ioPublicKey ) {
-          //   authorize.value = true;
-          // };
           isLoading.value = false;
         });
 
@@ -397,15 +342,13 @@
           error.value = true;
           errorTitle.value = title ?? t('pages.seedPhrase.status.errorSeed');
           errorSubtitle.value = message ?? t('pages.send.pressOkToTryAgain');
-          console.log(`errorBody = ${err?.cause?.errorBody}`);
           const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
             + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
             + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-          console.log(messageConsole);
           isLoading.value = false;
           return false;
         });
-  
+
         return { isLoading, error, seedPhrasesArray, seedPhrasesString, masterKey, copied, titleLoad, pinLength, 
           messageLoad, errorTitle, errorSubtitle, nfcHandlerWindow, nfcIsActive, pinValid, nfcCancel, 
           pinState, errorImg, successImg, success, successMessage, authorize, pinCodeNew, pinCodePre, errorPin,
@@ -414,13 +357,13 @@
         }
       },
     }
-  </script>
-  
+</script>
+
   <style scoped lang="scss">
     .container-main {
         width: 90%;
         flex-direction: column;
-    
+
         &.scroll {
             justify-content: flex-start;
         }
@@ -448,7 +391,6 @@
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                // height: 100%;
                 flex-wrap: wrap;
                 align-content: flex-start;
 
@@ -536,4 +478,4 @@
     }
   }
 }
-  </style>
+</style>

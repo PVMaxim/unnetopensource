@@ -56,13 +56,13 @@ export const encryptData = async (data: string): Promise<string | undefined> => 
     const key = await getCryptoKey();
     const iv = getWebCrypto().getRandomValues(new Uint8Array(16));
     const encodedData = new TextEncoder().encode(data);
-    
+
     const ciphertextBuffer = await getWebCrypto().subtle.encrypt(
       { name: 'AES-CBC', iv },
       key,
       encodedData
     );
-    
+
     return `${bufferToHex(iv.buffer)}:${bufferToHex(ciphertextBuffer)}`;
   } catch (err) {
     return undefined;
@@ -90,7 +90,7 @@ export const decryptData = async (data: string | null): Promise<string | undefin
       key,
       ciphertext
     );
-    
+
     return new TextDecoder().decode(decryptedBuffer);
   } catch (err) {
     return undefined; 
@@ -109,7 +109,7 @@ export const decryptDataLegacy = async (data: string | null): Promise<string | u
       key,
       ciphertext
     );
-    
+
     return new TextDecoder().decode(decryptedBuffer);
   } catch (err) {
     return undefined;

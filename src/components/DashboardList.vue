@@ -113,8 +113,6 @@ export default defineComponent({
           value: responseParsed,
         });
       } catch (error) {
-        console.error('Error fetching or setting token balance:', error);
-        //throw new Error('Error fetching data',{ cause: {errorSubtitle: 'Get token balance.', errorBody:'Please try later'} });
       }
     };
 
@@ -136,7 +134,6 @@ export default defineComponent({
     }
 
     const getPinCodeCoti = (event) => {
-      console.log(`getPinCodeCoti`);
       unlockCotiTokenObject.value = event;
       pinState.value = true;
     }
@@ -161,9 +158,7 @@ export default defineComponent({
     const submitXRPTokenLimit = async () => {
       isLoading.value = true;
       loaderXrpToken.value = true;
-      console.log(`isLoading = ${isLoading.value}`);
       if (typeof trustLimitObject.value?.request !== 'object') {
-        console.log(`trustLimitObject not object = ${typeof trustLimitObject.value}`);
       }
       if (typeof store.state.user.selectedToken?.[trustLimitObject.value?.rpc] !== 'object' ) {
         error.value = true;
@@ -171,41 +166,28 @@ export default defineComponent({
         isLoading.value = false;
         loaderXrpToken.value = false;
       }
-      console.log(`isLoading = ${isLoading.value}`);
       const resultStart = shallowRef(null);
       const transaction = shallowRef(undefined);
       messageLoad.value = 'Prepare sign transaction';
       const request = shallowRef(null);
-      console.log(`setUniSettings: = ${store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'}`);
       setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
-      console.log(`isLoading = ${isLoading.value}`);
-     
+
       resultStart.value = await nfcHandlerWindow.value?.nfcProgressChunksHandler(trustLimitObject.value.request, pinPre.value, true);
-      console.log(`resultStart.value:  type is ${typeof resultStart.value} data is ${typeof resultStart.value === 'object' || typeof resultStart.value === 'array' ? JSON.stringify(resultStart.value) : resultStart.value}`);
-      console.log(`isLoading = ${isLoading.value}`);
       try {
         transaction.value = await trustLimitObject.value.request.send();
-        console.log(`transaction.value.send:  type is ${typeof transaction.value} data is ${JSON.stringify(transaction)}`);
       } catch(err) {
-        console.log(`transaction.value.send ERROR: ${err}`);
-        console.log(`isLoading = ${isLoading.value}`);
         trustLimitObject.value = null;
         loaderXrpToken.value = false;
         throw new Error('Card response',{ cause: {errorSubtitle: 'Transaction error.', errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
       }
 
-      //transaction.value = {"dep":{"version":1,"sc":0},"__v_isRef":true,"__v_isShallow":true,"_rawValue":"5590793A0EC5601620EFB9B1762629CAFE4BDE518D11CDB7553D9C75C00A611C","_value":"5590793A0EC5601620EFB9B1762629CAFE4BDE518D11CDB7553D9C75C00A611C"}
-
       setTokenBalance(trustLimitObject.value.token_id, trustLimitObject.value.rpc );
 
       if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-        console.log(`Store PIN code 3 min`);
         store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
         }).catch((err) => {
         });
       }
-      console.log(`TRANSACTION SUCCESS`);
-      console.log(`isLoading = ${isLoading.value}`);
       trustLimitObject.value = null;
       pinPre.value = null;
       loaderXrpToken.value = false;
@@ -215,45 +197,30 @@ export default defineComponent({
     const submitUnlockCotiToken = async () => {
       isLoading.value = true;
       loaderCotiToken.value = true;
-      console.log(`isLoading = ${isLoading.value}`);
       if (typeof unlockCotiTokenObject.value?.request !== 'object') {
-        console.log(`unlockCotiTokenObject not object = ${typeof unlockCotiTokenObject.value}`);
       }
-      console.log(`isLoading = ${isLoading.value}`);
       const resultStart = shallowRef(null);
       const transaction = shallowRef(undefined);
       messageLoad.value = 'Prepare sign transaction';
       const request = shallowRef(null);
-      console.log(`setUniSettings: = ${store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'}`);
       setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
-      console.log(`isLoading = ${isLoading.value}`);
-     
+
       resultStart.value = await nfcHandlerWindow.value?.nfcProgressChunksHandler(unlockCotiTokenObject.value.request, pinPre.value, true);
-      console.log(`resultStart.value:  type is ${typeof resultStart.value} data is ${typeof resultStart.value === 'object' || typeof resultStart.value === 'array' ? JSON.stringify(resultStart.value) : resultStart.value}`);
-      console.log(`isLoading = ${isLoading.value}`);
       try {
         transaction.value = await unlockCotiTokenObject.value.request.send();
-        console.log(`transaction.value.send:  type is ${typeof transaction.value} data is ${JSON.stringify(transaction)}`);
       } catch(err) {
-        console.log(`transaction.value.send ERROR: ${err}`);
-        console.log(`isLoading = ${isLoading.value}`);
         unlockCotiTokenObject.value = null;
         loaderCotiToken.value = false;
         throw new Error('Card response',{ cause: {errorSubtitle: 'Transaction error.', errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
       }
 
-      //transaction.value = {"dep":{"version":1,"sc":0},"__v_isRef":true,"__v_isShallow":true,"_rawValue":"5590793A0EC5601620EFB9B1762629CAFE4BDE518D11CDB7553D9C75C00A611C","_value":"5590793A0EC5601620EFB9B1762629CAFE4BDE518D11CDB7553D9C75C00A611C"}
-
       setTokenBalance(unlockCotiTokenObject.value.token_id, unlockCotiTokenObject.value.rpc );
 
       if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-        console.log(`Store PIN code 3 min`);
         store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
         }).catch((err) => {
         });
       }
-      console.log(`TRANSACTION SUCCESS`);
-      console.log(`isLoading = ${isLoading.value}`);
       unlockCotiTokenObject.value = null;
       pinPre.value = null;
       loaderCotiToken.value = false;
@@ -261,9 +228,7 @@ export default defineComponent({
     };
 
     useEventsBus().on('rpcProviderChange', async () => {
-      console.log(`rpcProviderChange `);
       if ( typeof store.state.user.tokenBalance[storeProvider.value?.name] === 'object' && store.state.user.tokenBalance[storeProvider.value?.name]?.length === 0 ) {
-        console.log(`rpcProviderChange Enter if`);
         fetchTokenList(true);
       }
       rpcProviderChange.value = true;

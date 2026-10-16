@@ -1,12 +1,8 @@
 import { Buffer } from "buffer";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const NFC_TAG_LONG_CMD_OPCODE = 0xF0;
 const NFC_TAG_LONG_CMD_THRESHOLD = 255;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function buildNfcTagRequest(payload: Uint8Array): Uint8Array {
     if( payload.length <= NFC_TAG_LONG_CMD_THRESHOLD ) {
         return payload;

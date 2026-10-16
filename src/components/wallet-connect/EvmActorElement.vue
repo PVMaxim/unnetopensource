@@ -9,7 +9,6 @@
 import { defineComponent } from "vue";
 import EvmTokenElement from "./EvmTokenElement.vue";
 
-
 export default defineComponent({
   name: "EvmActorElement",
   components: {

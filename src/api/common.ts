@@ -1,4 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
 export interface Logger {
     debug(message: string): any;
     info(message: string): any;
@@ -6,24 +5,18 @@ export interface Logger {
     error(message: string): any;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface CardKeys {
     ioPublicKey?: string,
     secp256k1?: string,
     ed25519?: string,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export enum CardErrorCode {
     Success = 0,
     BadPin = 1,
-    CardLocked = 2,     // card is locked (most likely due to multiple uses of invalid pin)
+    CardLocked = 2,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export type TransactionDirection = "in" | "out";
 
 export interface TransactionInfo {
@@ -40,8 +33,6 @@ export interface TokenTransactionInfo extends TransactionInfo {
     tokenId: string;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface HistoryProvider {
     getNativeTransactions(owner: string): Promise<TransactionInfo[]>;
 
@@ -53,8 +44,6 @@ export interface HistoryProvider {
     getAllTokenTransactions(owner: string): Promise<TokenTransactionInfo[]>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface RequestChunk {
     isSigned(): boolean;
 
@@ -77,15 +66,11 @@ export interface Request {
     send(): Promise<string>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface TokenPriceInfo {
     usdPrice: string;
     usd24hChange: string;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface Token {
 
     readonly id: string;
@@ -133,11 +118,9 @@ export interface Token {
         amount: number | string;
         keys?: CardKeys;
     }): Promise<Request>
-    
+
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface TokenMetadataInput {
     address: string,
     name?: string,
@@ -148,8 +131,6 @@ export interface TokenMetadataInput {
     icon?: string,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface BlockchainManager {
     readonly type: "bitcoin" | "canton" | "coti" | "evm" | "solana" | "ton" | "tron" | "venom" | "xrpl";
     readonly nativeCoin: Token;
@@ -175,8 +156,6 @@ export interface BlockchainManager {
     }>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface Storage {
     set(key: string, value: string): Promise<void>;
     get(key: string): Promise<string | undefined>;

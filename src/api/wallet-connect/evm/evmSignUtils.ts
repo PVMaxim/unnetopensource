@@ -25,4 +25,3 @@ export function getTypedDataHashToSign<
   return result.toString('hex');
 }
 
-

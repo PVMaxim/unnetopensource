@@ -8,12 +8,8 @@ import { parseNumberOrFail, LazyValue, toBlockchainUnits, fromBlockchainUnits } 
 import { CotiCore } from "./core";
 import { CotiSecureUint64 } from "./secure";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const SECURE_ERC20_TRANSFER_GAS_USAGE = BigInt(525_000);
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiErc20Token extends GenericTokenBase implements Token {
 
     private readonly _core: CotiCore;
@@ -124,7 +120,6 @@ export class CotiErc20Token extends GenericTokenBase implements Token {
             total = allItems.length;
             items = allItems.slice(offset, offset + args.limit);
 
-            // decrypt amounts if it's secure token or fill it with zero if on-boarding was not completed
             if( items.length > 0 ) {
                 if( await this._core.isOnBoarded(args.owner) ) {
                     for( const item of items ) {
@@ -208,8 +203,6 @@ export class CotiErc20Token extends GenericTokenBase implements Token {
         }
     }
 
-    // todo: approve & getApprovedAmount
-
     getAddress(): string {
         return this._address;
     }
@@ -217,8 +210,6 @@ export class CotiErc20Token extends GenericTokenBase implements Token {
     protected async _doGetBalance(owner: string, failIfNeedOnboarding?: boolean): Promise<bigint> {
         let balance: bigint = await this._erc20.balanceOf(owner);
 
-        // there's a bug in PrivateERC20 implementation:
-        // if account has never acquired this token then balanceOf returns unencrypted '0'
         if( (await this._isSecureToken.get()) && balance !== BigInt(0) ) {
             if( (await this._core.isOnBoarded(owner)) || failIfNeedOnboarding ) {
                 balance = await this._core.decryptValue(owner, balance);

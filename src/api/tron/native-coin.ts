@@ -11,8 +11,6 @@ import { calcTronAddress, TronRequest, TRON_NATIVE_TOKEN_DECIMALS } from "./requ
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 import BigNumber from "bignumber.js";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TransfersSchema = z.object({
     total: z.number(),
     data: z.object({
@@ -29,8 +27,6 @@ const TransfersSchema = z.object({
 
 const CONTRACT_TYPE_TRANSFER_TRX = 1;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TronNativeCoin extends NativeTokenBase implements Token {
 
     private readonly MAX_TRANSACTIONS = 50;
@@ -128,14 +124,13 @@ export class TronNativeCoin extends NativeTokenBase implements Token {
             throw new UniError("INVALID_ARGUMENT", `Invalid address : ${args.recipient}`);
         }
 
-        // todo: normalize recipient
         if( sender === args.recipient ) {
             throw new UniError("SAME_SENDER_AND_RECIPIENT");
         }
 
         const amount = toBlockchainUnits(args.amount, this._decimals);
         const tx = await this._provider.transactionBuilder.sendTrx(args.recipient, Number(amount), sender);
-        
+
         return TronRequest.create({
             provider: this._provider,
             publicKey,

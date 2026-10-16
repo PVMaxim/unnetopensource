@@ -47,7 +47,7 @@ export default defineComponent({
       close = () => {
         isActive.value = false
       }
-       
+
       return { isActive, setLocale, toggle, locales, close, storeLocale }
     }
 })

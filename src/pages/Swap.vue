@@ -155,9 +155,6 @@ export default {
       error.value = true;
       errorTitle.value = title ?? t("errors.transferError");
       errorSubtitle.value = message ?? t("pages.send.pressOkToTryAgain");
-      console.log(
-        `[Swap.vue] onErrorCaptured: errorBody = ${err?.cause?.errorBody}, message = ${err?.message}`
-      );
       isLoading.value = false;
       return false;
     });

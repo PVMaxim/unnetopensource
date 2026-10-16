@@ -2,8 +2,6 @@ import { z } from "zod";
 import { UniError } from "../errors";
 import { HttpClient } from "../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const AuthResponseSchema = z.object({
     access_token: z.string(),
     token_type: z.literal("Bearer"),
@@ -17,8 +15,6 @@ const ExecuteResponseSchema = z.object({
     status: z.enum(["progress", "finished"]),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonAuthClient {
 
     private readonly ONBOARDING_MAX_TRIES = 30;

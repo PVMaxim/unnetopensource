@@ -15,10 +15,6 @@ export const convertToLocalTime = (time: string, server: string): string => {
     return dayjs(time).add(timeZoneOffset, 'minute').format('YYYY-MM-DD HH:mm:ss');
 };
 
-/**
- * Accepts a timestamp (ms), Date, or pre-formatted string and converts it
- * to a local-time string adjusted for the given swap service's timezone.
- */
 export function formatHistoryDate(dateInput: Date | number | string, server: string): string {
     const time = typeof dateInput === 'string'
         ? dateInput

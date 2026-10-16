@@ -15,12 +15,8 @@ import { Ed25519RequestChunk } from "../../request-chunks";
 import { BasicTokenMetadata, GenericTokenBase } from "../../token-base";
 import { validateHex256, validateHex512, parseNumberOrFail, LazyValue } from "../../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TIP3_STATIC_FEE = "15000000";
 
-
-///////////////////////////////////////////////////////////////////////////////
 interface Tip3TransferData {
     tokenTransfers: {
         tokenRoot: Address,
@@ -39,8 +35,6 @@ enum Tip3ErrorCodes {
     NOT_ENOUGH_BALANCE = 1060,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class Tip3TransferRequest implements Request {
     readonly chunks: Ed25519RequestChunk[];
 
@@ -150,8 +144,6 @@ class Tip3TransferRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Tip3Token extends GenericTokenBase implements Token {
 
     private readonly _rpc: ProviderRpcClient;
@@ -203,7 +195,6 @@ export class Tip3Token extends GenericTokenBase implements Token {
         try {
             await contract.methods.decimals({answerId: 0}).call({cachedState});
             await contract.methods.symbol({answerId: 0}).call({cachedState});
-            // await contract.methods.walletOf({answerId: 0, walletOwner: args.root}).call({cachedState});
         } 
         catch(e: any) {
             if( e instanceof TvmException ) {
@@ -378,7 +369,7 @@ export class Tip3Token extends GenericTokenBase implements Token {
         return {
             name,
             symbol,
-            decimals: parseNumberOrFail(decimals),  // todo: parseIntOrFail
+            decimals: parseNumberOrFail(decimals),
         };
     }
 
@@ -387,8 +378,6 @@ export class Tip3Token extends GenericTokenBase implements Token {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TIP3_TRANSFER_STRUCTURE = [
     { name: "timestamp", type: "uint64" },
     {
@@ -407,8 +396,6 @@ const TIP3_TRANSFER_STRUCTURE = [
     }
 ] as const;
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function checkTip3Transactions(
     rpc: ProviderRpcClient, 
     transactions: Transaction[], 

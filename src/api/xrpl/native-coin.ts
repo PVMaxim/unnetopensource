@@ -8,8 +8,6 @@ import { fromBlockchainUnits, getSecp256k1Key, toPosBlockchainUnits, toPosBigInt
 import { XrplCore, XRPL_NATIVE_DECIMALS, MIN_XRP_AMOUNT_NO_DST } from "./core";
 import { XrplRequest } from "./request";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class XrplNativeCoin extends NativeTokenBase implements Token {
 
     private readonly _core: XrplCore;

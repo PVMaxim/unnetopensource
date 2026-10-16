@@ -6,17 +6,11 @@ import { CardKeys, TransactionInfo, TokenTransactionInfo } from "../common";
 import { UniError } from "../errors";
 import { CachedValue, getSecp256k1Key, LazyValue, fromBlockchainUnits } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const XRPL_NATIVE_DECIMALS = 6;
-export const MIN_XRP_AMOUNT_NO_DST = 1_000_000;    // 1 XRP
+export const MIN_XRP_AMOUNT_NO_DST = 1_000_000;
 
+const CACHE_LIFE_TIME = 3000;
 
-///////////////////////////////////////////////////////////////////////////////
-const CACHE_LIFE_TIME = 3000;       // 3 seconds
-
-
-///////////////////////////////////////////////////////////////////////////////
 export interface TrustLineInfo {
     balance: string;
     limit: string;
@@ -35,8 +29,6 @@ interface XrplPaymentTxInfo {
     dstAmount: string;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class XrplCore {
 
     readonly provider: LazyValue<xrpl.Client>;
@@ -101,7 +93,7 @@ export class XrplCore {
                 ledger_index: "validated",
             }));
         } catch(err: any) {
-            if( err?.data?.error === "actNotFound" ) {      // account not found
+            if( err?.data?.error === "actNotFound" ) {
                 return undefined;
             } else {
                 throw err;
@@ -148,7 +140,7 @@ export class XrplCore {
             return result;
 
         } catch(err: any) {
-            if( err?.data?.error === "actNotFound" ) {      // account not found
+            if( err?.data?.error === "actNotFound" ) {
                 return new Map();
             } else {
                 throw err;
@@ -175,7 +167,7 @@ export class XrplCore {
         const response = await provider.request({
             command: "account_tx",
             account: owner,
-            limit: 100,  // todo
+            limit: 100,
             binary: false,
         });
 
@@ -220,7 +212,7 @@ export class XrplCore {
         const response = await provider.request({
             command: "account_tx",
             account: owner,
-            limit: 100,  // todo
+            limit: 100,
             binary: false,
         });
 
@@ -323,7 +315,7 @@ export class XrplCore {
             };
         }
 
-        if( "mpt_issuance_id" in src ||     // MPT are not supported
+        if( "mpt_issuance_id" in src ||
             !src.issuer
         ) {
             return {};
@@ -426,13 +418,11 @@ export class XrplCore {
             currency,
         ]));
 
-        return Buffer.from(hash.subarray(0, 32));   // sha512half
+        return Buffer.from(hash.subarray(0, 32));
     }
 
     private _encodeCurrencyCode(src: string): Buffer | undefined {
         if( src.length === 3 ) {
-            // standard currency code
-            // https://xrpl.org/docs/references/protocol/binary-format#currency-codes
 
             const result = Buffer.alloc(20);
             result[12] = src.charCodeAt(0);
@@ -441,7 +431,6 @@ export class XrplCore {
             return result;
         }
 
-        // non-standard currency code
         if( src.match(/^[a-fA-F0-9]{40}$/) ) {
             return Buffer.from(src, "hex");
         }

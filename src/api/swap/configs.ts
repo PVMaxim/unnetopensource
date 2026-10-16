@@ -1,7 +1,7 @@
 import { SWAP_CHAINS, SWAP_SERVICES } from "../constants-types";
 import { getRouteKey, type RoutePriorityMap } from "./utils/quote";
 
-export const INITIAL_SLIPPAGE = 0.1; // 0.5% slippage
+export const INITIAL_SLIPPAGE = 0.1;
 
 export const serviceDexPriorityByRoute: RoutePriorityMap = new Map([
   [getRouteKey(SWAP_CHAINS.TON, SWAP_CHAINS.TON), SWAP_SERVICES.Omniston],
@@ -80,4 +80,4 @@ export const web3WorldWhiteListCurrencies = [
   "0:1c5ebbde66ef5c2e7bcd49fd3d37762204d225762b03b37cac9c9fd0a5e70f0b",
 ];
 
-export const TOKENS_BALANCES_LIFETIME = 1000 * 60 * 60 * 24 * 7; // 7 days
+export const TOKENS_BALANCES_LIFETIME = 1000 * 60 * 60 * 24 * 7;

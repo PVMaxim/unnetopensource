@@ -12,14 +12,10 @@ import { fromBlockchainUnits, getEd25519Key, wait } from "../utils";
 import { SolScan } from "./solscan";
 import { SplBalanceReader } from "./spl-balance-reader";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const SOLANA_MAX_TIME_BEFORE_TX_SEND = 40 * 1000;
 export const SOLANA_TX_CONFIRM_TIMEOUT = 60 * 1000;
 export const SOLANA_NATIVE_DECIMALS = 9;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SolanaCore {
 
     readonly rpc: Connection;
@@ -73,7 +69,6 @@ export class SolanaCore {
         const sender = solanaPublicKeyFromHex(args.senderPublicKey);
         const senderSolBalance = await this.rpc.getBalance(sender);
 
-        // create separate transaction for fee estimation because transaction has very short lifetime (~60 seconds)
         const feeTx = await this._createTransaction({ sender, instructions: args.instructions });
         const fee = BigInt((await feeTx.getEstimatedFee(this.rpc)) || 0);
         const solTotal = (args.solAmount ?? BigInt(0)) + fee;
@@ -104,8 +99,6 @@ export class SolanaCore {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SolanaRequest implements Request {
 
     readonly chunks: Ed25519RequestChunk[];
@@ -147,7 +140,7 @@ export class SolanaRequest implements Request {
         }
 
         if( !this._tx.feePayer ) {
-            throw new UniError("INTERNAL_ERROR");   // should never get here
+            throw new UniError("INTERNAL_ERROR");
         }
 
         if( Date.now() > this._deadline ) {
@@ -159,8 +152,6 @@ export class SolanaRequest implements Request {
             Buffer.from(signature, "hex")
         );
 
-        // todo: verify
-
         const retSignature = await this._rpc.sendRawTransaction(this._tx.serialize());
         await this._waitForConfirmation(retSignature);
 
@@ -168,8 +159,6 @@ export class SolanaRequest implements Request {
     }
 
     private async _waitForConfirmation(signature: string) {
-        // implement waiting via HTTP as a fallback method
-        // because there were cases when RPC websocket node reached its subscription limit and responded with errors
         let status;
         try {
             status = (await this._rpc.confirmTransaction(signature)).value;
@@ -208,8 +197,6 @@ export class SolanaRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function solanaPublicKeyFromHex(src: string): PublicKey {
     return new PublicKey(Buffer.from(src, "hex"));
 }

@@ -5,8 +5,6 @@ import { Ed25519RequestChunk } from "../request-chunks";
 import { CantonAuthClient } from "./auth-client";
 import { getEd25519Key } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 class CantonOnboardingRequest implements Request {
     readonly actionType = "CREATE_USER";
     readonly chunks: Ed25519RequestChunk[];
@@ -41,8 +39,6 @@ class CantonOnboardingRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonUserManager {
 
     private readonly _authClient: CantonAuthClient;

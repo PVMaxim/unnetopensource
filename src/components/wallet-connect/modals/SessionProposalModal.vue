@@ -98,7 +98,6 @@ export default defineComponent({
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn('Extra attempt to close modal');
         return;
       }
       closeModalCalled = true;
@@ -112,7 +111,6 @@ export default defineComponent({
     const reject = async () => {
       if (state.value == STATE_DEFAULT && walletConnectHelper.value) {
         walletConnectHelper.value.rejectSession(proposal).catch((error) => {
-          console.error('rejectSession error', error);
         });
       }
 
@@ -121,10 +119,6 @@ export default defineComponent({
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error('approve error', {
-          state,
-          walletConnectHelper: walletConnectHelper.value ? 'available' : 'unexpected unavailable',
-        });
 
         failMessage.value = 'Failed';
         failDetails.value = 'Unable to perform the operation at the moment.';
@@ -132,7 +126,6 @@ export default defineComponent({
 
         return;
       }
-
 
       let success = false;
 
@@ -154,7 +147,7 @@ export default defineComponent({
           const supportedNamespace = await getSupportedNamespaces(getCardKeys(), chain);
           supportedNamespaces = {...supportedNamespaces, ...supportedNamespace }
         }
-       
+
         const approvedNamespaces = buildApprovedNamespaces({
           proposal: proposal.params,
           supportedNamespaces,
@@ -164,9 +157,7 @@ export default defineComponent({
         if (approvedNamespaces.ton) {
           try {
             sessionProperties = await getTonSessionProperties(getCardKeys());
-            console.log("TON sessionProperties approved:", sessionProperties);
           } catch (e) {
-            console.error("Failed to get TON session properties:", e);
           }
         }
 
@@ -179,7 +170,6 @@ export default defineComponent({
         invalidateConnectedAppsCache();
         success = true;
       } catch (error) {
-        console.error('approveSession error', error);
       } finally {
         progressTitle.value = "";
       }
@@ -194,7 +184,6 @@ export default defineComponent({
         failDetails.value = 'Try again with new connection QR code / URL.';
         state.value = STATE_PROCESS_FAIL;
 
-        //respondRejected(); //???
       }
     };
 
@@ -258,7 +247,6 @@ export default defineComponent({
                 try {
                   return await manager.getWalletAddress(keys);
                 } catch (_) {
-                  console.error(_);
                 }
 
                 return "";

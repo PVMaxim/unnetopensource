@@ -4,8 +4,6 @@ import { Request, RequestChunk } from "../common";
 import { UniLowBalanceError, assert} from "../errors";
 import { CotiLazyTxChunk, CotiArgSignChunk, splitIntoChunks, arrayPopFrontN, buildTransaction } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export abstract class CotiSecureArg {
 
     protected readonly _rawChunks: Uint8Array[];
@@ -35,8 +33,6 @@ export abstract class CotiSecureArg {
     abstract buildValue(signatures: string[]): any;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiSecureUint64 extends CotiSecureArg {
     constructor(value: bigint) {
         assert(value >= 0 && value <= BigInt(2) ** BigInt(64));
@@ -54,12 +50,10 @@ export class CotiSecureUint64 extends CotiSecureArg {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////
 export class CotiSecureString extends CotiSecureArg {
     constructor(value: string) {
         let utf8Value = new TextEncoder().encode(value);
 
-        // pad to 8-byte chunks
         if( utf8Value.length % 8 !== 0 ) {
             utf8Value = new Uint8Array([ ...utf8Value, ...new Uint8Array(8 - (utf8Value.length % 8)) ]);
         }
@@ -83,8 +77,6 @@ export class CotiSecureString extends CotiSecureArg {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiRequest implements Request {
 
     readonly chunks: RequestChunk[];
@@ -181,8 +173,6 @@ export class CotiRequest implements Request {
             const feeData = await args.provider.getFeeData();
             fee = (feeData.gasPrice || BigInt(0)) * args.estimatedGas;
         }
-
-        // todo: estimate if no secure args
 
         const totalAmount = fee + (args.value ?? BigInt(0));
         const sender = ethers.computeAddress(`0x${args.publicKey}`);

@@ -146,7 +146,6 @@
     return allowedBrowsers.indexOf(browserName.toString()) !== -1;
   }
 
-
   const isMobileDevice = (): boolean => {
     const regexs = [/(Android)(.+)(Mobile)/i, /BlackBerry/i, /iPhone|iPod/i, /Opera Mini/i, /IEMobile/i]
     return regexs.some((b) => userAgent.match(b))
@@ -177,7 +176,6 @@
   export const isDesktop = false
   const isMobile = isMobileDevice()
   const isTablet = isTabletDevice()
-
 
   enum MobileOS {
     Android = 'android',
@@ -234,7 +232,6 @@
   const desktopOS: DesktopOS | undefined = getDesktopOS()
   const isWindowsDesktop = getDeviceOS() === DesktopOS.Windows
   const isLinuxOrUnixDesktop = getDeviceOS() === DesktopOS.Linux || getDeviceOS() === DesktopOS.Unix
-
 
   const hasScreen = typeof screen !== 'undefined';
   const hasMatchMedia = typeof matchMedia !== 'undefined';

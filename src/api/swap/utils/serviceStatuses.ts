@@ -1,5 +1,4 @@
 import { SWAP_HISTORY_STATUSES } from "../../constants-types";
-// bridgers statuses
 const BridgersOmniPendingStatuses = [
   "wait_deposit_send",
   "wait_exchange_push",
@@ -18,7 +17,6 @@ const BridgersOmniFailedStatuses = [
 
 const BridgersOmniSuccessStatuses = ["receive_complete"];
 
-// changelly statuses
 const ChangellyPendingStatuses = ["waiting", "exchanging", "sending"];
 
 const ChangellyFailedStatuses = ["failed"];
@@ -27,7 +25,6 @@ const ChangellySuccessStatuses = ["finished", "confirmed"];
 
 const ChangellyHoldStatuses = ["hold"];
 
-// One Inch statuses
 
 const OneInchPendingStatuses = ["pending", "0"];
 

@@ -9,17 +9,17 @@ export default {
         this.params = args;
 
         app.component(args.componentName || "vue3-confirm-dialog", Vue3ConfirmDialog);
-    
+
         const confirm = params => {
           if (typeof params != "object" || Array.isArray(params)) {
             let caughtType = typeof params;
             if (Array.isArray(params)) caughtType = "array";
-    
+
             throw new Error(
               `Options type must be an object. Caught: ${caughtType}. Expected: object`
             );
           }
-    
+
           if (typeof params === "object") {
             if (
               params.hasOwnProperty("callback") &&
@@ -37,7 +37,7 @@ export default {
         confirm.close = () => {
           event.emit("close");
         }
-    
+
         app.config.globalProperties.$confirm = confirm;
 
         app["$confirm"] = confirm;

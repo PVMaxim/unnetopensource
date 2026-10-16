@@ -13,7 +13,6 @@ import baseManifest from "../../manifests/base.json";
 import polygonManifest from "../../manifests/polygon.json";
 import xrplManifest from "../../manifests/xrpl.json";
 
-// Adjust the return type to match the actual token data structure from the manifests
 import { z } from "zod";
 
 type Token = z.infer<typeof TokenSchema>;

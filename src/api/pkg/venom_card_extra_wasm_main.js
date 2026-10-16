@@ -106,11 +106,6 @@ function passStringToWasm0(arg, malloc, realloc) {
     WASM_VECTOR_LEN = offset;
     return ptr;
 }
-/**
-* Get BIP39 mnemonic words by given prefix
-* @param {string} prefix
-* @returns {Array<string>}
-*/
 module.exports.getBip39Hints = function(prefix) {
     const ptr0 = passStringToWasm0(prefix, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
@@ -118,10 +113,6 @@ module.exports.getBip39Hints = function(prefix) {
     return takeObject(ret);
 };
 
-/**
-* Generate 12-word BIP39 mnemonic
-* @returns {Array<string>}
-*/
 module.exports.generateLabsMnemonic = function() {
     const ret = wasm.generateLabsMnemonic();
     return takeObject(ret);
@@ -135,12 +126,6 @@ function getDataViewMemory0() {
     }
     return cachedDataViewMemory0;
 }
-/**
-* Generate derived key by given 12-word BIP39 mnemonic
-* @param {string} phrase
-* @param {number} id
-* @returns {string}
-*/
 module.exports.deriveFromLabsMnemonic = function(phrase, id) {
     let deferred3_0;
     let deferred3_1;

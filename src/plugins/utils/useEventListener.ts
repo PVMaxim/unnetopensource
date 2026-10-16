@@ -2,7 +2,6 @@ import type { Arrayable, Fn  } from './datas'
 import { isObject, toArray , defaultWindow } from './datas'
 import { watchImmediate } from './watchImmediate'
 import { tryOnScopeDispose } from './tryOnScopeDispose'
-// eslint-disable-next-line no-restricted-imports -- We specifically need to use unref here to distinguish between callbacks
 import { computed, toValue, unref, MaybeRef, MaybeRefOrGetter } from 'vue'
 import { unrefElement } from './unrefElement'
 

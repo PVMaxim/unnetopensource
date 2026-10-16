@@ -4,8 +4,6 @@ import { UniError, UniLowBalanceError } from "../errors";
 import * as constants from "./constants";
 import { wait } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export abstract class TxCollectorBase {
 
     protected readonly _rpc: ProviderRpcClient;
@@ -87,8 +85,6 @@ export abstract class TxCollectorBase {
     protected abstract _parseTransaction(tx: Transaction): Promise<TransactionInfo | undefined>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function waitForTransactionTree(
     rpc: ProviderRpcClient,
     startTx: Transaction,
@@ -121,8 +117,6 @@ export async function waitForTransactionTree(
 
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function checkCardTransaction(tx: Transaction): void {
     if( tx.resultCode === 1030 ) {
         throw new UniLowBalanceError("_");

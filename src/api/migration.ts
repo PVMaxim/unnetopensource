@@ -3,7 +3,6 @@ import { writeEncryptedDB, readEncryptedDB } from './indexeddb-storage';
 import { MIGRATABLE_KEYS, STORAGE_KEYS, DYNAMIC_KEYS_SUFFIXES } from './storage-keys';
 
 export async function runDataMigration(): Promise<void> {
-  // 1. Migrate static user, settings, lang, and swap keys
   for (const key of MIGRATABLE_KEYS) {
     const raw = localStorage.getItem(key);
     if (raw && raw !== 'undefined') {
@@ -35,7 +34,6 @@ export async function runDataMigration(): Promise<void> {
     }
   }
 
-  // 2. Migrate dynamic custom token store keys for multi-card support
   const dynamicKeysToMigrate: string[] = [];
   if (typeof localStorage !== 'undefined') {
     for (let i = 0; i < localStorage.length; i++) {
@@ -72,7 +70,6 @@ export async function runDataMigration(): Promise<void> {
     }
   }
 
-  // 3. Migrate legacy PIN Hash if present
   const legacyPinHash = localStorage.getItem(STORAGE_KEYS.PIN_HASH);
   if (legacyPinHash && legacyPinHash !== 'undefined') {
     try {

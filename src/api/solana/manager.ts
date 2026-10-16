@@ -6,8 +6,6 @@ import { SolanaCore, SOLANA_TX_CONFIRM_TIMEOUT } from "./core";
 import { SolanaNativeCoin } from "./native-coin";
 import { SplToken } from "./spl-token";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SolanaManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "solana";

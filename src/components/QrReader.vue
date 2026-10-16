@@ -173,7 +173,7 @@ export default defineComponent({
       torchNotSupported.value = !capabilities.torch;
       zoomSupported.value = !!capabilities.zoom;
       zoomMax.value = capabilities.zoom?.max || 1;
-      
+
       error.value = '';
       emit('isActive', {
         value: true,
@@ -307,7 +307,6 @@ export default defineComponent({
           @include transforma(translateX(-50%) translateY(-50%));
       }
     }
-    
 
     .close {
       width: 24px;

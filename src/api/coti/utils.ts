@@ -6,8 +6,6 @@ import { BatchSecp256k1RequestChunk } from "../request-chunks";
 import { convertSignatureForEvm } from "../evm/request";
 import { getSecp256k1Key } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiArgSignChunk extends BatchSecp256k1RequestChunk {
     processCardResponse(rawData: Uint8Array | ArrayBuffer): {
         errorCode: CardErrorCode,
@@ -39,7 +37,6 @@ export class CotiArgSignChunk extends BatchSecp256k1RequestChunk {
     }): string {
         const evmSignature = Buffer.from(convertSignatureForEvm(args), "hex");
 
-        // Coti requires V in signatures for method arguments to be 0-based
         return Buffer.concat([
             evmSignature.subarray(0, 64),
             Buffer.from([
@@ -49,8 +46,6 @@ export class CotiArgSignChunk extends BatchSecp256k1RequestChunk {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiLazyTxChunk implements RequestChunk {
 
     private readonly _command: CmdSignSecp256k1;
@@ -126,8 +121,6 @@ export class CotiLazyTxChunk implements RequestChunk {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function buildTransaction(args: {
     provider: ethers.Provider,
     walletAddress: string,

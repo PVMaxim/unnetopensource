@@ -39,7 +39,6 @@ const getEip155NameSpace = async (keys: CardKeys) => {
             try {
               address = await manager.getWalletAddress(keys);
             } catch (error) {
-              console.error(error);
             }
 
             if (!address) {
@@ -72,7 +71,6 @@ const getSolanaNameSpace = async (keys: CardKeys) => {
             try {
               address = await manager.getWalletAddress(keys);
             } catch (error) {
-              console.error(error);
             }
 
             if (!address) {
@@ -104,7 +102,6 @@ const getSolanaNameSpace = async (keys: CardKeys) => {
               try {
                 address = await manager.getWalletAddress(keys);
               } catch (error) {
-                console.error(error);
               }
 
               if (!address) {
@@ -137,7 +134,6 @@ const getSolanaNameSpace = async (keys: CardKeys) => {
               try {
                 address = await manager.getWalletAddress(keys);
               } catch (error) {
-                console.error(error);
               }
 
               if (!address) {
@@ -177,7 +173,7 @@ export async function getSupportedNamespaces(keys: CardKeys, chain: string): Pro
   }
 
   throw new Error(`Unsupported chain: ${chain}`);
-  
+
 }
 
 export async function getTonSessionProperties(keys: CardKeys): Promise<Record<string, string>> {

@@ -21,9 +21,7 @@ export default defineComponent({
     ResultDialog,
   },
   setup: (_props) => {
-    console.log('WalletConnectResultModal.setup');
     const closeModal = () => {
-      console.log('WalletConnectResultModal.close');
       walletConnectResultModalData.value = undefined;
     };
     return {

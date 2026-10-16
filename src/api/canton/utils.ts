@@ -3,11 +3,8 @@ import { PublicKey } from "@canton-network/core-signing-lib";
 import { CardKeys } from "../common";
 import { getEd25519Key } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
-// from https://github.com/canton-network/wallet/blob/main/sdk/wallet-sdk/src/wallet/namespace/keys/client.ts
 async function getFingerprint(publicKey: PublicKey) {
-    const hashPurpose = 12 // For `PublicKeyFingerprint`
+    const hashPurpose = 12
     const keyBytes = Buffer.from(publicKey, 'base64')
     const hashInput = Buffer.alloc(4 + keyBytes.length)
     hashInput.writeUInt32BE(hashPurpose, 0)
@@ -19,8 +16,6 @@ async function getFingerprint(publicKey: PublicKey) {
     return Buffer.concat([multiprefix, hash]).toString('hex')
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function getCardKeyFingerprint(keys: CardKeys) {
     const publicKey = getEd25519Key(keys);
     const publicKeyB64 = Buffer.from(publicKey, "hex").toString("base64");

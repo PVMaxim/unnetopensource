@@ -1,8 +1,3 @@
-/**
- * United Non-Custodial Wallet Service Worker
- * Handles Web Push notifications, background audio chime triggers,
- * and notification click navigation.
- */
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
@@ -12,7 +7,6 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(self.clients.claim());
 });
 
-// Handle incoming Web Push Notifications (FCM / APNs / WebPush)
 self.addEventListener('push', (event) => {
   let data = {
     title: 'Transaction Detected',
@@ -48,13 +42,6 @@ self.addEventListener('push', (event) => {
   );
 });
 
-/**
- * Handle PLAY_CHIME messages from main thread (SoundNotifierService).
- * When the page is in a background tab or minimised, browsers block
- * HTMLAudioElement.play() and AudioContext. The only way to produce
- * an audible alert is via OS-level notification (showNotification),
- * which carries the system's default notification sound + vibrate.
- */
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'PLAY_CHIME') {
     const title = event.data.title || 'Transaction received';
@@ -78,7 +65,6 @@ self.addEventListener('message', (event) => {
   }
 });
 
-// Handle user clicking on notification
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   const targetUrl = event.notification.data?.url || '/';
@@ -98,6 +84,5 @@ self.addEventListener('notificationclick', (event) => {
 });
 
 self.addEventListener('notificationclose', (event) => {
-  // Graceful notification close handler
 });
 

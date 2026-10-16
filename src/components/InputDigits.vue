@@ -44,10 +44,10 @@
       </div>
     </div>
   </template>
-  
+
   <script>
     import { ref, computed, defineComponent, watchEffect, nextTick } from 'vue';
-  
+
     export default defineComponent({
       name: 'InputDigits',
       emits: ['update:modelValue', 'update:errorMessage'],
@@ -82,7 +82,7 @@
           default: false
         }
       },
-  
+
       setup(props, { emit }) {
         const inputRef = ref(null);
         const errorMessageContainer = ref(null);
@@ -109,7 +109,7 @@
           ',', 
           '.', 
           '٫', 
-          '。' // Chinese dot
+          '。'
         ]
         const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         const decimalSymbolInsertedAt = ref(null);
@@ -204,13 +204,13 @@
             isOverflowing.value = false;
           }
         })
-  
+
         return {
           props, onChanged, onInput, formReadyToSubmit, inputRef, onEnterInputRef, errorMessageContainer, errorMessageContainerElse, isOverflowing
         }
       }
     })
-  </script>
+</script>
 
 <style scoped lang="scss">
 .input-container {

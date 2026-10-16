@@ -7,12 +7,8 @@ import { Ed25519RequestChunk } from "../request-chunks";
 import { assertArgument, UniLowBalanceError, UniError } from "../errors";
 import { getEd25519Key, wait } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TON_WALLET_WORKCHAIN = 0;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class UniTonCore {
 
     readonly client: TonClient;
@@ -68,7 +64,6 @@ export class UniTonCore {
             signer: async (_: Cell) => Buffer.alloc(0),
         });
 
-        // todo: calculate fees in jetton requests
         const fee = await estimateMessageFee({
             client: this.client,
             contract,
@@ -110,8 +105,6 @@ export class UniTonCore {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class WalletV3R2Request implements Request {
 
     readonly TX_WAIT_POLL_WINDOW_SIZE = 3;
@@ -216,7 +209,6 @@ class WalletV3R2Request implements Request {
         let startTxLt: string | undefined = undefined;
 
         while( Date.now() < deadline ) {
-            // transactions are received in latest-first order
             const txList = await this._client.getTransactions(this._contract.address, {
                 limit: this.TX_WAIT_POLL_WINDOW_SIZE,
                 hash: startTxHash,
@@ -264,8 +256,6 @@ class WalletV3R2Request implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function base64ToSafe(src: string): string {
     return src.replace(/\+/g, '-').replace(/\//g, '_');
 }

@@ -4,13 +4,9 @@ import { RequestChunk, Request } from "../common";
 import { UniError, UniLowBalanceError, assert } from "../errors";
 import { CotiLazyTxChunk, CotiArgSignChunk, buildTransaction } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const COTI_ONBOARDING_GAS_LIMIT = 12_000_000;
 const COTI_ONBOARDING_GAS_USAGE = 500_000;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiOnBoardingRequest implements Request {
 
     private readonly _provider: ethers.Provider;

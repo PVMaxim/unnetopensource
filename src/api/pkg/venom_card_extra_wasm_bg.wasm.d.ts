@@ -1,5 +1,3 @@
-/* tslint:disable */
-/* eslint-disable */
 export const memory: WebAssembly.Memory;
 export function getBip39Hints(a: number, b: number): number;
 export function generateLabsMnemonic(): number;

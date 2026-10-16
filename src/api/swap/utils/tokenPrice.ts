@@ -20,13 +20,12 @@ export const getTokenPrice = async (token: SwapToken, amount: string) => {
 
         const priceInUSD = pBN.multipliedBy(aBN);
         const priceInUSDString = priceInUSD.toString();
-       
+
         const res = (`${priceInUSDString}`.match(new RegExp(`^-?\\d+(?:\.\\d{0,${2}})?`)) as string[])[0];
 
         return  res;
     } catch (error) {
-        console.error("Error fetching token price:", error);
         throw error;
     }
-   
+
 }

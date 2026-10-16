@@ -16,7 +16,7 @@ export const checkIsNeedIncreaseTrustLimitXrp = async (
   if(token.address === SWAP_NATIVE_ADDRESS) {
     return false;
   }
-  
+
   const { token: xrpToken } = await createProviderManagerAndToken(
     provider,
     token
@@ -27,5 +27,5 @@ export const checkIsNeedIncreaseTrustLimitXrp = async (
       ? await (xrpToken as any).getTrustLimit(xrpOwnerAddress)
       : "0";
   return new BigNumber(amount).gt(new BigNumber(trustedLimit || 0));
-  
+
 };

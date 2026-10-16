@@ -11,8 +11,6 @@ import { BasicTokenMetadata, GenericTokenBase } from "../token-base";
 import { parseNumberOrFail, getSecp256k1Key, LazyValue } from "../utils";
 import { TronRequest, calcTronAddress } from "./request";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const TRC20_ABI = [
     {
         constant:true,
@@ -69,8 +67,6 @@ export const TRC20_ABI = [
     }
 ];
 
-
-///////////////////////////////////////////////////////////////////////////////
 const Trc20TransfersSchema = z.object({
     total: z.number(),
     token_transfers: z.object({
@@ -84,8 +80,6 @@ const Trc20TransfersSchema = z.object({
     }).array(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Trc20Token extends GenericTokenBase implements Token {
 
     private readonly MAX_TRANSACTIONS = 50;
@@ -254,7 +248,6 @@ export class Trc20Token extends GenericTokenBase implements Token {
             throw new UniError("INVALID_ARGUMENT", `Invalid address : ${args.recipient}`);
         }
 
-        // todo: normalize recipient
         if( sender === args.recipient ) {
             throw new UniError("SAME_SENDER_AND_RECIPIENT");
         }
@@ -290,7 +283,6 @@ export class Trc20Token extends GenericTokenBase implements Token {
     }
 
     protected async _doGetMetadata(): Promise<BasicTokenMetadata> {
-        // todo: use multicall
         const name = await this._contract.name().call();
         const symbol = await this._contract.symbol().call();
         const decimals = parseNumberOrFail(await this._contract.decimals().call());

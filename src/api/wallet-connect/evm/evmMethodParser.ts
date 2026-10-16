@@ -64,7 +64,6 @@ class EvmMethodParser {
         this.decodeParam(input, index, values)
       );
     } catch (_) {
-      //do nothing
     }
 
     return {
@@ -109,7 +108,6 @@ class EvmMethodParser {
         result = fourByteResponse.results[0].text_signature;
       }
     } catch (_) {
-      //do nothing
     }
 
     if (result) {

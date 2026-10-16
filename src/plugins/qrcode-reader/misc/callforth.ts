@@ -32,10 +32,8 @@ export const polling = async (predicate: any, options: { maxTries: number; inter
   const { maxTries = 10, interval = 10 } = options
 
   if (maxTries <= 0) {
-    // reject
     throw undefined
   } else if (predicate()) {
-    // resolve
     return undefined
   } else {
     await timeout(interval)

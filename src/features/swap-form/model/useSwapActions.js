@@ -23,14 +23,6 @@ import { checkIsNeedIncreaseTrustLimitXrp } from '@/api/swap/utils/xrpUtils';
 import { formatAmount } from '@/api/swap/utils/formatting';
 import { getErrorMessage } from '@/api/sub-utils';
 
-/**
- * All swap business actions: approve, swap, trust-limit increase, modal opening.
- * Internally consumes useSwapFormState so callers don't need to pass state down.
- *
- * @param {object} deps
- * @param {(tx: any) => Promise<void>} deps.signTransaction  - from useSwapSigner
- * @param {() => void}                 deps.clearPin         - from useSwapPin
- */
 export function useSwapActions({ signTransaction, clearPin }) {
   const store = useStore();
   const { t } = useI18n();
@@ -49,7 +41,6 @@ export function useSwapActions({ signTransaction, clearPin }) {
     publicKeyCard,
   } = useSwapFormState();
 
-  // ── slippage & commission state ───────────────────────────────────────────
   const slippage        = ref(INITIAL_SLIPPAGE);
   const comission       = ref(null);
   const comissionInUsd  = ref(null);
@@ -66,16 +57,12 @@ export function useSwapActions({ signTransaction, clearPin }) {
     }
   });
 
-  // ── input validation ──────────────────────────────────────────────────────
-
   const checkAmount = () => {
     const num = Number(fromAmount.value);
     if (!Number.isFinite(num) || num <= 0) {
       throw new Error(t('swap.errors.invalidAmount'));
     }
   };
-
-  // ── ERC-20 approve ────────────────────────────────────────────────────────
 
   const approveToken = async () => {
     try {
@@ -113,8 +100,6 @@ export function useSwapActions({ signTransaction, clearPin }) {
       });
     }
   };
-
-  // ── post-swap: upload hash and show result ────────────────────────────────
 
   const updateOrderAndUploadHash = async (hash, orderId) => {
     const fromAddress = await getOwnerAddress(fromProvider.value, publicKeyCard.value);
@@ -156,8 +141,6 @@ export function useSwapActions({ signTransaction, clearPin }) {
       openTransactionErrorModal();
     }
   };
-
-  // ── main swap transaction ─────────────────────────────────────────────────
 
   const confirmSwap = async () => {
     try {
@@ -213,8 +196,6 @@ export function useSwapActions({ signTransaction, clearPin }) {
     }
   };
 
-  // ── XRP trust limit ───────────────────────────────────────────────────────
-
   const increaseTrustLimit = async () => {
     try {
       store.dispatch('swap/openLoading', { title: t('swap.loader.createTransaction') });
@@ -242,16 +223,12 @@ export function useSwapActions({ signTransaction, clearPin }) {
     }
   };
 
-  // ── set max balance as from amount ────────────────────────────────────────
-
   const setFromValueMaxBalance = async () => {
     const balance = await getTokenBalance(fromToken.value);
     if (Number(balance) > 0) {
       store.dispatch('swap/setFromAmount', formatAmount(balance));
     }
   };
-
-  // ── pre-swap: open confirm modal with fee preview ─────────────────────────
 
   const openModal = async () => {
     store.dispatch('swap/autoReload/stopAutoReload');

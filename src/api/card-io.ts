@@ -5,10 +5,8 @@ import { UniError, assertArgument } from "./errors";
 import { parseHex } from "./utils";
 const { subtle } = globalThis.crypto;
 
-
-///////////////////////////////////////////////////////////////////////////////
 enum KeyType {
-    ioPublicKey = 0,    // uses P-256 curve
+    ioPublicKey = 0,
     secp256k1 = 1,
     ed25519 = 2,
 }
@@ -21,12 +19,7 @@ const CARD_MAGIC = [0xC2, 0xF5, 0x0F, 0x01];
 const MIN_ERROR_CODE = 0;
 const MAX_ERROR_CODE = 2;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdGetInfo {
-
-    // Request  : 0x01
-    // Response : <magic:4> <error:1> <version:4> <flags:1> <key-count:1> <key-1:33>...<key-N:33>
 
     static getExpectedResponseSize(): number {
         return 4 + 1 + 4 + 1 + 1 + 33 * 3;
@@ -60,12 +53,7 @@ export class CmdGetInfo {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class CmdSignBase {
-
-    // Request  : <op-code:1> <pin-public-key:65> <pin-signature:64> <data-len:1> <data>
-    // Response : <magic:4> <error:1> <card-public-key:33> <signature:64> <pin-remaining:1>
 
     getExpectedResponseSize(): number {
         return 4 + 1 + 33 + 64 + 1;
@@ -119,8 +107,6 @@ class CmdSignBase {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdSignSecp256k1 extends CmdSignBase {
 
     async buildRequest(args: {
@@ -166,8 +152,6 @@ export class CmdSignSecp256k1 extends CmdSignBase {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdSignEd25519 extends CmdSignBase {
 
     async buildRequest(args: {
@@ -213,12 +197,7 @@ export class CmdSignEd25519 extends CmdSignBase {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdBatchSignSecp256k1 {
-
-    // Request  : 0x06 <pin-public-key:65> <pin-signature:64> <num-hashes:1> <hash-1:32> ... <hash-N:32>
-    // Response : <magic:4> <error:1> <card-public-key:33> <pin-remaining:1> <num-signatures:1> <signature-1:64> ... <signature-N:64>
 
     static readonly MAX_NUM_HASHES: number = 3;
 
@@ -266,7 +245,7 @@ export class CmdBatchSignSecp256k1 {
         let pinRemaining: number;
         let signatures: Buffer[] = [];
 
-        if( errorCode !== 0 && rawData.byteLength === 103 ) {   // workaround for card firmware bug
+        if( errorCode !== 0 && rawData.byteLength === 103 ) {
             reader.read(64);
             pinRemaining = reader.read(1)[0];
         } else {
@@ -302,12 +281,7 @@ export class CmdBatchSignSecp256k1 {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdSetPin {
-
-    // Request  : 0x04 <client-public-key:65> encrypt(<old-pin-hash:32> <new-pin-hash:32>)
-    // Response : <magic:4> <error-code:1> <pin-remaining:1>
 
     static getExpectedResponseSize(): number {
         return 4 + 1 + 1;
@@ -358,12 +332,7 @@ export class CmdSetPin {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CmdInit {
-
-    // Request  : 0x05 <client-public-key:65> encrypt(<seed:32> <pin-hash:32>)
-    // Response : <magic:4> <error-code:1> <key-count:1> <key-1:33>...<key-N:33>
 
     static getExpectedResponseSize(): number {
         return 4 + 1 + 1 + 33 * 3;
@@ -414,16 +383,12 @@ export class CmdInit {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function computePinHash(pin: string): Promise<Uint8Array> {
     const buffer = new TextEncoder().encode(pin);
     const hash = await subtle.digest("SHA-256", buffer);
     return Buffer.from(hash);
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function encrypt(args: {
     cardIOPublicKey: Uint8Array,
     data: Uint8Array,
@@ -488,8 +453,6 @@ async function encrypt(args: {
     };
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function signPin(pin: string) {
     const pinHash = await computePinHash(pin);
 
@@ -516,8 +479,6 @@ async function signPin(pin: string) {
     return { publicKey, signature };
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class BufferReader {
     private readonly _buffer: Buffer;
     private _offset: number;
@@ -552,8 +513,6 @@ class BufferReader {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function verifyMagic(magic: Uint8Array) {
     if( Buffer.compare(magic, new Uint8Array(CARD_MAGIC)) ) {
         throw new UniError("INVALID_CARD_RESPONSE");
@@ -566,8 +525,6 @@ function assertCardResponse(condition: unknown, message?: string): asserts condi
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function parsePublicKey(src: Buffer) {
     const type = (src[0] & 0xF0) >> 4;
     let data = src.subarray(1);
@@ -603,7 +560,6 @@ function readPublicKeys(reader: BufferReader): CardKeys {
 
 export function parsePublicKeyHexList(src: string): CardKeys | undefined {
     try {
-        // todo: validate
         const reader = new BufferReader(Buffer.from(src, "hex"));
         const keys = readPublicKeys(reader);
         reader.failIfNonEmpty();

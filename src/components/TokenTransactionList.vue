@@ -77,7 +77,6 @@
     </div>
   </PullToRefresh>
 
-  <!-- Pagination -->
   <div v-if="transactionsList?.length > 0 && !isLoading" class="pagination">
     <div 
       v-for="(n, index) in paging" 
@@ -135,7 +134,7 @@ export default defineComponent({
     const loadingRefresh = ref(false);
     const transactionsList = ref([]);
     const token = shallowRef(null);
-    
+
     const pagination = reactive({
       limit: props.historyPageLimit ?? 5,
       page: 1,
@@ -154,7 +153,7 @@ export default defineComponent({
 
     const paging = computed(() => {
       if (maxPage.value < 2) return [];
-      
+
       let startPage = Math.max(1, pagination.page - 2);
       if (maxPage.value - startPage < 4) {
         startPage = Math.max(1, maxPage.value - 4);
@@ -198,13 +197,6 @@ export default defineComponent({
         transactionsList.value = response?.items || [];
         pagination.total = response?.total || 0;
       } catch (err) {
-        console.error(`[TokenTransactionList] fetchTransactions Error:`, err, {
-          network: store.state.settings.rpcProvider?.name,
-          token: token.value?.id,
-          owner: store.state.user.accountAddress,
-          limit: pagination.limit,
-          offset: currentOffset
-        });
         transactionsList.value = [];
         pagination.total = 0;
       } finally {
@@ -401,7 +393,7 @@ export default defineComponent({
       outline: 1px solid $color-orange;
       border-radius: 7px;
     }
-    
+
     .pagination-item {
       display: flex;
       flex-direction: row;

@@ -58,7 +58,7 @@
   import CopyIcon from '@/components/svg/copyIcon.vue';
   import QrCodeIcon from '@/components/svg/qrCodeIcon.vue';
   import Qrcode from '@/plugins/qrcode-generate';
-  
+
   export default {
     name: 'Receive page',
     layout: 'Dashboard',
@@ -118,11 +118,9 @@
         error.value = true;
         errorTitle.value = title ?? t('pages.receive.errors.receiveError');
         errorSubtitle.value = message ?? t('pages.receive.errors.subtitle');
-        console.log(`errorBody = ${err?.cause?.errorBody}`);
         const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
           + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
           + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-        console.log(messageConsole);
         isLoading.value = false;
         return false;
       });
@@ -167,7 +165,6 @@
       height: 100%;
       overflow-x: hidden;
       overflow-y: auto;
-      // margin-bottom: 16px;
     }
 
     .card-address-group {
@@ -189,7 +186,7 @@
         .public-key-card {
           width: 100%;
           padding: 5px 18px 5px 0;
-          
+
           .public-key-card-input {
             width: 100%;
             height: auto;
@@ -284,11 +281,4 @@
   }
 }
 
-// .web-app {
-//   .container-main{
-//     .container-box{
-
-//     }
-//   }
-// }
 </style>

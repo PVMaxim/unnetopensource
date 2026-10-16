@@ -14,7 +14,7 @@ export  type SwapToken = {
   withdrawGas?: number;
   chainId?: string;
   changellyTicker?: string;
-  currencyCode?: string;  // for XRP tokens
+  currencyCode?: string;
 }
 
 export type GetQuoteParams = {
@@ -114,7 +114,7 @@ export type XRPGetSwapDataResponse = {
         }
     }[]
 }
-    
+
 export type HistoryTransaction = {
   fromChain: string;
   toChain: string;
@@ -129,7 +129,6 @@ export type HistoryTransaction = {
   toTokenSymbol: string;
   provider: string;
 }
-
 
 export interface ISwapService {
    name: string;
@@ -146,7 +145,6 @@ export type SwapQuoteServiceRow = {
   minAmount: string;
   maxAmount: string;
   isSelected: boolean;
-  /** false when toTokenAmount is 0 — user must not select this row */
   isSelectable: boolean;
 };
 
@@ -179,7 +177,6 @@ export type CheckIsAmountIsApprovedParams = {
 }
 
 export type Chain = typeof SWAP_CHAINS[keyof typeof SWAP_CHAINS] | string;
-
 
 export interface FusionQuote {
   quoteId: string | null;
@@ -250,6 +247,4 @@ export interface TimeLocks {
   dstPublicWithdrawal: number;
   dstCancellation: number;
 }
-
-
 

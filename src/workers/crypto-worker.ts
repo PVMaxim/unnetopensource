@@ -1,7 +1,3 @@
-/**
- * Background Web Worker for Heavy Cryptographic Computations.
- * Offloads CPU-intensive hashing and WebCrypto tasks from the main thread.
- */
 
 let cachedGcmKey: { hexKey: string; key: CryptoKey } | null = null;
 

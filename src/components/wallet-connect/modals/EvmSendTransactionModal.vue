@@ -70,7 +70,6 @@ import { getSecp256k1Key } from "@/api/utils";
 import { EvmRequest } from "@/api/evm/request";
 import { setUniSettings } from "@/api/global-settings";
 
-
 export default defineComponent({
   name: "EvmSendTransactionModal",
   components: {
@@ -88,7 +87,6 @@ export default defineComponent({
     requestSession: Object,
     nfcHandlerWindow: Object,
   },
-
 
   setup({ requestEvent, nfcHandlerWindow }) {
     const state = ref(STATE_DEFAULT);
@@ -117,14 +115,13 @@ export default defineComponent({
       const supportedChain = SUPPORTED_CHAINS[chainId];
       const supportedChainId = supportedChain.id;
       const supportedChainProviderManager = supportedChain.getBlockchainManager();
-     
 
       const blockchain = {
         chainId: new EvmChainId(supportedChainId),
         manager: supportedChainProviderManager,
       };
       txParsed.value = await evmTransactionParser.parse(txRequest.value, blockchain);
-     
+
       const predictedEvmTransaction = evmTransactionPredictor.predict(txRequest.value, blockchain);
       tokenBalanceChanges.value = unref(predictedEvmTransaction.tokenBalanceChanges);
       txExplanation.value = await evmTransactionExplaner.explain(txParsed.value);
@@ -132,20 +129,18 @@ export default defineComponent({
       isLoading.value = false;
     })
 
-   
     const pinLength = computed(() => { 
       if ( typeof store.state[`${prefixStore.value}.customtoken`]?.pinLength !== undefined ) {
         return store.state[`${prefixStore.value}.customtoken`]?.pinLength
       }
       return 4
     });
-    
+
     const isCurrentAccount = ref(true);
 
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn('Extra attempt to close modal');
         return;
       }
       closeModalCalled = true;
@@ -165,7 +160,6 @@ export default defineComponent({
         const result = createRejectResponse(requestEvent);
         await walletConnectHelper.value.respondSessionRequest(requestEvent, result);
       } catch (error) {
-        console.error('respondSessionRequest (reject) error', error);
       }
     }
 
@@ -179,10 +173,6 @@ export default defineComponent({
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error('approve error', {
-          state,
-          walletConnectHelper: walletConnectHelper.value ? 'available' : 'unexpected unavailable',
-        });
 
         failMessage.value = 'Failed';
         failDetails.value = 'Unable to perform the operation at the moment.';
@@ -225,7 +215,6 @@ export default defineComponent({
     }
 
     const approveWithPin = async () => {
-      console.log("called evmSendTransactionModal approveWithPin");
       state.value = STATE_INPROGRESS;
 
       let txSendRequest;
@@ -233,7 +222,6 @@ export default defineComponent({
       try {
         txSendRequest = await createTxSendRequest();
       }catch (error) {
-        console.error('createTxSendRequest error', error)
       } finally {
         progressTitle.value = "";
       }
@@ -241,20 +229,17 @@ export default defineComponent({
       let processResult = undefined;
 
       progressTitle.value = "Signing message";
-      
 
       try {
         progressTitle.value = "Signing transaction";
         await signTransaction(txSendRequest.tx);
       } catch (error) {
-        console.error('signing tx error', error)
       }
-      
+
       try {
         const { tx } = txSendRequest;
         processResult = await tx.send();
       } catch (error) {
-        console.error('sign error', error)
       } finally {
         progressTitle.value = "";
       }
@@ -287,7 +272,6 @@ export default defineComponent({
         await walletConnectHelper.value.respondSessionRequest(requestEvent, formatJsonRpcResult(id, processResult));
         processSuccess = true;
       } catch (error) {
-        console.error('respondSessionRequest (result) error', error);
       } finally {
         progressTitle.value = "";
       }
@@ -300,7 +284,6 @@ export default defineComponent({
         failDetails.value = 'Message was signed successfully, but the application was not notified about the result.';
         state.value = STATE_PROCESS_FAIL;
 
-        //respondRejected(); //???
       }
     };
 
@@ -310,7 +293,6 @@ export default defineComponent({
           ioMethod:
             store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
         });
-        console.log("signTransaction", transaction);
         const resultStart = shallowRef(null);
         resultStart.value =
           await nfcHandlerWindow.nfcProgressChunksHandler(
@@ -319,15 +301,11 @@ export default defineComponent({
             true
           );
       } catch (err) {
-        console.log(
-          `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`
-        );
         throw new Error(`Error signing transaction: ${err.message}`);
       } finally {
         pinPre.value = null;
       }
     }
-
 
     const createTxSendRequest = async () => {
       progressTitle.value = "Preparing transaction";
@@ -337,9 +315,6 @@ export default defineComponent({
       const tx = await EvmRequest.create({ provider: supportedChainProviderManager.provider, tx: txRequest.value, publicKey: publicKey, });
       return { tx };
     } 
-
-   
-  
 
     return {
       state,

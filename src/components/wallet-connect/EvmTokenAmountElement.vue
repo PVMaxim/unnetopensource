@@ -76,8 +76,6 @@ export default defineComponent({
     }
   }
 
-  
-
   margin: 0px;
   white-space: nowrap;
 }

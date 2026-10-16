@@ -3,10 +3,8 @@ import { CmdSignSecp256k1, CmdSignEd25519, CmdBatchSignSecp256k1 } from "./card-
 import { UniError } from "./errors";
 import { getEd25519Key, getSecp256k1Key } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 abstract class BasicRequestChunkBase implements RequestChunk {
-    
+
     readonly command: CmdSignSecp256k1 | CmdSignEd25519;
     readonly hash: string;
     readonly expectedPublicKey?: string;
@@ -78,8 +76,6 @@ abstract class BasicRequestChunkBase implements RequestChunk {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Secp256k1RequestChunk extends BasicRequestChunkBase {
     constructor(args: {
         hash: string,
@@ -96,8 +92,6 @@ export class Secp256k1RequestChunk extends BasicRequestChunkBase {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Ed25519RequestChunk extends BasicRequestChunkBase {
     constructor(args: {
         hash: string,
@@ -114,8 +108,6 @@ export class Ed25519RequestChunk extends BasicRequestChunkBase {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BatchSecp256k1RequestChunk implements RequestChunk {
 
     readonly hashes: string[];

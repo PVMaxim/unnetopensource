@@ -53,7 +53,6 @@ class BridgersService extends SwapService implements ISwapService {
         "Bridgers does not support USDT on Ethereum chain. Please select another token."
       );
     }
-    console.log({ fromToken, toToken, amount, accountAddress });
     const quoteResponse = await bridgersApi().getQuote(
       {
         fromTokenAddress: fromToken.address,
@@ -110,8 +109,6 @@ class BridgersService extends SwapService implements ISwapService {
       slippage,
     };
 
-    console.log({ paramsForGetQuote: params });
-
     const response = await bridgersApi().getSwapData(params);
     if (response.resCode !== 100) {
       throw new Error(response.resMsg);
@@ -148,7 +145,6 @@ class BridgersService extends SwapService implements ISwapService {
       slippage,
       publicKeyCard,
     });
-    console.log({ quoteRes: quote });
     if (!token.swap) {
       throw new Error(
         `Swap method is not implemented for ${fromProvider.name} provider.`
@@ -187,7 +183,6 @@ class BridgersService extends SwapService implements ISwapService {
       Amount: quote.Amount,
       Memos: quote.Memos,
     };
-    console.log({ swapParams });
 
     const tx = await token.swap(swapParams);
     return { tx, orderId: "" };
@@ -235,9 +230,7 @@ class BridgersService extends SwapService implements ISwapService {
         return 101;
       }
       maxAttempts--;
-      console.log({ maxAttempts });
       const orderData = await bridgersApi().updateDataAndStatus(params);
-      console.log({ orderDataFromService: orderData });
 
       if (orderData.resCode === 100 || orderData.resCode === 101) {
         return orderData.resCode;

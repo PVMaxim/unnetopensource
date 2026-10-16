@@ -5,8 +5,6 @@ import { XrplNativeCoin } from "./native-coin";
 import { XrplCore } from "./core";
 import { XrplToken, parseTokenId } from "./token";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class XrplManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "xrpl";

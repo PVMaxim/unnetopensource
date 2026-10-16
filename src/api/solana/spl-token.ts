@@ -25,8 +25,6 @@ import { BasicTokenMetadata, GenericTokenBase } from "../token-base";
 import { getEd25519Key, LazyValue, toBlockchainUnits } from "../utils";
 import { SolanaCore, solanaPublicKeyFromHex } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 interface SplTokenMetadata extends BasicTokenMetadata {
     programId: PublicKey;
 }
@@ -36,8 +34,6 @@ interface TokenNameMetadata {
     symbol: string;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SplToken extends GenericTokenBase<SplTokenMetadata> implements Token {
 
     private readonly _core: SolanaCore;
@@ -204,7 +200,7 @@ export class SplToken extends GenericTokenBase<SplTokenMetadata> implements Toke
                 return getAssociatedTokenAddressSync(
                     this._mint,
                     owner,
-                    false,  // disable off-curve, todo: check this
+                    false,
                     metadata.programId,
                 );
             });
@@ -225,10 +221,6 @@ export class SplToken extends GenericTokenBase<SplTokenMetadata> implements Toke
         try {
             account = await getAccount(this._core.rpc, args.associatedAccount, undefined, metadata.programId);
         } catch (error: unknown) {
-            // TokenAccountNotFoundError can be possible if the associated address has already received some lamports,
-            // becoming a system account. Assuming program derived addressing is safe, this is the only case for the
-            // TokenInvalidAccountOwnerError in this code path.
-            // See @spl-token/src/actions/getOrCreateAssociatedTokenAccount.ts
             if (error instanceof TokenAccountNotFoundError || error instanceof TokenInvalidAccountOwnerError) {
                 return false;
             } else {
@@ -259,8 +251,6 @@ export class SplToken extends GenericTokenBase<SplTokenMetadata> implements Toke
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function getSolanaTokenMetadata(
     rpc: Connection,
     mint: PublicKey,
@@ -287,7 +277,6 @@ async function getSolanaTokenMetadata(
     return undefined;
 }
 
-///////////////////////////////////////////////////////////////////////////////
 async function getTokenNameMetadata(
     rpc: Connection,
     mint: PublicKey,
@@ -312,7 +301,6 @@ async function getTokenNameMetadata(
     return nameMeta;
 }
 
-///////////////////////////////////////////////////////////////////////////////
 async function getMplTokenMetadata(
     rpc: Connection,
     mint: PublicKey,

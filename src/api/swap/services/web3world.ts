@@ -39,7 +39,7 @@ class Web3WorldService extends SwapService implements ISwapService {
     super([SWAP_CHAINS.VENOM]);
   }
   async getTokens(): Promise<SwapToken[]> {
-    const chainsTokens = sortTokensByChainIds(swapTokensManifest);
+    const chainsTokens: any = sortTokensByChainIds(swapTokensManifest);
     return chainsTokens[SWAP_CHAINS.VENOM] || [];
   }
   async getQuote(
@@ -166,7 +166,6 @@ class Web3WorldService extends SwapService implements ISwapService {
     fromAmount,
     publicKeyCard,
   }: GetTransactionParams): Promise<{ tx: Request; orderId: string }> {
-    console.log("called createTransaction", crossSwapPayload);
     if (crossSwapPayload?.method === "wrap") {
       const { token } = await createProviderManagerAndToken(
         fromProvider,
@@ -234,7 +233,6 @@ class Web3WorldService extends SwapService implements ISwapService {
   }
 
   async getSwapHistory(addresses: string[]): Promise<HistoryTransaction[]> {
-    console.log("called getSwapHistory", addresses);
     const ordersPromises = addresses.map(async (address) => {
       return web3WorlApi()
         .getTransactionsHistory({
@@ -246,7 +244,6 @@ class Web3WorldService extends SwapService implements ISwapService {
           userAddress: address,
         })
         .then((res) => {
-          console.log({ res });
           return res.transactions.map((tx: any) => tx);
         });
     });

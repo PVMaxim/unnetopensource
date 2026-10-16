@@ -4,30 +4,13 @@ import { isRef, shallowReadonly, shallowRef, toValue, watch } from 'vue'
 import { tryOnScopeDispose, isClient } from  './datas'
 
 export interface UseIntervalFnOptions {
-  /**
-   * Start the timer immediately
-   *
-   * @default true
-   */
   immediate?: boolean
 
-  /**
-   * Execute the callback immediately after calling `resume`
-   *
-   * @default false
-   */
   immediateCallback?: boolean
 }
 
 export type UseIntervalFnReturn = Pausable
 
-/**
- * Wrapper for `setInterval` with controls
- *
- * @param cb
- * @param interval
- * @param options
- */
 export function useIntervalFn(cb: Fn, interval: MaybeRefOrGetter<number> = 1000, options: UseIntervalFnOptions = {}): UseIntervalFnReturn {
   const {
     immediate = true,

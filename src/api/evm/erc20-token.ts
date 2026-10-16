@@ -9,8 +9,6 @@ import { Multicall } from "./multicall";
 import { EvmRequest } from "./request";
 import { parseNumberOrFail, getSecp256k1Key, LazyValue, toBlockchainUnits } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmErc20Token extends GenericTokenBase implements Token {
 
     private readonly _provider: ethers.Provider;
@@ -220,10 +218,7 @@ export class EvmErc20Token extends GenericTokenBase implements Token {
     }
 }
 
-
-//////////////////////////////////////////////////////////////////////////////
 function getEvmMetadata(provider: ethers.Provider, address: string, multicall?: Multicall): Promise<BasicTokenMetadata> {
-    // todo: check if balanceOf works
     if( !multicall ) {
         return getEvmNonBatchMetadata(provider, address);
     } else {
@@ -250,8 +245,6 @@ async function getEvmBatchMetadata(multicall: Multicall, address: string): Promi
             fnName: x,
         }))
     );
-
-    // todo: handle error
 
     return {
         name: results[0].data,

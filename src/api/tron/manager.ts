@@ -14,8 +14,6 @@ import { TronNativeCoin } from "./native-coin";
 import { calcTronAddress, TRON_NATIVE_TOKEN_DECIMALS } from "./request";
 import { Trc20Token } from "./trc20-token";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const Trc20TransfersSchema2 = z.object({
     total: z.number(),
     token_transfers: z.object({
@@ -33,8 +31,6 @@ export const Trc20TransfersSchema2 = z.object({
     }).array(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TronManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "tron";
@@ -122,12 +118,11 @@ export class TronManager extends BlockchainManagerBase implements BlockchainMana
     }
 
     async getTransactionStatus(txHash: string): Promise<number> {
-        const retries = 30; // Retry for up to 30 seconds
+        const retries = 30;
         for (let i = 0; i < retries; i++) {
             const txInfo =  await this.provider.trx.getTransactionInfo(txHash).catch(() => null);
 
             if (!txInfo || Object.keys(txInfo).length === 0) {
-                // Transaction not yet confirmed
                 await new Promise(r => setTimeout(r, 2000));
                 continue;
             }

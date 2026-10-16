@@ -64,7 +64,6 @@ body {
 
   &.web-app {
 
-    //margin: 24px 0;
     header {
       padding-top: 42px;
     }
@@ -86,12 +85,6 @@ body.menuOpen {
   height: 100%;
   position: relative;
   display: block;
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: nowrap;
-  // align-content: center;
-  // justify-content: center;
-  // align-items: flex-start;
 }
 
 body {
@@ -138,12 +131,6 @@ body {
     font-weight: 300;
     padding: 48px 0;
   }
-
-  // .gride-group {
-  //   display: flex;
-  //   justify-content: space-between;
-  //   padding-top: 108px;
-  // }
 
   .section-sub-header+.gride-group {
     padding-top: 0 !important;
@@ -222,7 +209,6 @@ body {
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0);
-    //outline: 1px solid $color-orange;
     color: $color-orange;
     border-radius: 8px;
     overflow: hidden;

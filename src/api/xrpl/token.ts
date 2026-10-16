@@ -7,8 +7,6 @@ import { getSecp256k1Key, LazyValue, toInt } from "../utils";
 import { XrplCore } from "./core";
 import { XrplRequest } from "./request";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class XrplToken implements Token {
 
     readonly id: string;
@@ -70,7 +68,7 @@ export class XrplToken implements Token {
             return response.result.receive_currencies.includes(currencyCode);
 
         } catch(err: any) {
-            if( err?.data?.error === "actNotFound" ) {      // account not found
+            if( err?.data?.error === "actNotFound" ) {
                 return false;
             } else {
                 throw err;
@@ -240,8 +238,6 @@ export class XrplToken implements Token {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function parseTokenId(src: string) {
     const parts = src.split(".");
 
@@ -259,23 +255,20 @@ export function parseTokenId(src: string) {
 
 function normalizeCurrencyCode(currencyCode: string): string {
     if( currencyCode.length === 3 && currencyCode.trim().toLowerCase() !== "xrp" ) {
-        // "Standard" currency code
         return currencyCode.trim()
     }
 
     if( currencyCode.match(/^[a-fA-F0-9]{40}$/) && !isNaN(parseInt(currencyCode, 16)) ) {
-        // Hexadecimal currency code
         const hex = currencyCode.toString().replace(/(00)+$/g, "")
 
-        if( hex.startsWith("01") ||     // Old demurrage code
-            hex.startsWith("02")        // NFT
+        if( hex.startsWith("01") ||
+            hex.startsWith("02")
         ) {
             return "";
         }
 
         const decodedHex = Buffer.from(hex, "hex").toString("utf-8").slice(0, 20).trim()
         if (decodedHex.match(/[a-zA-Z0-9]{3,}/) && decodedHex.toLowerCase() !== "xrp") {
-            // ASCII or UTF-8 encoded alphanumeric code, 3+ characters long
             return decodedHex
         }
     }

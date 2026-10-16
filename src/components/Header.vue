@@ -194,20 +194,18 @@ export default defineComponent({
         const accountAddress = await getWallet(storePublicKeyCard.value, true);
         await store.dispatch('user/setAccountAddress', accountAddress);
       } catch (err) {
-        console.error('[Header] Failed to update wallet address after RPC change:', err);
       }
 
       useEventsBus().emit('rpcProviderChange', true);
       runApplicationChecks();
     };
 
-
     onMounted(() => {
       const unwatch = store.watch(
         (state) => state.settings.rpcProvider,
         (newProvider) => { rpcSelected.value = newProvider; }
       );
-      
+
       onUnmounted(() => unwatch());
     });
 
@@ -246,7 +244,7 @@ header {
   width: 100%;
   isolation: isolate;
   z-index: 11;
-  
+
   .container-main {
     position: relative;
     max-width: 620px;
@@ -274,7 +272,7 @@ header {
     &.multiselect {
       width: 82px;
       @include transition(width .2s ease-in-out);
-      
+
       .multiselect__single, .multiselect__option {
         svg {
           width: 36px;
@@ -380,7 +378,7 @@ header {
       &:hover, &.active { color: $color-orange; }
     }
   }
-  
+
   .h-burger {
     position: absolute;
     left: 5%;
@@ -395,7 +393,7 @@ header {
     background-color: $color-black-38;
     color: $color-white;
     @include transition(left .3s ease-in-out);
-    
+
     &.open { left: 82%; background-color: $color-black; }
     &:focus { outline: none; }
 

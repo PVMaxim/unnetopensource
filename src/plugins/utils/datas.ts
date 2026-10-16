@@ -1,10 +1,10 @@
 import { Ref, MaybeRefOrGetter, toValue, WatchOptions, WatchSource, isRef, nextTick, watch, ShallowRef, getCurrentScope, onScopeDispose } from 'vue'
 
 export const isClient = typeof window !== 'undefined' && typeof document !== 'undefined'
-export const defaultWindow = /* #__PURE__ */ isClient ? window : undefined
-export const defaultDocument = /* #__PURE__ */ isClient ? window.document : undefined
-export const defaultNavigator = /* #__PURE__ */ isClient ? window.navigator : undefined
-export const defaultLocation = /* #__PURE__ */ isClient ? window.location : undefined
+export const defaultWindow =  isClient ? window : undefined
+export const defaultDocument =  isClient ? window.document : undefined
+export const defaultNavigator =  isClient ? window.navigator : undefined
+export const defaultLocation =  isClient ? window.location : undefined
 export const noop = () => {}
 export type Fn = () => void
 export type Arrayable<T> = T[] | T
@@ -15,41 +15,20 @@ export type FunctionArgs<Args extends any[] = any[], Return = void> = (...args: 
 export type PromisifyFn<T extends AnyFn> = (...args: ArgumentsType<T>) => Promisify<ReturnType<T>>
 
 export interface Pausable {
-  /**
-   * A ref indicate whether a pausable instance is active
-   */
   readonly isActive: Readonly<ShallowRef<boolean>>
 
-  /**
-   * Temporary pause the effect from executing
-   */
   pause: Fn
 
-  /**
-   * Resume the effects
-   */
   resume: Fn
 }
 
 export interface ConfigurableNavigator {
-  /*
-  * Specify a custom `navigator` instance, e.g. working with iframes or in testing environments.
-  */
   navigator?: Navigator
 }
 
 export interface DebounceFilterOptions {
-  /**
-   * The maximum time allowed to be delayed before it's invoked.
-   * In milliseconds.
-   */
   maxWait?: MaybeRefOrGetter<number>
 
-  /**
-   * Whether to reject the last call if it's been cancel.
-   *
-   * @default false
-   */
   rejectOnCancel?: boolean
 }
 
@@ -71,47 +50,13 @@ export interface UntilValueInstance<T, Not extends boolean = false> extends Unti
   toBeUndefined: (options?: UntilToMatchOptions) => Not extends true ? Promise<Exclude<T, undefined>> : Promise<undefined>
   toBeNaN: (options?: UntilToMatchOptions) => Promise<T>
 }
-/**
- * Promised one-time watch for changes
- *
- * @see https://vueuse.org/until
- * @example
- * ```
- * const { count } = useCounter()
- *
- * await until(count).toMatch(v => v > 7)
- *
- * alert('Counter is now larger than 7!')
- * ```
- */
 export interface UntilToMatchOptions {
-  /**
-   * Milliseconds timeout for promise to resolve/reject if the when condition does not meet.
-   * 0 for never timed out
-   *
-   * @default 0
-   */
   timeout?: number
 
-  /**
-   * Reject the promise when timeout
-   *
-   * @default false
-   */
   throwOnTimeout?: boolean
 
-  /**
-   * `flush` option for internal watch
-   *
-   * @default 'sync'
-   */
   flush?: WatchOptions['flush']
 
-  /**
-   * `deep` option for internal watch
-   *
-   * @default 'false'
-   */
   deep?: WatchOptions['deep']
 }
 
@@ -243,7 +188,7 @@ function createUntil<T>(r: any, isNot = false) {
   }
 
   function changedTimes(n = 1, options?: UntilToMatchOptions) {
-    let count = -1 // skip the immediate check
+    let count = -1
     return toMatch(() => {
       count += 1
       return count >= n
@@ -301,7 +246,6 @@ export const isObject = (val: any): val is object =>
 export function createFilterWrapper<T extends AnyFn>(filter: EventFilter, fn: T) {
   function wrapper(this: any, ...args: ArgumentsType<T>) {
     return new Promise<Awaited<ReturnType<T>>>((resolve, reject) => {
-      // make sure it's a promise
       Promise.resolve(filter(() => fn.apply(this, args), { fn, thisArg: this, args }))
         .then(resolve)
         .catch(reject)
@@ -311,9 +255,6 @@ export function createFilterWrapper<T extends AnyFn>(filter: EventFilter, fn: T)
   return wrapper
 }
 
-/**
- * Create an EventFilter that debounce the events
- */
 export function debounceFilter(ms: MaybeRefOrGetter<number>, options: DebounceFilterOptions = {}) {
   let timer: ReturnType<typeof setTimeout> | undefined
   let maxTimer: ReturnType<typeof setTimeout> | undefined | null
@@ -345,7 +286,6 @@ export function debounceFilter(ms: MaybeRefOrGetter<number>, options: DebounceFi
     return new Promise((resolve, reject) => {
       lastRejector = options.rejectOnCancel ? reject : resolve
       lastInvoker = invoke
-      // Create the maxTimer. Clears the regular timer on invoke
       if (maxDuration && !maxTimer) {
         maxTimer = setTimeout(() => {
           if (timer)
@@ -355,7 +295,6 @@ export function debounceFilter(ms: MaybeRefOrGetter<number>, options: DebounceFi
         }, maxDuration)
       }
 
-      // Create the regular timer. Clears the max timer on invoke
       timer = setTimeout(() => {
         if (maxTimer)
           _clearTimeout(maxTimer)

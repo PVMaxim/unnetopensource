@@ -3,8 +3,6 @@ import { z } from "zod";
 import { HistoryProvider, TransactionInfo, TokenTransactionInfo } from "../../common";
 import { HttpClient } from "../../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TxListSchema = z.object({
     status: z.string(),
     message: z.string(),
@@ -33,8 +31,6 @@ const TokenTxSchema = z.object({
     }).array(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EtherScanHistory implements HistoryProvider {
 
     protected readonly MAX_TRANSACTIONS = 50;

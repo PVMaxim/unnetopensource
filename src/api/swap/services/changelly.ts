@@ -16,9 +16,6 @@ import { Request } from "../../common";
 import { getHistoryStatus } from "../utils/serviceStatuses";
 import { EXPLORER_TX_URLS } from "../chainConfig";
 
-// fake addresses for get cost on network fee
-// we cant use real addresses because changelly api create order and save in history
-// this addressses gets from changelly api
 const SAMPLE_ADDRESSES: Record<string, string> = {
   [SWAP_CHAINS.BSC]: "0x5b181874ee88e19fa4d7c3d46978da81c7f6bc8e",
   [SWAP_CHAINS.ETH]: "0x47302a24923e2b8c5109f7f701ddcda0eb9e46fc",

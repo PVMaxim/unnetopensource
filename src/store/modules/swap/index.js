@@ -540,7 +540,7 @@ export default {
         isSelected: row.service === serviceName,
       }));
       commit(types.SET_SWAP_QUOTE_SERVICES_LIST, servicesList);
-     
+
       try {
         if (
         candidate.txData.depositMin &&
@@ -560,7 +560,7 @@ export default {
           return;
         }
       }
-      
+
     },
 
     async checkIsNeedApprove({ commit, state }) {

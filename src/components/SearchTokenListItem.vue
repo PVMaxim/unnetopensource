@@ -109,7 +109,6 @@ export default defineComponent({
           try {
             tokenObject.iconUrl = await token.value?.tip3?.getIconUrl();
           } catch(err) {
-            console.log(`SearchTokenListItem iconUrl ERROR:  ${JSON.stringify(err)}`);
           }
         }
         try {
@@ -175,12 +174,10 @@ export default defineComponent({
         const prefixStore = getStorePrefix();
         if (prefixStore && store.state.settings.rpcProvider?.name) {
           store.dispatch(`${prefixStore}.customtoken/setCustomToken`, { "key": store.state.settings.rpcProvider?.name, "value": dsd }).catch((error) => {
-            console.error('setCustomToken error:', error);
           });
         }
 
         store.dispatch('user/setTokenBalanceItem', { "provider": store.state.settings.rpcProvider?.name, "key": tokenRoot, "value": tokenObject, "action": "newToken" }).catch((err) => {
-          console.error('setTokenBalanceItem error:', err);
         });
 
         token.value = null;
@@ -196,7 +193,6 @@ export default defineComponent({
 
       useEventsBus().on('confirmedAddToken',  (payload) => {
         payload = JSON.parse(payload);
-        console.log(`confirmedAddToken payload=${JSON.stringify(payload)} `);
         if (payload?.root === tokenObject?.root) {
          addToken();
         }
@@ -236,7 +232,7 @@ export default defineComponent({
       flex-basis: 0;
       min-width: 0;
     }
-    
+
     &.last {
       flex-grow: 0;
     }

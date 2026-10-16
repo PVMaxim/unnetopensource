@@ -22,23 +22,19 @@ function createPinoLogger(name: string) {
             return pinoFn({ name, level: "error" });
         }
     } catch (e) {
-        // fallback
     }
     return {
         info: () => {},
-        error: console.error.bind(console),
-        warn: console.warn.bind(console),
+        error: () => {},
+        warn: () => {},
         debug: () => {},
         trace: () => {},
         child: () => createPinoLogger(name)
     } as any;
 }
 
-///////////////////////////////////////////////////////////////////////////////
 const PARTY_HINT = "wallet-1";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface CantonAsset {
     id: string,
     displayName: string,
@@ -47,8 +43,6 @@ export interface CantonAsset {
     admin: PartyId,
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class LazyEd25519RequestChunk implements RequestChunk {
 
     private readonly _command: CmdSignEd25519;
@@ -115,8 +109,6 @@ export class LazyEd25519RequestChunk implements RequestChunk {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonLedgerRequest implements Request {
 
     readonly chunks: LazyEd25519RequestChunk[];
@@ -200,7 +192,6 @@ export class CantonLedgerRequest implements Request {
                 body: {
                     userId,
                     preparedTransaction: preparedTx.preparedTransaction,
-                    // wallet sdk explicitly uses V2 for some reason so we do the same here
                     hashingSchemeVersion: "HASHING_SCHEME_VERSION_V2",
                     submissionId: v4(),
                     deduplicationPeriod: {
@@ -229,8 +220,6 @@ export class CantonLedgerRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonOnboardingStep extends CantonLedgerRequest {
     readonly actionType: string;
 
@@ -250,8 +239,6 @@ export class CantonOnboardingStep extends CantonLedgerRequest {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonAuthTokenProvider implements AccessTokenProvider {
 
     readonly EXPIRATION_THRESHOLD_MS = 30 * 1000;
@@ -300,8 +287,6 @@ export class CantonAuthTokenProvider implements AccessTokenProvider {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonCore {
 
     readonly accessTokenProvider: AccessTokenProvider;

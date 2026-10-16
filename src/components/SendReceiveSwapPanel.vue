@@ -14,12 +14,12 @@
     </router-link>
   </div>
 </template>
-  
+
   <script>
     import { defineComponent } from 'vue';
     import { useRouter } from 'vue-router';
     import HomeIcon from '@/components/svg/homeIcon.vue';
-  
+
     export default defineComponent({
       name: 'SendReceiveSwapPanel',
       emits: ['buttonClickSend', 'buttonClickReceive', 'buttonClickSwap'],
@@ -73,7 +73,7 @@
         }
       }
     })
-  </script>
+</script>
 
 <style scoped lang="scss">
 .buttons-group-send-receive {

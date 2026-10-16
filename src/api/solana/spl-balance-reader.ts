@@ -2,8 +2,6 @@ import { Connection, PublicKey } from "@solana/web3.js";
 import { TOKEN_2022_PROGRAM_ID, TOKEN_PROGRAM_ID } from "@solana/spl-token";
 import { CachedValue } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SplBalanceReader {
 
     private readonly MAX_CACHE_AGE = 5 * 1000;
@@ -38,7 +36,7 @@ export class SplBalanceReader {
     private async _getProgramBalances(
         owner: PublicKey,
         programId: PublicKey,
-        balances: Map<string, string>,  // mint => amount
+        balances: Map<string, string>,
     ): Promise<void> {
         const response = await this._rpc.getParsedTokenAccountsByOwner(owner, { programId });
 

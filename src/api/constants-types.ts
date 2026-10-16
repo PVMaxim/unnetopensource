@@ -71,12 +71,8 @@ export const RPC_NAMES = {
   XRP: "Xrp",
   COTI: "Coti",
   KATANA: "Katana",
-  // NOTE (Temporary Dev/Test): Split into CANTON_TEST and CANTON_DEV.
-  // To revert back to single CANTON: replace CANTON_TEST & CANTON_DEV with `CANTON: "Canton"`
   CANTON_TEST: "Canton test",
   CANTON_DEV: "Canton dev",
-  /** @deprecated Use CANTON_TEST instead */
-  //CANTON_LOC: "Canton local",
 } as const;
 
 export const PING_LENGTH_MIN = 4;
@@ -86,9 +82,7 @@ export const ALLOWED_PING_LENGTH = [4, 6, 8];
 export type RpcName = typeof RPC_NAMES[keyof typeof RPC_NAMES] | (string & {});
 export type SwapChain = typeof SWAP_CHAINS[keyof typeof SWAP_CHAINS] | (string & {});
 
-/** @deprecated Use RpcName instead */
 export type RpcNamesType = RpcName;
-/** @deprecated Use SwapChain instead */
 export type SwapChainsType = typeof SWAP_CHAINS;
 
 export interface RpcListItem {
@@ -118,7 +112,6 @@ export const rpcList: RpcListItem[] = [
   { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 16, displayName: "Venom (Old)" }
 ];
 
-/** @deprecated Use RpcListItem instead */
 export type rpcListType = RpcListItem;
 
 export interface PublicKeyCardType {

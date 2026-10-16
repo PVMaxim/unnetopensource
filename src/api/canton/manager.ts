@@ -26,9 +26,6 @@ import { HttpClient } from "../http-client";
 import { z } from "zod";
 import { LazyValue } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
-// <instrument-admin>|<instrument-id>|<transfer-id>
 function parsePendingTransferId(src: string) {
     const parts = src.split("|");
     if( parts.length === 3 && parts.every(x => x.length > 0) ) {
@@ -51,8 +48,6 @@ function buildPendingTransferId(args: {
     return `${args.instrument.admin}|${args.instrument.id}|${args.transferCid}`;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CantonManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "canton";
@@ -342,7 +337,6 @@ export class CantonManager extends BlockchainManagerBase implements BlockchainMa
                             });
                         }
                     } catch (e) {
-                        // ignore unreachable or misconfigured registries
                     }
                 }
                 return results;
@@ -418,7 +412,6 @@ export class CantonManager extends BlockchainManagerBase implements BlockchainMa
         const asset = await core.findAsset(instrument);
         const packedId = CantonStandardToken.packInstrumentId(instrument);
 
-        // to mitigate security issues token should be present in our token list
         if( !asset || !this._tokenByInstrument.has(packedId) ) {
             throw new UniError(
                 "INVALID_ARGUMENT",

@@ -10,14 +10,10 @@ import { BtcRequest, DummyBtcSigner } from "./request";
 import { getSecp256k1Key, toBlockchainUnits, fromBlockchainUnits } from "../utils";
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const DUST_RELAY_FEE = 3;
 const UTXO_MIN_CONFIRMATIONS = 3;
 const MIN_FEE_RATE = 1.5;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BitcoinNativeCoin extends NativeTokenBase implements Token {
 
     private readonly _client: MempoolClient;
@@ -366,8 +362,6 @@ export class BitcoinNativeCoin extends NativeTokenBase implements Token {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function isPaymentMethod(
     payment: (x: bitcoin.Payment) => bitcoin.Payment,
     script: Buffer
@@ -381,7 +375,6 @@ function isPaymentMethod(
 }
 
 function getDustThreshold(address: string, network: bitcoin.Network): bigint {
-    // see GetDustThreshold() in Bitcoin Core
 
     const script = bitcoin.address.toOutputScript(address, network);
     let size = 8 + varuint.encodingLength(script.length) + script.length;
@@ -397,8 +390,6 @@ function getDustThreshold(address: string, network: bitcoin.Network): bigint {
     return BigInt(size * DUST_RELAY_FEE);
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function estimateTxVSize(args: {
     network: bitcoin.Network,
     sender: string,
@@ -447,14 +438,11 @@ function estimateTxVSize(args: {
     const tx = psbt.extractTransaction();
     const vSizeNoChange = tx.virtualSize();
 
-    // virtual size if some amount is returned to sender
     const vSizeWithChange = vSizeNoChange + 8 + varuint.encodingLength(senderScript.length) + senderScript.length;
 
     return { vSizeNoChange, vSizeWithChange };
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 function bigIntToNumber(value: bigint): number {
     if( value > Number.MAX_SAFE_INTEGER ) {
         throw new UniError("INVALID_ARGUMENT", "Value is greater than MAX_SAFE_INTEGER");

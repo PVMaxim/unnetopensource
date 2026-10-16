@@ -7,8 +7,6 @@ import { fromBlockchainUnits, toBlockchainUnits } from "../utils";
 import { SolanaCore, solanaPublicKeyFromHex, SOLANA_NATIVE_DECIMALS } from "./core";
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SolanaNativeCoin extends NativeTokenBase implements Token {
 
     private readonly _core: SolanaCore;

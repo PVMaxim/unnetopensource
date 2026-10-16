@@ -230,14 +230,12 @@ export default defineComponent({
 
       const getEstimateFee = async(amount = 0) => {
         if (validateFields(amount)) { 
-          console.log(`getEstimateFee entered data false`);
           price.gazPriceToken = null;
           price.gazPriceUsd = null;
           price.priceUsd = null;
           emit('update:price', price);
           return false;
         }
-        console.log(`getEstimateFee entered`);
         const request = shallowRef(null);
         const transactionData = ref(
           {
@@ -246,8 +244,6 @@ export default defineComponent({
             "keys": store.state.user.publicKeyCard
           }
         );
-        console.log(`getEstimateFee transactionData:  type is ${typeof transactionData.value} data is ${JSON.stringify(transactionData.value)}`);
-        console.log(`getEstimateFee start transfer`);
         submitButtonLoading.value = true;
         try {
           request.value = await token.value.transfer(transactionData.value);
@@ -258,7 +254,7 @@ export default defineComponent({
           price.gazPriceUsd = null;
           disableConfirmButton.value = true;
           submitButtonLoading.value = false;
-          
+
           switch (true) {
             case err?.code?.toString() === 'SAME_SENDER_AND_RECIPIENT' :
             walletError.value = t('errors.sameSenderRecipient');
@@ -280,38 +276,30 @@ export default defineComponent({
             case err?.code?.toString() === 'INVALID_ARGUMENT':
             amountError.value = t('errors.enteredDataWrong');
             return false;
-            
+
             default:
               null;
           }
         }
-        console.log(`getEstimateFee stop transfer`);
-        console.log(`getEstimateFee start estimateFee`);
         disableConfirmButton.value = false;
         try {
           price.gazPriceToken = await request.value.estimateFee();
         } catch(err) {
-          console.log(`getEstimateFee estimateFee Error:  type is ${typeof err} data is ${typeof err === 'object' ? JSON.stringify(err) : err}`);
           price.gazPriceToken = null;
           price.gazPriceUsd = null;
           emit('update:price', price);
         }
 
-        console.log(`getEstimateFee stop estimateFee`);
-        console.log(`getEstimateFee nativeToken:  type is ${typeof props.nativeToken} data is ${typeof props.nativeToken === 'object' ? JSON.stringify(props.nativeToken) : props.nativeToken}`);
         if ( price.gazPriceToken && props.nativeToken) {
           const index = store.state.user.tokenBalance[store.state.settings.rpcProvider?.name].findIndex(item => item.name === props.nativeToken);
           price.gazPriceUsd =  price.gazPriceToken * store.state.user.tokenBalance[store.state.settings.rpcProvider?.name][index]?.price?.usdPrice;
         }
         price.priceUsd = amount * store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name]?.price?.usdPrice;
         emit('update:price', price);
-        console.log(`amountChanged:  type is ${typeof price.priceUsd} data is ${JSON.stringify(price.priceUsd)}`);
         submitButtonLoading.value = false;
-        console.log(`getEstimateFee finish`);
       }
-      
+
       const walletChangedDebounced = useDebounceFn( async() => {
-        console.log(`walletChanged:  type is ${typeof price.priceUsd} data is ${JSON.stringify(price.priceUsd)}`);
         await getEstimateFee(formData.amount);
       }, 1000, { maxWait: 5000 })
 
@@ -321,7 +309,6 @@ export default defineComponent({
 
       const walletChanged = () => {
         walletError.value = null;
-        console.log(`walletChanged:  type is ${typeof price.priceUsd} data is ${JSON.stringify(price.priceUsd)}`);
         walletChangedDebounced();
       }
 
@@ -330,7 +317,7 @@ export default defineComponent({
         if (typeof parseInt(amount) !== 'number' || amount <= 0) {
           isError.value = true;
           disableConfirmButton.value = true;
-          
+
         }
 
         if (!isValidWalletAddress(formData.wallet) && formData.wallet?.length > 1) {
@@ -352,7 +339,6 @@ export default defineComponent({
       }, 1000, { maxWait: 5000 })
 
       const amountChanged = (event) => {
-        console.log(`Amount changed enter, amount = ${formData.amount}, event = ${ event?.target.value }`);
         amountError.value = null;
         amountChangedDebounced(event?.target.value);
       }
@@ -360,7 +346,6 @@ export default defineComponent({
       const multiselectChange = async () => {
         store.dispatch('user/setSelectedToken', {"key":store.state.settings.rpcProvider?.name, "value":selectedToken.value} ).then(() => {
           }).catch((error) => {
-            console.log('setSelectedToken error : ' + JSON.stringify(error));
           });
         formData.amount = '';
         price.gazPriceToken = null;
@@ -392,7 +377,6 @@ export default defineComponent({
 
       const submitForm = () => {
         if (checkFields()) {
-          console.log(`checkFields false`);
           return;
         }
 
@@ -413,12 +397,11 @@ export default defineComponent({
       const toggleCamera = () => {
         emit('update:qrScan', !props.qrScan );
       }
-      
+
       const pasteFromClip = async () => {
         try {
           permissionManager.logPermissionsState('SendForm.button-clipboard');
         } catch (err) {
-          console.error('[SendForm] Error calling logPermissionsState:', err);
         }
         try {
           if (navigator?.clipboard?.readText) {
@@ -427,7 +410,6 @@ export default defineComponent({
             emit('update:formData', formData);
           }
         } catch (e) {
-          console.warn('[SendForm] clipboard readText error:', e);
         }
       };
 
@@ -442,27 +424,22 @@ export default defineComponent({
         try {
           resultPrepareNFC.value = await CmdGetInfo.buildRequest();
         } catch (err) {
-          console.error('Error during NFC process', err);
           throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: typeof err === 'object' ? JSON.stringify(err) : err}});
         }
 
         resultAuth.value = await props.nfcHandler?.nfcProgressHandler(resultPrepareNFC.value, CmdGetInfo, false);
 
-          console.log(`CmdGetInfo.parseResponse SUCCESS all: ${JSON.stringify(resultAuth.value)}`);
-          console.log(`isNewCard: ${resultAuth.value.isNewCard}`);
           if (resultAuth.value.isNewCard) {
             throw new Error(t('errors.cardResponse'),{ cause: {errorSubtitle: t('errors.walletNotDeployed')} });
           }
 
           try {
-            accountAddress.value = await getWallet(resultAuth.value.keys); //resultAuth.publicKey
+            accountAddress.value = await getWallet(resultAuth.value.keys);
           } catch(err) {
             throw new Error(t('errors.gettingData'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody: typeof err === 'object' ? JSON.stringify(err) : err} });
           }
-        console.log(`pasteFromCard walletAddress: ${JSON.stringify(accountAddress.value)}`);
         formData.wallet = accountAddress.value;
         emit('update:formData', formData);
-        console.log(`pasteFromCard formData.wallet: ${formData.wallet}`);
         setLoadingPayload(false);
       };
 
@@ -477,7 +454,6 @@ export default defineComponent({
         if (index !== -1) {
           arrayCopy.splice(index, 1);
           store.dispatch(`${prefixStore}.customtoken/setCustomToken`, {"key": rpcName, "value": arrayCopy} ).catch((error) => {
-            console.log('setCustomToken error : ' + JSON.stringify(error));
           });
         }
         await setDefaultSelectedToken(true);
@@ -500,7 +476,7 @@ export default defineComponent({
       return { 
         props, formData, price, selectedToken, tokenBalance, clipboardPermission, cameraPermission, nfcPermissionStatus, 
         isShowPermissionNotify, walletError, amountError, isShowConfirm, isWebViewApp, disableConfirmButton, 
-        
+
         submitForm, deleteSelectedToken, multiselectChange, roundNumber, walletChanged, showPermissionNotify, isSafariBrowser, 
         closePermissionNotify, pasteFromClip, pasteFromCard, toggleCamera, alertConfirm, alertCancel, amountChanged, submitButtonLoading
        }
@@ -624,7 +600,7 @@ export default defineComponent({
   }
 }
 
-.input-container:not(:first-child) { //:not(:first-child) 
+.input-container:not(:first-child) {
   padding: 0 0 0 0;
 }
 

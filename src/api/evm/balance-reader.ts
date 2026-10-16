@@ -5,22 +5,15 @@ import { parseNumberOrFail, CachedValue } from "../utils";
 import { Multicall } from "./multicall";
 import { convertEthersError } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const EVM_BALANCE_BATCH_SIZE = 10;
 const EVM_BALANCE_MAX_CACHE_AGE = 5000;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export interface BalanceReader {
-    // note: all addresses are expected to be normalized
     registerToken(address: string): void;
     getTokenBalance(token: string, owner: string, force?: boolean): Promise<bigint>;
     clearCache(): void;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BasicEvmBalanceReader implements BalanceReader {
 
     private readonly _provider: ethers.Provider;
@@ -63,7 +56,6 @@ export class BasicEvmBalanceReader implements BalanceReader {
                 balance = await this._getErc20Balance(token, owner);
             }
         } catch(error: any) {
-            // treat contract errors as 'no-error'
             if( error.code !== "CALL_EXCEPTION" &&
                 error.code !== "BAD_DATA"
             ) {
@@ -85,8 +77,6 @@ export class BasicEvmBalanceReader implements BalanceReader {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 interface BatchValue {
     balances: Map<string, bigint>;
     blockNumber: number;
@@ -94,11 +84,9 @@ interface BatchValue {
 
 interface Batch {
     tokens: string[];
-    values: Map<string, CachedValue<BatchValue>>;   // { owner: BatchValue }
+    values: Map<string, CachedValue<BatchValue>>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BatchEvmBalanceReader implements BalanceReader {
 
     private readonly _multicall: Multicall;
@@ -162,7 +150,6 @@ export class BatchEvmBalanceReader implements BalanceReader {
     }
 
     private async _doGetBalances(tokens: string[], owner: string): Promise<BatchValue> {
-        // prepare calls
         const calls = tokens.map(x => {
             if( x === "_" ) {
                 return this._multicall.buildGetEthBalance(owner);
@@ -178,11 +165,9 @@ export class BatchEvmBalanceReader implements BalanceReader {
 
         calls.push(this._multicall.buildGetBlockNumber());
 
-        // execute calls
         const results = await this._multicall.execute(calls);
         assert(results.length === (tokens.length + 1));
 
-        // collect balances
         const balances: Map<string, bigint> = new Map();
         for( let i = 0; i < tokens.length; i++ ) {
             if( results[i].success ) {

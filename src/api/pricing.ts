@@ -3,14 +3,11 @@ import { TokenPriceInfo } from "./common";
 import { HttpClient } from "./http-client";
 import { CachedValue } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const SimplePriceSchema = z.record(
     z.string(),
     z.object({
         usd: z.number().nonnegative().nullish(),
         usd_24h_change: z.number().nullish(),
-        // skipped: usd_market_cap, usd_24h_vol, last_updated_at
     }),
 );
 
@@ -36,8 +33,6 @@ interface CoinSearchItem {
     search: string;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class PriceProvider {
 
     private readonly CACHE_LIFE_TIME = 60 * 1000;
@@ -119,13 +114,12 @@ export class PriceProvider {
                     this._cachedPrices = await this._doGetPrices();
                     this._lastUpdateTime = Date.now();
                 } catch(err) {
-                    // todo: log this
                 } finally {
                     if( this._pendingNumTokens === this._registeredTokens.length ) {
                         this._pending = undefined;
                     }
                 }
-    
+
                 return undefined;
             })();
         }
@@ -165,7 +159,7 @@ export class PriceProvider {
                 const search = `${item.name.toLowerCase()}||${item.symbol.toLowerCase()}`;
                 result.push({
                     name: item.name,
-                    symbol: item.symbol.toUpperCase(),  // symbols received from coingecko are always lowercase
+                    symbol: item.symbol.toUpperCase(),
                     ticker: item.id,
                     address,
                     search,

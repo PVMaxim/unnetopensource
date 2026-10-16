@@ -128,7 +128,6 @@ export default defineComponent({
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn('Extra attempt to close modal');
         return;
       }
       closeModalCalled = true;
@@ -148,7 +147,6 @@ export default defineComponent({
         const result = createRejectResponse(requestEvent);
         await walletConnectHelper.value.respondSessionRequest(requestEvent, result);
       } catch (error) {
-        console.error('respondSessionRequest (reject) error', error);
       }
     }
 
@@ -162,10 +160,6 @@ export default defineComponent({
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error('approve error', {
-          state,
-          walletConnectHelper: walletConnectHelper.value ? 'available' : 'unexpected unavailable',
-        });
 
         failMessage.value = 'Failed';
         failDetails.value = 'Unable to perform the operation at the moment.';
@@ -207,7 +201,6 @@ export default defineComponent({
 
      const approveWithPin = async () => {
         state.value = STATE_INPROGRESS;
-        console.log("called evmSignTypedDataModal approveWithPin");
 
         let processResult = undefined;
 
@@ -215,7 +208,6 @@ export default defineComponent({
         try {
           processResult = await sign();
         } catch (error) {
-          console.error('sign error', error)
         } finally {
           progressTitle.value = "";
         }
@@ -236,7 +228,6 @@ export default defineComponent({
           return;
         }
 
-
         let processSuccess = false;
 
         progressTitle.value = "Responding to the application";
@@ -244,7 +235,6 @@ export default defineComponent({
           await walletConnectHelper.value.respondSessionRequest(requestEvent, formatJsonRpcResult(id, processResult));
           processSuccess = true;
         } catch (error) {
-          console.error('respondSessionRequest (result) error', error);
         } finally {
           progressTitle.value = "";
         }
@@ -257,7 +247,6 @@ export default defineComponent({
           failDetails.value = 'Message was signed successfully, but the application was not notified about the result.';
           state.value = STATE_PROCESS_FAIL;
 
-          //respondRejected(); //???
         }
       };
 
@@ -268,9 +257,6 @@ export default defineComponent({
             ioMethod:
               store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
           });
-
-          console.log('methodParamData:',methodParamData);
-          console.log('method:',method);
 
           const dataHash = getTypedDataHashToSign({
             data: methodParamData,
@@ -283,34 +269,28 @@ export default defineComponent({
               )
           });
 
-          console.log(`dataHash: ${typeof dataHash === 'object' ? JSON.stringify(dataHash) : dataHash}`);
-
           const publicKey = getSecp256k1Key(store.state.user.publicKeyCard);
 
           const requestChunk = new BatchSecp256k1RequestChunk({
             hashes: [dataHash],
             expectedPublicKey: publicKey,
           })
-          
+
           const resultStart = shallowRef(null);
-          console.log("signTransaction", requestChunk);
-          
+
           resultStart.value = await nfcHandlerWindow.nfcProgressChunksHandler(
               {chunks: [requestChunk]},
               pinPre.value,
               false         
              ); 
-          console.log('resultStart : ' + JSON.stringify(resultStart.value));
-        
+
           const signature = requestChunk.signatures[0];
-          console.log(`signature: ${typeof signature === 'object' ? JSON.stringify(signature) : signature}`);
 
           const signResult = add0xPrefix(convertSignatureForEvm({
             dataHash,
             signature: signature,
             publicKey: resultStart.value.keys.secp256k1
           }));
-          console.log(`signResult: ${typeof signResult === 'object' ? JSON.stringify(signResult) : signResult}`);
 
           if (needStorePin.value) {
             storeSuccessfulSignPin(pinPre.value, signature.keys);
@@ -318,17 +298,13 @@ export default defineComponent({
 
           return signResult;
         } catch (err) {
-          console.log(
-            `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`
-          );
           throw new Error(`Error signing transaction: ${err.message}`);
         } finally {
           pinPre.value = null;
         } 
-       
+
       }
 
-    
     return {
       state,
       progressTitle,

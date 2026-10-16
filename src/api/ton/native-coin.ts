@@ -8,15 +8,10 @@ import { UniTonCore, base64ToSafe } from "./core";
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 import { toBlockchainUnits } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TON_NATIVE_DECIMALS = 9;
 
-
-///////////////////////////////////////////////////////////////////////////////
 const AccountStateSchema = z.object({
     balance: z.coerce.bigint().nonnegative().nullish(),
-    // skipped: code_boc, code_hash, data_boc, data_hash, frozen_hash, hash, account_status
 });
 
 const MessageSchema = z.object({
@@ -24,8 +19,6 @@ const MessageSchema = z.object({
     source: z.string().nullish(),
     destination: z.string().nullish(),
     value: z.coerce.bigint().nullish(),
-    // skipped: fwd_fee, ihr_fee, created_lt, created_at
-    // skipped: import_fee, message_content, init_state, opcode, ihr_disabled
     bounce: z.boolean().nullish(),
     bounced: z.boolean().nullish(),
 });
@@ -36,8 +29,6 @@ const TransactionSchema = z.object({
     lt: z.coerce.bigint(),
     now: z.number().int(),
     total_fees: z.coerce.bigint(),
-    // skipped: mc_block_seqno, trace_id, prev_trans_hash, prev_trans_lt
-    // skipped: description, block_ref, orig_status, end_status
     in_msg: MessageSchema,
     out_msgs: z.array(MessageSchema),
     account_state_before: AccountStateSchema,
@@ -46,11 +37,8 @@ const TransactionSchema = z.object({
 
 const TransactionsSchema = z.object({
     transactions: z.array(TransactionSchema),
-    // skipped: address_book
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TonNativeCoin extends NativeTokenBase implements Token {
 
     private readonly MAX_TRANSACTIONS = 50;

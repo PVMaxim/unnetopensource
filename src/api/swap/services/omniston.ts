@@ -109,7 +109,6 @@ class OmnistonService extends SwapService implements ISwapService {
         },
       };
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }
@@ -238,8 +237,8 @@ class OmnistonService extends SwapService implements ISwapService {
         Address.parse(jettonAddress),
         "get_wallet_data",
       );
-      res.stack.readBigNumber(); // total_supply
-      res.stack.readAddress(); // admin_address
+      res.stack.readBigNumber();
+      res.stack.readAddress();
       const jettonMaster = res.stack.readAddress();
 
       return jettonMaster.toString();

@@ -144,7 +144,7 @@ const customTokenStore = (prefix) => {
                 if (!notificationData) return;
                 const formattedRecord = {
                     id: notificationData.id || notificationData.txId || `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
-                    timestamp: notificationData.timestamp || new Date().toISOString(), // Standard UTC ISO-8601 string
+                    timestamp: notificationData.timestamp || new Date().toISOString(),
                     chain: notificationData.chain || 'Unknown',
                     symbol: notificationData.symbol || 'TOKEN',
                     tokenId: notificationData.tokenId ?? notificationData.contractAddress ?? '',
@@ -160,23 +160,17 @@ const customTokenStore = (prefix) => {
     };
 };
 
-/**
- * @param {string | null | undefined} [prefix=null]
- */
-export const registerCustomTokenStore = (prefix = null) => {
+export const registerCustomTokenStore = (prefix) => {
     if (!prefix || typeof prefix !== 'string' || prefix.length < 4) {
         throw new Error('Invalid store prefix', { cause: { errorSubtitle: "Please try sign in again." } });
     }
     if (!store.hasModule(`${prefix}.customtoken`)) {
         store.registerModule(`${prefix}.customtoken`, customTokenStore(`${prefix}`));
-        store.dispatch(`${prefix}.customtoken/initializeCustomToken`).catch(console.error);
+        store.dispatch(`${prefix}.customtoken/initializeCustomToken`).catch(() => {});
     }
 };
 
-/**
- * @param {string | null | undefined} [prefix=null]
- */
-export const unRegisterCustomTokenStore = (prefix = null) => {
-    if (prefix === null) return;
+export const unRegisterCustomTokenStore = (prefix) => {
+    if (!prefix || prefix === null) return;
     if (store.hasModule(`${prefix}.customtoken`)) store.unregisterModule(`${prefix}.customtoken`);
 };

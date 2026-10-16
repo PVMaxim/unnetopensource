@@ -1,12 +1,8 @@
 import { ethers } from "ethers";
 import { UniError } from "./errors";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const derivationPath = "m/44'/396'/0'/0/0";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function generateMnemonic(): string[] {
     let wallet: ethers.HDNodeWallet;
 

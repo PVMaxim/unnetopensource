@@ -4,13 +4,9 @@ import { TokenTransactionInfo } from "../common";
 import { VENOM_NATIVE_COIN_DECIMALS } from "./constants";
 import { HttpClient } from "../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const API_BASE_URL = "https://api.venomscan.com/";
 const TOKENS_BASE_URL = "https://tokens.venomscan.com/";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TxCountResponseSchema = z.object({
     count: z.number().int(),
 });
@@ -41,8 +37,6 @@ const TokensTxResponseSchema = z.object({
     }).array(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class VenomScan {
 
     private readonly _apiHttp: HttpClient;

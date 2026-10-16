@@ -41,7 +41,6 @@ import { formatHistoryDate } from "../utils/historyTime";
 import { getSecp256k1Key } from "../../utils";
 import { OneInch } from "./oneInch";
 import { EvmTypedDataRequestSecp } from "../utils/request";
-import { sortTokensByChainIds } from "../utils/tokens";
 
 function manifestChainId(chain: SwapChain): string {
   return chain === SWAP_CHAINS.SOLANA ? "SOL" : chain;
@@ -53,14 +52,14 @@ function mapOneInchTokenToSwapToken(
   const chain = getChainByEvmId(t.chainId);
   if (!chain) return null;
 
-  
+
   let address =
     chain === SWAP_CHAINS.SOLANA ? t.address : t.address.toLowerCase();
 
   if(chain === SWAP_CHAINS.SOLANA && t.address === "SoNative11111111111111111111111111111111111")  {
     address = SWAP_NATIVE_ADDRESS;
   }
-  
+
   return {
     symbol: t.symbol,
     name: t.name,
@@ -99,7 +98,6 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
     const swapTokens = raw
       .map(mapOneInchTokenToSwapToken)
       .filter((t): t is SwapToken => t !== null);
-      console.log("OneInch getTokens sorted by chain ids:", sortTokensByChainIds(swapTokens));
     return swapTokens;
   }
 
@@ -578,7 +576,6 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
     orderHash: string,
     secrets: string[]
   ): Promise<void> {
-    console.log("Starting to monitor for fills...");
 
     const alreadyShared = new Set<number>();
 
@@ -586,13 +583,9 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
       try {
         const order = await oneInchApi().getOrderByHash(orderHash);
         if (order.status === "executed") {
-          console.log("Order is complete.");
           return;
         }
       } catch (err) {
-        console.error(
-          `Error while getting order status: ${JSON.stringify(err, null, 2)}`
-        );
       }
 
       try {
@@ -607,19 +600,14 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
             try {
               await oneInchApi().submitSecret(orderHash, secrets[idx]);
               alreadyShared.add(idx);
-              console.log("Submitted secret for index:", idx);
             } catch (err) {
-              console.error("Failed to submit secret for index", idx, ":", err);
             }
           }
         }
 
         await new Promise((resolve) => setTimeout(resolve, 5000));
-        console.log("polling for fills...");
       } catch (err) {
-        console.error("Error while monitoring fills:", err);
         await new Promise((resolve) => setTimeout(resolve, 5000));
-        console.log("retrying after error...");
       }
     }
   }

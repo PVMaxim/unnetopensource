@@ -13,8 +13,6 @@ import { Tip3Token } from "./tokens/tip3";
 import { WVenomVault } from "./tokens/WVenomVault";
 import { VenomScan } from "./venomscan";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class VenomWalletManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "venom";
@@ -51,7 +49,7 @@ export class VenomWalletManager extends BlockchainManagerBase implements Blockch
         this._rpc = new ProviderRpcClient({
             fallback: () => EverscaleStandaloneClient.create({
                 connection: {
-                    id: 1,  // mainnet
+                    id: 1,
                     type: 'jrpc',
                     data: {
                         endpoint: args.rpcUrl,
@@ -142,8 +140,6 @@ export class VenomWalletManager extends BlockchainManagerBase implements Blockch
     }
 
     private async _getSignatureId(): Promise<number | undefined> {
-        // note: this is a workaround to get blockchain signature id
-        //  because currently there is no other way to get is properly
 
         const data = Buffer.alloc(1).toString("base64");
         const publicKey = Buffer.alloc(32).toString("hex");

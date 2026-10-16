@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const TokenSchema = z.object({
     address: z.string(),
     name: z.string().optional(),
@@ -16,8 +14,6 @@ export const TokenManifestSchema = z.object({
     tokens: z.array(TokenSchema),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 const BlockchainBaseManifestSchema = z.object({
     version: z.number().int().positive(),
     name: z.string(),

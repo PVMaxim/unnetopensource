@@ -5,7 +5,7 @@
     <PermissionsModal />
     <div v-if="!network.isOnline" class="is-online">You are currently offline.</div>
 </template>
-    
+
 <script>
   import { ref, reactive, watchEffect, defineComponent } from "vue";
   import { useRouter } from 'vue-router';
@@ -30,11 +30,9 @@
       watchEffect(() => {
         if (!network.isOnline) {
           prevNetworkState.value = true;
-          console.log('online prevNetworkState');
         }
         setTimeout(3000);
         if (prevNetworkState.value && network.isOnline) {
-          console.log('online refresh');
           prevNetworkState.value = false;
           router.go();
         }

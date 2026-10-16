@@ -31,7 +31,6 @@ const COINGECKO_CORE_TOKEN_IDS: Record<string, string> = {
   [SWAP_CHAINS.POLYGON]: "matic-network",
   [SWAP_CHAINS.XRP]: "ripple",
 };
-// currencies_usdt_prices
 export class SwapPriceProvider {
 
     private readonly CACHE_LIFE_TIME = 60 * 5000; 
@@ -40,7 +39,6 @@ export class SwapPriceProvider {
     private readonly _web3Client: HttpClient;
     private _cachedPrices: Map<string, string>;
     private _cachedTimes: Map<string, number>;
-   
 
     constructor() {
         this._coingeckoClient = new HttpClient({ baseUrl: "https://coingecko.worker.united.network/" });
@@ -52,7 +50,6 @@ export class SwapPriceProvider {
     async getPrice(token: SwapToken): Promise<string> {
         const key = `${token.chain}:${token.address}`;
         const cachedPrice = this._cachedPrices.get(key);
-       
 
         if( cachedPrice && this._isCacheUpToDate(key) ) {
             return cachedPrice;
@@ -102,7 +99,7 @@ export class SwapPriceProvider {
             url: `api/v3/simple/price/?ids=${id}&vs_currencies=usd`,
             validateStatus: (status: number)=> status === 200 || status === 404,
         });
-       
+
         const data = await response.json();
 
         return data[id]?.usd || 0;
@@ -121,7 +118,7 @@ export class SwapPriceProvider {
             },
             body: JSON.stringify({ currency_addresses: [address] }),
         });
-       
+
         const data = await response.json();
 
         return data[address] || 0;
@@ -134,5 +131,5 @@ export class SwapPriceProvider {
         }
         return Date.now() < (cachedTime + this.CACHE_LIFE_TIME);
     }
-    
+
 }

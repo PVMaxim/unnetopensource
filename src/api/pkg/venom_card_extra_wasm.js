@@ -102,11 +102,6 @@ function passStringToWasm0(arg, malloc, realloc) {
     WASM_VECTOR_LEN = offset;
     return ptr;
 }
-/**
-* Get BIP39 mnemonic words by given prefix
-* @param {string} prefix
-* @returns {Array<string>}
-*/
 export function getBip39Hints(prefix) {
     const ptr0 = passStringToWasm0(prefix, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
@@ -114,10 +109,6 @@ export function getBip39Hints(prefix) {
     return takeObject(ret);
 }
 
-/**
-* Generate 12-word BIP39 mnemonic
-* @returns {Array<string>}
-*/
 export function generateLabsMnemonic() {
     const ret = wasm.generateLabsMnemonic();
     return takeObject(ret);
@@ -131,12 +122,6 @@ function getDataViewMemory0() {
     }
     return cachedDataViewMemory0;
 }
-/**
-* Generate derived key by given 12-word BIP39 mnemonic
-* @param {string} phrase
-* @param {number} id
-* @returns {string}
-*/
 export function deriveFromLabsMnemonic(phrase, id) {
     let deferred3_0;
     let deferred3_1;
@@ -180,7 +165,6 @@ async function __wbg_load(module, imports) {
 
             } catch (e) {
                 if (module.headers.get('Content-Type') != 'application/wasm') {
-                    console.warn("`WebAssembly.instantiateStreaming` failed because your server does not serve wasm with `application/wasm` MIME type. Falling back to `WebAssembly.instantiate` which is slower. Original error:\n", e);
 
                 } else {
                     throw e;
@@ -348,19 +332,15 @@ function __wbg_finalize_init(instance, module) {
     cachedDataViewMemory0 = null;
     cachedUint8ArrayMemory0 = null;
 
-
-
     return wasm;
 }
 
 function initSync(module) {
     if (wasm !== undefined) return wasm;
 
-
     if (typeof module !== 'undefined' && Object.getPrototypeOf(module) === Object.prototype)
     ({module} = module)
     else
-    console.warn('using deprecated parameters for `initSync()`; pass a single object instead')
 
     const imports = __wbg_get_imports();
 
@@ -378,11 +358,9 @@ function initSync(module) {
 async function __wbg_init(module_or_path) {
     if (wasm !== undefined) return wasm;
 
-
     if (typeof module_or_path !== 'undefined' && Object.getPrototypeOf(module_or_path) === Object.prototype)
     ({module_or_path} = module_or_path)
     else
-    console.warn('using deprecated parameters for the initialization function; pass a single object instead')
 
     if (typeof module_or_path === 'undefined') {
         module_or_path = new URL('venom_card_extra_wasm_bg.wasm', import.meta.url);

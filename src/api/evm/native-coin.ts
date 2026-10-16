@@ -8,12 +8,8 @@ import { BalanceReader } from "./balance-reader";
 import { EvmRequest } from "./request";
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const EVM_NATIVE_DECIMALS = 18;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmNativeCoin extends NativeTokenBase implements Token {
 
     private readonly _provider: ethers.Provider;

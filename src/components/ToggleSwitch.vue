@@ -24,7 +24,7 @@
           class="selected"
           :for="item.value + group"
           type="radio"
-          
+
         >
           {{ item.name }}
         </label>
@@ -191,7 +191,7 @@ setup(props, { emit }) {
 
   return { defaultOptions, toggleSwitchStyle, itemStyle, labelStyleSelected, props, toggle, labelStyle, selectedItem }
 }
-  
+
 })
 </script>
 <style scoped lang="scss">

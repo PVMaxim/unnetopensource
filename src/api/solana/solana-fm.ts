@@ -4,8 +4,6 @@ import { UniError } from "../errors";
 import { HttpClient } from "../http-client";
 import {BigNumber} from "bignumber.js";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const InstructionSchema = z.object({
     instructionIndex: z.number(),
     innerInstructionIndex: z.number(),
@@ -53,8 +51,6 @@ const TokenInfoSchema = z.object({
     }),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function getTokenInfo(args: {
     httpClient: HttpClient,
     mint: string,
@@ -77,22 +73,18 @@ export async function getTokenInfo(args: {
         throw new UniError("SERVER_ERROR", "Invalid server response");
     }
 
-    // todo: check network
-
     return {
         name: data.result.data.tokenName,
         symbol: data.result.data.symbol,
     };
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function getTransfers(args: {
     httpClient: HttpClient,
     accountAddress: string,
     decimals: number,
     getTransactionLink: (id: string) => string,
-    mint?: string,      // no mint means native SOL
+    mint?: string,
 }): Promise<TransactionInfo[]> {
     const data = await args.httpClient.getTyped({
         url: `v0/accounts/${args.accountAddress}/transfers`,

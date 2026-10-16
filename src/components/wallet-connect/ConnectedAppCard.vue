@@ -41,7 +41,6 @@ export default defineComponent({
     Loading,
   },
 
-
   setup({ metadata, disconnect }) {
     const appWebSite = ref("");
     const disconnectInProgress = ref(false);
@@ -59,8 +58,6 @@ export default defineComponent({
       try {
         await disconnect();
       } catch (error) {
-        console.error('App disconnect error', error);
-        //TODOERROR
       } finally {
         disconnectInProgress.value = false;
       }

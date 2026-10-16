@@ -13,8 +13,6 @@ import * as constants from "./constants";
 import { Ed25519RequestChunk } from "../request-chunks";
 import { validateHex256, validateHex512 } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 class DummyAccount implements Account {
 
     readonly address: Address;
@@ -40,8 +38,6 @@ class DummyAccount implements Account {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class Deployer {
 
     static readonly MIN_BALANCE = constants.DEPLOYER_MIN_BALANCE;
@@ -89,14 +85,14 @@ export class Deployer {
 
         return nt.createExternalMessage(
             new nt.ClockWithOffset(),
-            address.toString(),             // recipient
-            JSON.stringify(CardWalletABI),  // ABI
-            "constructor",                  // method
+            address.toString(),
+            JSON.stringify(CardWalletABI),
+            "constructor",
             stateInit,
             {
                 transactionLifeTime: constants.TRANSACTION_LIFE_TIME,
                 postMsgBody: postMsgData ?? null,
-            },                             // params
+            },
             publicKey,
             ~~constants.WALLET_DEPLOYMENT_TIMEOUT,
         );
@@ -122,7 +118,7 @@ export class Deployer {
                     address,
                 })
             );
-            
+
             try {
                 const tx = await this._rpc.sendMessage({
                     sender: address,
@@ -130,7 +126,7 @@ export class Deployer {
                     bounce: true,
                     recipient: constants.ZERO_ADDRESS,
                 });
-    
+
                 return tx.transaction;
             } 
             finally {
@@ -145,13 +141,11 @@ export class Deployer {
             tvc: CardWalletTvc,
             initParams: {},
         });
-    
+
         return address;
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class DeploymentRequest implements Request {
     readonly chunks: Ed25519RequestChunk[];
 
@@ -210,7 +204,6 @@ export class DeploymentRequest implements Request {
             minBalance = minBalance.plus(args.sendAfterDeployment.value);
         }
 
-        // check if low balance
         const walletAddress = await args.deployer.getWalletAddress(args.publicKey);
         const walletState = await args.rpc.getFullContractState({address: new Address(walletAddress)});
         const balance = new BigNumber(walletState.state?.balance ?? "0");
@@ -235,14 +228,13 @@ export class DeploymentRequest implements Request {
     async estimateFee(): Promise<string> {
         return new BigNumber(this._fee ?? "0").shiftedBy(-constants.VENOM_NATIVE_COIN_DECIMALS).toFixed();
     }
-    
+
     async send(): Promise<string> {
         const signature = this.chunks[0].signature;
 
         if( !signature ) {
             throw new UniError("INVALID_ARGUMENT", "Request is not signed");
         }
-
 
         validateHex512(signature);
 

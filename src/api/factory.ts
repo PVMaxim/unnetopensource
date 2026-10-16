@@ -13,8 +13,6 @@ import { TronManager } from "./tron/manager";
 import { VenomWalletManager } from "./venom/manager";
 import { XrplManager } from "./xrpl/manager";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function createPriceProvider(args: {
     type: string,
     blockchain: string,
@@ -30,8 +28,6 @@ export function createPriceProvider(args: {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function createManager(args: {
     manifest: unknown,
     storage?: Storage,
@@ -135,7 +131,6 @@ export function createManager(args: {
         throw new UniError("INVALID_ARGUMENT", "Unknown blockchain");
     }
 
-    // add mandatory tokens
     for( const item of (manifest.tokens?.mandatory ?? []) ) {
         if( typeof item === "string" ) {
             manager.addTokenByMetadata({ address: item, isMandatory: true });
@@ -144,7 +139,6 @@ export function createManager(args: {
         }
     }
 
-    // add extra tokens
     for( const address of (args.extraTokens ?? []) ) {
         manager.addTokenByMetadata({ address });
     }

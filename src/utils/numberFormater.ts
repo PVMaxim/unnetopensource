@@ -10,5 +10,5 @@ export const numberFormatter = (number: string | number, fractionDigits: number 
       return value.toFixed(fractionDigits).toString();
     }
     return value.toString();
-  
+
 }

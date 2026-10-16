@@ -8,8 +8,6 @@ import { fromBlockchainUnits } from "../utils";
 import { BITCOIN_NATIVE_DECIMALS } from "./constants";
 import { MempoolClient } from "./mempool";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BtcRequest implements Request {
 
     readonly chunks: BatchSecp256k1RequestChunk[];
@@ -27,7 +25,6 @@ export class BtcRequest implements Request {
         this._psbt = args.psbt;
         this._publicKey = args.publicKey;
 
-        // use dummy signer to collect hashes to sign
         const signer = new DummyBtcSigner(args.publicKey);
         const psbtClone = args.psbt.clone();
         psbtClone.signAllInputs(signer);
@@ -68,7 +65,6 @@ export class BtcRequest implements Request {
         const psbt = this._psbt.clone();
         psbt.signAllInputs(signer);
 
-        // validate signatures
         let valid;
         try {
             valid = psbt.validateSignaturesOfAllInputs((pk: Uint8Array, h: Uint8Array, sig: Uint8Array) => {
@@ -85,15 +81,12 @@ export class BtcRequest implements Request {
         psbt.finalizeAllInputs();
 
         const tx = psbt.extractTransaction();
-        // todo: verify that fee doesn't exceed threshold
         await this._client.sendTransaction(tx.toHex());
 
         return tx.getId();
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class DummyBtcSigner implements bitcoin.Signer {
 
     readonly publicKey: Buffer;
@@ -107,13 +100,10 @@ export class DummyBtcSigner implements bitcoin.Signer {
     sign(hash: Buffer, _lowR?: boolean): Buffer {
         this.hashes.push(hash.toString("hex"));
 
-        // fill with non-zero value to force signature take as much space as possible
         return Buffer.alloc(64, 0x01);
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class StoredBtcSigner implements bitcoin.Signer {
 
     readonly publicKey: Buffer;
@@ -130,7 +120,6 @@ class StoredBtcSigner implements bitcoin.Signer {
     }
 
     sign(hash: Buffer, _lowR?: boolean): Buffer {
-        // todo: check lowR
 
         const key = hash.toString("hex").toLowerCase();
         const signature = this.signatures.get(key);

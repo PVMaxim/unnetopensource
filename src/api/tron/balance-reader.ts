@@ -3,12 +3,8 @@ import { BalanceReader } from "../evm/balance-reader";
 import { CachedValue } from "../utils";
 import { TRC20_ABI } from "./trc20-token";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TRON_BALANCE_MAX_CACHE_AGE = 5000;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BasicTronBalanceReader implements BalanceReader {
 
     private readonly _provider: TronWeb;

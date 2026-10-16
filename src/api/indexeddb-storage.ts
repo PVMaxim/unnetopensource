@@ -100,7 +100,6 @@ export const encryptStringDB = async (data: string): Promise<any> => {
       );
       return { iv: Array.from(iv), data: encryptedBuffer };
     } catch {
-      /* fallback to encryptData below */
     }
   }
   const encrypted = await encryptData(data);
@@ -111,7 +110,6 @@ export const encryptStringDB = async (data: string): Promise<any> => {
 export const decryptStringDB = async (encrypted: any): Promise<string | null> => {
   if (!encrypted) return null;
 
-  // 1. Direct string format or { data: string } format
   if (typeof encrypted === 'string' && encrypted.length > 0) {
     return (await decryptData(encrypted)) || null;
   }
@@ -119,7 +117,6 @@ export const decryptStringDB = async (encrypted: any): Promise<string | null> =>
     return (await decryptData(encrypted.data)) || null;
   }
 
-  // 2. Binary AES-GCM format { iv, data }
   const cryptoObj = getWebCrypto();
   if (cryptoObj?.subtle && encrypted.iv && encrypted.data) {
     try {
@@ -154,7 +151,6 @@ export const decryptStringDB = async (encrypted: any): Promise<string | null> =>
       );
       return new TextDecoder().decode(decryptedData);
     } catch {
-      /* AES-GCM decryption failed */
     }
   }
 
@@ -180,7 +176,6 @@ export async function readEncryptedDB<T>(key: string, fallback: T): Promise<T> {
       }
     }
 
-    // Fallback to localStorage if not yet in IndexedDB
     let localVal: T | undefined = await readEncrypted<T>(key, undefined as unknown as T);
     if (localVal === undefined) {
       localVal = await readLegacyEncrypted<T>(key, undefined as unknown as T);
@@ -197,9 +192,7 @@ export async function readEncryptedDB<T>(key: string, fallback: T): Promise<T> {
     }
 
     if (localVal !== undefined && localVal !== null) {
-      // Auto-populate IndexedDB for future instant loads
       await writeEncryptedDB(key, localVal);
-      // Clean up localStorage
       removeEncrypted(key);
       if (typeof localStorage !== 'undefined') {
         localStorage.removeItem(key);
@@ -222,7 +215,6 @@ export async function writeEncryptedDB(key: string, value: unknown): Promise<voi
         (store) => store.put(encrypted, key),
       );
     }
-    // Delete from localStorage upon successful write to IndexedDB
     removeEncrypted(key);
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem(key);

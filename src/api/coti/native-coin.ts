@@ -7,12 +7,8 @@ import { EvmRequest } from "../evm/request";
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 import { CotiCore } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const COTI_NATIVE_DECIMALS = 18;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiNativeCoin extends NativeTokenBase implements Token {
 
     private readonly _core: CotiCore;

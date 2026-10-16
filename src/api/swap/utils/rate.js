@@ -12,7 +12,7 @@ export const calculateRate = async ({
     if ((toAmount && parseInt(toAmount) === 0) || !fromAmount) {
       return { rate: 0, reverseRate: 0 };
     }
-    const bgFromAmount = toBigInt(fromAmount); // From token is already in base units
+    const bgFromAmount = toBigInt(fromAmount);
     const bgToAmount = toBigInt(toAmount);
     const rate =
       (bgToAmount * toBigInt((10 ** fromDecimal).toString())) / bgFromAmount;
@@ -24,7 +24,6 @@ export const calculateRate = async ({
       reverseRate: formatUnits(reverseRate, fromDecimal),
     };
   } catch (error) {
-    console.error("Error calculating rate:", error);
     throw error;
   }
 };

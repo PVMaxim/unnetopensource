@@ -119,7 +119,6 @@ export const syncCustomTokensWithManagers = (customTokens?: CustomTokenBase) => 
           try {
             (config.ref.value as any).addTokenByMetadata({ address });
           } catch (e) {
-            // ignore
           }
         }
       }
@@ -172,7 +171,6 @@ export function getOrCreateManager(rpcName: string, isForced = false): Blockchai
           try {
             (config.ref.value as any).addTokenByMetadata({ address });
           } catch (e) {
-            // ignore
           }
         }
       }
@@ -186,47 +184,26 @@ export function getOrCreateManager(rpcName: string, isForced = false): Blockchai
   return config.ref.value;
 }
 
-/**
- * Get or create a blockchain manager by chain name.
- * Returns undefined if the chain is unknown or initialization fails.
- */
 export function getManager(rpcName: string, isForced = false): BlockchainManager | undefined {
   try { return getOrCreateManager(rpcName, isForced); } catch { return undefined; }
 }
 
-/** @deprecated Use getManager(RPC_NAMES.VENOM, isForced) instead */
 export const initialVenomWalletManager = (isForced = false) => getManager(RPC_NAMES.VENOM, isForced);
-/** @deprecated Use getManager(RPC_NAMES.ETH, isForced) instead */
 export const initialEvmManager = (isForced = false) => getManager(RPC_NAMES.ETH, isForced);
-/** @deprecated Use getManager(RPC_NAMES.BSC, isForced) instead */
 export const initialBnbManager = (isForced = false) => getManager(RPC_NAMES.BSC, isForced);
-/** @deprecated Use getManager(RPC_NAMES.TRON, isForced) instead */
 export const initialTronManager = (isForced = false) => getManager(RPC_NAMES.TRON, isForced);
-/** @deprecated Use getManager(RPC_NAMES.TON, isForced) instead */
 export const initialTonManager = (isForced = false) => getManager(RPC_NAMES.TON, isForced);
-/** @deprecated Use getManager(RPC_NAMES.BTC, isForced) instead */
 export const initialBitcoinManager = (isForced = false) => getManager(RPC_NAMES.BTC, isForced);
-/** @deprecated Use getManager(RPC_NAMES.SOLANA, isForced) instead */
 export const initialSolanaManager = (isForced = false) => getManager(RPC_NAMES.SOLANA, isForced);
-/** @deprecated Use getManager(RPC_NAMES.ARBITRUM, isForced) instead */
 export const initialArbitrumManager = (isForced = false) => getManager(RPC_NAMES.ARBITRUM, isForced);
-/** @deprecated Use getManager(RPC_NAMES.BASE, isForced) instead */
 export const initialBaseManager = (isForced = false) => getManager(RPC_NAMES.BASE, isForced);
-/** @deprecated Use getManager(RPC_NAMES.POLYGON, isForced) instead */
 export const initialPolygonManager = (isForced = false) => getManager(RPC_NAMES.POLYGON, isForced);
-/** @deprecated Use getManager(RPC_NAMES.AVALANCHE, isForced) instead */
 export const initialAvalancheManager = (isForced = false) => getManager(RPC_NAMES.AVALANCHE, isForced);
-/** @deprecated Use getManager(RPC_NAMES.XRP, isForced) instead */
 export const initialXrplManager = (isForced = false) => getManager(RPC_NAMES.XRP, isForced);
-/** @deprecated Use getManager(RPC_NAMES.COTI, isForced) instead */
 export const initialCotiManager = (isForced = false) => getManager(RPC_NAMES.COTI, isForced);
-/** @deprecated Use getManager(RPC_NAMES.KATANA, isForced) instead */
 export const initialKatanaManager = (isForced = false) => getManager(RPC_NAMES.KATANA, isForced);
-// NOTE (Temporary Dev/Test): Split into CANTON_TEST and CANTON_DEV.
-// To revert back to single CANTON: restore `export const initialCantonManager = (isForced = false) => getManager(RPC_NAMES.CANTON, isForced);`
 export const initialCantonTestnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_TEST, isForced);
 export const initialCantonDevnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_DEV, isForced);
-/** @deprecated Use initialCantonTestnetManager instead */
 export const initialCantonLocalnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_TEST, isForced);
 
 export function initialManager(
@@ -302,10 +279,8 @@ export const getCotiSecret = async (isForced = false): Promise<string | null> =>
   try {
     const mgr = getOrCreateManager(RPC_NAMES.COTI, isForced);
     const secretKey = await (mgr as any).performOnBoarding(store.state.user.publicKeyCard);
-    console.log(`getCotiSecret secretKey:  ${secretKey}`);
     return secretKey;
   } catch (err) {
-    console.log(`getCotiSecret secretKey ERROR:  ${JSON.stringify(err)}`);
     throw new Error(i18n.global.t('errors.tokenLimit'), { cause: { errorSubtitle: i18n.global.t('messages.messageXrpMinBalance'), errorBody: err } });
   }
 };
@@ -346,11 +321,9 @@ export const setDefaultSelectedToken = async (isForced = false): Promise<void> =
     try {
       balance = await mgr.nativeCoin.getAvailableBalance(walletAddress);
     } catch (err) {
-      console.log(`setDefaultSelectedToken getBalance ERROR:  ${JSON.stringify(err)}`);
     }
   }
 
-  // Parallelize independent calls after we have walletAddress + balance
   const [symbolResult, priceResult, nameResult, iconUrlResult] = await Promise.allSettled([
     mgr.nativeCoin.getSymbol(),
     mgr.nativeCoin.getPrice(),
@@ -368,46 +341,31 @@ export const setDefaultSelectedToken = async (isForced = false): Promise<void> =
     "iconUrl": iconUrlResult.status === 'fulfilled' ? (iconUrlResult.value ?? null) : null,
     additionalData: {},
   };
-  console.log(`setDefaultSelectedToken tokenObject:  ${JSON.stringify(tokenObject)}`);
   store.dispatch('user/setSelectedToken', { "key": store.state.settings.rpcProvider?.name, "value": tokenObject }).then(() => {
   }).catch((_error: unknown) => {
   });
 };
-
-// ---------------------------------------------------------------------------
-// Token data helpers — no unnecessary reactive wrapping
-// ---------------------------------------------------------------------------
 
 export const getTokenObject = async (id: string, rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name): Promise<Token | undefined> => {
   const mgr = getOrCreateManager(rpcProvider as string, false);
   try {
     return mgr.getToken(id);
   } catch (err) {
-    console.log(`getTokenObject getToken ERROR:  ${err instanceof Error ? err.message : JSON.stringify(err)}`);
     return undefined;
   }
 };
 
-const safeCall = async <T>(fn: () => Promise<T>, label: string): Promise<T | null> => {
+const safeCall = async <T>(fn: () => Promise<T>, _label?: string): Promise<T | null> => {
   try {
     return await fn();
   } catch (err) {
-    console.log(`setTokenBalance ${label} ERROR: ${JSON.stringify(err)}`);
     return null;
   }
 };
 
-// ---------------------------------------------------------------------------
-// Global RPC Anti-Spam, Deduplication & Rate Limiting System
-// ---------------------------------------------------------------------------
-
 const pendingTokenFetches = new Map<string, Promise<void>>();
 const lastTokenFetchTimestamp = new Map<string, number>();
 const GLOBAL_TOKEN_FETCH_COOLDOWN_MS = 5000;
-
-// ---------------------------------------------------------------------------
-// setTokenBalance — deduplicated, throttled, parallelized with Promise.allSettled
-// ---------------------------------------------------------------------------
 
 export const setTokenBalance = async (
   id: string,
@@ -443,12 +401,10 @@ const _executeSetTokenBalance = async (
   id: string,
   rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name
 ): Promise<void> => {
-  console.log(`setTokenBalance root: ${id}`);
   const mgr = getOrCreateManager(rpcProvider as string, false);
   const token: any = await getTokenObject(id, rpcProvider);
 
   const walletAddress = await getCachedWalletAddress(rpcProvider as string);
-  console.log(`setTokenBalance getWalletAddress: ${typeof walletAddress === 'object' ? JSON.stringify(walletAddress) : walletAddress}`);
 
   const [symbolResult, balanceResult, priceResult, nameResult, iconUrlResult] = await Promise.allSettled([
     token?.getSymbol() ?? Promise.resolve(null),
@@ -492,21 +448,13 @@ const _executeSetTokenBalance = async (
       action: "updateToken",
     });
   } catch (err) {
-    console.log(`dispatch setTokenBalance ERROR data is ${err}`);
   }
 
   const selected = store.state.user.selectedToken?.[rpcProvider];
   if (selected?.root === tokenObject?.root && selected?.balance !== tokenObject?.balance) {
-    console.log(
-      `Update selected token when updating token:
-      - symbol ${tokenObject.symbol}
-      - balance old ${selected?.balance}
-      - balance new ${tokenObject?.balance}`
-    );
     try {
       await store.dispatch('user/setSelectedToken', { key: rpcProvider, value: tokenObject });
     } catch (err) {
-      console.log(`dispatch setSelectedToken ERROR data is ${err}`);
     }
   }
 
@@ -523,16 +471,11 @@ export const getToken = (id: string): any => {
   return mgr.getToken(id);
 };
 
-// ---------------------------------------------------------------------------
-// setTokensBalances — non-blocking token loop, cached wallet address & throttled
-// ---------------------------------------------------------------------------
-
 export const setTokensBalances = async (isForced = false): Promise<void> => {
   if (isForced) {
     walletAddressCache.clear();
     lastTokenFetchTimestamp.clear();
-    store.dispatch('user/resetTokenBalance').catch((err: unknown) => {
-      console.error(`resetTokenBalance error: ${err}`);
+    store.dispatch('user/resetTokenBalance').catch((_err: unknown) => {
     });
   }
   const mgr = getOrCreateManager(store.state.settings.rpcProvider?.name, isForced);
@@ -544,9 +487,6 @@ export const setTokensBalances = async (isForced = false): Promise<void> => {
     await Promise.allSettled(batch.map(tokenItem => setTokenBalance(tokenItem.id, store.state.settings.rpcProvider?.name, isForced)));
   }
 };
-// ---------------------------------------------------------------------------
-// Clear / Reset
-// ---------------------------------------------------------------------------
 export const clearData = (): boolean => {
   walletAddressCache.clear();
   store.dispatch('user/resetToken');
@@ -563,9 +503,6 @@ export const clearUserSettings = (): boolean => {
   store.dispatch('swapHistory/clearHistory');
   return true;
 };
-// ---------------------------------------------------------------------------
-// Feature detection computeds
-// ---------------------------------------------------------------------------
 export const checkFidoSupport = computed(() => browserSupportsWebAuthn());
 
 export const checkNfcSupport = computed(() => typeof window !== 'undefined' && 'NDEFReader' in window);
@@ -576,7 +513,6 @@ export const getTokenNameById = async (
   id: string,
   rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name
 ): Promise<string | null> => {
-  console.log(`setTokenBalance root: ${id}`);
   const mgr = getOrCreateManager(rpcProvider as string, false);
   const token = mgr.getToken(id);
   if (!token) return null;
@@ -588,14 +524,12 @@ export const getTokenSymbolById = async (
   id: string | null,
   rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name
 ): Promise<string | null> => {
-  console.log(`setTokenBalance root: ${id}`);
   if (id == null) return null;
   const mgr = getOrCreateManager(rpcProvider as string, false);
   let token: Token | undefined;
   try {
     token = mgr.getToken(id);
   } catch (err) {
-    console.log(`getTokenSymbolById getToken ERROR:  ${err instanceof Error ? err.message : JSON.stringify(err)}`);
   }
   if (!token) return null;
 

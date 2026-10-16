@@ -9,7 +9,7 @@
         :buttonClick="errorHandler"
         :buttonName="$t('button.ok')" 
       />
-          
+
       <PinCode v-else-if="pinState"
         :title="$t('pin.enterPin')"
         v-model="pinPre"
@@ -28,7 +28,6 @@
           <div class="canton-card-modal">
             <div class="onboarding-content">
               <template v-if="!isOnboarded">
-                <!-- Steps View -->
                 <div v-if="showStepsView" class="steps-container">
                   <div class="header-icon-wrap">
                     <div class="main-icon">
@@ -53,19 +52,16 @@
                       }"
                     >
                       <div class="step-icon-box">
-                        <!-- Wallet icon for CREATE_USER -->
                         <svg v-if="step.actionType === 'CREATE_USER'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" />
                           <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" />
                           <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" />
                         </svg>
-                        <!-- Delegation / Key icon for MINTING_DELEGATION -->
                         <svg v-else-if="step.actionType === 'MINTING_DELEGATION'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                           <circle cx="7.5" cy="15.5" r="5.5" />
                           <path d="m21 2-9.6 9.6" />
                           <path d="m15.5 7.5 3 3L22 7l-3-3" />
                         </svg>
-                        <!-- Approval icon for CC_TRANSFER_PREAPPROVAL -->
                         <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                           <path d="m9 12 2 2 4-4" />
@@ -79,15 +75,12 @@
 
                       <div class="step-badge">
                         <span class="badge-indicator" :class="step.status">
-                          <!-- Completed checkmark -->
                           <svg v-if="step.status === 'completed'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="20 6 9 17 4 12"></polyline>
                           </svg>
-                          <!-- In Progress indicator -->
                           <svg v-else-if="step.status === 'in_progress'" width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
                             <circle cx="12" cy="12" r="6" />
                           </svg>
-                          <!-- Pending dot -->
                           <svg v-else width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="5" />
                           </svg>
@@ -108,7 +101,6 @@
                   </div>
                 </div>
 
-                <!-- Initial intro view -->
                 <div v-else class="intro-container">
                   <div class="header-icon-wrap">
                     <div class="main-icon">
@@ -229,7 +221,6 @@ export default {
     NFCHandlerWindow,
     Panel,
     TokenIcon,
-    /* eslint-disable-next-line vue/no-reserved-component-names */
     Button,
     CantonIcon
   },
@@ -256,8 +247,6 @@ export default {
       return false;
     };
 
-    // NOTE (Temporary Dev/Test): Split into CANTON_TEST and CANTON_DEV.
-    // To revert back to single CANTON: check `name === RPC_NAMES.CANTON`
     const isCantonProvider = computed(() => {
       const name = store.state.settings.rpcProvider?.name;
       return name === RPC_NAMES.CANTON_TEST || name === RPC_NAMES.CANTON_DEV;
@@ -306,8 +295,6 @@ export default {
     };
 
     onErrorCaptured(async (err) => {
-      console.log(`[CantonOnboardingOverlay] onErrorCaptured: type is ${typeof err}, data is ${typeof err === 'object' && err !== null ? JSON.stringify(err) : err}`);
-      console.log(`[CantonOnboardingOverlay] onErrorCaptured: message is ${err?.message}`);
       const { title, message } = await getErrorMessage(err);
       error.value = true;
       errorTitle.value = title ?? t('errors.transferError');
@@ -320,7 +307,6 @@ export default {
           parts.push(`errorBody: ${typeof err.cause.errorBody === 'object' ? JSON.stringify(err.cause.errorBody) : err.cause.errorBody}`);
         }
         if (parts.length > 0) {
-          console.log(parts.join(', '));
         }
       }
       isLoading.value = false;
@@ -376,8 +362,6 @@ export default {
         showOverlay.value = true;
       }
       try {
-        console.group('[CantonOnboardingOverlay] Checking Onboarding & Pending Transfers');
-        console.log('[CantonOnboardingOverlay] Primary Card Keys:', keys);
 
         const mgr = shallowRef(initialManager(false));
         if (typeof mgr.value !== 'string' && mgr.value) {
@@ -385,17 +369,13 @@ export default {
             mgr.value.setPrimaryCard(keys);
           }
 
-          console.log('[CantonOnboardingOverlay] Calling API: isOnBoarded()...');
           const check = await mgr.value.isOnBoarded(keys);
           isOnboarded.value = check;
-          console.log('[CantonOnboardingOverlay] API Response isOnBoarded:', check);
 
           if (!check) {
             showOverlay.value = true;
             pendingTransfers.value = [];
-            console.warn('[CantonOnboardingOverlay] User is NOT onboarded on Canton. Overlay displayed.');
           } else {
-            console.log('[CantonOnboardingOverlay] Calling API: getPendingTransfers()...');
             const transfers = await mgr.value.getPendingTransfers(keys);
             const providerName = store.state.settings.rpcProvider?.name || RPC_NAMES.CANTON_TEST;
             const storeTokens = store.state.user?.tokenBalance?.[providerName] || [];
@@ -435,23 +415,17 @@ export default {
             }));
 
             pendingTransfers.value = richTransfers;
-            console.log('[CantonOnboardingOverlay] API Response Pending Transfers (Enriched):', richTransfers);
 
             if (richTransfers && richTransfers.length > 0) {
               showOverlay.value = true;
-              console.log(`[CantonOnboardingOverlay] Found ${richTransfers.length} pending transfer(s). Overlay displayed.`);
             } else {
               showOverlay.value = false;
-              console.log('[CantonOnboardingOverlay] No pending transfers found. Overlay hidden.');
             }
           }
         } else {
           showOverlay.value = false;
         }
-        console.groupEnd();
       } catch (err) {
-        console.groupEnd();
-        console.error('[CantonOnboardingOverlay] Canton isOnBoarded check error:', err);
         error.value = true;
         errorTitle.value = t('errors.transferError');
         errorSubtitle.value = t('cantonOnboarding.errorFetchData');
@@ -491,7 +465,6 @@ export default {
       }
       const requests = await mgr.value.performOnBoarding(keys);
       const requestList = Array.isArray(requests) ? requests : [requests];
-      console.log('[CantonOnboardingOverlay] Remaining Onboarding Requests:', requestList);
 
       const steps = CANONICAL_STEPS.map((type) => {
         const matchingReq = requestList.find((r) => r?.actionType === type);
@@ -521,7 +494,6 @@ export default {
         await refreshOnboardingSteps();
         showStepsView.value = true;
       } catch (err) {
-        console.error('[CantonOnboardingOverlay] Error preparing steps view:', err);
         const { title, message } = await getErrorMessage(err);
         error.value = true;
         errorTitle.value = title ?? t('errors.transferError');
@@ -557,15 +529,12 @@ export default {
       setUniSettings({ ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc' });
 
       try {
-        console.group(`[CantonOnboardingOverlay] Signing Step: ${step.actionType}`);
         currentNfcTitle.value = t(`cantonOnboarding.steps.${step.actionType}.nfcTitle`);
         currentNfcSubtitle.value = t(`cantonOnboarding.steps.${step.actionType}.nfcSubTitle`);
 
         nfcIsActive.value = true;
-        console.log('[CantonOnboardingOverlay] Requesting NFC Signature with PIN...');
 
         const signResult = await nfcHandlerWindow.value?.nfcProgressChunksHandler(step.request, pinPre.value, true);
-        console.log('[CantonOnboardingOverlay] Card Signature Result:', signResult);
 
         if (!signResult) {
           throw new Error(t('errors.invalidCardResponse'));
@@ -574,34 +543,24 @@ export default {
         isLoading.value = true;
         messageLoad.value = t('cantonOnboarding.statusSending');
 
-        console.log('[CantonOnboardingOverlay] Submitting Signed Step Request (req.send)...');
         const updateId = await step.request.send();
-        console.log('[CantonOnboardingOverlay] Step Request Submitted. Update ID:', updateId);
-        console.groupEnd();
 
-        // Mark current step as completed
         step.status = 'completed';
         step.request = null;
 
-        // Advance to next pending step
         const nextPending = onboardingSteps.value.find((s) => s.status === 'pending');
         if (nextPending) {
           nextPending.status = 'in_progress';
         } else {
-          // All steps completed!
           isOnboarded.value = true;
           showStepsView.value = false;
           showOverlay.value = false;
-          console.log('[CantonOnboardingOverlay] All Canton Onboarding Steps Completed Successfully.');
         }
 
-        // Save PIN if store PIN option was checked
         if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
           await store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 5) });
         }
       } catch (err) {
-        console.groupEnd();
-        console.error(`[CantonOnboardingOverlay] Error signing step ${step.actionType}:`, err);
         const { title, message } = await getErrorMessage(err);
         error.value = true;
         errorTitle.value = title ?? t('errors.transferError');
@@ -617,7 +576,6 @@ export default {
       activeTransfer.value = transfer;
       activeAction.value = action;
       error.value = false;
-      console.log(`[CantonOnboardingOverlay] User initiated transfer action: ${action}`, transfer);
 
       if (store.state.user.pinHash !== null && (store.state.user.pinHash?.date - Date.now()) > 0) {
         pinPre.value = store.state.user.pinHash?.pin;
@@ -637,8 +595,6 @@ export default {
       setUniSettings({ ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc' });
 
       try {
-        console.group(`[CantonOnboardingOverlay] Executing Transfer Action: ${activeAction.value?.toUpperCase()}`);
-        console.log('[CantonOnboardingOverlay] Target Pending Transfer:', activeTransfer.value);
 
         const keys = store.state.user.publicKeyCard;
         const mgr = shallowRef(initialManager(false));
@@ -652,20 +608,14 @@ export default {
 
         let request;
         if (activeAction.value === 'accept') {
-          console.log('[CantonOnboardingOverlay] Calling API: acceptTransfer()...');
           request = await mgr.value.acceptTransfer({ id: activeTransfer.value.id, keys });
         } else {
-          console.log('[CantonOnboardingOverlay] Calling API: rejectTransfer()...');
           request = await mgr.value.rejectTransfer({ id: activeTransfer.value.id, keys });
         }
-        console.log('[CantonOnboardingOverlay] Prepared Ledger Request:', request);
 
-        // Show NFC progress window
         nfcIsActive.value = true;
-        console.log('[CantonOnboardingOverlay] Requesting NFC Signature with PIN...');
 
         const signResult = await nfcHandlerWindow.value?.nfcProgressChunksHandler(request, pinPre.value, true);
-        console.log('[CantonOnboardingOverlay] Card Signature Result:', signResult);
 
         if (!signResult) {
           throw new Error(t('errors.invalidCardResponse'));
@@ -676,22 +626,14 @@ export default {
           ? t('cantonOnboarding.statusSendingAccept')
           : t('cantonOnboarding.statusSendingReject');
 
-        console.log('[CantonOnboardingOverlay] Submitting Transfer Action to Canton Ledger API (request.send)...');
         const updateId = await request.send();
-        console.log('[CantonOnboardingOverlay] Transfer Action Submitted Successfully. Canton Update ID:', updateId);
-        console.groupEnd();
 
-        // Onboarding / transfer action successful! Save PIN if checked
         if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
           await store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 5) });
         }
 
-        // Refresh pending transfers
-        console.log('[CantonOnboardingOverlay] Refreshing Canton Onboarding & Pending Transfer State...');
         await checkCantonOnboarding();
       } catch (err) {
-        console.groupEnd();
-        console.error('[CantonOnboardingOverlay] Canton transfer action error:', err);
         const { title, message } = await getErrorMessage(err);
         error.value = true;
         errorTitle.value = title ?? t('errors.transferError');
@@ -767,7 +709,6 @@ export default {
       }
     };
 
-    // Watchers and lifecycle hooks
     watch(
       [showOverlay, () => store.state.user.accountAddress],
       () => {

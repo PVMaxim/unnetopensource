@@ -4,15 +4,11 @@ import { TokenManifestSchema } from "./manifests";
 import { PriceProvider } from "./pricing";
 import { LazyValue } from "./utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 interface ParsedTokenManifest {
     items: TokenMetadataInput[];
     byAddress: Map<string, TokenMetadataInput>;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export abstract class BlockchainManagerBase {
 
     protected readonly _tokens: Map<string, Token>;
@@ -50,7 +46,6 @@ export abstract class BlockchainManagerBase {
         const token = this._createToken(metadata);
         this.addToken(token);
 
-        // notify price provider about token if we know its ticker to allow price preloading
         if( metadata.ticker ) {
             this._priceProvider.registerToken(metadata.ticker);
         }
@@ -72,7 +67,6 @@ export abstract class BlockchainManagerBase {
         const canBeAddress = this._isValidTokenAddress(text);
         const textAsNormAddress = this._normalizeAddress(text);
 
-        // check if already added and text is address
         if( canBeAddress && this._tokens.has(textAsNormAddress) ) {
             return [this._tokens.get(textAsNormAddress)!];
         }
@@ -80,7 +74,6 @@ export abstract class BlockchainManagerBase {
         const textLwr = text.toLowerCase();
         const found: Map<string, Token> = new Map();
 
-        // check if already added and name/symbol contains text
         for( const token of this._tokens.values() ) {
             const name = await token.getName();
             const symbol = await token.getSymbol();
@@ -92,7 +85,6 @@ export abstract class BlockchainManagerBase {
             }
         }
 
-        // search in token manifest
         if( !!this._lazyTokenManifest ) {
             const manifest = await this._lazyTokenManifest.get();
 
@@ -112,7 +104,6 @@ export abstract class BlockchainManagerBase {
             }
         }
 
-        // search using price provider
         const priceProviderItems = await this._priceProvider.findTokens(textLwr);
         const customPriceProvider = this._priceProvider.clone();
         for( const item of priceProviderItems ) {
@@ -137,7 +128,6 @@ export abstract class BlockchainManagerBase {
             }
         }
 
-        // search on-chain
         if( found.size === 0 && canBeAddress ) {
             const exists = await this._checkTokenOnChain(text);
             if( exists ) {

@@ -4,13 +4,9 @@ import { CardKeys, Request } from "../common";
 import { getEd25519Key } from "../utils";
 import { CantonCore, CantonOnboardingStep } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const PREAPPROVAL_TEMPLATE_ID = "#splice-amulet:Splice.AmuletRules:TransferPreapproval";
 const PROPOSAL_TEMPLATE_ID = "#splice-wallet:Splice.Wallet.TransferPreapproval:TransferPreapprovalProposal";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TransferPreapprovalManager {
 
     private readonly _coreFactory: () => Promise<CantonCore>;

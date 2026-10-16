@@ -1,13 +1,9 @@
 import { z } from "zod";
 import { UniError } from "./errors";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const DEFAULT_TIMEOUT = 10 * 1000;
 const DEFAULT_VALIDATE_STATUS = (status: number)=> status >= 200 && status < 300;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class HttpClient {
 
     readonly baseUrl: URL;

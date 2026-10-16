@@ -6,14 +6,10 @@ import { type LedgerCommonSchemas } from "@canton-network/core-ledger-client-typ
 import { TokenTransactionInfo } from "../common";
 import { CantonCore } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 type JsTransaction = LedgerCommonSchemas["JsTransaction"];
 type CreatedEvent = LedgerCommonSchemas["CreatedEvent"];
 type ExercisedEvent = LedgerCommonSchemas["ExercisedEvent"];
 
-
-///////////////////////////////////////////////////////////////////////////////
 const HoldingInterfaceViewSpec = z.object({
     owner: z.string(),
     instrumentId: z.object({
@@ -23,15 +19,6 @@ const HoldingInterfaceViewSpec = z.object({
     amount: z.string(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
-// Enhanced Ledger Updates History Reader
-// - Pagination & offset tracking (nextOffset, afterOffset, beforeOffset)
-// - Sorting newest-first
-// - Extracting transfer details directly from choiceArgument when contract
-//   was created outside current chunk boundary (avoids failing /v2/events/events-by-contract-id)
-// - Filtering out internal MergeSplit / Lock net-zero transactions
-///////////////////////////////////////////////////////////////////////////////
 export class CantonHistoryReader {
 
     private readonly _core: CantonCore;
@@ -76,7 +63,6 @@ export class CantonHistoryReader {
         const history: TokenTransactionInfo[] = [];
 
         for (const update of updates) {
-            // Track nextOffset from OffsetCheckpoint or Transaction offset
             if (update.update && "OffsetCheckpoint" in update.update && (update.update as any).OffsetCheckpoint?.value?.offset !== undefined) {
                 const cpOffset = (update.update as any).OffsetCheckpoint.value.offset;
                 this._nextOffset = Math.max(this._nextOffset ?? 0, cpOffset);
@@ -91,7 +77,6 @@ export class CantonHistoryReader {
             }
         }
 
-        // Sort newest first
         history.sort((a, b) => b.timestamp - a.timestamp);
         return history;
     }
@@ -99,7 +84,6 @@ export class CantonHistoryReader {
     private _processTransaction(tx: JsTransaction, history: TokenTransactionInfo[]) {
         const mergedHoldings = new Map<string, BigNumber>();
 
-        // 1. Process CreatedEvents and ExercisedEvents (existing raw logic)
         for (const event of tx.events) {
             if ("CreatedEvent" in event) {
                 this._processCreatedEvent(event.CreatedEvent, mergedHoldings);
@@ -109,8 +93,6 @@ export class CantonHistoryReader {
             }
         }
 
-        // 2. if an outgoing or incoming transfer contract wasn't in _activeHoldings
-        // (e.g. crossing chunk boundaries during pagination), extract directly from choiceArgument.transfer
         if (mergedHoldings.size === 0) {
             for (const event of tx.events) {
                 if ("ExercisedEvent" in event) {
@@ -141,7 +123,6 @@ export class CantonHistoryReader {
 
         for (const [instrumentId, amount] of mergedHoldings.entries()) {
             if (amount.isZero()) {
-                // Ignore MergeSplit or net-zero internal transfers
                 continue;
             }
 

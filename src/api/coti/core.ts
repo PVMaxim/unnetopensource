@@ -8,8 +8,6 @@ import { CotiScanHistory } from "./cotiscan";
 import { CotiOnBoardingRequest } from "./onboarding";
 import { CotiRequest } from "./secure";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiCore {
 
     readonly provider: ethers.Provider;

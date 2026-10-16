@@ -16,8 +16,6 @@ const isExcludedRoute = (path) => {
 
 const checkInitially = () => {
   const providerName = store.state.settings.rpcProvider?.name;
-  // NOTE (Temporary Dev/Test): Split into CANTON_TEST and CANTON_DEV.
-  // To revert back to single CANTON: `const isCanton = providerName === RPC_NAMES.CANTON;`
   const isCanton = providerName === RPC_NAMES.CANTON_TEST || providerName === RPC_NAMES.CANTON_DEV;
   const path = window.location.pathname;
   if (isExcludedRoute(path)) return false;

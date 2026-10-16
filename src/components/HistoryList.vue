@@ -48,15 +48,12 @@ export default defineComponent({
       const router = useRouter();
       const error = ref(undefined);
 
-      // console.log(`props.inputData: ${JSON.stringify(props.inputData)}`);
-
       const goToSendHandler = async (e) => {
         let token = JSON.parse(e.currentTarget?.getAttribute('data-token'));
         store.dispatch('user/setSelectedToken', {"key":store.state.settings.rpcProvider?.name, "value":token} ).then(() => {
         }).catch((error) => {
           error.value = error;
         });
-        // console.log(`goToSendHandler user/setSelectedToken data is ${JSON.stringify({[store.state.settings.rpcProvider?.name]:token})}`);
         router.push({ name: 'send' });
       }
 

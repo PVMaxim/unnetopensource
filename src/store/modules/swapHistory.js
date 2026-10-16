@@ -100,7 +100,7 @@ export default {
                 commit(types.SET_SWAP_HISTORY_LOADING, false);
             }
         },
-            
+
         async checkIsHistoryExist({ dispatch, commit, state }){
             try {
                 if (state.history && state.history.length > 0) {

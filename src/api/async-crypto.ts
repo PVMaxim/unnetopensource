@@ -1,7 +1,3 @@
-/**
- * Async Crypto Helper interfacing with Web Worker.
- * Offloads heavy tasks with main-thread fallback.
- */
 
 let worker: Worker | null = null;
 const pendingCallbacks = new Map<string, { resolve: (val: any) => void; reject: (err: any) => void }>();
@@ -35,7 +31,6 @@ function getWorker(): Worker | null {
 export async function deriveBitsAsync(password: string, salt: string, iterations = 100000, length = 32): Promise<string> {
   const w = getWorker();
   if (!w) {
-    // Sync WebCrypto fallback
     const enc = new TextEncoder();
     const webCrypto = typeof window !== 'undefined' && window.crypto ? window.crypto : globalThis.crypto;
     const keyMaterial = await webCrypto.subtle.importKey(

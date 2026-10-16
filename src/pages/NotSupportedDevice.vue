@@ -23,7 +23,7 @@
       </div>
     </main>
   </template>
-    
+
 <script>
 import { ref } from 'vue';
   import Qrcode from '@/plugins/qrcode-generate';

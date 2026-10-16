@@ -74,7 +74,7 @@ export default defineComponent({
       () => [props.tokenIconUrl, props.tokenIconSymbol],
       resolveUrl
     );
-  
+
     return {
       localIcon,
       resolvedIconUrl,

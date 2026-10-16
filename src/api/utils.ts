@@ -3,54 +3,39 @@ import { Buffer } from "buffer";
 import { CardKeys } from "./common";
 import { assert, assertArgument, UniError, UniTooManyDecimalsError } from "./errors";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function validateLength(value: Uint8Array, length: number) {
     assertArgument(value.length === length);
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function parseNumberOrFail(src: string): number {
     const value = Number(src);
     assertArgument(!Number.isNaN(value), "Value is not a number");
     return value;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export async function wait(interval: number): Promise<void>{
     return new Promise((resolve) => {
         setTimeout(resolve, interval);
     });
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function validateHex256(src: string): void {
     assertArgument(src.match(/^[a-fA-F0-9]{64}$/));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function validateHex512(src: string): void {
     assertArgument(src.match(/^[a-fA-F0-9]{128}$/));
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function validateHex(src: string, bytesLength: number): void {
     assertArgument(src.match(/^[a-fA-F0-9]+$/) && src.length === (bytesLength * 2));
 }
-
 
 export function parseHex(src: string, bytesLength: number): Uint8Array {
     validateHex(src, bytesLength);
     return Buffer.from(src, "hex");
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function getSecp256k1Key(keys?: CardKeys): string {
     assertArgument(!!keys?.secp256k1, "No secp256k1 key");
     return keys.secp256k1;
@@ -61,8 +46,6 @@ export function getEd25519Key(keys?: CardKeys): string {
     return keys.ed25519;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function fromBlockchainUnits(value: number | bigint | string, decimals: number): string {
     const initialBn = new BigNumber(value.toString());
     const bn = initialBn.shiftedBy(-decimals);
@@ -117,8 +100,6 @@ export function toInt(value: string): number {
     return result;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class LazyValue<T> {
 
     private _getter?: () => Promise<T>;
@@ -151,8 +132,6 @@ export class LazyValue<T> {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CachedValue<T> {
 
     private readonly _getter: (oldValue?: T) => Promise<T | undefined>;
@@ -162,8 +141,7 @@ export class CachedValue<T> {
     private _pending?: Promise<NonNullable<T>>;
 
     constructor(
-        getter: (oldValue?: T) => Promise<T | undefined>,   // return value of null | undefined means
-                                                            // neither value nor expiration will not change
+        getter: (oldValue?: T) => Promise<T | undefined>,
         maxAge: number
     ) {
         this._getter = getter;

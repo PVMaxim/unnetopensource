@@ -3,13 +3,9 @@ import { CardKeys, Request } from "../common";
 import { getEd25519Key } from "../utils";
 import { CantonCore, CantonOnboardingStep } from "./core";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const AMULET_MERGE_LIMIT = "10";
 const DELEGATION_EXPIRATION = 365 * 24 * 60 * 60 * 1000;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class MintingDelegationManager {
 
     private readonly _coreFactory: () => Promise<CantonCore>;

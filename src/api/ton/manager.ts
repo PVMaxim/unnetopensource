@@ -7,8 +7,6 @@ import { UniTonCore } from "./core";
 import { Jetton, getJettonTransactions } from "./jetton";
 import { TonNativeCoin } from "./native-coin";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TonManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "ton";
@@ -79,7 +77,6 @@ export class TonManager extends BlockchainManagerBase implements BlockchainManag
             address,
         });
     }
-
 
     async getTransactionStatus(txHash: string, options: {ownerAddress: string}): Promise<number> {
         const refetchLimit = 10;

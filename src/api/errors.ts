@@ -1,5 +1,4 @@
 
-///////////////////////////////////////////////////////////////////////////////
 const UniErrors = {
     INTERNAL_ERROR: "Internal error",
     INVALID_ARGUMENT: "Invalid argument",
@@ -22,8 +21,6 @@ const UniErrors = {
 
 type UniErrorCode = keyof (typeof UniErrors);
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class UniError extends Error {
     code: UniErrorCode;
 
@@ -55,8 +52,6 @@ export class UniAmountTooSmallError extends UniError {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function assert(condition: unknown, message?: string): asserts condition {
     if( !condition ) {
         throw new UniError("INTERNAL_ERROR", message);

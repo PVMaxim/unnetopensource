@@ -3,8 +3,6 @@ import { TronWeb, utils } from "tronweb";
 import { UniError } from "../errors";
 import { Multicall, MulticallCall, MulticallCallResult } from "../evm/multicall";
 
-
-/////////////////////////////////////////////////////////////////////////////
 export class TronMulticall implements Multicall {
 
     readonly provider: TronWeb;
@@ -107,8 +105,6 @@ export class TronMulticall implements Multicall {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 const AGGREGATE3_ABI = {
     "inputs": [
         {

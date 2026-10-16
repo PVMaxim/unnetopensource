@@ -45,7 +45,6 @@ class EvmTransactionPredictor {
               blockchain
             );
         } catch (error) {
-          console.error('getSimulationData error', error);
         }
       })();
     }

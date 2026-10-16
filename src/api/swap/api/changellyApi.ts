@@ -84,7 +84,6 @@ export const changellyApi = () =>  {
         });
 
         const data = await response.json();
-        console.log(data, 'response')
         return data.result;
     }
 
@@ -147,7 +146,7 @@ export const changellyApi = () =>  {
         });
         return response.json();
     }
-     
+
     return {
       getCurrencies,
       getExchangeAmount,

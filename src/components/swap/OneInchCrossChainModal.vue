@@ -286,7 +286,6 @@ export default {
           ioMethod:
             store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
         });
-        console.log("signTransaction", transaction);
         const resultStart = shallowRef(null);
         resultStart.value =
           await nfcHandlerWindow.value.nfcProgressChunksHandler(
@@ -295,9 +294,6 @@ export default {
             true
           );
       } catch (err) {
-        console.log(
-          `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`
-        );
         throw err?.cause?.errorBody
           ? new Error(err.message, { cause: err?.cause })
           : new Error(`Error signing transaction: ${err.message}`);
@@ -331,7 +327,6 @@ export default {
         activeStep.value = steps.value[0];
       } catch (error) {
         isError.value = true;
-        console.error("Error during initialization:", error);
       } finally {
         isLoading.value = false;
       }
@@ -402,7 +397,6 @@ export default {
         await tx.send();
         goToNextStep();
       } catch (error) {
-        console.error(error);
         isError.value = true;
         errorTitle.value = error?.message ?? "Wrap error";
       } finally {
@@ -432,7 +426,6 @@ export default {
         await tx.send();
         goToNextStep();
       } catch (error) {
-        console.error(error);
         isError.value = true;
         errorTitle.value = error?.message ?? "Approve error";
       } finally {
@@ -465,7 +458,6 @@ export default {
         });
         closeModal();
       } catch (error) {
-        console.log({ error });
         isError.value = true;
         errorTitle.value = error?.message ?? "Wrap error";
       } finally {

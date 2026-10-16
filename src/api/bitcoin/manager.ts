@@ -5,12 +5,8 @@ import { UniError } from "../errors";
 import { PriceProvider } from "../pricing";
 import { BitcoinNativeCoin } from "./native-coin";
 
-
-///////////////////////////////////////////////////////////////////////////////
 let g_eccInitialized = false;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class BitcoinManager implements BlockchainManager {
 
     readonly type = "bitcoin";

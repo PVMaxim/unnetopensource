@@ -14,12 +14,8 @@ import { Ed25519RequestChunk } from "../../request-chunks";
 import { validateHex256, validateHex512 } from "../../utils";
 import { SWAP_NATIVE_ADDRESS } from "../../constants-types";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const NATIVE_STATIC_FEE = "3000000";
 
-
-///////////////////////////////////////////////////////////////////////////////
 interface NativeTransactionData {
     timestamp: string;
     transfers: {
@@ -31,8 +27,6 @@ interface NativeTransactionData {
     }[];    
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 class NativeTransferRequest implements Request {
     readonly chunks: Ed25519RequestChunk[];
 
@@ -127,8 +121,6 @@ class NativeTransferRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class NativeToken extends NativeTokenBase implements Token {
 
     private readonly _rpc: ProviderRpcClient;
@@ -220,8 +212,6 @@ export class NativeToken extends NativeTokenBase implements Token {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 const NATIVE_TRANSFER_STRUCTURE = [
     { name: "timestamp", type: "uint64" },
     {

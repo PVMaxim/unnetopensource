@@ -60,10 +60,6 @@ class CoreSwapService implements ICoreSwapService {
     if (suppotedServices.length === 0) {
       throw new Error("No swap service supports the selected tokens.");
     }
-    console.log(
-      "Supported services:",
-      suppotedServices.map((s) => s.name),
-    );
     const results = (
       await Promise.allSettled(
         suppotedServices.map((service) => service.getQuote(params, signal)),
@@ -131,7 +127,6 @@ class CoreSwapService implements ICoreSwapService {
         merged.push(token);
       }
     } catch (err) {
-      console.error("OneInch getTokens failed:", err);
     }
 
     return merged;

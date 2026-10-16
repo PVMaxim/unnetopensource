@@ -107,13 +107,12 @@
         />
   </main>
 </template>
-  
+
   <script>
     import { ref, onMounted, computed, onErrorCaptured } from 'vue';
     import { useStore } from 'vuex';
     import { useRouter } from 'vue-router';
     import { useI18n } from 'vue-i18n';
-    //import init from '@/api/pkg/venom_card_extra_wasm.js';
     import { generateMnemonic, deriveSeedFromMnemonic } from '@/api/mnemonic';
     import { CmdInit, CmdGetInfo }  from '@/api/card-io';
     import { setUniSettings }  from '@/api/global-settings';
@@ -171,10 +170,8 @@
         const nfcHandlerWindow = ref(NFCHandlerWindow);
         const successImg = new URL(`@/assets/images/successcode.svg`, import.meta.url).href;
         const errorImg = new URL(`@/assets/images/errorcode.svg`, import.meta.url).href;
-       
+
         const initial = async() => {
-          //await init();
-          console.log(`store.state.user.seedPhrase:  type is ${typeof store.state.user.seedPhrase} data is ${store.state.user.seedPhrase}`);
           if ( typeof store.state.user.seedPhrase === null || (typeof store.state.user.seedPhrase === 'object' && store.state.user.seedPhrase?.length !== 12)) {
             createSeed();
           }
@@ -191,14 +188,10 @@
         }
 
         const alertConfirm = (event) => {
-          console.log(`alertConfirm:  type is ${typeof event} data is ${JSON.stringify(event)}`);
-          console.log(`isShowConfirm:  type is ${typeof isShowConfirm.value} data is ${isShowConfirm.value}`);
           enterPinCode();
         }
 
         const alertCancel = (event) => {
-          console.log(`alertCancel:  type is ${typeof event} data is ${JSON.stringify(event)}`);
-          console.log(`isShowConfirm:  type is ${typeof isShowConfirm.value} data is ${isShowConfirm.value}`);
           errorHandler();
         }
 
@@ -224,7 +217,6 @@
         const prePin = () => {
           if (pinCodePre.value !== undefined && pinCodeNew.value === pinCodePre.value) {
             pinValid.value = true;
-            console.log('pinCode - ' + pinCodePre.value);
           } else if (pinCodeNew.value?.length === pinCodePre.value?.length) {
             errorPin.value = t('pages.settings.incorrectPin');
             pinValid.value = false;
@@ -246,13 +238,11 @@
         }
 
         const NFCWindowCancel = () => {
-          console.log(`Click Cancel NFC window button.`);
           nfcCancel.value = true;
           errorHandler();
         }
-       
+
         const createSeed = () => {
-          console.log('start create seeds ' )
           const seedPhrases  = generateMnemonic();
           store.dispatch('user/setSeedPhrase',  seedPhrases );
         }
@@ -280,17 +270,14 @@
           try {
             resultPrepare.value = await CmdGetInfo.buildRequest();
           } catch (err) {
-            console.error('Error during NFC process', err);
             throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: err}});
           }
           messageLoad.value = 'Waiting for card sign';
 
           resultAuth.value  = await nfcHandlerWindow.value?.nfcProgressHandler(resultPrepare.value, CmdGetInfo, false);
 
-            console.log(`CmdGetInfo.parseResponse SUCCESS all: ${JSON.stringify(resultAuth.value)}`);
             messageLoad.value = 'Card sign submit';
             publicKeyCard.value = resultAuth.value?.keys;
-            console.log(`publicKeyCard: ${publicKeyCard.value}`);
 
           if (publicKeyCard.value !== null && publicKeyCard.value?.ioPublicKey) {
             store.dispatch('user/setPinPublicKey',  publicKeyCard.value?.ioPublicKey).then(() => {
@@ -298,27 +285,20 @@
               throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
             });
             store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
-              console.log(`authorizeCard setPublicKeyCard ${typeof publicKeyCard.value} data is ${JSON.stringify(publicKeyCard.value)}`);
             }).catch((err) => {
               throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
             });
             try {
               accountAddress.value = await getWallet( store.state.user.publicKeyCard );
-              console.log(`accountAddress.value typeof: ${typeof accountAddress.value} data ${JSON.stringify(accountAddress.value)}`);
             } catch(err) {
-              console.log(`walletAddress ERROR: ${err}`);
               throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody:err}});
             }
-            console.log(`walletAddress: ${JSON.stringify(accountAddress.value)}, provider type ${store.state.settings.rpcProvider?.type}`);
 
             store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
-              console.log(`user/setAccountAddress typeof: ${typeof accountAddress.value} data ${JSON.stringify(accountAddress.value)}`);
             }).catch((err) => {
               throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
             });
           }
-          console.log(`store.state.user.publicKeyCard typeof: ${typeof store.state.user.publicKeyCard} data ${JSON.stringify(store.state.user.publicKeyCard)}`);
-          console.log(`/^[a-fA-F0-9]{64,66}$/.test(store.state.user.publicKeyCard.ed25519)  data ${/^[a-fA-F0-9]{64,66}$/.test(store.state.user.publicKeyCard.ed25519)}`);
           if (/^[a-fA-F0-9]{64,66}$/.test(store.state.user.publicKeyCard.ed25519) && store.state.user?.publicKeyCard?.ioPublicKey ) {
             initial();
             authorize.value = false;
@@ -335,13 +315,6 @@
           const signResponsePrepare = ref(undefined);
           const result = ref(null);
           setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
-          console.log(`signRequestPrepare PREPARE:   data is ${JSON.stringify(
-            {
-              "seed": seedPhrasesDerive.value,
-              "keys": store.state.user.publicKeyCard,
-              "pin": pinCodePre.value,
-            }
-          )}`);
           try {
             signRequestPrepare.value = await CmdInit.buildRequest(
               {
@@ -350,36 +323,26 @@
                 "pin": pinCodePre.value,
               }
             );
-            console.log(`signRequestPrepare NFC:  type is ${typeof signRequestPrepare.value} data is ${JSON.stringify(signRequestPrepare.value)}`);
           } catch(err) {
-            console.log(`signRequestPrepare NFC ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`);
             throw new Error(t('errors.restoreCardError'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: err}});
           }
           messageLoad.value = 'Waiting for card sign';
           result.value = await nfcHandlerWindow.value?.nfcProgressHandler(signRequestPrepare.value, CmdInit, false);
-          console.log(`CmdInit.parseResponse: ${JSON.stringify(result.value)}`);
-          console.log(`nfcCancel: ${nfcCancel.value}`);
           if (result.value === null || nfcCancel.value === true) { 
             return false;
           }
           switch (result.value?.errorCode) {
             case 1:
-              console.log(`result.errorCode 1: FAIL`);
             throw new Error(t('errors.restoreCardError'),{ cause: {errorSubtitle: t('errors.wrongPin')}});
             case 2:
-              console.log(`result.errorCode 2: FAIL`);
               throw new Error(t('errors.restoreCardError'),{ cause: {errorSubtitle: t('errors.cardBlocked')}});
             default:
-              console.log(`result.errorCode 0: OK`);
               break
           }
-          console.log(`setPublicKeyCard BEFORE: ${JSON.stringify(result.value?.keys)}`);
           if (/^[a-fA-F0-9]{64}$/.test(result.value?.keys?.ed25519) && result.value?.keys?.ed25519!== '0000000000000000000000000000000000000000000000000000000000000000' ) {
             isTheSamePublicKey(result.value?.keys);
             store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
-              console.log(`writeSeed setPublicKeyCard ${typeof result.value?.keys} data is ${JSON.stringify(result.value?.keys)}`);
             }).catch((err) => {
-            console.log(`setPublicKeyCard ERROR: ${JSON.stringify(err)}`);
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
           });
           if (result.value?.ioPublicKey) {
@@ -392,10 +355,8 @@
             try {
               accountAddress.value = await getWallet(result.value?.keys);
             } catch(err) {
-              console.log(`walletAddress ERROR: ${err}`);
               throw new Error(t('errors.restoreCardError'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody:err}});
             }
-            console.log(`walletAddress: ${JSON.stringify(accountAddress.value)}`);
             store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
             }).catch((err) => {
               throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
@@ -411,7 +372,6 @@
         }
 
         onMounted(() => {
-          console.log(`onMounted store.state.user?.publicKeyCard ${typeof store.state.user?.publicKeyCard} data is ${JSON.stringify(store.state.user?.publicKeyCard)}`);
           if (!store.state.user?.publicKeyCard.ioPublicKey ) {
             authorize.value = true;
             isLoading.value = false;
@@ -425,15 +385,13 @@
           error.value = true;
           errorTitle.value = title ?? t('pages.seedPhrase.status.errorCreating');
           errorSubtitle.value = message ?? t('pages.send.pressOkToTryAgain');
-          console.log(`errorBody = ${err?.cause?.errorBody}`);
           const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
             + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
             + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-          console.log(messageConsole);
           isLoading.value = false;
           return false;
         });
-  
+
         return { isLoading, error, seedPhrasesArray, seedPhrasesString, masterKey, copied, titleLoad, pinLength, 
           messageLoad, errorTitle, errorSubtitle, nfcHandlerWindow, nfcIsActive, pinCodeNew, pinCodePre, nfcCancel, 
           pinState, errorImg, successImg, success, successMessage, isShowConfirm, pinValid, errorPin, authorize, 
@@ -442,13 +400,13 @@
         }
       },
     }
-  </script>
-  
+</script>
+
   <style scoped lang="scss">
     .container-main {
         width: 90%;
         flex-direction: column;
-    
+
         &.scroll {
             justify-content: flex-start;
         }
@@ -480,7 +438,6 @@
                 display: flex;
                 flex-direction: row;
                 width: 100%;
-                // height: 180px;
                 flex-wrap: wrap;
                 align-content: flex-start;
 
@@ -543,4 +500,4 @@
     }
   }
 }
-  </style>
+</style>

@@ -20,10 +20,10 @@
       </div>
     </div>
   </template>
-  
+
   <script>
     import { watchEffect, defineComponent, ref, nextTick } from 'vue'
-  
+
     export default defineComponent({
       name: 'InputWalletAddress',
       emits: ['update:modelValue, update:errorMessage'],
@@ -50,7 +50,7 @@
           default: null
         }
       },
-  
+
       setup(props, { emit }) {
         const errorMessageContainer = ref(null);
         const isOverflowing = ref(false);
@@ -85,7 +85,7 @@
         }
       }
     })
-  </script>
+</script>
 
 <style scoped lang="scss">
 .input-container {

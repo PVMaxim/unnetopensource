@@ -3,8 +3,6 @@ import { z } from "zod";
 import { TransactionInfo, TokenTransactionInfo } from "../common";
 import { HttpClient } from "../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TransfersResponseSchema = z.object({
     success: z.boolean(),
     data: z.object({
@@ -17,8 +15,6 @@ const TransfersResponseSchema = z.object({
     }).array().nullish(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class SolScan {
 
     private readonly NATIVE_TOKEN_ADDRESS = "So11111111111111111111111111111111111111111";

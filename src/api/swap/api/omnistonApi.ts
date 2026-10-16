@@ -49,7 +49,6 @@ class WSClient {
       this.setupEventHandlers();
     } catch (error) {
       this.state = WSClientState.ERROR;
-      console.error("Failed to create WebSocket:", error);
     }
   }
 
@@ -57,14 +56,12 @@ class WSClient {
     this.ws.onopen = () => {
       this.state = WSClientState.CONNECTED;
       this.reconnectAttempts = 0;
-      console.log("WebSocket connected");
     };
 
     this.ws.onmessage = (wsEvent) => this.handleMessage(wsEvent);
 
-    this.ws.onerror = (event) => {
+    this.ws.onerror = (_event) => {
       this.state = WSClientState.ERROR;
-      console.error("WebSocket error:", event);
     };
 
     this.ws.onclose = () => {
@@ -102,7 +99,6 @@ class WSClient {
         return;
       }
     } catch (error) {
-      console.error("Error parsing WebSocket message:", error);
     }
   }
 
@@ -204,12 +200,8 @@ class WSClient {
       this.reconnectAttempts++;
       const delay =
         this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1);
-      console.log(
-        `Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts}/${this.maxReconnectAttempts})`,
-      );
       setTimeout(() => this.initializeWebSocket(), delay);
     } else {
-      console.error("Max reconnection attempts reached");
     }
   }
 
@@ -259,7 +251,6 @@ class WSClient {
 
   private unsubscribe(subscribeId: number): void {
     if (this.state !== WSClientState.CONNECTED) {
-      console.warn("Cannot unsubscribe: WebSocket is not connected");
       return;
     }
 
@@ -274,7 +265,6 @@ class WSClient {
         } as WSRequest),
       );
     } catch (error) {
-      console.error("Failed to send unsubscribe request:", error);
     }
   }
 

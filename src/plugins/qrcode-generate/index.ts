@@ -14,7 +14,6 @@ const ErrorCorrectLevelMap : Readonly<Record<Level, QR.QrCode.Ecc>> = {
   H: QR.QrCode.Ecc.HIGH,
 }
 
-// Thanks the `qrcode.react`
 const SUPPORTS_PATH2D: boolean = (function () {
   try {
     new Path2D().addPath(new Path2D())
@@ -34,8 +33,6 @@ function generatePath(modules: Modules, margin: number = 0): string {
     let start: number | null = null
     row.forEach(function (cell, x) {
       if (!cell && start !== null) {
-        // M0 0h7v1H0z injects the space with the move and drops the comma,
-        // saving a char per operation
         ops.push(
           `M${start + margin} ${y + margin}h${x - start}v1H${start + margin}z`
         )
@@ -43,18 +40,13 @@ function generatePath(modules: Modules, margin: number = 0): string {
         return
       }
 
-      // end of row, clean up or skip
       if (x === row.length - 1) {
         if (!cell) {
-          // We would have closed the op above already so this can only mean
-          // 2+ light modules in a row.
           return
         }
         if (start === null) {
-          // Just a single dark module.
           ops.push(`M${x + margin},${y + margin} h1v1H${x + margin}z`)
         } else {
-          // Otherwise finish the current line.
           ops.push(
             `M${start + margin},${y + margin} h${x + 1 - start}v1H${
               start + margin
@@ -125,12 +117,6 @@ const QRCodeSvg = defineComponent({
       const cells = QR.QrCode.encodeText(value, ErrorCorrectLevelMap[level]).getModules()
       numCells.value = cells.length + margin * 2
 
-      // Drawing strategy: instead of a rect per module, we're going to create a
-      // single path for the dark modules and layer that on top of a light rect,
-      // for a total of 2 DOM nodes. We pay a bit more in string concat but that's
-      // way faster than DOM ops.
-      // For level 1, 441 nodes -> 2
-      // For level 40, 31329 -> 2
       fgPath.value = generatePath(cells, margin)
     }
 

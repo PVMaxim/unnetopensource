@@ -141,7 +141,7 @@ export default defineComponent({
     const loadingRefresh = ref(false);
     const transactionsList = ref([]);
     const tokensInfo = reactive({});
-    
+
     const pagination = reactive({
       limit: props.historyPageLimit ?? 5,
       page: 1,
@@ -160,7 +160,7 @@ export default defineComponent({
 
     const paging = computed(() => {
       if (maxPage.value < 2) return [];
-      
+
       let startPage = Math.max(1, pagination.page - 2);
       if (maxPage.value - startPage < 4) {
         startPage = Math.max(1, maxPage.value - 4);
@@ -183,29 +183,18 @@ export default defineComponent({
     });
 
     const fetchTokensInfo = async (items) => {
-      console.log('fetchTokensInfo items:', items);
       if (!items?.length) return;
 
       const uniqueTokenIds = [...new Set(items.map(item => item.tokenId))]
         .filter(id => id !== null && id !== undefined && !tokensInfo[id]);
-      console.log('fetchTokensInfo uniqueTokenIds:', uniqueTokenIds);
-      
+
       if (!uniqueTokenIds.length) return;
 
       const rpcName = store.state.settings.rpcProvider?.name;
-      console.log('fetchTokensInfo rpcName:', rpcName);
       const storeTokens = store.state.user.tokenBalance?.[rpcName] || [];
-      console.log('fetchTokensInfo storeTokens:', storeTokens);
-
-      console.log('fetchTokensInfo data:', {
-          rpcName: store.state.settings.rpcProvider?.name,
-          accountAddress: store.state.user.accountAddress,
-          nativeCoin: mgr.value?.nativeCoin?._name
-        });
 
       await Promise.all(uniqueTokenIds.map(async (tokenId) => {
         const storeToken = storeTokens.find(t => t.root === tokenId);
-        console.log(`fetchTokensInfo [${tokenId}] storeToken:`, storeToken);
         if (storeToken && storeToken.symbol) {
           tokensInfo[tokenId] = { symbol: storeToken.symbol, iconUrl: storeToken.iconUrl };
           return;
@@ -213,7 +202,6 @@ export default defineComponent({
 
         try {
           const tokenObj = await getToken(tokenId);
-          console.log(`fetchTokensInfo [${tokenId}] tokenObj:`, tokenObj);
           if (tokenObj) {
             const [symbol, iconUrl] = await Promise.all([
               tokenObj.getSymbol(),
@@ -222,19 +210,11 @@ export default defineComponent({
             tokensInfo[tokenId] = { symbol, iconUrl };
           }
         } catch (err) {
-          console.log(`fetchTokensInfo [${tokenId}] error:`, err);
         }
       }));
     };
 
     const fetchTransactions = async (isRefresh = false) => {
-      console.log('fetchTransactions start', {
-        isRefresh,
-        owner: store.state.user.accountAddress,
-        limit: pagination.limit,
-        offset: isRefresh ? 0 : offset.value,
-        mgr: mgr.value
-      });
 
       if (isRefresh) {
         loadingRefresh.value = true;
@@ -246,33 +226,17 @@ export default defineComponent({
       const currentOffset = isRefresh ? 0 : offset.value;
 
       try {
-        console.log('fetchTransactions data:', {
-          rpcName: store.state.settings.rpcProvider?.name,
-          accountAddress: store.state.user.accountAddress,
-          limit: pagination.limit,
-          offset: currentOffset,
-          nativeCoin: mgr.value?.nativeCoin?._name
-        });
 
         const response = await mgr.value.getTransactions({
           owner: store.state.user.accountAddress,
           limit: pagination.limit,
           offset: currentOffset
         });
-        console.log('fetchTransactions response:', response);
 
         transactionsList.value = response?.items || [];
         pagination.total = response?.total || 0;
-        console.log('fetchTransactions transactionsList:', transactionsList.value, 'total:', pagination.total);
         await fetchTokensInfo(transactionsList.value);
       } catch (err) {
-        console.log('fetchTransactions error:', err, {
-          rpcName: store.state.settings.rpcProvider?.name,
-          accountAddress: store.state.user.accountAddress,
-          limit: pagination.limit,
-          offset: currentOffset,
-          nativeCoin: mgr.value?.nativeCoin?._name
-        });
         transactionsList.value = [];
         pagination.total = 0;
       } finally {
@@ -484,7 +448,7 @@ export default defineComponent({
       outline: 1px solid $color-orange;
       border-radius: 7px;
     }
-    
+
     .pagination-item {
       display: flex;
       flex-direction: row;

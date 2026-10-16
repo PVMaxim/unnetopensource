@@ -37,7 +37,6 @@ export async function checkIsCurrentAccountAddress(
     const signedIn = await manager.getWalletAddress(cardKeys);
     return signedIn.toLowerCase() == address.toLowerCase();
   } catch (error) {
-    console.error("checkIsCurrentAccountAddress error", error);
     return false;
   }
 }

@@ -10,14 +10,11 @@ import { EvmMulticall } from "./multicall";
 import { EtherScanHistory } from "./providers/etherscan";
 import { TatumEvmHistory } from "./providers/tatum";
 
-
-///////////////////////////////////////////////////////////////////////////////
 class FixedJsonRpcProvider extends ethers.JsonRpcProvider {
     async send(method: string, params: Array<any> | Record<string, any>): Promise<any> {
         try {
             return (await super.send(method, params));
         } catch (e: any) {
-            // Avalanche RPC servers respond with error if blockNo > height unlike RPC servers on other blockchains
             if( method === "eth_getBlockByNumber" &&
                 e.error?.code === -32000 &&
                 e.error?.message === "cannot query unfinalized data"
@@ -30,8 +27,6 @@ class FixedJsonRpcProvider extends ethers.JsonRpcProvider {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmManager extends BlockchainManagerBase implements BlockchainManager {
 
     readonly type = "evm";

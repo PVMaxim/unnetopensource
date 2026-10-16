@@ -17,7 +17,7 @@ export const i18n = createI18n({
 export const loadLocaleMessages = async (locale) => {
   const messages = await import(`@/locales/${locale}.json`);
   i18n.global.setLocaleMessage(locale, messages.default);
-  
+
   i18n.mode === 'legacy' ? i18n.global.locale = locale : i18n.global.locale.value = locale;
 
   return nextTick();

@@ -5,12 +5,8 @@ import { EvmRequestChunk } from "../evm/request";
 import { assertArgument, UniLowBalanceError } from "../errors";
 import { fromBlockchainUnits } from "../utils";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export const TRON_NATIVE_TOKEN_DECIMALS = 6;
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class TronRequest<TxContractType> implements Request {
     readonly chunks: EvmRequestChunk[];
 
@@ -43,7 +39,6 @@ export class TronRequest<TxContractType> implements Request {
         energy?: number,
         nativeAmount?: bigint,
     }) {
-        // calculate fee
         const sender = calcTronAddress(args.publicKey);
         const availableBandwidth = await args.provider.trx.getBandwidth(sender);
         const bandwithToBuy = Math.max(estimateBandwith(args.transaction.raw_data_hex) - availableBandwidth, 0);
@@ -53,7 +48,6 @@ export class TronRequest<TxContractType> implements Request {
         const energyPrice = chainParams.filter(item => item.key === "getEnergyFee")[0].value;
         const fee = BigInt(Math.ceil(bandwithToBuy * bandwithPrice + (args.energy ?? 0) * energyPrice));
 
-        // check if enough TRX balance
         const totalAmount = (args.nativeAmount ?? BigInt(0)) + fee;
         const balance = BigInt(await args.provider.trx.getUnconfirmedBalance(sender));
 
@@ -85,8 +79,6 @@ export class TronRequest<TxContractType> implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function calcTronAddress(publicKey: string): string {
     const uncompressedPubKey = secp256k1.ProjectivePoint.fromHex(publicKey).toRawBytes(false);
     const addressBytes = tronUtils.crypto.computeAddress(uncompressedPubKey);
@@ -95,8 +87,8 @@ export function calcTronAddress(publicKey: string): string {
 
 function estimateBandwith(rawDataHex: string): number {
     let result = Math.ceil(rawDataHex.length / 2);
-    result += 3;    // protobuf extra
-    result += 64;   // max transaction result size
-    result += 67;   // signature
+    result += 3;
+    result += 64;
+    result += 67;
     return result;
 }

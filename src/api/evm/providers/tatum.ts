@@ -4,8 +4,6 @@ import { HistoryProvider, TransactionInfo, TokenTransactionInfo } from "../../co
 import { UniError } from "../../errors";
 import { HttpClient } from "../../http-client";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const TatumTxListSchema = z.object({
     result: z.object({
         timestamp: z.coerce.number().int().positive(),
@@ -16,9 +14,6 @@ const TatumTxListSchema = z.object({
     }).array(),
 });
 
-
-
-///////////////////////////////////////////////////////////////////////////////
 export class TatumEvmHistory implements HistoryProvider {
 
     private readonly MAX_TRANSACTIONS = 50;

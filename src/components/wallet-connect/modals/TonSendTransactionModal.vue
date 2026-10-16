@@ -83,13 +83,11 @@ export default defineComponent({
     const supportedChainProviderManager = supportedChain.getBlockchainManager();
 
     onMounted(async () => {
-        // UI message previews can be added here
     })
 
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn('Extra attempt to close modal');
         return;
       }
       closeModalCalled = true;
@@ -105,7 +103,6 @@ export default defineComponent({
         const result = createRejectResponse(requestEvent);
         await walletConnectHelper.value.respondSessionRequest(requestEvent, result);
       } catch (error) {
-        console.error('respondSessionRequest (reject) error', error);
       }
     }
 
@@ -119,10 +116,6 @@ export default defineComponent({
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error('approve error', {
-          state,
-          walletConnectHelper: walletConnectHelper.value ? 'available' : 'unexpected unavailable',
-        });
 
         failMessage.value = 'Failed';
         failDetails.value = 'Unable to perform the operation at the moment.';
@@ -133,10 +126,10 @@ export default defineComponent({
 
       pinPre.value = null;
       needStorePin.value = false;
-      
+
       const walletAddress = await supportedChainProviderManager.getWalletAddress(store.state.user.publicKeyCard);
       const storedPin = await getSuccessfulSignPinByAddress(walletAddress, supportedChainProviderManager);
-      
+
       if (storedPin) {
         pinPre.value = storedPin;
         await approveWithPin();
@@ -175,7 +168,7 @@ export default defineComponent({
             const cell = Cell.fromBase64(msg.stateInit);
             init = loadStateInit(cell.beginParse());
         }
-        
+
         return internal({
           to: Address.parse(msg.address),
           value: BigInt(msg.amount),
@@ -194,7 +187,6 @@ export default defineComponent({
     } 
 
      const approveWithPin = async () => {
-      console.log("called TonSendTransactionModal approveWithPin");
       state.value = STATE_INPROGRESS;
 
       let txSendRequest;
@@ -202,7 +194,6 @@ export default defineComponent({
       try {
         txSendRequest = await createTxSendRequest();
       }catch (error) {
-        console.error('createTxSendRequest error', error)
         failMessage.value = 'Failed to prepare transaction';
         failDetails.value = error.message;
         state.value = STATE_PROCESS_FAIL;
@@ -212,7 +203,7 @@ export default defineComponent({
       }
 
       progressTitle.value = "Signing message";
-      
+
       try {
         progressTitle.value = "Signing transaction";
         await signTransaction(txSendRequest.tx);
@@ -231,17 +222,14 @@ export default defineComponent({
       try {
         progressTitle.value = "Sending transaction";
         const txHash = await txSendRequest.tx.send();
-        console.log("TON tx sent, hash:", txHash);
 
         progressTitle.value = "Responding to the application";
         const boc = txSendRequest.tx.getSignedBoc();
         const responseData = formatJsonRpcResult(id, boc);
-        console.log("responseData", JSON.stringify(responseData), responseData)
-        
+
         await walletConnectHelper.value.respondSessionRequest(requestEvent, responseData);
         processSuccess = true;
       } catch (error) {
-        console.error('respondSessionRequest (result) error', error);
         failMessage.value = 'Application not notified or transaction failed';
         failDetails.value = error.message || '';
         state.value = STATE_PROCESS_FAIL;
@@ -267,7 +255,6 @@ export default defineComponent({
           ioMethod:
             store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
         });
-        console.log("signTransaction", transaction);
         const resultStart = shallowRef(null);
         resultStart.value =
           await nfcHandlerWindow.nfcProgressChunksHandler(
@@ -275,19 +262,14 @@ export default defineComponent({
             pinPre.value,
             true
           );
-        console.log('resultStart : ' + JSON.stringify(resultStart.value));
-        console.log("transaction", transaction)
 
       } catch (err) {
-        console.log(
-          `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`
-        );
         throw new Error(`Error signing transaction: ${err.message}`);
       } finally {
         pinPre.value = null;
       }
     }
-     
+
     return {
       state,
       progressTitle,

@@ -146,10 +146,8 @@ export default defineComponent({
     const maxRetries = ref(5);
     const retries = ref(0);
     const retryProgressChunk = async () => {
-      // reset retry UI state and try again
       nfcRetry.value = false;
       nfcListen.value = true;
-      console.log(`LOG_INFO 6: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
       await progressChunk();
     };
     const isExecuteNfcSequence = ref(true);
@@ -162,7 +160,6 @@ export default defineComponent({
     const abortController = ref(new AbortController());
 
     const clearNfcData = () => {
-      console.log(`click cleadNfcData`);
       cardResponse.value = null;
       pinCode.value = null;
       attemptNumber.value = null;
@@ -198,20 +195,17 @@ export default defineComponent({
 
     const closeAbortController = () => {
       if( !abortController.value.signal.aborted ) {
-        console.log(`Stop timeout for blocking NFC tag`);
         abortController.value.abort("Idle timeout");
       }
     }
 
     const clearData = () => {
-      console.log(`click clearData`);
       emit('update:isActive', false);
       clearNfcData();
       closeAbortController();
     }
-    
+
     const windowCancel = () => {
-      console.log(`click windowCancel`);
       emit('onCancel', true);
       emit('update:isActive', false);
       clearNfcData();
@@ -219,37 +213,30 @@ export default defineComponent({
     }
 
     const readNdefTag = async() => {
-      console.log("Enter readNdefTag");
       return new Promise((resolve, reject) => {
         const ndef = new window.NDEFReader();
         const abortControllerReadNdef = new AbortController();
         const timeoutReadNdef = ref(null);
 
-        console.log(`readNdefTag Init  NDEFReader = ${JSON.stringify(ndef)}`);
-        console.log(`readNdefTag Init  abortControllerReadNdef = ${JSON.stringify(abortControllerReadNdef)}`);
         timeoutReadNdef.value = setTimeout(() => {
           abortControllerReadNdef.abort("Timeout");
           reject(new Error(t('errors.ndefReadTimeout')));
         }, 5000);
-        console.log(`timeoutReadNdef  = ${JSON.stringify(timeoutReadNdef.value)}`);
 
         ndef.onreading = (event) => {
           clearTimeout(timeoutReadNdef.value);
-          console.log(`timeoutReadNdef clearTimeout onreading = ${JSON.stringify(timeoutReadNdef.value)}`);
           abortControllerReadNdef.abort('Finished');
           resolve(event.message.records);
         };
 
         ndef.onreadingerror = (event) => {
           clearTimeout(timeoutReadNdef.value);
-          console.log(`timeoutReadNdef clearTimeout onreadingerror = ${JSON.stringify(timeoutReadNdef.value)}`);
           reject(new Error(`${event}`));
         };
 
         ndef.scan({ signal: abortControllerReadNdef.signal })
           .catch((err) => {
             clearTimeout(timeoutReadNdef.value);
-            console.log(`timeoutReadNdef clearTimeout scan = ${JSON.stringify(timeoutReadNdef.value)}`);
             reject(err);
           }
         );
@@ -257,7 +244,6 @@ export default defineComponent({
     }
 
     const writeNdefTag = async(ndefMessage) => {
-      console.log("Enter writeNdefTag");
       const ndef = new window.NDEFReader();
       const abortControllerWriteNdef = new AbortController();
       const timeoutWriteNdef = ref(null);
@@ -272,33 +258,26 @@ export default defineComponent({
           await ndef.write(msg, { signal: abortControllerWriteNdef.signal });
       } finally {
           clearTimeout(timeoutWriteNdef.value);
-          console.log(`timeoutWriteNdef clearTimeout scan = ${JSON.stringify(timeoutWriteNdef.value)}`);
       }
     }
 
     const executeNfcSequence = async (ndefMessage, expectedLength) => {
-      console.log("Enter executeNfcSequence");
-      console.log(`Writing message : length=${ndefMessage.length}, data ${JSON.stringify(new Uint8Array(expectedLength))}`);
       await writeNdefTag({
         recordType: "mime",
         mediaType: "application/octet-stream",
         data: new Uint8Array(ndefMessage),
       });
 
-      console.log(`Writing dummy data`);
       await writeNdefTag({
         recordType: "text",
         data: new Uint8Array(expectedLength),
       });
 
-      console.log(`Reading command result`);
       let records = await readNdefTag();
-      console.log(`Result read : records=[${records.map((x) => x.recordType).join(",")}]`);
 
       for (const rec of records) {
           if ( rec.recordType !== "url" ) {
             const response = await base64url_encode(rec.data.buffer);
-            console.log(`Data read data success by NFC: type ${rec.recordType}, data ${JSON.stringify(await base64url_encode(response))}`);
             return rec.data.buffer;
           }
       }
@@ -306,58 +285,40 @@ export default defineComponent({
       throw new Error(t('errors.noCardResponse'));
     }
 
-    /**
-     * Handles the NFC authorization process.
-     * @param {Uint8Array} dataWright - The data to be written to the NFC tag.
-     * @returns {Promise<any>} - The data read from the NFC tag.
-     */
     const authorizationNFCHandler = async (ndefMessage, expectedLength) => {
-      console.log("Enter NFC request");
       abortController.value = new AbortController();
-      console.log(`abortController init ${JSON.stringify(abortController.value)}`);
 
       function stopNfcPolling(startIdleTimer) {
-        console.log(`Start stopNfcPolling`);
-        console.log(`StopNfcPolling - abortController.signal =  ${JSON.stringify(abortController.value.signal)}, startIdleTimer = ${startIdleTimer}`);
       }
 
     return new Promise((resolve, reject) => {
-      console.log("Enter Promise");
       const ndef = new window.NDEFReader();
-      console.log(`Promise Init  NDEFReader = ${JSON.stringify(ndef)}`);
       let ignoreRead = false;
 
       abortController.value.signal.addEventListener("abort", (e) => {
-        console.log(`Catch signal abort = ${typeof e === 'object' || typeof e === 'array' ? JSON.stringify(e) : e}`);
       }, {once: true});
 
       ndef.onreading = async () => {
-        console.log("Enter ndef.onreading");
         if ( ignoreRead ) {
             return;
         }
 
         ignoreRead = true;
-        console.log("Card found");
 
         await executeNfcSequence(ndefMessage, expectedLength)
             .then(x => {
-              console.log(`executeNfcSequence Then : ${JSON.stringify(x)}`);
               resolve(x);
             })
             .catch(e => {
-              console.log(`executeNfcSequence Error : ${e}`);
               reject(e);
             });
       };
 
       ndef.onreadingerror = (event) => {
-        console.log(`Enter onreadingerror : ${event}`);
         stopNfcPolling(true);
         reject(new Error(`${event}`));
       };
 
-      console.log("Waiting for card...");
       ndef.scan({ signal: abortController.value.signal })
         .catch((err) => {
           stopNfcPolling(false);
@@ -366,42 +327,26 @@ export default defineComponent({
       });
     };
 
-    /**
-   * Attempts to initiate an NFC scan.
-   * @throws {Error} If NFC scan fails or times out.
-   */
   const requestNfcAccess = async () => {
     try {
       const ndef = new NDEFReader();
-      console.log('Requesting NFC access...');
       const scanPromise = ndef.scan();
       const timeout = new Promise((_, reject) =>
         setTimeout(() => reject(new Error(t('errors.nfcScanTimeout'))), 5000)
       );
       await Promise.race([scanPromise, timeout]);
-      console.log('NFC scan started...');
     } catch (err) {
-      console.error('NFC Error:', err);
       throw new Error(t('errors.nfcPermissionsError'), {
         cause: { errorSubtitle: t('pages.authorization.errors.processError'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err }
-      });// Re-throw to be handled by the caller
+      });
     }
   };
 
-    /**
-     * Handles authorization for browser environments (NFC or FIDO).
-     * @param {object} nfcHandler - Object containing NFC-related functions.
-     * @param {string} requestData - The data to be signed.
-     * @returns {Promise<string>} The signed authorization data.
-     * @throws {Error} If the authorization fails.
-     */
     const handleBrowserAuthorization = async (requestData, expectedLength, longNfc = false) => {
-      console.log(`nfcSupported: is type ${typeof nfcSupported}, data ${typeof nfcSupported === 'object' ? JSON.stringify(nfcSupported) : nfcSupported}`);
       const responseData = ref(null);
       if (nfcSupported && nfcPermissionStatus.value === 'prompt') {
         await requestNfcAccess();
       }
-      console.log(typeof requestData === 'object' || typeof requestData  === 'array' ? `handleBrowserAuthorization requestData: ${JSON.stringify(requestData)}, ` : `handleBrowserAuthorization requestData: ${requestData}`);
       if (
         nfcSupported &&
         nfcPermissionStatus.value === 'granted' &&
@@ -412,9 +357,7 @@ export default defineComponent({
         }
         try {
           responseData.value = await authorizationNFCHandler(requestData, expectedLength);
-          console.log(`Data from NFC: ${responseData.value}`);
         } catch (err) {
-          console.log(typeof err === Object || typeof err  === Array ? `ERROR Data from NFC: ${JSON.stringify(err)}, ` : `ERROR Data from NFC: ${err}`);
           throw new Error(t('errors.cardRequest'),{ cause: {errorSubtitle: t('pages.authorization.errors.validError'), errorBody: typeof err === Object || typeof err  === Array ? JSON.stringify(err) : err}});
         }
         return responseData.value;
@@ -430,7 +373,6 @@ export default defineComponent({
             cause: { errorSubtitle: 'Prepare FIDO request', errorBody: responseData.value },
           });
         }
-        console.log(typeof responseData.value  === 'object' || typeof responseData.value === 'array' ? `Data from FIDO: ${JSON.stringify(responseData.value )}, ` : `Data from FIDO: ${responseData.value }`);
         if (!responseData.value?.response?.signature) {
           throw new Error(t('errors.cardRequest'), {
             cause: { errorSubtitle: 'Error sign', errorBody: responseData.value },
@@ -438,19 +380,16 @@ export default defineComponent({
         }
         return await base64url_decode(responseData.value.response.signature);
       }
-      console.log('No supported authorization method found.');
       throw new Error(t('errors.noIoPublicKey'));
     };
 
     const waitForFlutterInAppWebView = () => {
       const readyPromise = new Promise((resolve) => {
-        console.log(`Start waitForFlutterInAppWebView`)
         let isFlutterInAppWebViewReady = window.flutter_inappwebview != null && window.flutter_inappwebview.callHandler != null;
           window.addEventListener("flutterInAppWebViewPlatformReady", function(event) {
             isFlutterInAppWebViewReady = true;
           });
         if (isFlutterInAppWebViewReady) {
-          console.log(`Start waitForFlutterInAppWebView isFlutterInAppWebViewReady true`)
           return resolve(true);
         }
       });
@@ -463,21 +402,11 @@ export default defineComponent({
     };
 
     const handleInAppWebStop = () => {
-      console.log(`Start handleInAppWebStop`)
       waitForFlutterInAppWebView();
       window.flutter_inappwebview.callHandler('handleStopNfc', null);
-      console.log(`Stop handleInAppWebStop`)
     }
 
-    /**
-     * Handles authorization for Flutter InAppWeb environments.
-     * @param {string} requestName - The data to be signed.
-     * @param {string} requestData - The data to be signed.
-     * @returns {Promise<string>} The signed authorization data.
-     * @throws {Error} If the authorization fails.
-     */
     const handleInAppWebAuthorization = async (requestName, requestData, longNfc = false) => {
-      console.warn('handleInAppWebAuthorization Enter');
       const objectToSend = {
         id: requestName,
         request: requestData,
@@ -490,176 +419,121 @@ export default defineComponent({
 
       while (!flutterResponse.value) {
         await waitForFlutterInAppWebView();
-        console.warn('handleInAppWebAuthorization while ');
         await Promise.race([
             await window.flutter_inappwebview.callHandler('handleWithFlutter', objectToSend),
           ])
             .then(async (response) => {
-              console.log(`Inappwebview response typeof - ${typeof response}, response - ${JSON.stringify(response)}`);
-              console.log(`Inappwebview response?.response typeof - ${typeof response?.response}, response - ${response?.response}`);
               if (response?.code === 'NfcCancelledException') {
-                console.warn('NFC scan was cancelled by the user. Retrying...');
                 isRetry = true;
-                
+
               } else {
                 flutterResponse.value = response?.response;
               }
             })
             .catch((err) => {
-              console.log(`handleFlutterInAppWeb Error: is type ${typeof err}, data ${typeof err === 'object' ? JSON.stringify(err) : err}`);
               if (err.message === 'Application call timed out') {
-                // Handle timeout specifically
-                console.error('Call to Flutter timed out after 30 seconds.');
-                // Optionally, set an error state or inform the user
                 throw new Error(t('errors.cardRequest'), { cause: { errorSubtitle: t('pages.authorization.errors.processError'), errorBody: typeof err === 'object' ? JSON.stringify(err) : err } });
               }
               throw new Error(t('errors.cardRequest'), { cause: { errorSubtitle: t('pages.authorization.errors.processError'), errorBody: typeof err === 'object' ? JSON.stringify(err) : err } });
             });
         if (!isRetry && flutterResponse.value) {
-          console.warn('handleInAppWebAuthorization Break');
           break;
         }
       }
-    
-      console.log(`Inappwebview resultPrepareAuthenticate.value typeof - ${typeof flutterResponse.value}, response - ${flutterResponse.value}`);
-    
+
       flutterResponseEncoded.value = await base64url_encode(flutterResponse.value);
-      console.log(`Inappwebview flutterResponseEncoded.value typeof - ${typeof flutterResponseEncoded.value}, response - ${flutterResponseEncoded.value}`);
       flutterResponseDecoded.value = await base64url_decode(flutterResponseEncoded.value);
-      console.log(`Inappwebview flutterResponseDecoded.value typeof - ${typeof flutterResponseDecoded.value}, response - ${flutterResponseDecoded.value}`);
-    
+
       return flutterResponseDecoded.value;
     };
 
     const nextChunk = async() => {
-      console.log(`progressChunk click`);
       nfcWindow.value = false;
       chunkIndex.value = chunkIndex.value + 1;
       if (chunkData.value.chunkIndex > chunkData.value.chunkLength) {
-        console.log(`Enter isActive false`);
         isChunksProcessed.value = true;
         emit('update:isActive', false);
         return;
       }
-      console.log(`chunkIndex = ${chunkIndex.value}, chunkData.chunkLength = ${chunkData.value.chunkLength}, chunkData.chunkIndex = ${chunkData.value.chunkIndex}`);
       if (chunkIndex.value <= chunkLength.value) {
-        console.log(`LOG_INFO 7: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
         await progressChunk();
       }
-      console.log(`nextChunk after progressChunk`);
     }
 
     const progressChunk = async() => {
-      console.log(`2 progressChunk ENTER`);
       nfcRetry.value = false;
       try {
-        console.log(`progressChunk`);
         title.value = t('nfcHandler.touchCard');
         nfcWindow.value = true;
         nfcListen.value = true;
         const cardRequest = shallowRef(null);
 
-        console.log(`LOG_INFO 1: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
-
-        console.log(`chunkIndex.value buildCardRequest: ${chunkIndex.value}`);
-        console.log(`chunks.value[${chunkIndex.value}}] buildCardRequest: ${JSON.stringify(chunks.value[chunkIndex.value])}`);
         if (isChunk.value ) {
           try {
             cardRequest.value = await chunks.value[chunkIndex.value].buildCardRequest({ pin: pinCode.value });
-            console.log(`cardRequest:  type is ${typeof cardRequest.value} data is ${JSON.stringify(cardRequest.value)}`);
           } catch(err) {
-            console.log(`cardRequest ERROR: ${err}`);
             throw new Error(t('errors.cardRequest'),{ cause: {errorSubtitle: t('pages.authorization.errors.prepareError'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err } });
           }
           if (!isWebViewApp()) {
-            console.log(`Check FIDO or NFC`);
             resultStart.value = await handleBrowserAuthorization( cardRequest.value, chunks.value[chunkIndex.value].getExpectedResponseSize(), nfcLongRequest.value);
-            console.log(`FIDO or NFC resultStart.value typeof - ${typeof resultStart.value}, response - ${await base64url_encode(resultStart.value)}`);
           } else if (isWebViewApp()) {
-            console.log(`Enter App`);
             resultStart.value =  await handleInAppWebAuthorization('SEND', cardRequest.value, nfcLongRequest.value);
-            console.log(`Inappwebview resultStart.value typeof - ${typeof resultStart.value}, response - ${await base64url_encode(resultStart.value)}`);
             if (isMobileAppleDevice) {
-              console.log(`Start handleInAppWebStop`)
               handleInAppWebStop();
             }
           } else {
-            console.log(`2 progressChunk NFC - Browser not supported `);
             throw new Error(t('errors.authorizationError'),{ cause: {errorBody: t('errors.browserError')}});
           }
           title.value = t('nfcHandler.removeAndClickContinue');
 
           if (resultStart.value === 'TIME_OUT' || resultStart.value?.stack) {
-            console.log(`2 progressChunk NFC - Timeout, can't read card. `);
             throw new Error('Card response',{ cause: {errorSubtitle: "Timeout, can't read card."} });
           }
 
-          console.log(`chunkIndex.value processcardResponse.value: ${chunkIndex.value}`);
           cardResponse.value = chunks.value[chunkIndex.value].processCardResponse(resultStart.value);
         } else {
           if (!isWebViewApp()) {
-            console.log(`Check FIDO or NFC`);
             resultStart.value = await handleBrowserAuthorization( chunks.value, expectedResponseSize.value.getExpectedResponseSize(), nfcLongRequest.value);
-            console.log(`FIDO or NFC resultStart.value typeof - ${typeof resultStart.value}, response - ${await base64url_encode(resultStart.value)}`);
           } else if (isWebViewApp()) {
-            console.log(`2 progressChunk Enter App`);
             resultStart.value =  await handleInAppWebAuthorization('SEND', chunks.value, nfcLongRequest.value);
-            console.log(`Inappwebview resultStart.value typeof - ${typeof resultStart.value}, response - ${await base64url_encode(resultStart.value)}`);
           } else {
-            console.log(`2 progressChunk NFC - Browser not supported `);
             throw new Error('Authorization error',{ cause: {errorBody: 'Browser not supported.'}});
           }
-          console.log(`LOG_INFO 2: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
           title.value = t('nfcHandler.removeAndClickContinue');
 
           if (resultStart.value === 'TIME_OUT' || resultStart.value?.stack) {
-            console.log(`2 progressChunk NFC - Timeout, can't read card. `);
             throw new Error('Card response',{ cause: {errorSubtitle: "Timeout, can't read card."} });
           }
 
-          console.log(`chunkIndex.value processcardResponse.value: ${chunkIndex.value}`);
           try {
             cardResponse.value = expectedResponseSize.value.parseResponse(resultStart.value);
           } catch(err) {
-            console.log(`2 progressChunk cardResponse ERROR - Timeout, can't read card. ${typeof err === 'object' ? JSON.stringify(err) : err}`);
             throw new Error(t('errors.cardResponse'),{ cause: {errorSubtitle: t('errors.invalidCardResponse'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err} });
           }
         }
 
         const { errorCode, keys, pinRemaining } = cardResponse.value;
-        console.log(`2 progressChunk cardResponse errorCode: ${typeof errorCode === 'object' ? JSON.stringify(errorCode) : errorCode}`);
-        console.log(`2 progressChunk cardResponse keys: ${typeof keys === 'object' ? JSON.stringify(keys) : keys}`);
-        console.log(`2 progressChunk cardResponse pinRemaining: ${typeof pinRemaining === 'object' ? JSON.stringify(pinRemaining) : pinRemaining}`);
-        console.log(`2 progressChunk cardResponse cardResponse.value: ${typeof cardResponse.value === 'object' ? JSON.stringify(cardResponse.value) : cardResponse.value}`);
         if (errorCode > 0) {
-          console.log(`2 progressChunk errorCode enter - ${errorCode}`);
           throw cardResponse.value;
         }
         if (cardResponse.value?.errorCode > 0) {
-          console.log(`2 progressChunk cardResponse.value.errorCode enter`);
           throw cardResponse.value?.errorCode;
         }
         if (chunkLength.value === 1) {
           nextChunk();
         }
         nfcListen.value = false;
-        retries.value = 0;   // reset counter on success
-        console.log(`LOG_INFO 3: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
+        retries.value = 0;
       } catch (err) {
-        console.log(`2 progressChunk ERROR Try read write data ERROR - ${typeof err === 'object' ? JSON.stringify(err) : err}`);
         if (err.errorCode > 0 || err.message === 'No supported authorization method found.' || err?.code === 'PUBLIC_KEY_MISMATCH' || err?.message === 'Public key mismatch' || err?.message === t('errors.cardRequest') || err?.cause?.errorSubtitle === t('pages.authorization.errors.prepareError')) {
-          console.log(`2 progressChunk ERROR Try read write data ERROR - non-retryable error`);
           throw err;
         }
         retries.value += 1;
 
         if (retries.value < maxRetries.value) {
-          console.log(`2 progressChunk ERROR: nfcRetry = ${nfcRetry.value}`);
-          console.log(`LOG_INFO 4: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
           nfcListen.value = false;
-          nfcRetry.value  = true;          // show Retry button
+          nfcRetry.value  = true;
           attemptNumber.value  = t('nfcHandler.retryCount', { n: retries.value, max: maxRetries.value });
-          console.log(`LOG_INFO 5: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
           switch (retries.value) {
             case 1:
             title.value = t('nfcHandler.errorReadWriteRetry');
@@ -669,20 +543,15 @@ export default defineComponent({
             subTitle.value = t('nfcHandler.exactSpotInstruction');
             default:
           }
-          console.log(`Set subTitle.value 1 = ${subTitle.value}`);
-          return;                          // wait for user click
+          return;
         } else {
-          // exceeded maximum retries – propagate the error
-          console.log(`2 progressChunk ERROR maxRetry: ${err}`);
           retries.value   = 0;
           nfcRetry.value  = false;
           attemptNumber.value  = null;
           title.value = props.title;
           subTitle.value = props.subTitle;
-          console.log(`Set subTitle.value 2 = ${subTitle.value}`);
           windowCancel();
           if (isWebViewApp() && isMobileAndroidDevice) {
-            console.log(`2 progressChunk ERROR ENTER TO TIMEOUT 10 SEC`);
             let seconds = 10;
             new Promise(resolve => {
               intervalWebApp = setInterval(() => {
@@ -702,37 +571,25 @@ export default defineComponent({
     }
 
     const nfcProgressHandler = (request, expectedSize, longNfc = false) => {
-      console.log(`1 nfcProgressHandler ENTER`);
-      console.log(`nfcSupported = ${nfcSupported}`);
-      console.log(`nfcPermissionStatus.value = ${nfcPermissionStatus.value}`);
-      console.log(`isWebViewApp() = ${isWebViewApp()}`);
-      console.log(`isMobileAndroidDevice = ${isMobileAndroidDevice}`);
-      console.log(`isMobileAppleDevice = ${isMobileAppleDevice}`);
 
       return new Promise(async (resolve, reject) => {
         if (isWebViewApp() && isMobileAndroidDevice) {
           clearInterval(intervalWebApp);
         }
         clearNfcData();
-        console.log(`request?.chunks: length = ${request?.chunks?.length}, data =  ${typeof request?.chunks === 'object' ? JSON.stringify(request?.chunks) : request?.chunks}`);
         expectedResponseSize.value = expectedSize;
         nfcLongRequest.value = longNfc;
         chunks.value = request;
         chunkLength.value = request?.chunks?.length ?? 1;
-        console.log(`chunkLength.value = ${chunkLength.value}`);
         emit('update:isActive', true);
-        
+
         const stopWatching = watch(() => props.isActive, (isActive) => {
-          console.log(`stopWatching ENTER`);
           if (!isActive) {
-            stopWatching(); // Clean up watcher
+            stopWatching();
             if (isChunksProcessed.value) {
-              console.log(`stopWatching resolve`);
               resolve(cardResponse.value);
               clearNfcData();
-              console.log(`APP AND ANDROID = ${(isWebViewApp() && isMobileAndroidDevice)}`);
               if (isWebViewApp() && isMobileAndroidDevice) {
-                console.log(`ENTER TO TIMEOUT 10 SEC`);
                 let seconds = 10;
                 new Promise(resolve => {
                   intervalWebApp = setInterval(() => {
@@ -748,23 +605,18 @@ export default defineComponent({
               } else if (isWebViewApp() && isMobileAppleDevice) {
                 handleInAppWebStop();
               }
-    
+
             } else {
-              console.log(`stopWatching reject`);
               clearNfcData();
             }
           }
         });
 
         try {
-          console.log(`LOG_INFO 8: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
           await progressChunk();
         } catch (err) {
-          console.log(`1 nfcProgressHandler progressChunk ERROR ${typeof err === 'object' ? JSON.stringify(err) : err}`);
           stopWatching();
-          console.log(`APP AND ANDROID = ${(isWebViewApp() && isMobileAndroidDevice)}`);
           if (isWebViewApp() && isMobileAndroidDevice) {
-            console.log(`ENTER TO TIMEOUT 10 SEC`);
             let seconds = 10;
             new Promise(resolve => {
               intervalWebApp = setInterval(() => {
@@ -780,7 +632,6 @@ export default defineComponent({
           } else if (isWebViewApp() && isMobileAppleDevice) {
             handleInAppWebStop();
           }
-          console.log(`1 nfcProgressHandler err instanceof Error = ${err instanceof Error}`);
           if (err instanceof Error) {
             reject(new Error(t('errors.cardResponse'),{ cause: {errorSubtitle: err.message, errorBody:err.cause?.errorBody} }));
           }
@@ -796,13 +647,9 @@ export default defineComponent({
           clearInterval(intervalWebApp);
         }
         clearNfcData();
-        console.log(`request?.chunks: length = ${request?.chunks?.length}, data =  ${typeof request?.chunks === 'object' ? JSON.stringify(request?.chunks) : request?.chunks}`);
         isChunk.value = true;
         nfcLongRequest.value = longNfc;
         pinCode.value = pinCodeRequest;
-        // chunks.value = request?.chunks ? request?.chunks : request;
-        // chunkLength.value = request?.chunks?.length;
-        // Добавленно для Canton
         let flatChunks = [];
         if (Array.isArray(request)) {
           flatChunks = request.flatMap(item => item?.chunks ? item.chunks : item);
@@ -813,21 +660,15 @@ export default defineComponent({
         }
         chunks.value = flatChunks;
         chunkLength.value = flatChunks.length;
-        // End Добавленно для Canton
-        console.log(`nfcProgressChunksHandler initialized: chunkLength = ${chunkLength.value}`);
         emit('update:isActive', true);
-        
+
         const stopWatching = watch(() => props.isActive, (isActive) => {
-          console.log(`stopWatching ENTER`);
           if (!isActive) {
-            stopWatching(); // Clean up watcher
+            stopWatching();
             if (isChunksProcessed.value) {
-              console.log(`stopWatching resolve`);
               resolve(cardResponse.value);
               clearData();
-              console.log(`APP AND ANDROID = ${(isWebViewApp() && isMobileAndroidDevice)}`);
               if (isWebViewApp() && isMobileAndroidDevice) {
-                console.log(`ENTER TO TIMEOUT 10 SEC`);
                 let seconds = 10;
                 new Promise(resolve => {
                   intervalWebApp = setInterval(() => {
@@ -844,12 +685,9 @@ export default defineComponent({
                 handleInAppWebStop();
               }
             } else {
-              console.log(`stopWatching reject`);
               reject(new Error('Card response',{ cause: {errorSubtitle: "Couldn't write/read data from card.", errorBody:typeof cardResponse.value === 'object' ? JSON.stringify(cardResponse.value) : cardResponse.value} }))
               windowCancel();
-              console.log(`APP AND ANDROID = ${(isWebViewApp() && isMobileAndroidDevice)}`);
               if (isWebViewApp() && isMobileAndroidDevice) {
-                console.log(`ENTER TO TIMEOUT 10 SEC`);
                 let seconds = 10;
                 new Promise(resolve => {
                   const intervalWebApp = setInterval(() => {
@@ -866,26 +704,22 @@ export default defineComponent({
                 handleInAppWebStop();
               }
               if (isMobileAndroidDevice) {
- 
+
               }
             }
           }
         });
 
         try {
-          console.log(`LOG_INFO 9: nfcListen - ${nfcListen.value}, nfcWindow - ${nfcWindow.value}, nfcRetry - ${nfcRetry.value}, chunkLength - ${chunkLength.value}`);
           await progressChunk();
         } catch (err) {
-          console.log(`nfcProgressChunksHandler progressChunk ERROR ${typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}`);
           const isKeyMismatch = err?.code === 'PUBLIC_KEY_MISMATCH' || err?.message === 'Public key mismatch' || err?.cause?.errorSubtitle === t('errors.publicKeyMismatch');
           const errorSubtitle = isKeyMismatch
             ? t('errors.publicKeyMismatch')
             : (err?.cause?.errorSubtitle || t('pages.authorization.errors.walletError'));
           reject(new Error(t('errors.cardResponse'),{ cause: {errorSubtitle, errorBody:typeof cardResponse.value === 'object' ? JSON.stringify(cardResponse.value) : cardResponse.value} }));
           windowCancel();
-          console.log(`APP AND ANDROID = ${(isWebViewApp() && isMobileAndroidDevice)}`);
           if (isWebViewApp() && isMobileAndroidDevice) {
-            console.log(`ENTER TO TIMEOUT 10 SEC`);
             let seconds = 10;
             new Promise(resolve => {
               const intervalWebApp = setInterval(() => {
@@ -914,7 +748,6 @@ export default defineComponent({
     });
 
     onUnmounted(() => {
-      console.log(`onUnmounted`);
     });
 
     return { nfcWindow, nfcAnimationImg, authorizationNFCHandler, nfcProgressChunksHandler, nfcProgressHandler, 
@@ -944,7 +777,7 @@ export default defineComponent({
   .attempt-number {
     margin-bottom: 8px;
   }
-  
+
   .title {
     font-size: 18px;
     font-weight: 600;

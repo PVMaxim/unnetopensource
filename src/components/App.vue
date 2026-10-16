@@ -30,7 +30,6 @@ export default defineComponent({
   },
   setup() {
     const handlePreloadError = (e) => {
-      console.error('[App] Vite preload error detected');
       e.preventDefault();
       errorReload('Error during page load', 3);
     };

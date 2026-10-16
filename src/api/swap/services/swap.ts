@@ -14,7 +14,6 @@ export class SwapService {
       this._history = data;
       return data;
     } catch (e) {
-      console.warn("Ошибка, возвращаю кэш", e);
       return this._history;
     }
   }

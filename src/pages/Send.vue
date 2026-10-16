@@ -166,14 +166,13 @@
 
       const errorImg = new URL(`@/assets/images/errorcode.svg`, import.meta.url).href;
       const successImg = new URL(`@/assets/images/successcode.svg`, import.meta.url).href;
-      
+
       const amountError = ref(null);
       const walletError = ref(null);
-      
+
       const token = computed(() => { return getToken(store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name]?.root);});
 
       const historyPageLimit = computed(() => { 
-        console.log(`historyPageLimit:  type is ${typeof historyBox.value?.clientHeight} data is ${JSON.stringify(historyBox.value?.clientHeight)}`);
         if ( historyBox.value?.clientHeight ) {
           return Number(roundNumberIntMin((historyBox.value?.clientHeight - 69) / 50));
         }
@@ -206,7 +205,7 @@
       const qrClose = () => {
         qrScan.value = false;
       }
-      
+
       const pinCancelButton = () => {
         pinState.value = false;
         pinPre.value = null;
@@ -254,13 +253,11 @@
           return;
         }
         isLoading.value = true;
-        console.log(`isLoading = ${isLoading.value}`);
         if (typeof store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name] !== 'object' ) {
           error.value = true;
           errorSubtitle.value = t('errors.incorrectToken');
           isLoading.value = false;
         }
-        console.log(`isLoading = ${isLoading.value}`);
         const resultStart = shallowRef(null);
         const transaction = shallowRef(undefined);
         const transactionData = ref(
@@ -271,60 +268,41 @@
           }
         );
 
-        console.log(`token:  type is ${typeof store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name]?.root} data is ${JSON.stringify(store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name]?.root)}`);
-        console.log(`transactionData.value:  type is ${typeof transactionData.value} data is ${JSON.stringify(transactionData.value)}`);
         messageLoad.value = t('pages.send.status.prepareSign');
 
-        const request = shallowRef(null); ///transactionCardPrepare.value
-        console.log(`setUniSettings: = ${store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'}`);
+        const request = shallowRef(null);
         setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
-        console.log(`isLoading = ${isLoading.value}`);
         try {
           request.value = await token.value.transfer(transactionData.value);
-          console.log(`token.value.transfer:  type is ${typeof request.value} data is ${request.value}`);
         } catch(err) {
-          console.log(`token.value.transfer ERROR:  type is ${typeof err} data is ${typeof err === 'object' ? JSON.stringify(err) : err}`);
           throw new Error(t('errors.tokenTransfer'),{ cause: {errorSubtitle: t('errors.transferError'), errorBody: typeof err === 'object' ? JSON.stringify(err) : err} });
         }
         resultStart.value = await nfcHandlerWindow.value?.nfcProgressChunksHandler(request.value, pinPre.value, true);
-        console.log(`resultStart.value:  type is ${typeof resultStart.value} data is ${typeof resultStart.value === 'object' ? JSON.stringify(resultStart.value) : resultStart.value}`);
-        console.log(`isLoading = ${isLoading.value}`);
         messageLoad.value = t('pages.send.status.processing');
         try {
           transaction.value = await request.value.send();
         } catch(err) {
-          console.log(`transaction.value.send ERROR: ${err}`);
-          console.log(`isLoading = ${isLoading.value}`);
           throw new Error(t('errors.cardResponse'),{ cause: {errorSubtitle: t('errors.transferError'), errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
         }
 
         if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-          console.log(`Store PIN code 3 min`);
           store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
           }).catch((err) => {
           });
         }
-        console.log(`TRANSACTION SUCCESS`);
-        console.log(`isLoading = ${isLoading.value}`);
         pinPre.value = null;
         success.value = true;
         isLoading.value = false;
       };
 
       const submitPinSelectHandler = async(event) => {
-        console.log(`submitPinSelectHandler event - ${JSON.stringify(event)}`);
         formData.amount = event.amount;
         formData.wallet = event.wallet;
         formData.tokenList = event.tokenList;
-        console.log(`Store PIN storePin.value - ${storePin.value}`);
-        console.log(`Store PIN store.state.user.pinHash - ${store.state.user.pinHash}`);
-        console.log(`Store PIN store.state.user.pinHash?.date  - ${store.state.user.pinHash?.date}`);
         if ( store.state.user.pinHash !== null && (store.state.user.pinHash?.date - Date.now()) > 0 ) {
-          console.log(`Store PIN get`);
           pinPre.value = store.state.user.pinHash?.pin;
           await submitFormOrderHandler();
         } else {
-          console.log(`Store PIN remove`);
           store.dispatch('user/resetPinHash').then(() => {
           }).catch((err) => {
           });
@@ -333,17 +311,15 @@
       }
 
       useEventsBus().on('loadingPayload', async (payload) => {
-        console.log(`useEventsBus loadingPayload - ${payload}`);
         isLoading.value = payload;
       });
 
       useEventsBus().on('rpcProviderChange', async (payload) => {
-        console.log(`useEventsBus rpcProviderChange - ${payload}`);
         isLoading.value = true;
         price.gazPriceToken = null;
         price.gazPriceUsd = null;
         price.priceUsd = null;
-        setTokensBalances(true).catch(console.error);
+        setTokensBalances(true).catch(() => {});
         nativeToken.value = await getNativeCoinSymbol();
         formData.wallet = '';
         formData.amount = '';
@@ -351,7 +327,6 @@
       });
 
       onMounted(async() => {
-        console.log('onMounted store.state.user.accountAddress - ' + store.state.user.accountAddress);
         if ( typeof(store.state.user.accountAddress) !== 'string' ) {
           router.push({ name: 'authorization' });
         } else if ( !(await isValidWalletAddress(store.state.user.accountAddress)) ) {
@@ -375,11 +350,9 @@
         error.value = true;
         errorTitle.value = title ?? t('errors.sendTokenError');
         errorSubtitle.value = message ?? t('pages.send.pressOkToTryAgain');
-        console.log(`errorBody = ${err?.cause?.errorBody}`);
         const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
           + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
           + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-        console.log(messageConsole);
         isLoading.value = false;
         return false;
       });

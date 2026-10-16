@@ -11,10 +11,10 @@
         <label v-if="label" :for="inputId" v-html="label"></label>
     </div>
   </template>
-  
+
   <script>
     import { defineComponent } from 'vue'
-  
+
     export default defineComponent({
       name: 'InputCheckbox',
       emits: ['update:modelValue', 'change'],
@@ -37,7 +37,7 @@
           default: false
         }
       },
-  
+
       setup(props, { emit }) {
         function onChanged(e) {
           emit('update:modelValue', e.currentTarget.checked);
@@ -51,7 +51,7 @@
         }
       }
     })
-  </script>
+</script>
 
 <style scoped lang="scss">
 .input-container-checkbox {

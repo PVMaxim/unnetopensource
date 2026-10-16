@@ -4,8 +4,6 @@ import { Request } from "../common";
 import { UniLowBalanceError , UniError } from "../errors";
 import { Secp256k1RequestChunk } from "../request-chunks";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmRequestChunk extends Secp256k1RequestChunk {
     protected convertSignature(
         publicKey: string, 
@@ -19,8 +17,6 @@ export class EvmRequestChunk extends Secp256k1RequestChunk {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class EvmRequest implements Request {
     readonly chunks: EvmRequestChunk[];
 
@@ -108,17 +104,11 @@ export class EvmRequest implements Request {
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function convertSignatureForEvm(args: {
     dataHash: string, 
     signature: string,
     publicKey: string,
 }): string {
-    // Ethereum expects signature in the following format:
-    // <r:32 bytes><s: 32 bytes><v:1 byte>
-    // where "s" is normalized : s <= (CURVE_ORDER / 2)
-    // and v = recoveryBit + 27
 
     const normSignature = secp256k1.Signature.fromCompact(args.signature).normalizeS();
 
@@ -135,15 +125,11 @@ export function convertSignatureForEvm(args: {
     throw new UniError("INVALID_ARGUMENT", "Invalid signature");
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 async function estimateFee(provider: ethers.Provider, gas: bigint): Promise<bigint> {
     const feeData = await provider.getFeeData();
     return (feeData.gasPrice || BigInt(0)) * gas;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
 export function evmNormalizeAddress(address: string) {
     return address.toLowerCase();
 }

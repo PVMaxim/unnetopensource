@@ -15,11 +15,11 @@
       </div>
     </div>
   </template>
-  
+
   <script>
 import { defineComponent, watchEffect, ref, computed } from 'vue';
 import Loading from '@/components/Loading.vue';
-  
+
   export default defineComponent({
     name: 'PullToRefresh',
     emits: ['refresh'],
@@ -36,7 +36,7 @@ import Loading from '@/components/Loading.vue';
       components: {
         Loading
       },
-  
+
       setup(props, { emit }) {
         const pullToRefreshContainer = ref(null);
         const startY = ref(0);
@@ -49,7 +49,7 @@ import Loading from '@/components/Loading.vue';
           }
           return 'initial'
         });
-  
+
         const checkScrollTop = () => {
           return pullToRefreshContainer.value.scrollTop <= 10;
         }
@@ -64,7 +64,7 @@ import Loading from '@/components/Loading.vue';
         const blockingPullStatus = () => {
           return !checkScrollTop() || props.isLoading;
         }
-  
+
         const handleTouchStart = (event) => {
           if (blockingPullStatus()) return;
           startY.value = event.touches[0].clientY;
@@ -124,7 +124,7 @@ import Loading from '@/components/Loading.vue';
         return { isRefresh, refreshHeight, refreshIndicatorRotation, pullToRefreshContainer, handleTouchStart, handleTouchMove, handleTouchEnd, minHeightComp }
       }
   })
-  </script>
+</script>
 
   <style scoped lang="scss">
   .pull-to-refresh-wrapper {
@@ -132,11 +132,11 @@ import Loading from '@/components/Loading.vue';
     width: 100%;
     min-height: v-bind(minHeightComp);
   }
-  
+
   .pull-to-refresh-loading-wrapper {
     pointer-events: none;
   }
-  
+
   .pull-to-refresh-container {
     scroll-behavior: smooth;
     overscroll-behavior: contain;
@@ -145,7 +145,7 @@ import Loading from '@/components/Loading.vue';
     width: 100%;
     min-height: 100%;
   }
-  
+
   .pull-to-refresh-box  {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -169,5 +169,5 @@ import Loading from '@/components/Loading.vue';
       z-index: 2;
     }
   }
-  
-  </style>
+
+</style>

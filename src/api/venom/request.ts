@@ -1,7 +1,5 @@
 import { Ed25519RequestChunk } from "../request-chunks";
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class VenomRequestChunkFactory {
 
     constructor(readonly sidReader: () => Promise<number | undefined>) {

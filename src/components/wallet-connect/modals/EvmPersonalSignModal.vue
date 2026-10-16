@@ -158,18 +158,12 @@ export default defineComponent({
       chainId: new EvmChainId(supportedChainId),
       manager: supportedChainProviderManager,
     };
-    
 
 const text = Buffer.from(methodParamDataHex.replace(/^0x/, ''), 'hex').toString('utf8');
-
-console.log(text);
-
-    
 
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn("Extra attempt to close modal");
         return;
       }
       closeModalCalled = true;
@@ -192,7 +186,6 @@ console.log(text);
           result,
         );
       } catch (error) {
-        console.error("respondSessionRequest (reject) error", error);
       }
     };
 
@@ -206,12 +199,6 @@ console.log(text);
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error("approve error", {
-          state,
-          walletConnectHelper: walletConnectHelper.value
-            ? "available"
-            : "unexpected unavailable",
-        });
 
         failMessage.value = "Failed";
         failDetails.value = "Unable to perform the operation at the moment.";
@@ -256,7 +243,6 @@ console.log(text);
 
     const approveWithPin = async () => {
       state.value = STATE_INPROGRESS;
-      console.log("called evmSignTypedDataModal approveWithPin");
 
       let processResult = undefined;
 
@@ -264,7 +250,6 @@ console.log(text);
       try {
         processResult = await sign();
       } catch (error) {
-        console.error("sign error", error);
       } finally {
         progressTitle.value = "";
       }
@@ -295,7 +280,6 @@ console.log(text);
         );
         processSuccess = true;
       } catch (error) {
-        console.error("respondSessionRequest (result) error", error);
       } finally {
         progressTitle.value = "";
       }
@@ -309,7 +293,6 @@ console.log(text);
           "Message was signed successfully, but the application was not notified about the result.";
         state.value = STATE_PROCESS_FAIL;
 
-        //respondRejected(); //???
       }
     };
 
@@ -321,12 +304,8 @@ console.log(text);
             store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
         });
 
-        console.log("method:", method);
-
         const publicKey = getSecp256k1Key(store.state.user.publicKeyCard);
         const dataHash = ethers.hashMessage(ethers.getBytes(methodParamDataHex)).slice(2);
- 
-        console.log("dataHash:", dataHash);
 
         const requestChunk = new BatchSecp256k1RequestChunk({
           hashes: [dataHash],
@@ -334,19 +313,14 @@ console.log(text);
         });
 
         const resultStart = shallowRef(null);
-        console.log("signTransaction", requestChunk);
 
         resultStart.value = await nfcHandlerWindow.nfcProgressChunksHandler(
           { chunks: [requestChunk] },
           pinPre.value,
           false,
         );
-        console.log("resultStart : " + JSON.stringify(resultStart.value));
 
         const signature = requestChunk.signatures[0];
-        console.log(
-          `signature: ${typeof signature === "object" ? JSON.stringify(signature) : signature}`,
-        );
 
         const signResult = add0xPrefix(
           convertSignatureForEvm({
@@ -355,9 +329,6 @@ console.log(text);
             publicKey: resultStart.value.keys.secp256k1,
           }),
         );
-        console.log(
-          `signResult: ${typeof signResult === "object" ? JSON.stringify(signResult) : signResult}`,
-        );
 
         if (needStorePin.value) {
           storeSuccessfulSignPin(pinPre.value, signature.keys);
@@ -365,9 +336,6 @@ console.log(text);
 
         return signResult;
       } catch (err) {
-        console.log(
-          `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`,
-        );
         throw new Error(`Error signing transaction: ${err.message}`);
       } finally {
         pinPre.value = null;
@@ -382,7 +350,7 @@ console.log(text);
 
       chainId,
       method,
-      
+
       from,
       text,
       isCurrentAccount,

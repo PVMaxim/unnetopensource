@@ -27,7 +27,6 @@ interface NativeTransactionData {
 const NATIVE_STATIC_FEE = "3000000";
 
 const STATIC_FEE = "15000000";
-///////////////////////////////////////////////////////////////////////////////
 class WVaultTransferRequest implements Request {
 
     readonly chunks: Ed25519RequestChunk[];
@@ -83,7 +82,6 @@ class WVaultTransferRequest implements Request {
         return new BigNumber(NATIVE_STATIC_FEE).shiftedBy(-VENOM_NATIVE_COIN_DECIMALS).toFixed();
     }
 
-
     async send(): Promise<string> {
 
         const publicKey = this.chunks[0].publicKey;
@@ -121,7 +119,6 @@ class WVaultTransferRequest implements Request {
     }
 }
 
-///////////////////////////////////////////////////////////////////////////////
 const NATIVE_TRANSFER_STRUCTURE = [
     { name: "timestamp", type: "uint64" },
     {
@@ -137,7 +134,6 @@ const NATIVE_TRANSFER_STRUCTURE = [
     }
 ] as const;
 
-///////////////////////////////////////////////////////////////////////////////
 export class WVenomVault{
 
     private readonly _rpc: ProviderRpcClient;
@@ -256,7 +252,6 @@ export class WVenomVault{
             payload: boc,
         });
     }
-
 
     async swap(args: {
         crossSwapPayload: any,

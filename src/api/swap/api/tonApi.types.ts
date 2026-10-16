@@ -8,8 +8,8 @@ export interface TonApiTransactionWithTrace extends TonApiTransaction {
 interface DedustSwapOutBody {
   asset_in: DedustAsset;
   asset_out: DedustAsset;
-  amount_in: string; // nano units (jetton or TON)
-  amount_out: string; // nano units
+  amount_in: string;
+  amount_out: string;
   field4: {
     sender_addr: string;
     referral_addr: string;
@@ -34,7 +34,6 @@ interface DedustAsset {
   };
 }
 
-/* ===================== TRANSACTION ===================== */
 
 export interface TonApiTransaction {
   hash: string;
@@ -68,7 +67,6 @@ export interface TonApiTransaction {
   raw: string;
 }
 
-/* ===================== ACCOUNT ===================== */
 
 interface Account {
   address: string;
@@ -82,7 +80,6 @@ interface AddressInfo {
   is_wallet: boolean;
 }
 
-/* ===================== MESSAGES ===================== */
 
 type MessageType = "int_msg" | "ext_in_msg";
 
@@ -101,7 +98,6 @@ interface BaseMessage {
   decoded_body?: DecodedBody | DedustSwapOutBody;
 }
 
-/* ---------- IN MSG ---------- */
 
 type InMessage = InternalInMessage | ExternalInMessage;
 
@@ -121,7 +117,6 @@ interface ExternalInMessage extends BaseMessage {
   decoded_body?: DecodedBody;
 }
 
-/* ---------- OUT MSG ---------- */
 
 interface OutMessage extends BaseMessage {
   msg_type: "int_msg";
@@ -129,11 +124,9 @@ interface OutMessage extends BaseMessage {
   source: AddressInfo;
 }
 
-/* ===================== DECODED ===================== */
 
 type DecodedBody = JettonNotifyBody | WalletSignedV3Body;
 
-/* ---------- JETTON ---------- */
 
 interface JettonNotifyBody {
   query_id: number;
@@ -145,7 +138,6 @@ interface JettonNotifyBody {
   };
 }
 
-/* ---------- WALLET SIGNED V3 ---------- */
 
 interface WalletSignedV3Body {
   signature: string;
@@ -190,7 +182,6 @@ interface MessageInternal {
   };
 }
 
-/* ===================== PHASES ===================== */
 
 interface ComputePhase {
   skipped: boolean;

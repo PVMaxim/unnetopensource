@@ -22,7 +22,7 @@
     subTitle="Hold your card flat against the back of your device until this window is open."
     v-model:isActive="nfcIsActive"
   />
- 
+
 </template>
 
 <script>

@@ -84,11 +84,9 @@ export default {
         navigator.permissions.query({ name: "camera" }).then(async ({ state }) => {
           if (state == "granted") {
             qrReaderError.value = undefined;
-            console.log("permission granted!");
           } else if (state == "denied") {
             qrReaderError.value =
               t('pages.connectedApps.cameraPermissionError');
-            console.log("permission denied!");
           }
         });
       }
@@ -105,7 +103,6 @@ export default {
     }
 
     const onQrReaderOk = (value) => {
-      console.log("onQrReaderOk");
 
       qrReaderEnabled.value = false;
       appConnectLink.value = value;
@@ -114,7 +111,6 @@ export default {
     };
 
     const onQrReaderError = (error) => {
-      console.log("onQrReaderError", error);
 
       if (error.startsWith('[NotAllowedError]')) {
         walletConnectResultModalData.value = {
@@ -129,7 +125,6 @@ export default {
     };
 
     const onQrReaderClose = () => {
-      console.log("onQrReaderClose");
 
       qrReaderEnabled.value = false;
     };
@@ -144,7 +139,6 @@ export default {
         appConnectLink.value = "";
         invalidateConnectedAppsCache();
       } catch (error) {
-        console.error('onConnect error:', error);
         walletConnectResultModalData.value = {
           success: false,
           message: t('pages.connectedApps.unableToConnect'),

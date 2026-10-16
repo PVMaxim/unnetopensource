@@ -5,8 +5,6 @@ import { assert } from "../errors";
 import { EtherScanHistory } from "../evm/providers/etherscan";
 import { default as IPrivateERC20 } from "./abi/IPrivateERC20.json";
 
-
-///////////////////////////////////////////////////////////////////////////////
 const LogsSchema = z.object({
     status: z.string(),
     message: z.string(),
@@ -19,8 +17,6 @@ const LogsSchema = z.object({
     }).array(),
 });
 
-
-///////////////////////////////////////////////////////////////////////////////
 export class CotiScanHistory extends EtherScanHistory {
 
     protected readonly _privateTokenInterface: ethers.Interface;

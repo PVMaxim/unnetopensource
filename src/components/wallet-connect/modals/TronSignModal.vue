@@ -15,7 +15,6 @@
         :useStorePinCode=true @isStore="onStorePinChange($event.value)" @cancelButton="onPinCancelButton($event.value)"
         @change="onPinChange($event.value)" />
 
-      
     </template>
 
     <template v-if="!pinState" v-slot:actions>
@@ -89,10 +88,8 @@ export default defineComponent({
         const contractHexAddress = params.request.params.transaction.transaction.raw_data.contract[0].parameter.value.contract_address;
         const contractAddress = TronWeb.address.fromHex(contractHexAddress);
         const contract = await supportedChainProviderManager.provider.trx.getContract(contractAddress);
-        console.log("hi", contract);
         const rawData = params.request.params.transaction.transaction.raw_data.contract[0].parameter.value.data;
         const selector = rawData.slice(0, 8); 
-        console.log("hi", selector);
         for (const item of contract.abi.entrys) {
             if (item.type.toLowerCase() !== 'function' ) continue;
 
@@ -100,8 +97,7 @@ export default defineComponent({
 
             const inputTypes = item.inputs.map(i => {
                 if (i.type === 'tuple') {
-                // support tuple syntax
-                
+
                 return `tuple()`;
                 }
                 return i.type;
@@ -109,22 +105,17 @@ export default defineComponent({
 
             const signature = `${item.name}(${inputTypes})`;
 
-            // Use TronWeb to hash the function signature (keccak256)
-            const hash = supportedChainProviderManager.provider.sha3(signature).substring(2, 10); // 0x + 8 hex chars
-            console.log(hash, signature)
+            const hash = supportedChainProviderManager.provider.sha3(signature).substring(2, 10);
             if (hash === selector) {
-                console.log(`✅ Selector ${selector} matches function: ${signature}`);
                 break;
             }
         } 
 
-       
     })
 
     let closeModalCalled = false;
     const closeModal = () => {
       if (closeModalCalled) {
-        console.warn('Extra attempt to close modal');
         return;
       }
       closeModalCalled = true;
@@ -140,7 +131,6 @@ export default defineComponent({
         const result = createRejectResponse(requestEvent);
         await walletConnectHelper.value.respondSessionRequest(requestEvent, result);
       } catch (error) {
-        console.error('respondSessionRequest (reject) error', error);
       }
     }
 
@@ -154,10 +144,6 @@ export default defineComponent({
 
     const approve = async () => {
       if (state.value == STATE_INPROGRESS || !walletConnectHelper.value) {
-        console.error('approve error', {
-          state,
-          walletConnectHelper: walletConnectHelper.value ? 'available' : 'unexpected unavailable',
-        });
 
         failMessage.value = 'Failed';
         failDetails.value = 'Unable to perform the operation at the moment.';
@@ -205,7 +191,6 @@ export default defineComponent({
     } 
 
      const approveWithPin = async () => {
-      console.log("called evmSendTransactionModal approveWithPin");
       state.value = STATE_INPROGRESS;
 
       let txSendRequest;
@@ -213,7 +198,6 @@ export default defineComponent({
       try {
         txSendRequest = await createTxSendRequest();
       }catch (error) {
-        console.error('createTxSendRequest error', error)
       } finally {
         progressTitle.value = "";
       }
@@ -221,7 +205,6 @@ export default defineComponent({
       let processResult = undefined;
 
       progressTitle.value = "Signing message";
-      
 
       try {
         progressTitle.value = "Signing transaction";
@@ -241,20 +224,17 @@ export default defineComponent({
       progressTitle.value = "Responding to the application";
       try {
         const copyTransaction = JSON.parse(JSON.stringify(params.request.params.transaction.transaction))
-        console.log({ copyTransaction })
         const responseData = formatJsonRpcResult(id, {
             transaction: {
               ...copyTransaction,
               signature: [txSendRequest.tx.chunks[0].signature]
             }
-           
+
         }) 
-        console.log("responseData", JSON.stringify(responseData), responseData,)
-        
+
         await walletConnectHelper.value.respondSessionRequest(requestEvent, responseData);
         processSuccess = true;
       } catch (error) {
-        console.error('respondSessionRequest (result) error', error);
       } finally {
         progressTitle.value = "";
       }
@@ -267,7 +247,6 @@ export default defineComponent({
         failDetails.value = 'Message was signed successfully, but the application was not notified about the result.';
         state.value = STATE_PROCESS_FAIL;
 
-        //respondRejected(); //???
       }
     };
 
@@ -277,7 +256,6 @@ export default defineComponent({
           ioMethod:
             store.state.settings.cardReaderPriority === "fido" ? "fido" : "nfc",
         });
-        console.log("signTransaction", transaction);
         const resultStart = shallowRef(null);
         resultStart.value =
           await nfcHandlerWindow.nfcProgressChunksHandler(
@@ -285,22 +263,14 @@ export default defineComponent({
             pinPre.value,
             true
           );
-        console.log('resultStart : ' + JSON.stringify(resultStart.value));
-        console.log("transaction", transaction)
-
 
       } catch (err) {
-        console.log(
-          `nfcHandlerWindow ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`
-        );
         throw new Error(`Error signing transaction: ${err.message}`);
       } finally {
         pinPre.value = null;
       }
     }
 
-     
-    
     return {
       state,
       progressTitle,

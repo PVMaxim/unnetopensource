@@ -123,7 +123,7 @@
   import narrow from '@/components/svg/narrowRight.vue';
   import backIcon from '@/components/svg/backIcon.vue';
   import CopyIcon from '@/components/svg/copyIcon.vue'
-  
+
   export default {
     name: 'Settings page',
     layout: 'Dashboard',
@@ -156,7 +156,6 @@
       const pinState = ref('OLD_PIN');
       const pinLength = computed(() => { 
         if ( typeof store.state[`${prefixStore.value}.customtoken`]?.pinLength !== undefined ) {
-          console.log(`pinLength isset`);
           return store.state[`${prefixStore.value}.customtoken`]?.pinLength;
         }
         return 4
@@ -286,7 +285,6 @@
       }
 
       const confirmPinHandler = async () => {
-        console.log(`confirmPinHandler 1 state = ${state.value}, error = ${error.value}`);
         isLoading.value = true;
         const resultAuth = ref(null);
         const resultChangePinHandler = ref(null);
@@ -299,11 +297,8 @@
 
         setUniSettings({ioMethod: store.state.settings.cardReaderPriority === 'fido' ? 'fido' : 'nfc'});
         try {
-          console.log(`CmdSetPin.buildRequest NFC PRE: data is ${JSON.stringify(pinPrepareData.value)}`);
           resultAuth.value = await CmdSetPin.buildRequest(pinPrepareData.value);
-          console.log(`CmdSetPin.buildRequest NFC:  type is ${typeof resultAuth.value} data is ${JSON.stringify(resultAuth.value)}`);
         } catch(err) {
-          console.log(`buildRequest NFC ERROR:  type is ${typeof err} data is ${JSON.stringify(err)}`);
           error.value = true;
           errorSubtitle.value = err;
           isLoading.value = false;
@@ -311,12 +306,9 @@
         }
 
         resultChangePinHandler.value = await nfcHandlerWindow.value?.nfcProgressHandler(resultAuth.value, CmdSetPin, false);
-        console.log(`confirmPinHandler 2 state = ${state.value}, error = ${error.value}`);
-         
-        console.log(`After SWITCH`);
+
         state.value = 'pinChanged';
         isLoading.value = false;
-        console.log(`confirmPinHandler 3 state = ${state.value}, error = ${error.value}`);
       }
 
       const selectedMethod = ref('');
@@ -348,7 +340,7 @@
       const showSettingsChangeHandler = async () => {
         state.value = 'change-settings';
       }
-      
+
       const backHandler = async () => {
         error.value = false;
         errorTitle.value = t('pages.settings.pinChangeError');
@@ -356,9 +348,6 @@
         state.value = 'menu';
       }
 
-      console.log(`store.state.user?.publicKeyCard.ioPublicKey: data is ${JSON.stringify(store.state.user?.publicKeyCard?.ioPublicKey)}`);
-      console.log(`store.state.user.registered: data is ${store.state.user.registered}`);
-      
       watchEffect(() => {
         currentLanguage.value = store.state.lang.locale;
         if (state.value === 'change-pin' && (!store.state.user?.publicKeyCard?.ioPublicKey || store.state.user.registered === true || store.state.user.registered === null )) {
@@ -372,12 +361,9 @@
         error.value = true;
         errorTitle.value = title ?? t('errors.sendTokenError');
         errorSubtitle.value = message ?? t('pages.settings.pressOkToTryAgain');
-        console.log(`errorBody = ${err?.cause?.errorBody}`);
         const messageConsole = err?.cause?.errorTitle ? `errorTitle: ${err?.cause?.errorTitle}, ` : null 
           + err?.cause?.errorSubtitle ? `errorSubtitle: ${err?.cause?.errorSubtitle}, ` : null
           + err?.cause?.errorBody ? typeof err?.cause?.errorBody === 'object' || typeof err?.cause?.errorBody  === 'array' ? `errorBody: ${JSON.stringify(err?.cause?.errorBody)}, ` : `errorBody: ${err?.cause?.errorBody}, ` : null;
-        console.log(messageConsole);
-        console.log(`onErrorCaptured state = ${state.value}, error = ${error.value}`);
         isLoading.value = false;
         return false;
       });
@@ -401,11 +387,6 @@
 </script>
 
 <style scoped lang="scss">
-// .toggle-switch-settings {
-//   :deep(.toggle-switch){
-//     width: 100%;
-//   }
-// }
 .container-main {
   width: 90%;
   flex-direction: column;
@@ -440,10 +421,10 @@
   }
   .settings-language-select {
     width: 100px;
-    
+
     :deep(.multiselect) {
       background-color: transparent;
-      
+
       .multiselect__tags {
         background-color: $color-black-38;
         border: 1px solid $color-black-40;
@@ -473,7 +454,7 @@
       .multiselect__option {
         background-color: transparent;
         color: $color-white;
-        
+
         &--highlight {
           background-color: $color-orange;
           color: $color-white;
@@ -520,7 +501,7 @@
       background-color: rgb(23, 23, 23);
       border-radius: 20px;
       padding: 18px 0 18px 18px;
-      
+
       .public-key-card-input {
         width: 100%;
         height: auto;
