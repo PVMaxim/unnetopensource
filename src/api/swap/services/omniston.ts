@@ -33,7 +33,7 @@ const PROXY_TON_ADDRESSES = [
 const TONCO_ROUTER_ADDRESS =
   "0:bffadd270a738531da7b13ba8fc403826c2586173f9ede9c316fab53bc59ac86";
 
-const CHAINS = {
+const CHAINS: Record<string, number> = {
   [SWAP_CHAINS.TON]: 607,
 };
 
@@ -234,7 +234,7 @@ class OmnistonService extends SwapService implements ISwapService {
     try {
       const manager = createProviderManager(SWAP_CHAINS.TON);
 
-      const res = await manager.provider.runMethod(
+      const res = await (manager as any).provider.runMethod(
         Address.parse(jettonAddress),
         "get_wallet_data",
       );

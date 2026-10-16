@@ -1,4 +1,4 @@
-import { encryptData, decryptData, readEncrypted, writeEncrypted, removeEncrypted } from './encrypt-decrypt';
+import { encryptData, decryptData, readEncrypted, readLegacyEncrypted, writeEncrypted, removeEncrypted } from './encrypt-decrypt';
 
 const DB_NAME = 'UnitedNetworkDB';
 const DB_VERSION = 1;

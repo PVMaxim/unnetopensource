@@ -22,7 +22,6 @@ export class VenomWalletManager extends BlockchainManagerBase implements Blockch
 
     private readonly _rpc: ProviderRpcClient;
     private readonly _keystore: CustomKeyStore;
-    private readonly _logger?: Logger;
     private readonly _deployer: Deployer;
     private readonly _chunkFactory: VenomRequestChunkFactory;
     private readonly _venomScan: VenomScan;
@@ -45,7 +44,6 @@ export class VenomWalletManager extends BlockchainManagerBase implements Blockch
         });
 
         this._venomScan = new VenomScan({ txUrlFormatter: args.txUrlFormatter });
-        this._logger = args.logger;
         this._keystore = new CustomKeyStore();
 
         const accountsStorage = new SimpleAccountsStorage();

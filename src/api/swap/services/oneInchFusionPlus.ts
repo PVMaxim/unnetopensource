@@ -391,7 +391,7 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
         await this.submitOrder({
           order: order.typedData.message,
           secretHashes: secretsCount === 1 ? undefined : [hashLocks],
-          quoteId: fusionQuote.quoteId,
+          quoteId: fusionQuote.quoteId ?? '',
           srcChainId: this.getChainId(fromProvider.swapChain),
           signature,
           extension: order.extension,
@@ -634,15 +634,17 @@ class OneInchFusionPlus extends OneInch implements ISwapService {
         dstChain: this.getChainId(params.toToken.chain),
         srcTokenAddress: SolanaAddress.fromString(srcTokenAddress),
         dstTokenAddress: EvmAddress.fromString(dstTokenAddress),
-        amount: new BigNumber(params.amount)
-          .shiftedBy(params.fromToken.decimals)
-          .decimalPlaces(0, BigNumber.ROUND_FLOOR)
-          .toString(),
+        amount: BigInt(
+          new BigNumber(params.amount)
+            .shiftedBy(params.fromToken.decimals)
+            .decimalPlaces(0, BigNumber.ROUND_FLOOR)
+            .toString()
+        ),
         walletAddress: SolanaAddress.fromString(params.accountAddress),
         enableEstimate: true,
         fee: 0,
-      },
-      quoteResponse
+      } as any,
+      quoteResponse as any
     );
   }
 

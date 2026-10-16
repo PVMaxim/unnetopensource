@@ -17,7 +17,7 @@ export abstract class BlockchainManagerBase {
 
     protected readonly _tokens: Map<string, Token>;
     protected readonly _priceProvider: PriceProvider;
-    protected readonly _lazyTokenManifest?: LazyValue<ParsedTokenManifest>;
+    protected _lazyTokenManifest?: LazyValue<ParsedTokenManifest>;
 
     protected constructor(args: {
         priceProvider: PriceProvider,

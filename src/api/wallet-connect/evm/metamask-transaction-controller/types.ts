@@ -1,10 +1,13 @@
 import type { AccessList } from "@ethereumjs/tx";
-import type { AccountsController } from "@metamask/accounts-controller";
-import type EthQuery from "@metamask/eth-query";
-import type { GasFeeState } from "@metamask/gas-fee-controller";
-import type { NetworkClientId, Provider } from "@metamask/network-controller";
-import type { Hex, Json } from "@metamask/utils";
-import type { Operation } from "fast-json-patch";
+
+export type Hex = `0x${string}`;
+export type Json = boolean | number | string | null | { [key: string]: Json } | Json[];
+export type Operation = any;
+export type AccountsController = any;
+export type EthQuery = any;
+export type GasFeeState = any;
+export type NetworkClientId = string;
+export type Provider = any;
 
 /**
  * Given a record, ensures that each property matches the `Json` type.

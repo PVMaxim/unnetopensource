@@ -1,6 +1,6 @@
 import { SWAP_CHAINS, SWAP_SERVICES } from "../constants-types";
 
-export const SWAP_CHAINS_NOT_NEEDING_APPROVAL = [
+export const SWAP_CHAINS_NOT_NEEDING_APPROVAL: string[] = [
   SWAP_CHAINS.TON,
   SWAP_CHAINS.SOLANA,
   SWAP_CHAINS.VENOM,

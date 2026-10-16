@@ -19,7 +19,7 @@ export class SwapService {
     }
   }
 
-  async getSwapHistory(addresses: string[]): Promise<HistoryTransaction[]> {
+  async getSwapHistory(_addresses: string[]): Promise<HistoryTransaction[]> {
     throw new Error("Method not implemented.");
   }
 

@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { UniError } from "../errors";
 
 

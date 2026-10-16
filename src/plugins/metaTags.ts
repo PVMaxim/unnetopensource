@@ -269,7 +269,7 @@ export const setupMetaTagsHandler = (router: Router) => {
 };
 
 export const metaTagPlugin = {
-  install: (app: App, options: any, router: Router) => {
+  install: (_app: App, options: any, router: Router) => {
     if (options.preconnect) {
       preconnect.push(...options.preconnect);
     }

@@ -411,6 +411,7 @@ export class CantonCore {
             params: {
                 resource: "/v2/state/ledger-end",
                 requestMethod: "get",
+                query: {},
             },
         });
 

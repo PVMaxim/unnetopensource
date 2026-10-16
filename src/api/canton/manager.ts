@@ -10,7 +10,7 @@ import {
     Request,
     Token,
     TokenMetadataInput,
-    TokenTransactionInfo, TransactionInfo,
+    TokenTransactionInfo,
 } from "../common";
 
 import { UniError } from "../errors";

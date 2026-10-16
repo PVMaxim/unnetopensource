@@ -160,6 +160,9 @@ const customTokenStore = (prefix) => {
     };
 };
 
+/**
+ * @param {string | null | undefined} [prefix=null]
+ */
 export const registerCustomTokenStore = (prefix = null) => {
     if (!prefix || typeof prefix !== 'string' || prefix.length < 4) {
         throw new Error('Invalid store prefix', { cause: { errorSubtitle: "Please try sign in again." } });
@@ -170,6 +173,9 @@ export const registerCustomTokenStore = (prefix = null) => {
     }
 };
 
+/**
+ * @param {string | null | undefined} [prefix=null]
+ */
 export const unRegisterCustomTokenStore = (prefix = null) => {
     if (prefix === null) return;
     if (store.hasModule(`${prefix}.customtoken`)) store.unregisterModule(`${prefix}.customtoken`);

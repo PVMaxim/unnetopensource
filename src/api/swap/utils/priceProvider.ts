@@ -2,7 +2,7 @@ import { HttpClient } from "../../http-client";
 import { SwapToken } from "../types";
 import { SWAP_CHAINS, SWAP_NATIVE_ADDRESS, WRAPPED_VENOM_ADDRESS } from "../../constants-types";
 
-const COINGECKO_IDS = {
+const COINGECKO_IDS: Record<string, string> = {
     [SWAP_CHAINS.ETH]: 'ethereum',
     [SWAP_CHAINS.BSC]: 'binance-smart-chain',
     [SWAP_CHAINS.TRON]: 'tron',
@@ -17,7 +17,7 @@ const COINGECKO_IDS = {
     [SWAP_CHAINS.XRP]: 'xrp',
 
 }
-const COINGECKO_CORE_TOKEN_IDS = {
+const COINGECKO_CORE_TOKEN_IDS: Record<string, string> = {
   [SWAP_CHAINS.ETH]: "ethereum",
   [SWAP_CHAINS.BSC]: "binancecoin",
   [SWAP_CHAINS.TRON]: "tron",

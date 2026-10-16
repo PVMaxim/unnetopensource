@@ -1,3 +1,5 @@
+import type { TokenPriceInfo } from "./common";
+
 export const NATIVE_COIN_DECIMALS = 9;
 export const NATIVE_COIN_SYMBOL = "VENOM";
 export const NATIVE_COIN_NAME = "VENOM";
@@ -136,7 +138,7 @@ export interface TokenType {
   root: string | null;
   symbol: string | null;
   balance: string | number | null;
-  price: { usdPrice: number; usd24hChange: number } | null;
+  price: { usdPrice: number | string; usd24hChange: number | string } | TokenPriceInfo | null;
   name: string | null;
   isMandatory?: boolean;
   iconUrl: string | null;

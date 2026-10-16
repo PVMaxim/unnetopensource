@@ -1,7 +1,6 @@
 import { BigNumber } from "bignumber.js";
-import { Token } from "../../common";
-import { SWAP_CHAINS, SWAP_NATIVE_ADDRESS } from "../../constants-types";
-import { SwapProvider, SwapToken } from "../types";
+import { SWAP_CHAINS } from "../../constants-types";
+import { SwapProvider } from "../types";
 import { getOwnerAddress } from "./ownerAddress";
 import { createProviderManager } from "./provider";
 

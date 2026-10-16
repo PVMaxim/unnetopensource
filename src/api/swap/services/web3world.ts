@@ -43,7 +43,7 @@ class Web3WorldService extends SwapService implements ISwapService {
     return chainsTokens[SWAP_CHAINS.VENOM] || [];
   }
   async getQuote(
-    { fromToken, toToken, amount, accountAddress, slippage }: GetQuoteParams,
+    { fromToken, toToken, amount, accountAddress, slippage: _slippage }: GetQuoteParams,
     signal: AbortSignal
   ): Promise<QuoteResponse> {
     const isFromTokenIsCore = fromToken.address === SWAP_NATIVE_ADDRESS;

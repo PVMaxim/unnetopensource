@@ -127,7 +127,7 @@ export interface EvmSignedOrder {
   secretHashes: HashLock[] | undefined;
 }
 
-interface SolanaSubmittedOrderInput {
+export interface SolanaSubmittedOrderInput {
   order: CreateSolanaOrderParams;
   srcChainId: string;
   dstChainId: string;

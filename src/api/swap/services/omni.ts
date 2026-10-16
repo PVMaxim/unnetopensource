@@ -124,7 +124,7 @@ class OmniBridgeService extends SwapService implements ISwapService {
     }
     throw new Error();
   }
-  async getSwapData(params: GetTransactionParams): Promise<any> {
+  async getSwapData(_params: GetTransactionParams): Promise<any> {
     throw new Error("Method not implemented.");
   }
 
@@ -137,7 +137,7 @@ class OmniBridgeService extends SwapService implements ISwapService {
     slippage,
     toProvider,
     publicKeyCard,
-  }): Promise<{ tx: Request; orderId: string }> {
+  }: GetTransactionParams): Promise<{ tx: Request; orderId: string }> {
     const fromAddress = await getOwnerAddress(fromProvider, publicKeyCard);
 
     const toAddress = await getOwnerAddress(toProvider, publicKeyCard);
@@ -175,7 +175,7 @@ class OmniBridgeService extends SwapService implements ISwapService {
     return { tx, orderId };
   }
 
-  async updateOrderAnaUploadHash({ hash, orderId }): Promise<number> {
+  async updateOrderAnaUploadHash({ hash, orderId }: { hash: string; orderId: string }): Promise<number> {
     const params = {
       orderId,
       depositTxid: hash,
@@ -247,7 +247,7 @@ class OmniBridgeService extends SwapService implements ISwapService {
     fromToken,
     fromAmount,
     publicKeyCard,
-  }): Promise<Request> {
+  }: GetTransactionParams): Promise<Request> {
     const { token } = await createProviderManagerAndToken(
       fromProvider,
       fromToken

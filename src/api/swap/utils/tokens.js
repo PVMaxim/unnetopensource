@@ -4,6 +4,10 @@ import { createProviderManager } from "./provider";
 import { store } from "@/store/index";
 import { getTokenMandatoryByChain } from "./tokenMandatory";
 
+/**
+ * @param {any[]} tokens
+ * @returns {Record<string, any[]>}
+ */
 export const sortTokensByChainIds = (tokens) => {
   const sortedTokens = {};
   Object.keys(SWAP_CHAINS).forEach((chain) => {

@@ -59,7 +59,7 @@ export function useEventListener<EventType = Event>(
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): Fn
 
-export function useEventListener(...args: Parameters<typeof useEventListener>) {
+export function useEventListener(...args: any[]) {
   const cleanups: Function[] = []
   const cleanup = () => {
     cleanups.forEach(fn => fn())
@@ -77,16 +77,16 @@ export function useEventListener(...args: Parameters<typeof useEventListener>) {
   }
 
   const firstParamTargets = computed(() => {
-    const test = toArray(toValue(args[0])).filter(e => e != null)
-    return test.every(e => typeof e !== 'string') ? test : undefined
+    const test = toArray(toValue(args[0])).filter((e: any) => e != null)
+    return test.every((e: any) => typeof e !== 'string') ? test : undefined
   })
 
   const stopWatch = watchImmediate(
     () => [
-      firstParamTargets.value?.map(e => unrefElement(e as never)) ?? [defaultWindow].filter(e => e != null),
+      firstParamTargets.value?.map((e: any) => unrefElement(e as never)) ?? [defaultWindow].filter((e: any) => e != null),
       toArray(toValue(firstParamTargets.value ? args[1] : args[0])) as unknown as string[],
       toArray(unref(firstParamTargets.value ? args[2] : args[1])) as Function[],
-      toValue(firstParamTargets.value ? args[3] : args[2]) as boolean | AddEventListenerOptions | undefined,
+      toValue((firstParamTargets.value ? args[3] : args[2]) as any) as boolean | AddEventListenerOptions | undefined,
     ] as const,
     ([raw_targets, raw_events, raw_listeners, raw_options]) => {
       cleanup()
@@ -96,9 +96,9 @@ export function useEventListener(...args: Parameters<typeof useEventListener>) {
 
       const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options
       cleanups.push(
-        ...raw_targets.flatMap(el =>
-          raw_events.flatMap(event =>
-            raw_listeners.map(listener => register(el, event, listener, optionsClone)),
+        ...raw_targets.flatMap((el: any) =>
+          raw_events.flatMap((event: any) =>
+            raw_listeners.map((listener: any) => register(el, event, listener, optionsClone)),
           ),
         ),
       )

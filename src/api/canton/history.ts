@@ -1,6 +1,5 @@
 import { BigNumber } from "bignumber.js";
 import { z } from "zod";
-import { Ops } from "@canton-network/core-provider-ledger";
 import { HOLDING_INTERFACE_ID } from "@canton-network/core-token-standard";
 import { matchInterfaceIds } from "@canton-network/core-tx-parser";
 import { type LedgerCommonSchemas } from "@canton-network/core-ledger-client-types";
@@ -211,7 +210,7 @@ export class CantonHistoryReader {
         endInclusive: number,
         limit: number,
     }) {
-        return this._core.ledgerProvider.request<Ops.PostV2UpdatesFlats>({
+        return this._core.ledgerProvider.request<any>({
             method: "ledgerApi",
             params: {
                 resource: "/v2/updates/flats",

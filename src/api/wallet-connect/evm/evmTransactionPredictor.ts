@@ -1,4 +1,4 @@
-import { Ref, ref, watch } from 'vue';
+import { Ref, ref } from 'vue';
 import { Hex } from '@metamask/utils';
 import { SimulationData } from './metamask-transaction-controller/types';
 import { getSimulationData } from './metamask-transaction-controller/utils/simulation';
@@ -40,7 +40,7 @@ class EvmTransactionPredictor {
             value: transactionRequest.value,
           });
           tokenBalanceChanges.value =
-            this.tokenBalanceChangesFromSimulationData(
+            await this.tokenBalanceChangesFromSimulationData(
               simulationData,
               blockchain
             );
@@ -53,7 +53,7 @@ class EvmTransactionPredictor {
     return { tokenBalanceChanges };
   }
 
-  private tokenBalanceChangesFromSimulationData(
+  private async tokenBalanceChangesFromSimulationData(
     simulationData: SimulationData,
     blockchain: EvmBlockchain
   ) {
@@ -61,7 +61,7 @@ class EvmTransactionPredictor {
     if (simulationData?.nativeBalanceChange) {
       const rawChange = simulationData.nativeBalanceChange;
       result.push(
-        this.buildTokenBalanceChange(
+        await this.buildTokenBalanceChange(
           undefined,
           rawChange.isDecrease,
           rawChange.difference,
@@ -73,7 +73,7 @@ class EvmTransactionPredictor {
     if (simulationData?.tokenBalanceChanges?.length) {
       for (const rawChange of simulationData.tokenBalanceChanges) {
         result.push(
-          this.buildTokenBalanceChange(
+          await this.buildTokenBalanceChange(
             rawChange.address,
             rawChange.isDecrease,
             rawChange.difference,
@@ -86,13 +86,13 @@ class EvmTransactionPredictor {
     return result;
   }
 
-  buildTokenBalanceChange(
+  async buildTokenBalanceChange(
     address: string | undefined,
     isDecrease: boolean,
     difference: Hex,
     blockchain: EvmBlockchain
   ) {
-    const tokenActorRef = evmActorRecognizer.recognize(
+    const tokenActorRef = await evmActorRecognizer.recognize(
       address ?? evmTokenRecognizer.nativeCoinPseudoAddress(),
       blockchain,
       { canBeToken: true }

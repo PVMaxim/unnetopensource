@@ -18,7 +18,7 @@ import {
 import { EIP712TypedData } from "@1inch/fusion-sdk";
 import { ONE_INCH_CHAIN_IDS, getChainByEvmId, getExplorerTxUrl } from "../chainConfig";
 
-const WRAPPED_TOKENS: Record<SwapChain, string> = {
+const WRAPPED_TOKENS: Record<string, string> = {
   [SWAP_CHAINS.ETH]: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
   [SWAP_CHAINS.ARBITRUM]: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
   [SWAP_CHAINS.AVALANCHE]: "0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7",
@@ -36,11 +36,11 @@ export class OneInch extends SwapService {
     super(supportedProviders);
   }
 
-  getChainId(chain: SwapChain): number {
-    return ONE_INCH_CHAIN_IDS[chain];
+  getChainId(chain: SwapChain | string): number {
+    return ONE_INCH_CHAIN_IDS[chain as SwapChain];
   }
 
-  getWrappedTokenByChain(chain: SwapChain): SwapToken {
+  getWrappedTokenByChain(chain: SwapChain | string): SwapToken {
     const wrappedTokenAddress = WRAPPED_TOKENS[chain];
     if (!wrappedTokenAddress) {
       throw new Error(`Wrapped token not found for chain: ${chain}`);
@@ -143,7 +143,7 @@ export class OneInch extends SwapService {
     typedData: EIP712TypedData | TypedMessage<MessageTypes>
   ): string {
     const buffer = TypedDataUtils.eip712Hash(
-      typedData,
+      typedData as any,
       SignTypedDataVersion.V4
     );
 

@@ -1,4 +1,4 @@
-export const errorReload = (error: string, retries = 1) => {
+export const errorReload = (_error: string, retries = 1) => {
   
     let errRetries: string | null = sessionStorage.getItem("errRetries");
     if (typeof errRetries === 'string') {

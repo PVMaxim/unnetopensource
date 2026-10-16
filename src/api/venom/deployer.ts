@@ -47,7 +47,6 @@ export class Deployer {
     static readonly MIN_BALANCE = constants.DEPLOYER_MIN_BALANCE;
 
     private readonly _rpc: ProviderRpcClient;
-    private readonly _logger?: Logger;
     private readonly _accountsStorage: SimpleAccountsStorage;
     private readonly _mutex: Mutex;
 
@@ -57,7 +56,6 @@ export class Deployer {
         logger?: Logger,
     }) {
         this._rpc = args.rpc;
-        this._logger = args.logger;
         this._accountsStorage = args.accountsStorage;
         this._mutex = new Mutex();
     }

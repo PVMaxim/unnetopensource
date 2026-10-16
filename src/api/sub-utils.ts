@@ -1,5 +1,4 @@
-import { ref } from 'vue';
-import { clearData, getStorePrefixByKey, getTokenSymbolById, getNativeCoinId } from '@/api/ApiHandler';
+import { clearData, getStorePrefixByKey, getTokenSymbolById, getNativeCoinId, getNativeCoinSymbol } from '@/api/ApiHandler';
 import { store } from '@/store/index.js';
 import noneIcon from '@/components/svg/none.vue';
 import { router } from '@/router/index.js';
@@ -92,7 +91,7 @@ export const isTheSamePublicKey = (key: any): boolean => {
     return true;
   } else {
     const prefix = getStorePrefixByKey(store.state.user.publicKeyCard);
-    unRegisterCustomTokenStore(prefix);
+    unRegisterCustomTokenStore(prefix || null);
     clearData();
     return false;
   }

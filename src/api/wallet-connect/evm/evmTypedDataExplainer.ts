@@ -30,7 +30,7 @@ export interface EvmPermit2PermitTokensExplanation {
 export type EvmTypedDataExplanation = EvmPermit2PermitTokensExplanation;
 
 class EvmTypedDataExplainer {
-  explainPermit2PermitTokens(
+  async explainPermit2PermitTokens(
     typedDataParsed: EvmTypedDataParsedDerefed,
     blockchain: EvmBlockchain
   ) {
@@ -84,18 +84,23 @@ class EvmTypedDataExplainer {
       return undefined;
     }
 
-    return <EvmPermit2PermitTokensExplanation>{
-      type: EvmTypedDataExplanationType.Permit2PermitTokens,
-      spender: evmActorRecognizer.recognize(spender, blockchain),
-      details: validatedItems.map(({ token, amount }) => {
-        const tokenActor = evmActorRecognizer.recognize(token, blockchain, {
+    const spenderActor = await evmActorRecognizer.recognize(spender, blockchain);
+    const detailItems = await Promise.all(
+      validatedItems.map(async ({ token, amount }) => {
+        const tokenActor = await evmActorRecognizer.recognize(token, blockchain, {
           canBeToken: true,
         });
         return {
           tokenActor,
           amount: EvmAmount.forTokenActorRef(amount, tokenActor),
         };
-      }),
+      })
+    );
+
+    return <EvmPermit2PermitTokensExplanation>{
+      type: EvmTypedDataExplanationType.Permit2PermitTokens,
+      spender: spenderActor,
+      details: detailItems,
     };
   }
 
@@ -107,12 +112,12 @@ class EvmTypedDataExplainer {
 
     watch(
       typedDataParsedRef,
-      (typedDataParsed) => {
+      async (typedDataParsed) => {
         if (!typedDataParsed) {
           result.value = undefined;
           return;
         }
-        result.value = this.explainPermit2PermitTokens(
+        result.value = await this.explainPermit2PermitTokens(
           typedDataParsed,
           blockchain
         );

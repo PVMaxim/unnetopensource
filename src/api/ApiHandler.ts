@@ -1,8 +1,8 @@
 import type { ShallowRef } from 'vue';
 import type { BlockchainManager, Storage as cotiStorage, CardKeys, Token } from '../api/common';
 import { shallowRef, computed, ref } from 'vue';
-import { RPC_NAMES, SWAP_CHAINS } from '../api/constants-types';
-import type { RpcListItem, TokenType, SelectedTokenList, CustomTokenBase, RpcName, PublicKeyCardType } from '../api/constants-types';
+import { RPC_NAMES, rpcList } from '../api/constants-types';
+import type { TokenType, CustomTokenBase, RpcName, PublicKeyCardType } from '../api/constants-types';
 
 export { rpcList, getSelectedToken, getCustomTokenBase, RPC_NAMES, SWAP_CHAINS } from '../api/constants-types';
 
@@ -46,9 +46,11 @@ export const getStorePrefixByKey = (key: PublicKeyCardType): string | null => {
   if (isCardRegistered() && !isCardIsNew()) {
     const storePrefixStart = key?.ed25519?.slice(6, 10);
     const storePrefixEnd = key?.secp256k1?.slice(6, 10);
-    return storePrefixStart + storePrefixEnd;
+    if (storePrefixStart && storePrefixEnd) {
+      return storePrefixStart + storePrefixEnd;
+    }
   }
-  return null
+  return null;
 };
 
 export const getStorePrefix = (): string | null => {
@@ -340,10 +342,12 @@ export const setDefaultSelectedToken = async (isForced = false): Promise<void> =
   const walletAddress = await getCachedWalletAddress(rpcProvider as string, isForced);
 
   let balance: string | number | null = null;
-  try {
-    balance = await mgr.nativeCoin.getAvailableBalance(walletAddress);
-  } catch (err) {
-    console.log(`setDefaultSelectedToken getBalance ERROR:  ${JSON.stringify(err)}`);
+  if (walletAddress) {
+    try {
+      balance = await mgr.nativeCoin.getAvailableBalance(walletAddress);
+    } catch (err) {
+      console.log(`setDefaultSelectedToken getBalance ERROR:  ${JSON.stringify(err)}`);
+    }
   }
 
   // Parallelize independent calls after we have walletAddress + balance
@@ -358,15 +362,15 @@ export const setDefaultSelectedToken = async (isForced = false): Promise<void> =
     "root": mgr.nativeCoin.id,
     "symbol": symbolResult.status === 'fulfilled' ? symbolResult.value : null,
     "balance": balance,
-    "price": priceResult.status === 'fulfilled' ? priceResult.value : null,
+    "price": priceResult.status === 'fulfilled' ? (priceResult.value ?? null) : null,
     "name": nameResult.status === 'fulfilled' ? nameResult.value : null,
     "isMandatory": mgr.nativeCoin?.isMandatory,
-    "iconUrl": iconUrlResult.status === 'fulfilled' ? iconUrlResult.value : null,
+    "iconUrl": iconUrlResult.status === 'fulfilled' ? (iconUrlResult.value ?? null) : null,
     additionalData: {},
   };
   console.log(`setDefaultSelectedToken tokenObject:  ${JSON.stringify(tokenObject)}`);
   store.dispatch('user/setSelectedToken', { "key": store.state.settings.rpcProvider?.name, "value": tokenObject }).then(() => {
-  }).catch((error) => {
+  }).catch((_error: unknown) => {
   });
 };
 
@@ -527,7 +531,7 @@ export const setTokensBalances = async (isForced = false): Promise<void> => {
   if (isForced) {
     walletAddressCache.clear();
     lastTokenFetchTimestamp.clear();
-    store.dispatch('user/resetTokenBalance').catch((err) => {
+    store.dispatch('user/resetTokenBalance').catch((err: unknown) => {
       console.error(`resetTokenBalance error: ${err}`);
     });
   }
@@ -575,6 +579,7 @@ export const getTokenNameById = async (
   console.log(`setTokenBalance root: ${id}`);
   const mgr = getOrCreateManager(rpcProvider as string, false);
   const token = mgr.getToken(id);
+  if (!token) return null;
 
   return await safeCall(() => token?.getName(), "getName");
 };
@@ -592,6 +597,7 @@ export const getTokenSymbolById = async (
   } catch (err) {
     console.log(`getTokenSymbolById getToken ERROR:  ${err instanceof Error ? err.message : JSON.stringify(err)}`);
   }
+  if (!token) return null;
 
   return await safeCall(() => token?.getSymbol(), "getSymbol");
 };

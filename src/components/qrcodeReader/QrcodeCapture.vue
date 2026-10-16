@@ -10,7 +10,6 @@
 </template>
 
 <script setup lang="ts">
-import { type PropType } from 'vue'
 import { processFile } from '../../plugins/qrcode-reader/misc/scanner'
 import { type BarcodeFormat, type DetectedBarcode } from 'barcode-detector'
 

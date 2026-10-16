@@ -35,7 +35,6 @@ class WVaultTransferRequest implements Request {
     private readonly _rpc: ProviderRpcClient;
     private readonly _deployer: Deployer;
     private readonly _data: NativeTransactionData;
-    private readonly _hash: string;
 
     private constructor(args: {
         rpc: ProviderRpcClient,
@@ -48,7 +47,6 @@ class WVaultTransferRequest implements Request {
         this._rpc = args.rpc;
         this._deployer = args.deployer;
         this._data = args.data;
-        this._hash = args.hash;
     }
 
     static async create(args: {

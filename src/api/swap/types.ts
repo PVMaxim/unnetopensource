@@ -121,7 +121,7 @@ export type HistoryTransaction = {
   id: number | string;
   fromTokenAmount: string;
   toTokenAmount: string;
-  status: typeof SWAP_HISTORY_STATUSES[keyof typeof SWAP_HISTORY_STATUSES];
+  status: typeof SWAP_HISTORY_STATUSES[keyof typeof SWAP_HISTORY_STATUSES] | string;
   createTime: string;
   depositHashExplore: string;
   orderId: string;
@@ -178,7 +178,7 @@ export type CheckIsAmountIsApprovedParams = {
     amount: string;
 }
 
-export type Chain = typeof SWAP_CHAINS[keyof typeof SWAP_CHAINS]
+export type Chain = typeof SWAP_CHAINS[keyof typeof SWAP_CHAINS] | string;
 
 
 export interface FusionQuote {

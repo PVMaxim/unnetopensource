@@ -231,7 +231,7 @@ export class WalletConnectHelper {
   async connect(uri: string) {
     const { topic: pairingTopic } = parseUri(uri);
 
-    const pairingExpiredListener = ({ topic }) => {
+    const pairingExpiredListener = ({ topic }: { topic?: string }) => {
       if (pairingTopic === topic) {
         //TODO: error message 'Pairing expired. Please try again with new Connection URI'
         this.walletKit.core.pairing.events.removeListener(
@@ -498,7 +498,7 @@ watchEffect(() => {
   isConnectedAppsCacheValid.value = true;
 });
 
-export async function initWalletConnectHelper(relayUrl) {
+export async function initWalletConnectHelper(relayUrl?: string) {
   if (!walletConnectHelper.value) {
     walletConnectHelper.value = await WalletConnectHelper.create(relayUrl);
   }

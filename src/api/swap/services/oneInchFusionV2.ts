@@ -242,7 +242,7 @@ class OneInchFusionV2 extends OneInch implements ISwapService {
     extension: string;
   }) {
     return oneInchFusionApi().submitOrder({
-      order,
+      order: order as any,
       signature,
       quoteId,
       chain: chainId,

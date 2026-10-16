@@ -125,10 +125,6 @@
     }
   }
 
-  const isVivaldi = () => {
-    return false
-  }
-
   export const supportedBrowser = (): UserAgentMatch => {
     if (isBrave() || isDuckDuckGo()) {
       return false;

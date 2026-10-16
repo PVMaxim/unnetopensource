@@ -38,7 +38,6 @@ import {
   onMounted,
   ref,
   watch,
-  type PropType,
   type CSSProperties
 } from 'vue'
 
