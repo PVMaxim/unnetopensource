@@ -11,18 +11,17 @@
       cx="16"
       cy="16"
       r="16"
-      fill="#FF9800"
+      fill="#ffffff"
     />
     <path
       d="M17.8333 23.2L17.8333 7L27 16L21.5 16L21.5 23.2L17.8333 23.2Z"
-      fill="black"
+      fill="#1e2026"
     />
     <path
       d="M5 16L10.5 16L10.5 8.8L14.1666 8.8L14.1666 25L5 16Z"
-      fill="black"
+      fill="#1e2026"
     />
   </svg>
-
 </template>
 
 <script>

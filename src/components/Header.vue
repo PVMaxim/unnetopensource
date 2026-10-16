@@ -256,6 +256,9 @@ header {
   #header-logo {
     z-index: 25;
     cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 40px;
     svg { height: 40px; }
   }
 
@@ -324,7 +327,7 @@ header {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    background-color: $color-black-17;
     z-index: 17;
     @include transition(left .3s ease-in-out);
 

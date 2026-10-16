@@ -326,8 +326,8 @@ onErrorCaptured(async (err) => {
     display: flex;
     flex-direction: column;
     align-items: start;
-    background: #1f1f1f;
-    border: 1px solid #cdcdcd0a;
+    background: $color-black-24;
+    border: 1px solid $color-black-38;
     border-radius: 16px;
     box-sizing: border-box;
   }

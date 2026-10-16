@@ -20,7 +20,7 @@
       <div v-if="tokensHistory.length === 0" class="history-not-found">
         Not found
       </div>
-      <PullToRefresh :loading='loadingRefresh' :minHeight=scrollContainer?.clientHeight-85 @refresh='refreshHandler'>
+      <PullToRefresh :loading='isLoading' :minHeight=scrollContainer?.clientHeight-85 @refresh='refreshHandler'>
         <div
           v-for="histroyItem in currentPageTransactions"
           :key="histroyItem.id"
