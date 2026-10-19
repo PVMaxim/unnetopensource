@@ -2,7 +2,7 @@
   "name": "united-noncustodial-front",
   "version": "1.0.92",
   "description": "Non-custodial Multi-Chain Crypto Wallet & Swap Web Application with NFC Hardware Card Support",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "private": true,
   "repository": {
     "type": "git",
