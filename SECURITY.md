@@ -6,11 +6,11 @@ The United Wallet team takes the security of our non-custodial wallet and its us
 
 We actively provide security patches and updates for the following versions:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| `main`  | :white_check_mark: |
-| Latest Release | :white_check_mark: |
-| Older Releases | :x: |
+| Version | Supported |
+| ------- | --------- |
+| `main`  | Yes       |
+| Latest Release | Yes |
+| Older Releases | No  |
 
 Please ensure you are running the latest version before reporting issues.
 
@@ -43,11 +43,3 @@ To help us triage and resolve the issue quickly, please include:
 - **Non-Custodial Guarantee:** Never share your seed phrase, private keys, or PIN code with anyone. Official maintainers will never ask for them.
 - **Client-Side Storage:** Verify that private keys and seeds remain encrypted client-side using WebCrypto (AES-CBC + PBKDF2).
 - **Environment Isolation:** Do not expose sensitive API keys or RPC credentials in frontend source code.
-
-## Response SLA
-
-- **Acknowledgment:** Within 24–48 hours of initial report.
-- **Assessment & Triage:** Within 3–5 business days.
-- **Fix & Public Advisory:** A patch will be prepared in a private fork and released alongside a public CVE/Advisory once resolved.
-
-Thank you for helping keep the United Wallet ecosystem safe!
