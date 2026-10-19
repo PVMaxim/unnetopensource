@@ -1,93 +1,34 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { PermissionItem, PermissionStatus } from './types';
 import { useEventsBus } from '@/plugins/eventBus';
-import { isSafariBrowser, isFirefoxBrowser } from '@/plugins/checkDevice';
 
-export const isNotificationsSupported = () => typeof window !== 'undefined' && 'Notification' in window;
-export const checkNotificationsPermission = async (): Promise<PermissionStatus> => {
-  if (!isNotificationsSupported()) {
-    return 'unsupported';
-  }
-  try {
-    if (navigator.permissions && (navigator.permissions as any).query) {
-      const queryRes = await navigator.permissions.query({ name: 'notifications' as any });
-      if (queryRes.state === 'granted') {
-        return 'granted';
-      }
-      if (queryRes.state === 'denied') {
-        return 'denied';
-      }
-      return 'prompt';
-    }
-  } catch {
-  }
-  const perm = Notification.permission;
-  if (perm === 'granted') {
-    return 'granted';
-  }
-  if (perm === 'denied') {
-    return 'denied';
-  }
-  return 'prompt';
-};
-export const requestNotificationsPermission = async () => {
-  try {
-    if (isNotificationsSupported()) {
-      if (Notification.permission === 'granted') {
-        return true;
-      }
-      let perm: NotificationPermission;
-      try {
-        perm = await Notification.requestPermission();
-      } catch {
-        perm = await new Promise<NotificationPermission>((resolve) => {
-          Notification.requestPermission((result) => resolve(result));
-        });
-      }
-      if (perm === 'granted') {
-        return true;
-      } else {
-        return false;
-      }
-    }
-    return false;
-  } catch (e: any) {
-    return false;
-  }
-};
+const STORAGE_DONT_ASK_KEY = 'unnet_permissions_dont_ask';
 
-export const isAudioSupported = () => typeof window !== 'undefined' && ('AudioContext' in window || 'webkitAudioContext' in window);
-export const checkAudioPermission = async (): Promise<PermissionStatus> => {
-  if (!isAudioSupported()) {
-    return 'unsupported';
-  }
-  return 'granted';
-};
-export const requestAudioPermission = async () => {
-  try {
-    return true;
-  } catch (e: any) {
-    return false;
-  }
-};
+const isSecure = () => typeof window !== 'undefined' && (
+  window.isSecureContext ||
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1' ||
+  window.location.hostname.endsWith('.localhost')
+);
 
-export const isCameraSupported = () => typeof navigator !== 'undefined' && !!(navigator.mediaDevices?.getUserMedia || (navigator as any).getUserMedia);
+
+export const isCameraSupported = () =>
+  typeof navigator !== 'undefined' &&
+  isSecure() &&
+  !!(navigator.mediaDevices?.getUserMedia || (navigator as any).getUserMedia);
+
 export const checkCameraPermission = async (): Promise<PermissionStatus> => {
   if (!isCameraSupported()) {
     return 'unsupported';
   }
   try {
-    if (navigator.permissions && (navigator.permissions as any).query) {
+    if (navigator.permissions?.query) {
       const status = await navigator.permissions.query({ name: 'camera' as any });
-      if (status.state === 'granted') {
-        return 'granted';
-      }
-      if (status.state === 'denied') {
-        return 'denied';
-      }
+      if (status.state === 'granted') return 'granted';
+      if (status.state === 'denied') return 'denied';
       return 'prompt';
     }
-  } catch (err: any) {
+  } catch {
   }
   if (navigator.mediaDevices?.enumerateDevices) {
     try {
@@ -101,83 +42,77 @@ export const checkCameraPermission = async (): Promise<PermissionStatus> => {
   }
   return 'prompt';
 };
-export const requestCameraPermission = async () => {
+
+export const requestCameraPermission = async (): Promise<boolean> => {
+  if (!isCameraSupported()) return false;
+  let stream: MediaStream | null = null;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    stream.getTracks().forEach(track => track.stop());
+    stream = await navigator.mediaDevices.getUserMedia({ video: true });
     return true;
-  } catch (err: any) {
-    if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
-    } else {
-    }
+  } catch {
     return false;
+  } finally {
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+    }
   }
 };
 
-export const isNfcSupported = () => typeof window !== 'undefined' && 'NDEFReader' in window;
+export const isNfcSupported = () =>
+  typeof window !== 'undefined' && isSecure() && 'NDEFReader' in window;
+
 export const checkNfcPermission = async (): Promise<PermissionStatus> => {
   if (!isNfcSupported()) {
     return 'unsupported';
   }
   try {
-    if (navigator.permissions && (navigator.permissions as any).query) {
+    if (navigator.permissions?.query) {
       const status = await navigator.permissions.query({ name: 'nfc' as any });
-      if (status.state === 'granted') {
-        return 'granted';
-      }
-      if (status.state === 'denied') {
-        return 'denied';
-      }
+      if (status.state === 'granted') return 'granted';
+      if (status.state === 'denied') return 'denied';
       return 'prompt';
     }
   } catch {
   }
   return 'prompt';
 };
-export const requestNfcPermission = async () => {
+
+export const requestNfcPermission = async (): Promise<boolean> => {
+  if (!isNfcSupported()) return false;
   try {
-    if ('NDEFReader' in window) {
-      const ndef = new (window as any).NDEFReader();
-      await ndef.scan();
-      return true;
-    }
-    return false;
-  } catch (e: any) {
+    const ndef = new (window as any).NDEFReader();
+    await ndef.scan();
+    return true;
+  } catch {
     return false;
   }
 };
 
-export const isClipboardSupported = () => typeof navigator !== 'undefined' && !!navigator.clipboard?.readText && !isSafariBrowser;
+export const isClipboardSupported = () =>
+  typeof navigator !== 'undefined' && isSecure() && !!navigator.clipboard?.readText;
+
 export const checkClipboardPermission = async (): Promise<PermissionStatus> => {
   if (!isClipboardSupported()) {
     return 'unsupported';
   }
   try {
-    if (navigator.permissions && (navigator.permissions as any).query) {
+    if (navigator.permissions?.query) {
       const status = await navigator.permissions.query({ name: 'clipboard-read' as any });
-      if (status.state === 'granted') {
-        return 'granted';
-      }
-      if (status.state === 'denied') {
-        return 'denied';
-      }
+      if (status.state === 'granted') return 'granted';
+      if (status.state === 'denied') return 'denied';
       return 'prompt';
     }
   } catch {
   }
   return 'prompt';
 };
-export const requestClipboardPermission = async () => {
-  if (isSafariBrowser) {
-    return false;
-  }
+
+export const requestClipboardPermission = async (): Promise<boolean> => {
+  if (!isClipboardSupported()) return false;
   try {
-    if (navigator?.clipboard?.readText) {
-      await navigator.clipboard.readText();
-      return true;
-    }
-    return false;
-  } catch (e: any) {
+    await navigator.clipboard.readText();
+    return true;
+  } catch {
     return false;
   }
 };
@@ -186,9 +121,19 @@ export class PermissionManager {
   private static instance: PermissionManager;
   private permissionsList = ref<PermissionItem[]>([]);
   public isModalVisible = ref(false);
+  public statuses = ref<Record<string, PermissionStatus>>({});
+  private activeListenersInitialized = false;
+  private isDismissedThisSession = false;
 
   private constructor() {
     this.registerDefaultPermissions();
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('unnet_permissions_dismissed_until');
+      } catch {
+      }
+      this.initPermissionListeners();
+    }
   }
 
   public static getInstance(): PermissionManager {
@@ -199,30 +144,6 @@ export class PermissionManager {
   }
 
   private registerDefaultPermissions() {
-    this.register({
-      id: 'notifications',
-      name: 'Notifications',
-      titleKey: 'permissions.notificationsTitle',
-      descriptionKey: 'permissions.notificationsDesc',
-      iconName: 'notifications',
-      category: 'system',
-      isSupported: isNotificationsSupported,
-      checkStatus: checkNotificationsPermission,
-      request: requestNotificationsPermission
-    });
-
-    this.register({
-      id: 'audio',
-      name: 'Audio',
-      titleKey: 'permissions.audioTitle',
-      descriptionKey: 'permissions.audioDesc',
-      iconName: 'audio',
-      category: 'system',
-      optional: true,
-      isSupported: isAudioSupported,
-      checkStatus: checkAudioPermission,
-      request: requestAudioPermission
-    });
 
     this.register({
       id: 'camera',
@@ -233,7 +154,7 @@ export class PermissionManager {
       category: 'hardware',
       isSupported: isCameraSupported,
       checkStatus: checkCameraPermission,
-      request: requestCameraPermission
+      request: requestCameraPermission,
     });
 
     this.register({
@@ -245,7 +166,7 @@ export class PermissionManager {
       category: 'hardware',
       isSupported: isNfcSupported,
       checkStatus: checkNfcPermission,
-      request: requestNfcPermission
+      request: requestNfcPermission,
     });
 
     this.register({
@@ -258,8 +179,30 @@ export class PermissionManager {
       optional: true,
       isSupported: isClipboardSupported,
       checkStatus: checkClipboardPermission,
-      request: requestClipboardPermission
+      request: requestClipboardPermission,
     });
+  }
+
+  private async initPermissionListeners() {
+    if (this.activeListenersInitialized || !navigator?.permissions?.query) return;
+    this.activeListenersInitialized = true;
+
+    const queryNames: Record<string, string> = {
+      camera: 'camera',
+      clipboard: 'clipboard-read',
+      nfc: 'nfc',
+    };
+
+    for (const [id, queryName] of Object.entries(queryNames)) {
+      try {
+        const queryRes = await navigator.permissions.query({ name: queryName as any });
+        queryRes.addEventListener('change', async () => {
+          await this.getPermissionStatuses();
+          useEventsBus().emit('permissionsUpdated', { [id]: queryRes.state });
+        });
+      } catch {
+      }
+    }
   }
 
   public register(item: PermissionItem) {
@@ -276,9 +219,7 @@ export class PermissionManager {
   }
 
   public getSupportedPermissions() {
-    return computed(() => {
-      return this.permissionsList.value.filter(p => !p.isSupported || p.isSupported());
-    });
+    return this.permissionsList;
   }
 
   public async getPermissionStatuses(): Promise<Record<string, PermissionStatus>> {
@@ -299,6 +240,7 @@ export class PermissionManager {
       })
     );
 
+    this.statuses.value = statuses;
     return statuses;
   }
 
@@ -309,9 +251,10 @@ export class PermissionManager {
 
     try {
       const res = await perm.request();
+      await this.getPermissionStatuses();
       useEventsBus().emit('permissionsUpdated', { [permId]: res });
       return res;
-    } catch (e) {
+    } catch {
       return false;
     }
   }
@@ -319,47 +262,58 @@ export class PermissionManager {
   public async requestAll(): Promise<Record<string, boolean>> {
     const results: Record<string, boolean> = {};
     const supported = this.getSupportedPermissions().value;
+    const currentStatuses = await this.getPermissionStatuses();
 
-    const audioPerm = supported.find(p => p.id === 'audio');
-    if (audioPerm) {
-      try {
-        results['audio'] = await audioPerm.request();
-      } catch {
-        results['audio'] = false;
-      }
-    }
-
-    const order = ['notifications', 'camera', 'clipboard', 'nfc'];
-
-    const interactivePerms = supported.filter(p => p.id !== 'audio');
-    interactivePerms.sort((a, b) => {
+    const order = ['camera', 'nfc', 'clipboard'];
+    const sorted = [...supported].sort((a, b) => {
       const idxA = order.indexOf(a.id);
       const idxB = order.indexOf(b.id);
       return (idxA >= 0 ? idxA : 99) - (idxB >= 0 ? idxB : 99);
     });
 
-    for (const perm of interactivePerms) {
-      if (perm.id === 'notifications' && typeof Notification !== 'undefined' && Notification.permission === 'granted') {
-        results['notifications'] = true;
+    for (const perm of sorted) {
+      const status = currentStatuses[perm.id];
+      if (status === 'granted') {
+        results[perm.id] = true;
+        continue;
+      }
+      if (status === 'denied' || status === 'unsupported') {
+        results[perm.id] = false;
         continue;
       }
 
       try {
         const res = await perm.request();
         results[perm.id] = res;
-      } catch (err) {
+        await this.getPermissionStatuses();
+      } catch {
         results[perm.id] = false;
       }
     }
 
-    this.isModalVisible.value = false;
     useEventsBus().emit('permissionsUpdated', results);
+
+    const shouldPrompt = await this.shouldShowPrompt();
+    if (!shouldPrompt) {
+      this.dismiss();
+    }
 
     return results;
   }
 
   public async shouldShowPrompt(): Promise<boolean> {
     if (typeof window === 'undefined') return false;
+
+    try {
+      if (localStorage.getItem(STORAGE_DONT_ASK_KEY) === 'true') {
+        return false;
+      }
+    } catch {
+    }
+
+    if (this.isDismissedThisSession) {
+      return false;
+    }
 
     const supported = this.getSupportedPermissions().value;
     if (supported.length === 0) return false;
@@ -372,25 +326,37 @@ export class PermissionManager {
     }
 
     const hasUngranted = supported.some(perm => {
-      if (perm.optional) return false;
       const status = statuses[perm.id];
-
-      if ((isSafariBrowser || isFirefoxBrowser) && perm.id === 'camera') {
-        return false;
-      }
-
-      return status !== 'granted' && status !== 'unsupported';
+      return status === 'prompt';
     });
 
     return hasUngranted;
   }
 
-  public prompt() {
+  public prompt(force = false) {
+    if (force) {
+      this.isDismissedThisSession = false;
+      try {
+        localStorage.removeItem(STORAGE_DONT_ASK_KEY);
+        localStorage.removeItem('unnet_permissions_dismissed_until');
+      } catch {
+      }
+    }
     this.isModalVisible.value = true;
   }
 
-  public dismiss() {
+  public dismiss(dontAskAgain = false) {
     this.isModalVisible.value = false;
+    this.isDismissedThisSession = true;
+    try {
+      if (dontAskAgain) {
+        localStorage.setItem(STORAGE_DONT_ASK_KEY, 'true');
+      }
+    } catch {
+    }
+  }
+
+  public logPermissionsState(_source?: string): void {
   }
 }
 

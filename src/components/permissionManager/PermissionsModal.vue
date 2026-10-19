@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <Transition name="perm-fade">
-      <div v-if="isVisible" class="permissions-backdrop" @click="dismiss">
+      <div v-if="isVisible" class="permissions-backdrop" @click="handleBackdropClick" @keydown.esc="dismiss">
         <div class="permissions-card" @click.stop>
           <button class="close-btn" @click="dismiss" aria-label="Close">✕</button>
 
@@ -25,24 +25,19 @@
               :key="item.id"
               class="permission-item"
               :class="{
-                clickable: permissionStatuses[item.id] !== 'granted',
+                clickable: permissionStatuses[item.id] === 'prompt' && !loadingItems[item.id],
                 granted: permissionStatuses[item.id] === 'granted',
-                'denied-selected': selectedBlockedPermId === item.id && permissionStatuses[item.id] === 'denied'
+                unsupported: permissionStatuses[item.id] === 'unsupported',
+                denied: permissionStatuses[item.id] === 'denied',
+                'denied-selected': activeNoticePermId === item.id,
+                loading: loadingItems[item.id]
               }"
               @click="requestItem(item)"
             >
               <div class="item-icon-box">
                 <component :is="item.iconComponent" v-if="item.iconComponent" />
                 <template v-else>
-                  <svg v-if="item.id === 'notifications'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                  </svg>
-                  <svg v-else-if="item.id === 'audio'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  </svg>
-                  <svg v-else-if="item.id === 'camera'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <svg v-if="item.id === 'camera'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                     <circle cx="12" cy="13" r="4" />
                   </svg>
@@ -61,23 +56,52 @@
                   </svg>
                 </template>
               </div>
+
               <div class="item-text">
-                <span class="item-title">{{ t(item.titleKey) }}</span>
-                <span class="item-desc">{{ t(item.descriptionKey) }}</span>
-              </div>
-              <div class="item-badge">
+                <div class="item-title-row">
+                  <span class="item-title">{{ t(item.titleKey) }}</span>
+                  <span
+                    v-if="permissionStatuses[item.id] === 'unsupported'"
+                    class="item-status-tag unsupported"
+                  >
+                    {{ t('permissions.statusUnsupported') }}
+                  </span>
+                  <span
+                    v-else-if="permissionStatuses[item.id] === 'denied'"
+                    class="item-status-tag denied"
+                  >
+                    {{ t('permissions.statusDenied') }}
+                  </span>
+                </div>
                 <span
+                  class="item-desc"
+                  :class="{
+                    'status-reason-unsupported': permissionStatuses[item.id] === 'unsupported',
+                    'status-reason-denied': permissionStatuses[item.id] === 'denied'
+                  }"
+                >
+                  {{ getItemDescription(item) }}
+                </span>
+              </div>
+
+              <div class="item-badge">
+                <div v-if="loadingItems[item.id]" class="spinner-small"></div>
+                <span
+                  v-else
                   class="badge-indicator"
                   :class="permissionStatuses[item.id] || 'prompt'"
                   :title="permissionStatuses[item.id]"
                 >
+                  <!-- Granted: green checkmark -->
                   <svg v-if="permissionStatuses[item.id] === 'granted'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
-                  <svg v-else-if="permissionStatuses[item.id] === 'denied'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <!-- Denied or Unsupported: red cross -->
+                  <svg v-else-if="permissionStatuses[item.id] === 'denied' || permissionStatuses[item.id] === 'unsupported'" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                   </svg>
+                  <!-- Prompt: orange question mark -->
                   <svg v-else width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                     <line x1="12" y1="17" x2="12.01" y2="17"></line>
@@ -87,7 +111,7 @@
             </div>
           </div>
 
-          <div v-if="hasBlockedPermission" class="blocked-notice">
+          <div v-if="hasNotice" class="blocked-notice">
             <div class="notice-icon">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="10" />
@@ -95,22 +119,23 @@
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </div>
-            <p class="notice-text">{{ currentBlockedHint }}</p>
+            <p class="notice-text">{{ currentNoticeHint }}</p>
           </div>
 
           <div class="permissions-actions">
             <Button
+              v-if="hasPromptPermissions"
               button-type="main"
               button-round="round12"
               :button-name="t('permissions.enableAll')"
-              :is-loading="isLoading"
+              :is-loading="isAllLoading"
               @onClick="enableAll"
             />
             <Button
               button-type="second"
               button-round="round12"
               :button-name="t('permissions.notNow')"
-              :is-disabled="isLoading"
+              :is-disabled="isAllLoading"
               @onClick="dismiss"
             />
           </div>
@@ -121,7 +146,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import Button from '@/components/Button.vue';
 import { permissionManager } from './PermissionManager';
@@ -132,22 +157,57 @@ const { t, te } = useI18n();
 
 const isVisible = permissionManager.isModalVisible;
 const supportedPermissions = permissionManager.getSupportedPermissions();
-const isLoading = ref(false);
+const isAllLoading = ref(false);
+const loadingItems = reactive<Record<string, boolean>>({});
 const permissionStatuses = ref<Record<string, PermissionStatus>>({});
 const selectedBlockedPermId = ref<string | null>(null);
 
-const hasBlockedPermission = computed(() => {
-  return Object.values(permissionStatuses.value).some(status => status === 'denied');
+const hasNotice = computed(() => {
+  return Object.values(permissionStatuses.value).some(status => status === 'denied' || status === 'unsupported');
 });
 
-const currentBlockedHint = computed(() => {
-  if (selectedBlockedPermId.value && permissionStatuses.value[selectedBlockedPermId.value] === 'denied') {
-    const specificKey = `permissions.blockedHint_${selectedBlockedPermId.value}`;
-    if (te(specificKey)) {
-      return t(specificKey);
+const activeNoticePermId = computed(() => {
+  if (selectedBlockedPermId.value && (permissionStatuses.value[selectedBlockedPermId.value] === 'denied' || permissionStatuses.value[selectedBlockedPermId.value] === 'unsupported')) {
+    return selectedBlockedPermId.value;
+  }
+  const firstProblem = supportedPermissions.value.find(p => {
+    const s = permissionStatuses.value[p.id];
+    return s === 'denied' || s === 'unsupported';
+  });
+  return firstProblem?.id || null;
+});
+
+const currentNoticeHint = computed(() => {
+  const activeId = activeNoticePermId.value;
+  if (activeId) {
+    const status = permissionStatuses.value[activeId];
+    if (status === 'unsupported') {
+      const specificUnsupported = `permissions.blockedHint_${activeId}_unsupported`;
+      if (te(specificUnsupported)) return t(specificUnsupported);
     }
+    const specificBlocked = `permissions.blockedHint_${activeId}`;
+    if (te(specificBlocked)) return t(specificBlocked);
   }
   return t('permissions.blockedHintGeneral');
+});
+
+const getItemDescription = (item: PermissionItem) => {
+  const status = permissionStatuses.value[item.id];
+  if (status === 'unsupported') {
+    const key = `permissions.unsupported_${item.id}`;
+    return te(key) ? t(key) : t('permissions.statusUnsupported');
+  }
+  if (status === 'denied') {
+    return t('permissions.deniedReason');
+  }
+  return t(item.descriptionKey);
+};
+
+const hasPromptPermissions = computed(() => {
+  return supportedPermissions.value.some(perm => {
+    const s = permissionStatuses.value[perm.id];
+    return s === 'prompt';
+  });
 });
 
 const { on } = useEventsBus();
@@ -156,7 +216,14 @@ const updateStatuses = async () => {
   permissionStatuses.value = await permissionManager.getPermissionStatuses();
 };
 
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape' && isVisible.value) {
+    dismiss();
+  }
+};
+
 onMounted(async () => {
+  window.addEventListener('keydown', handleKeyDown);
   await updateStatuses();
   const shouldPrompt = await permissionManager.shouldShowPrompt();
   if (shouldPrompt) {
@@ -164,26 +231,28 @@ onMounted(async () => {
   }
 });
 
-on('promptPermissionsModal', async () => {
-  await updateStatuses();
-  permissionManager.prompt();
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeyDown);
 });
 
-on('promptPushPermission', async () => {
+on('promptPermissionsModal', async () => {
   await updateStatuses();
-  permissionManager.prompt();
+  permissionManager.prompt(true);
 });
+
 
 on('permissionsUpdated', async () => {
   await updateStatuses();
 });
 
 async function requestItem(item: PermissionItem) {
-  if (permissionStatuses.value[item.id] === 'denied') {
+  if (permissionStatuses.value[item.id] === 'denied' || permissionStatuses.value[item.id] === 'unsupported') {
     selectedBlockedPermId.value = item.id;
+    return;
   }
-  if (permissionStatuses.value[item.id] === 'granted' || isLoading.value) return;
-  isLoading.value = true;
+  if (permissionStatuses.value[item.id] === 'granted' || loadingItems[item.id] || isAllLoading.value) return;
+
+  loadingItems[item.id] = true;
   try {
     await permissionManager.requestSingle(item.id);
     await updateStatuses();
@@ -197,22 +266,26 @@ async function requestItem(item: PermissionItem) {
       permissionManager.dismiss();
     }
   } finally {
-    isLoading.value = false;
+    loadingItems[item.id] = false;
   }
 }
 
 async function enableAll() {
-  isLoading.value = true;
+  isAllLoading.value = true;
   try {
     await permissionManager.requestAll();
     await updateStatuses();
   } finally {
-    isLoading.value = false;
+    isAllLoading.value = false;
   }
 }
 
+function handleBackdropClick() {
+  dismiss();
+}
+
 function dismiss() {
-  permissionManager.dismiss();
+  permissionManager.dismiss(false);
 }
 </script>
 
@@ -239,7 +312,7 @@ function dismiss() {
   background: linear-gradient(150deg, $color-black-24 0%, $color-black-17 100%);
   border: 1px solid rgba($color-white, 0.12);
   border-radius: 24px;
-  padding: 30px 24px 24px;
+  padding: 30px 24px 20px;
   max-width: 440px;
   width: 100%;
   color: $color-white;
@@ -321,12 +394,12 @@ function dismiss() {
   border: 1px solid rgba($color-white, 0.07);
   border-radius: 16px;
   padding: 12px;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   text-align: left;
-  max-height: 260px;
+  max-height: 280px;
   overflow-y: auto;
 }
 
@@ -359,9 +432,19 @@ function dismiss() {
     background: rgba($color-white, 0.02);
   }
 
+  &.unsupported {
+    background: rgba($color-white, 0.02);
+    border-color: rgba($color-red, 0.18);
+  }
+
   &.denied-selected {
     border-color: rgba($color-red, 0.5);
     background: rgba($color-red, 0.08);
+  }
+
+  &.loading {
+    opacity: 0.7;
+    pointer-events: none;
   }
 
   .item-icon-box {
@@ -386,8 +469,15 @@ function dismiss() {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px;
     min-width: 0;
+
+    .item-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
     .item-title {
       font-size: 13.5px;
@@ -395,13 +485,43 @@ function dismiss() {
       color: $color-white;
     }
 
+    .item-status-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1px 6px;
+      border-radius: 6px;
+      line-height: 1.3;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+
+      &.unsupported {
+        background: rgba($color-red, 0.15);
+        color: #f87171;
+        border: 1px solid rgba($color-red, 0.3);
+      }
+
+      &.denied {
+        background: rgba($color-red, 0.18);
+        color: #ef4444;
+        border: 1px solid rgba($color-red, 0.4);
+      }
+    }
+
     .item-desc {
       font-size: 11.5px;
       color: $color-gray;
-      line-height: 1.3;
+      line-height: 1.35;
       white-space: wrap;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      &.status-reason-unsupported {
+        color: rgba(#f87171, 0.95);
+      }
+
+      &.status-reason-denied {
+        color: rgba(#ef4444, 0.95);
+      }
     }
   }
 
@@ -432,7 +552,8 @@ function dismiss() {
         }
       }
 
-      &.denied {
+      &.denied,
+      &.unsupported {
         background: rgba($color-red, 0.15);
         color: $color-red;
         border: 1px solid rgba($color-red, 0.4);
@@ -444,8 +565,7 @@ function dismiss() {
         }
       }
 
-      &.prompt,
-      &.unsupported {
+      &.prompt {
         background: rgba($color-orange, 0.15);
         color: $color-orange;
         border: 1px solid rgba($color-orange, 0.4);
@@ -458,6 +578,19 @@ function dismiss() {
       }
     }
   }
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba($color-orange, 0.25);
+  border-top-color: $color-orange;
+  border-radius: 50%;
+  animation: permSpin 0.7s linear infinite;
+}
+
+@keyframes permSpin {
+  to { transform: rotate(360deg); }
 }
 
 .blocked-notice {

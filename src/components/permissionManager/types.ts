@@ -1,4 +1,4 @@
-export type PermissionId = 'notifications' | 'audio' | 'nfc' | 'camera' | 'clipboard' | string;
+export type PermissionId = 'camera' | 'nfc' | 'clipboard' | string;
 export type PermissionStatus = 'granted' | 'denied' | 'prompt' | 'unsupported';
 
 export interface PermissionItem {
