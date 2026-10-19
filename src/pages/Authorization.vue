@@ -9,75 +9,6 @@
         :buttonClick=errorHandler
         :buttonName="$t('button.ok')" />
       <div v-show="!error && !isLoading" class="container-app">
-        <div></div>
-        <div class="slide-box">
-        <div class="embla" ref="slideImageRef">
-          <div class="embla__container">
-            <div class="embla__slide card-box">
-              <NfcCardSvg />
-            </div>
-            <div class="embla__slide card-box next-init">
-              <SecurelySvg />
-            </div>
-            <div class="embla__slide card-box">
-              <YourKeysSvg />
-            </div>
-            <div class="embla__slide card-box">
-              <MultiBlockchainSvg />
-            </div>
-            <div class="embla__slide card-box">
-              <WalletConnectSvg />
-            </div>
-          </div>
-        </div>
-        <div ref="dotsContainer" class="dots-container">
-          <div v-for="dot, index in dotsCount" :key="index" class="dot" :class="{active: index === 0}" @click.prevent="scrollTo(index)"></div>
-        </div>
-        <div class="embla" ref="slideTextRef">
-          <div class="embla__container">
-            <div class="embla__slide card-text">
-              <div class="card-title">
-                {{ $t('pages.authorization.slide1.title') }}
-              </div>
-              <div class="card-description">
-                {{ $t('pages.authorization.slide1.description') }}
-              </div>
-            </div>
-            <div class="embla__slide card-text next-init">
-              <div class="card-title">
-                {{ $t('pages.authorization.slide2.title') }}
-              </div>
-              <div class="card-description">
-                {{ $t('pages.authorization.slide2.description') }}
-              </div>
-            </div>
-            <div class="embla__slide card-text">
-              <div class="card-title">
-                {{ $t('pages.authorization.slide3.title') }}
-              </div>
-              <div class="card-description">
-                {{ $t('pages.authorization.slide3.description') }}
-              </div>
-            </div>
-            <div class="embla__slide card-text">
-              <div class="card-title">
-                {{ $t('pages.authorization.slide4.title') }}
-              </div>
-              <div class="card-description">
-                {{ $t('pages.authorization.slide4.description') }}
-              </div>
-            </div>
-            <div class="embla__slide card-text">
-              <div class="card-title">
-                {{ $t('pages.authorization.slide5.title') }}
-              </div>
-              <div class="card-description">
-                {{ $t('pages.authorization.slide5.description') }}
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
         <div class="button-group">
           <Button
             :buttonName="$t('pages.authorization.connectCard')"
@@ -106,7 +37,7 @@
 </template>
 
 <script>
-  import { ref, computed, onMounted, onErrorCaptured, watchEffect } from 'vue';
+  import { ref, computed, onMounted, onErrorCaptured } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useStore } from 'vuex';
   import { useRouter, useRoute } from 'vue-router';
@@ -119,15 +50,7 @@
   import Panel from '@/components/Panel.vue';
   import NFCHandlerWindow from '@/components/NFCHandlerWindow.vue';
   import { isCardRegistered, isCardIsNew, isCardBroken, checkAndSetVersionFromUrl } from '../api/check-guards';
-  import emblaCarouselVue from '../plugins/carousel/index';
   import Button from "@/components/Button.vue";
-
-  import NfcCardSvg from "@/components/svg/intro/nfc-card.vue";
-  import SecurelySvg from "@/components/svg/intro/securely.vue";
-  import YourKeysSvg from "@/components/svg/intro/yor-keys.vue";
-  import MultiBlockchainSvg from "@/components/svg/intro/multi-blockchain.vue";
-  import CrosschainSvg from "@/components/svg/intro/crosschain.vue";
-  import WalletConnectSvg from "@/components/svg/intro/wallet-connect.vue";
 
   export default {
     name: 'Authorization page',
@@ -136,12 +59,6 @@
       Loading,
       Panel,
       NFCHandlerWindow,
-      NfcCardSvg,
-      SecurelySvg,
-      YourKeysSvg,
-      MultiBlockchainSvg,
-      CrosschainSvg,
-      WalletConnectSvg,
       Button
     },
     setup() {
@@ -159,18 +76,6 @@
       const publicKeyCard = ref(undefined);
       const accountAddress = ref(undefined);
       const errorImg = new URL(`@/assets/images/errorcode.svg`, import.meta.url).href;
-
-      const [slideImageRef, slideImageApi] = emblaCarouselVue({ containScroll: false, align: 'center' });
-      const [slideTextRef, slideTextApi] = emblaCarouselVue({ containScroll: false, align: 'center' });
-      const dotsContainer = ref();
-
-      const buttonClickNextCan = ref(null);
-      const buttonClickPrevCan = ref(null);
-      const dotsCount = ref(null);
-      const slideActive = ref(null);
-      const slidePrev = ref(null);
-      const slideNodes = ref(null);
-      const textNodes = ref(null);
 
       const nfcHandlerWindow = ref(NFCHandlerWindow);
 
@@ -201,79 +106,6 @@
           ]
         }
       }});
-
-      const scrollTo = (index) => {
-          slideImageApi.value?.scrollTo(index)
-          scrollTo2(index)
-        }
-
-        const scrollTo2 = (index) => {
-          slideTextApi.value?.scrollTo(index)
-        }
-
-      const onSelect = () => {
-          slideNodes.value[1]?.classList.remove('next-init');
-          textNodes.value[1]?.classList.remove('next-init');
-          dotsContainer.value.children[0]?.classList.remove('active');
-          buttonClickPrevCan.value = slideImageApi.value.canScrollPrev();
-          buttonClickNextCan.value = slideImageApi.value.canScrollNext();
-          dotsCount.value = slideImageApi.value.scrollSnapList();
-          slideActive.value = slideImageApi.value.selectedScrollSnap();
-          slidePrev.value = slideImageApi.value.previousScrollSnap();
-          scrollTo2(slideActive.value);
-          slideNodes.value[slideActive.value + 1]?.classList.add('slide-next');
-          slideNodes.value[slidePrev.value + 1]?.classList.remove('slide-next');
-          slideNodes.value[slideActive.value - 1]?.classList.add('slide-prev');
-          slideNodes.value[slidePrev.value - 1]?.classList.remove('slide-prev');
-
-          textNodes.value[slideActive.value + 1]?.classList.add('slide-next');
-          textNodes.value[slidePrev.value + 1]?.classList.remove('slide-next');
-          textNodes.value[slideActive.value - 1]?.classList.add('slide-prev');
-          textNodes.value[slidePrev.value - 1]?.classList.remove('slide-prev');
-
-          dotsContainer.value.children[slideActive.value].classList.add('active');
-          dotsContainer.value.children[slidePrev.value].classList.remove('active');
-        }
-
-        const onReInit = () => {
-          buttonClickPrevCan.value = slideImageApi.value.canScrollPrev();
-          buttonClickNextCan.value = slideImageApi.value.canScrollNext();
-          dotsCount.value = slideImageApi.value.scrollSnapList();
-          slideActive.value = slideImageApi.value.selectedScrollSnap();
-          slidePrev.value = slideImageApi.value.previousScrollSnap();
-        }
-
-        const onSelect2 = () => {
-          slideNodes.value[1]?.classList.remove('next-init');
-          textNodes.value[1]?.classList.remove('next-init');
-          dotsContainer.value.children[0]?.classList.remove('active');
-          buttonClickPrevCan.value = slideTextApi.value.canScrollPrev();
-          buttonClickNextCan.value = slideTextApi.value.canScrollNext();
-          dotsCount.value = slideTextApi.value.scrollSnapList();
-          slideActive.value = slideTextApi.value.selectedScrollSnap();
-          slidePrev.value = slideTextApi.value.previousScrollSnap();
-          scrollTo(slideActive.value);
-          slideNodes.value[slideActive.value + 1]?.classList.add('slide-next');
-          slideNodes.value[slidePrev.value + 1]?.classList.remove('slide-next');
-          slideNodes.value[slideActive.value - 1]?.classList.add('slide-prev');
-          slideNodes.value[slidePrev.value - 1]?.classList.remove('slide-prev');
-
-          textNodes.value[slideActive.value + 1]?.classList.add('slide-next');
-          textNodes.value[slidePrev.value + 1]?.classList.remove('slide-next');
-          textNodes.value[slideActive.value - 1]?.classList.add('slide-prev');
-          textNodes.value[slidePrev.value - 1]?.classList.remove('slide-prev');
-
-          dotsContainer.value.children[slideActive.value].classList.add('active');
-          dotsContainer.value.children[slidePrev.value].classList.remove('active');
-        }
-
-        const onReInit2 = () => {
-          buttonClickPrevCan.value = slideTextApi.value.canScrollPrev();
-          buttonClickNextCan.value = slideTextApi.value.canScrollNext();
-          dotsCount.value = slideTextApi.value.scrollSnapList();
-          slideActive.value = slideTextApi.value.selectedScrollSnap();
-          slidePrev.value = slideTextApi.value.previousScrollSnap();
-        }
 
       const updatePriorityCard = async(event) => {
         await store.dispatch('settings/setCardReaderPriority', event ).then(() => {
@@ -373,26 +205,6 @@
         router.push({ name: 'authorization' });
       }
 
-      const initCarusel = () => {   
-        if (slideImageApi.value) {
-          slideNodes.value = slideImageApi.value.slideNodes();
-          textNodes.value = slideTextApi.value.slideNodes();
-          slideImageApi.value.on('select', onSelect)
-                        .on('init', onReInit)
-                        .on('reInit', onReInit)
-
-          slideTextApi.value.on('select', onSelect2)
-                        .on('init', onReInit2)
-                        .on('reInit', onReInit2)
-        }
-      }
-
-      watchEffect(() => {
-        if ( isLoading.value === false && error.value === false && slideImageRef !== null && slideTextRef !== null ) {
-          initCarusel();
-        }
-      });
-
       async function detectNfcCapabilities() {
         const result = {
           webNfc: 'NDEFReader' in window,
@@ -429,7 +241,6 @@
           } catch(err) {
           }
         }
-        initCarusel();
         isLoading.value = false;
       });
 
@@ -446,9 +257,7 @@
       });
 
       return { isWebViewApp, isLoading, error, authorizationHandler, errorHandler, restoreHandler, toggleOptions, updatePriorityCard, 
-        errorImg, nfcHandlerWindow, titleLoad, messageLoad, errorTitle, errorSubtitle, 
-        slideImageRef, slideTextRef, buttonClickNextCan, buttonClickPrevCan, nfcIsActive, 
-          dotsCount, slideActive, slidePrev, scrollTo, dotsContainer, slideImageApi, slideTextApi
+        errorImg, nfcHandlerWindow, titleLoad, messageLoad, errorTitle, errorSubtitle, nfcIsActive
       }
     },
   }
@@ -465,113 +274,10 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
   }
 
-  .slide-box {
-    width: 100%;
-  }
-
-  .embla {
-    overflow: hidden;
-
-    .embla__container {
-      display: flex;
-      touch-action: pan-y pinch-zoom;
-    }
-    .card-box {
-      display: flex;
-      flex: 0 0 50vw;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 50vw;
-      max-width: 333px;
-      max-height: 333px;
-      transform: translate3d(0, 0, 0);
-      @include transition(all .4s ease-in-out);
-      min-width: 0;
-      background: radial-gradient(72.6% 66.9% at 50.02% 0%, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 100%), #1C1C1C;
-      box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 0.06);
-      border-radius: 32px;
-
-      &.next-init, &.slide-next {
-        @include transforma(rotate(5deg) scale(0.8) translateY(20px));
-      }
-
-      &.slide-prev {
-        @include transforma(rotate(-5deg) scale(0.8) translateY(20px));
-      }
-    }
-
-    .card-text {
-      width: 90%;
-      display: flex;
-      flex: 0 0 70%;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      opacity: 1;
-      @include transition(opacity .4s ease-in-out);
-
-      &.next-init, &.slide-next {
-        opacity: 0;
-      }
-
-      &.slide-prev {
-        opacity: 0;
-      }
-
-      .card-title {
-        font-size: 32px;
-        margin-top: 2vh;
-        color: $color-white;
-        text-align: center;
-        font-weight: 600;
-      }
-
-      .card-description {
-        font-size: 18px;
-        margin-top: 2vh;
-        color: $color-black-136;
-        text-align: center;
-      }
-    }
-  }
-  .dots-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-top: 4vh;
-
-    .dot {
-      width: 3vw;
-      height: 3vw;
-      max-width: 18px;
-      max-height: 18px;
-      background-color: $color-black-60;
-      border-radius: 50%;
-      @include transition(all .4s ease-in-out);
-
-      &:first-child, &:last-child {
-        width: 1.5vw;
-        height: 1.5vw;
-        max-width: 9px;
-        max-height: 9px;
-      }
-
-      &:not(:last-child) {
-        margin-right: 2vw;
-      }
-      &.active {
-        width: 3vw;
-        height: 3vw;
-        background-color: $color-white;
-      }
-    }
-  }
   .button-group {
     width: 90%;
     margin-bottom: 12px;
