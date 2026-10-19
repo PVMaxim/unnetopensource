@@ -132,7 +132,7 @@ export interface TokenMetadataInput {
 }
 
 export interface BlockchainManager {
-    readonly type: "bitcoin" | "canton" | "coti" | "evm" | "solana" | "ton" | "tron" | "venom" | "xrpl";
+    readonly type: "bitcoin" | "coti" | "evm" | "solana" | "ton" | "tron" | "venom" | "xrpl";
     readonly nativeCoin: Token;
 
     addToken(token: Token): void;

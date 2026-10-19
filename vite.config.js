@@ -128,7 +128,6 @@ export default async ({ mode }) => {
         dynamicRequireTargets: [
           'node_modules/everscale-standalone-client/*/*.js',
         ],
-        exclude: [/@canton-network\/[^/]+\/dist\//],
       },
       rollupOptions: {
         output: {

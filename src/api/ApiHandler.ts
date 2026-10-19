@@ -23,8 +23,6 @@ import avalancheManifest from '../api/manifests/avalanche.json';
 import xrplManifest from '../api/manifests/xrpl.json';
 import cotiManifest from '../api/manifests/coti.json';
 import katanaManifest from '../api/manifests/katana.json';
-import cantonTestnetManifest from '../api/manifests/canton-testnet.json';
-import cantonDevnetManifest from '../api/manifests/canton-devnet.json';
 import { isCardRegistered, isCardIsNew, isCardBroken } from '../api/check-guards';
 import { registerCustomTokenStore } from '../store/modules/dynamicCustomToken.js';
 import i18n from "../plugins/i18n";
@@ -105,8 +103,6 @@ const chainRegistry: Record<string, ChainConfig> = {
   [RPC_NAMES.XRP]: { manifest: xrplManifest, ref: shallowRef(undefined), hasExtraTokens: true },
   [RPC_NAMES.COTI]: { manifest: cotiManifest, ref: shallowRef(undefined), hasExtraTokens: true, storage: new CotiApproveKey() },
   [RPC_NAMES.KATANA]: { manifest: katanaManifest, ref: shallowRef(undefined), hasExtraTokens: true },
-  [RPC_NAMES.CANTON_TEST]: { manifest: cantonTestnetManifest, ref: shallowRef(undefined), hasExtraTokens: true },
-  [RPC_NAMES.CANTON_DEV]: { manifest: cantonDevnetManifest, ref: shallowRef(undefined), hasExtraTokens: true },
 };
 
 export const syncCustomTokensWithManagers = (customTokens?: CustomTokenBase) => {
@@ -158,11 +154,6 @@ export function getOrCreateManager(rpcName: string, isForced = false): Blockchai
       extraTokens,
       storage: config.storage,
     });
-    if ((resolvedName === RPC_NAMES.CANTON_TEST || resolvedName === RPC_NAMES.CANTON_DEV) && store.state.user?.publicKeyCard) {
-      if ('setPrimaryCard' in manager && typeof (manager as any).setPrimaryCard === 'function') {
-        (manager as any).setPrimaryCard(store.state.user.publicKeyCard);
-      }
-    }
     config.ref.value = manager;
   } else {
     if (Array.isArray(extraTokens) && extraTokens.length > 0 && config.ref.value) {
@@ -173,11 +164,6 @@ export function getOrCreateManager(rpcName: string, isForced = false): Blockchai
           } catch (e) {
           }
         }
-      }
-    }
-    if ((rpcName === RPC_NAMES.CANTON_TEST || rpcName === RPC_NAMES.CANTON_DEV) && store.state.user?.publicKeyCard) {
-      if ('setPrimaryCard' in config.ref.value && typeof (config.ref.value as any).setPrimaryCard === 'function') {
-        (config.ref.value as any).setPrimaryCard(store.state.user.publicKeyCard);
       }
     }
   }
@@ -202,9 +188,6 @@ export const initialAvalancheManager = (isForced = false) => getManager(RPC_NAME
 export const initialXrplManager = (isForced = false) => getManager(RPC_NAMES.XRP, isForced);
 export const initialCotiManager = (isForced = false) => getManager(RPC_NAMES.COTI, isForced);
 export const initialKatanaManager = (isForced = false) => getManager(RPC_NAMES.KATANA, isForced);
-export const initialCantonTestnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_TEST, isForced);
-export const initialCantonDevnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_DEV, isForced);
-export const initialCantonLocalnetManager = (isForced = false) => getManager(RPC_NAMES.CANTON_TEST, isForced);
 
 export function initialManager(
   isForced?: boolean,

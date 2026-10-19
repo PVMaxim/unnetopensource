@@ -1,10 +1,9 @@
 import { z } from "zod";
 import { BlockchainManager, Storage } from "./common";
-import { UniError, assert } from "./errors";
+import { UniError } from "./errors";
 import { BlockchainManifestSchema } from "./manifests";
 import { PriceProvider } from "./pricing";
 import { BitcoinManager } from "./bitcoin/manager";
-import { CantonManager } from "./canton/manager";
 import { CotiManager } from "./coti/manager";
 import { EvmManager } from "./evm/manager";
 import { SolanaManager } from "./solana/manager";
@@ -57,22 +56,6 @@ export function createManager(args: {
             ...commonArgs,
             apiBaseUrl: manifest.apiBaseUrl,
             network: manifest.network,
-        });
-    }
-    else if( manifest.type === "canton" ) {
-        const address = commonArgs.nativeToken.address;
-        assert(!!address);
-
-        manager = new CantonManager({
-            ...commonArgs,
-            nativeToken: {
-                ...commonArgs.nativeToken,
-                address,
-            },
-            authServerUrl: manifest.authServerUrl,
-            ledgerUrl: manifest.ledgerUrl,
-            validatorUrl: manifest.validatorUrl,
-            registries: manifest.registries,
         });
     }
     else if( manifest.type === "coti" ) {

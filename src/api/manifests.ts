@@ -70,13 +70,6 @@ const BlockchainExtraSchema = z.discriminatedUnion("type", [
         multicallAddress: z.string().optional(),
     }),
     z.object({
-        type: z.literal("canton"),
-        authServerUrl: z.string().url(),
-        ledgerUrl: z.string().url(),
-        validatorUrl: z.string().url(),
-        registries: z.string().url().array(),
-    }),
-    z.object({
         type: z.literal("coti"),
         chainId: z.number(),
         rpcUrl: z.string().url(),

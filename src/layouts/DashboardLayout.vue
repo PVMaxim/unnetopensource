@@ -1,25 +1,21 @@
 <template>
   <Header />
-    <slot v-if="!isCantonOnboardingActive"></slot>
-    <CantonOnboardingOverlay />
-    <PermissionsModal />
-    <div v-if="!network.isOnline" class="is-online">You are currently offline.</div>
+  <slot></slot>
+  <PermissionsModal />
+  <div v-if="!network.isOnline" class="is-online">You are currently offline.</div>
 </template>
 
 <script>
   import { ref, reactive, watchEffect, defineComponent } from "vue";
   import { useRouter } from 'vue-router';
   import Header from "@/components/Header.vue";
-  import CantonOnboardingOverlay from "@/components/CantonOnboardingOverlay.vue";
   import PermissionsModal from "@/components/permissionManager/PermissionsModal.vue";
   import { useNetwork } from '@/plugins/utils/useNetwork';
-  import { isCantonOnboardingActive } from "@/plugins/cantonState";
 
   export default defineComponent({
     name: "DashboardLayout",
     components: {
       Header,
-      CantonOnboardingOverlay,
       PermissionsModal
     },
     setup() {
@@ -37,7 +33,7 @@
           router.go();
         }
       });
-      return { network, isCantonOnboardingActive };
+      return { network };
     }
   });
 </script>

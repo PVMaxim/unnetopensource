@@ -15,7 +15,7 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 - **NFC Hardware Card Integration:** Direct interaction with NFC security smart cards for hardware-level key isolation and transaction signing.
 - **Multi-Chain Asset Management:** Native support for balances, transfers, and transaction history across:
   - **EVM Networks:** Ethereum, BNB Chain (BSC), Polygon, Arbitrum, Base, Avalanche, Katana
-  - **Non-EVM Networks:** Bitcoin, Solana, TON, TRON, XRP Ledger, Venom, Canton, COTI
+  - **Non-EVM Networks:** Bitcoin, Solana, TON, TRON, XRP Ledger, Venom, COTI
 - **Cross-Chain & DEX Swaps:** Aggregated swaps powered by 1inch Fusion, Web3World, Changelly, Bridgers, Omniston, and more.
 - **WalletConnect v2:** Connect to decentralized applications (dApps) across ecosystems via QR code or direct pairing.
 - **WebCrypto Local Security:** Local storage items are encrypted client-side using WebCrypto (AES-CBC + PBKDF2).
@@ -29,7 +29,7 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 - **State Management:** [Vuex](https://vuex.vuejs.org/)
 - **Build Tool:** [Vite](https://vitejs.dev/)
 - **Languages:** TypeScript, JavaScript, SCSS
-- **Web3 Libraries:** `ethers.js`, `@solana/web3.js`, `@ton/ton`, `tronweb`, `bitcoinjs-lib`, `xrpl`, `@canton-network/*`, `@1inch/cross-chain-sdk`
+- **Web3 Libraries:** `ethers.js`, `@solana/web3.js`, `@ton/ton`, `tronweb`, `bitcoinjs-lib`, `xrpl`, `@1inch/cross-chain-sdk`
 - **WebAssembly (WASM):** High-performance cryptography and barcode/QR scanning modules
 
 ---
@@ -144,7 +144,6 @@ United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all
 | **XRP Ledger** | `XRP` | [`src/api/manifests/xrpl.json`](src/api/manifests/xrpl.json) | `xrpl` |
 | **Venom** | `VENOM` | [`src/api/manifests/venom.json`](src/api/manifests/venom.json) | `venom` |
 | **COTI** | `COTI` | [`src/api/manifests/coti.json`](src/api/manifests/coti.json) | `coti` |
-| **Canton (Devnet / Testnet)** | `CANTON_DEV` / `CANTON_TEST` | [`src/api/manifests/canton-devnet.json`](src/api/manifests/canton-devnet.json) | `canton` |
 | **Cross-Chain Swap Assets** | — | [`src/api/manifests/swap-tokens.json`](src/api/manifests/swap-tokens.json) | Aggregated catalog |
 
 ---
@@ -227,12 +226,6 @@ Depending on `"type"`, specific connectivity parameters are required:
 ##### `type: "venom"`
 - **`rpcUrl`**: Venom JRPC / GraphQL endpoint (e.g. `https://jrpc.venom.foundation/rpc`).
 
-##### `type: "canton"`
-- **`authServerUrl`**: Canton OAuth/Auth server URL.
-- **`ledgerUrl`**: Canton Ledger API endpoint.
-- **`validatorUrl`**: Canton Validator API endpoint.
-- **`registries`**: Array of Canton participant registry URLs.
-
 ---
 
 ### 🔧 How to Configure Blockchains for Independent Operation
@@ -268,31 +261,6 @@ By default, extended token lists can be loaded from any public token registry or
 - **Client-Side Cryptography:** Private keys never touch any centralized servers. Keys remain in the hardware security element or are generated and held purely in client-side ephemeral memory.
 - **Encrypted Local Storage:** Sensitive persisted preferences are encrypted using AES-CBC with PBKDF2 derived keys via the standard WebCrypto API.
 - **No Telemetry Tracking:** The application does not collect user tracking or telemetry metrics.
-
----
-
-## 🔑 Canton Network & JWKS (`/.well-known/jwks.json`)
-
-The file [`src/public/.well-known/jwks.json`](src/public/.well-known/jwks.json) provides a standard **JSON Web Key Set (RFC 7517)** served directly at `https://<your-domain>/.well-known/jwks.json`.
-
-### What it contains
-It exposes **public** RSA keys (`kty: "RSA"`, `alg: "RS256"`, `use: "sig"`) used for verifying JWT (JSON Web Token) digital signatures. It contains **no private keys or secrets**.
-
-### Purpose in this project
-- **Canton Network & Ledger API Authentication:** Nodes and validators in the Canton ecosystem require incoming requests to provide a signed JWT bearer token.
-- **Signature Verification (JWKS Discovery):** Canton validators fetch `https://<domain>/.well-known/jwks.json` to verify that JWT tokens were signed by the authorized RSA private key matching the token's `kid` (Key ID).
-
-### How to use or customize it
-- **Default usage:** If connecting to an existing Canton network / auth server, this file is static and harmless.
-- **Self-hosted Canton Validator:** If you run your own auth server and sign your own JWTs:
-  1. Generate an RSA keypair:
-     ```bash
-     openssl genrsa -out private.pem 2048
-     openssl rsa -in private.pem -pubout -out public.pem
-     ```
-  2. Convert your public key into JWK format and place it into `src/public/.well-known/jwks.json`.
-  3. Configure your Canton validator's `jwks-url` to point to `https://<your-domain>/.well-known/jwks.json`.
-- **If Canton is not used:** If your setup does not interact with Canton Network or your validator uses an external auth provider endpoint, this file is optional and can safely be removed.
 
 ---
 

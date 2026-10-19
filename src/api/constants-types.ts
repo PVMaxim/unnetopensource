@@ -71,8 +71,6 @@ export const RPC_NAMES = {
   XRP: "Xrp",
   COTI: "Coti",
   KATANA: "Katana",
-  CANTON_TEST: "Canton test",
-  CANTON_DEV: "Canton dev",
 } as const;
 
 export const PING_LENGTH_MIN = 4;
@@ -107,9 +105,7 @@ export const rpcList: RpcListItem[] = [
   { name: RPC_NAMES.XRP, type: 't', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
   { name: RPC_NAMES.COTI, type: 't', swapChain: undefined, serialnumber: 12 },
   { name: RPC_NAMES.KATANA, type: 't', swapChain: undefined, serialnumber: 13 },
-  { name: RPC_NAMES.CANTON_TEST, type: 't', swapChain: undefined, serialnumber: 14 },
-  { name: RPC_NAMES.CANTON_DEV, type: 't', swapChain: undefined, serialnumber: 15 },
-  { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 16, displayName: "Venom (Old)" }
+  { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
 ];
 
 export type rpcListType = RpcListItem;
