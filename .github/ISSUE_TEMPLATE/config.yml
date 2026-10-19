@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Security Vulnerability Reporting"
+    url: "https://github.com/unitednetwork-wallet/United-Network-Wallet/security/advisories/new"
+    about: "Report security vulnerabilities responsibly via GitHub Private Vulnerability Reporting."
+  - name: "Official Documentation & Wiki"
+    url: "https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki"
+    about: "Read our comprehensive developer guide, card protocols, and API reference."

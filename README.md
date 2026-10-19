@@ -4,13 +4,23 @@
 [![Vue 3](https://img.shields.io/badge/Vue-3.5-brightgreen.svg)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-purple.svg)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
-[![Documentation](https://img.shields.io/badge/Documentation-GitHub%20Wiki-24292e?logo=github)](https://github.com/PVMaxim/unnetopensource/wiki)
+[![Documentation](https://img.shields.io/badge/Documentation-GitHub%20Wiki-24292e?logo=github)](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Security Policy](https://img.shields.io/badge/Security-Policy-red.svg)](SECURITY.md)
 
 A modern, high-performance non-custodial Web3 application for managing digital assets, multi-chain swaps, and hardware card authentication across major blockchain ecosystems.
 
+> [!IMPORTANT]
+> **Hardware Smart Card Required for Full Functionality**
+>
+> To utilize the full functionality of the wallet (hardware-level key isolation, NFC card interaction, FIDO/WebAuthn transaction signing, and PIN code management), a physical **United Network NFC Smart Card** is required.
+>
+> **Request Developer Card Samples:**
+> To obtain test cards pre-configured with your domain name, please reach out to our team at **[info@unitednetwork.cards](mailto:info@unitednetwork.cards)**. We will ship card samples with your designated domain programmed into the secure element.
+
 ---
 
-## ✨ Features
+## Features
 
 - **Non-Custodial by Design:** Private keys stay offline and under user control. All cryptographic signatures occur client-side.
 - **NFC Hardware Card Integration:** Direct interaction with NFC security smart cards for hardware-level key isolation and transaction signing.
@@ -24,7 +34,7 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework:** [Vue 3](https://vuejs.org/) (Composition API, `<script setup>`)
 - **State Management:** [Vuex](https://vuex.vuejs.org/)
@@ -35,22 +45,22 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 
 ---
 
-## 📖 Documentation
+## Documentation
 
-Comprehensive guides, hardware NFC card protocols, security architecture, and API references are available in the **[GitHub Wiki](https://github.com/PVMaxim/unnetopensource/wiki)**:
+Comprehensive guides, hardware NFC card protocols, security architecture, and API references are available in the **[GitHub Wiki](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki)**:
 
-- 🏠 **[Getting Started & Developer Guide](https://github.com/PVMaxim/unnetopensource/wiki/Home)**
-- 💳 **[Card Interaction (FIDO & WebNFC)](https://github.com/PVMaxim/unnetopensource/wiki/card-interection)**
-- 🌐 **[Supported Networks & Manifests](https://github.com/PVMaxim/unnetopensource/wiki/supported-networks)**
-- 🔒 **[PIN Code & Card Security](https://github.com/PVMaxim/unnetopensource/wiki/pin-code)**
-- 🔑 **[Seed Phrases Generation & Recovery](https://github.com/PVMaxim/unnetopensource/wiki/seed-phrase-generation)**
-- 🔄 **[Swap Overview & DEX Aggregation](https://github.com/PVMaxim/unnetopensource/wiki/swap-overview)**
-- 📱 **[Mobile Application Guidelines](https://github.com/PVMaxim/unnetopensource/wiki/mobile-application)**
-- 📚 **[Full API Reference](https://github.com/PVMaxim/unnetopensource/wiki/api)**
+- **[Getting Started & Developer Guide](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/Home)**
+- **[Card Interaction (FIDO & WebNFC)](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/card-interection)**
+- **[Supported Networks & Manifests](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/supported-networks)**
+- **[PIN Code & Card Security](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/pin-code)**
+- **[Seed Phrases Generation & Recovery](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/seed-phrase-generation)**
+- **[Swap Overview & DEX Aggregation](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/swap-overview)**
+- **[Mobile Application Guidelines](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/mobile-application)**
+- **[Full API Reference](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/api)**
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Prerequisites
 
@@ -60,8 +70,8 @@ Comprehensive guides, hardware NFC card protocols, security architecture, and AP
 ### 2. Clone Repository
 
 ```bash
-git clone https://github.com/PVMaxim/unnetopensource.git
-cd unnetopensource
+git clone https://github.com/unitednetwork-wallet/United-Network-Wallet.git
+cd United-Network-Wallet
 ```
 
 ### 3. Install Dependencies
@@ -94,11 +104,11 @@ npm run dev
 ```
 
 The application will be accessible at:  
-👉 **`http://localhost:8081`**
+**`http://localhost:8080`** (or `8081`)
 
 ---
 
-## 📦 Available Scripts
+## Available Scripts
 
 | Command | Description |
 |---|---|
@@ -110,7 +120,7 @@ The application will be accessible at:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 ├── public/               # Build output artifacts (compiled distribution)
@@ -140,7 +150,7 @@ The application will be accessible at:
 
 United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all supported blockchains. Instead of hardcoding node endpoints, block explorers, and asset lists inside UI components, every blockchain is completely configured via a self-contained JSON manifest in [`src/api/manifests/`](src/api/manifests/) and validated at runtime using Zod schemas in [`src/api/manifests.ts`](src/api/manifests.ts).
 
-### 📋 Supported Chains & Manifest Mapping
+### Supported Chains & Manifest Mapping
 
 | Blockchain | RPC Identifier | Manifest File | Network Type (`type`) |
 |---|---|---|---|
@@ -164,7 +174,7 @@ United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all
 
 ---
 
-### 🧩 Manifest JSON Structure & Schema
+### Manifest JSON Structure & Schema
 
 Each manifest conforms to `BlockchainManifestSchema` ([`src/api/manifests.ts`](src/api/manifests.ts)):
 
@@ -244,7 +254,44 @@ Depending on `"type"`, specific connectivity parameters are required:
 
 ---
 
-### 🔧 How to Configure Blockchains for Independent Operation
+### How to Enable, Disable, or Remove a Blockchain
+
+To add, hide, or completely remove a blockchain from the wallet UI, you do **not** need to delete complex logic or alter manager files. 
+
+All active blockchains across the entire application (header network selector, swap routing, balance loading, and settings) are controlled centrally in **[`src/api/constants-types.ts`](src/api/constants-types.ts)** inside the **`rpcList`** array:
+
+```typescript
+// file: src/api/constants-types.ts
+
+export const rpcList: RpcListItem[] = [
+  { name: RPC_NAMES.SOLANA, type: 's', swapChain: SWAP_CHAINS.SOLANA, serialnumber: 1 },
+  { name: RPC_NAMES.BTC, type: 'b', swapChain: SWAP_CHAINS.BTC, serialnumber: 2 },
+  { name: RPC_NAMES.ETH, type: 't', swapChain: SWAP_CHAINS.ETH, serialnumber: 3 },
+  { name: RPC_NAMES.BSC, type: 't', swapChain: SWAP_CHAINS.BSC, serialnumber: 4 },
+  { name: RPC_NAMES.TRON, type: 't', swapChain: SWAP_CHAINS.TRON, serialnumber: 5 },
+  { name: RPC_NAMES.TON, type: 't', swapChain: SWAP_CHAINS.TON, serialnumber: 6 },
+  { name: RPC_NAMES.ARBITRUM, type: 't', swapChain: SWAP_CHAINS.ARBITRUM, serialnumber: 7 },
+  { name: RPC_NAMES.BASE, type: 't', swapChain: SWAP_CHAINS.BASE, serialnumber: 8 },
+  { name: RPC_NAMES.POLYGON, type: 't', swapChain: SWAP_CHAINS.POLYGON, serialnumber: 9 },
+  { name: RPC_NAMES.AVALANCHE, type: 't', swapChain: SWAP_CHAINS.AVALANCHE, serialnumber: 10 },
+  { name: RPC_NAMES.XRP, type: 't', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
+
+  // To disable any blockchain, simply comment out its line:
+  // { name: RPC_NAMES.COTI, type: 't', swapChain: undefined, serialnumber: 12 },
+  // { name: RPC_NAMES.KATANA, type: 't', swapChain: undefined, serialnumber: 13 },
+  // { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
+];
+```
+
+**Why commenting out works seamlessly:**
+- The network selector in the top bar automatically filters from `rpcList`.
+- The cross-chain swap engine only resolves routes for active `swapChain` entries.
+- Balance polling loops only query chains present in `rpcList`.
+- Zero build or TypeScript errors occur when commenting out items.
+
+---
+
+### How to Configure Blockchains for Independent Operation
 
 To run the wallet completely independently without reliance on third-party proxies, configure the manifests to point directly to your preferred node providers:
 
@@ -272,7 +319,7 @@ By default, extended token lists can be loaded from any public token registry or
 
 ---
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 - **Client-Side Cryptography:** Private keys never touch any centralized servers. Keys remain in the hardware security element or are generated and held purely in client-side ephemeral memory.
 - **Encrypted Local Storage:** Sensitive persisted preferences are encrypted using AES-CBC with PBKDF2 derived keys via the standard WebCrypto API.
@@ -280,7 +327,7 @@ By default, extended token lists can be loaded from any public token registry or
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to open an Issue or submit a Pull Request.
 
@@ -292,6 +339,6 @@ Contributions are welcome! Please feel free to open an Issue or submit a Pull Re
 
 ---
 
-## 📄 License
+## License
 
 This project is open-source and licensed under the [MIT License](LICENSE).

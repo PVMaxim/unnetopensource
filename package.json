@@ -6,7 +6,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/PVMaxim/unnetopensource.git"
+    "url": "https://github.com/unitednetwork-wallet/United-Network-Wallet.git"
   },
   "scripts": {
     "dev": "vite",

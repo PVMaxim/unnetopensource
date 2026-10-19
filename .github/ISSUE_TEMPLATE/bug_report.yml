@@ -1,0 +1,77 @@
+name: "Bug Report"
+description: "Report an issue, error, or unexpected behavior in United Wallet."
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please search existing issues and check our [Wiki Documentation](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki) before submitting.
+        
+        **Security Notice:** If this issue relates to a security vulnerability, please do NOT file a public issue. Follow our [Security Policy](https://github.com/unitednetwork-wallet/United-Network-Wallet/blob/main/SECURITY.md).
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: "When attempting to initiate a swap from ETH to SOL..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Open the wallet on '...'
+        2. Navigate to 'Swap'
+        3. Select '...'
+        4. See error '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+      placeholder: "Transaction quote should generate within 3 seconds..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Affected Component
+      description: Which part of the application is affected?
+      options:
+        - "NFC Card Interaction / FIDO"
+        - "Multi-Chain Manager (EVM / Solana / Bitcoin / TON / TRON / XRPL)"
+        - "Cross-Chain Swaps & DEX"
+        - "WalletConnect v2"
+        - "PIN Code & Authentication"
+        - "Tokens List & Balance Tracking"
+        - "UI / Layout / Responsiveness"
+        - "Other"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment & Devices
+      description: Details about your environment.
+      placeholder: |
+        - OS: [e.g. macOS 14.5 / iOS 17.4 / Android 14]
+        - Browser: [e.g. Chrome 125, Safari 17]
+        - Hardware Card: [e.g. United Network NFC Card v1]
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots or Console Logs
+      description: Paste any browser console errors or drag-and-drop screenshots here (ensure no private keys or seed phrases are visible!).
