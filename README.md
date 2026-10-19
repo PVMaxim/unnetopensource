@@ -330,7 +330,7 @@ By default, extended token lists can be loaded from any public token registry or
 
 We welcome community contributions! Please review our [Contributing Guidelines](CONTRIBUTING.md) for local development setup, coding standards, and pull request procedures.
 
-Before contributing, please review our [Code of Conduct](CODE_OF_CONDUCT.md). For responsible security vulnerability disclosures, refer to [SECURITY.md](SECURITY.md).
+For responsible security vulnerability disclosures, please refer to [SECURITY.md](SECURITY.md).
 
 ---
 

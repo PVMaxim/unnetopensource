@@ -6,7 +6,6 @@ Thank you for your interest in contributing to **United Wallet**! As an open-sou
 
 ## Table of Contents
 
-- [Code of Conduct](#code-of-conduct)
 - [How Can I Contribute?](#how-can-i-contribute)
   - [Reporting Bugs](#reporting-bugs)
   - [Suggesting Features](#suggesting-features)
@@ -16,12 +15,6 @@ Thank you for your interest in contributing to **United Wallet**! As an open-sou
 - [Git Workflow & Branching](#git-workflow--branching)
 - [Coding Standards & Conventions](#coding-standards--conventions)
 - [Pull Request Process](#pull-request-process)
-
----
-
-## Code of Conduct
-
-By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md). Please maintain a welcoming, respectful, and inclusive environment for everyone.
 
 ---
 
