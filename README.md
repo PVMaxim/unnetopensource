@@ -4,6 +4,7 @@
 [![Vue 3](https://img.shields.io/badge/Vue-3.5-brightgreen.svg)](https://vuejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-purple.svg)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
+[![Documentation](https://img.shields.io/badge/Documentation-GitHub%20Wiki-24292e?logo=github)](https://github.com/PVMaxim/unnetopensource/wiki)
 
 A modern, high-performance non-custodial Web3 application for managing digital assets, multi-chain swaps, and hardware card authentication across major blockchain ecosystems.
 
@@ -31,6 +32,21 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 - **Languages:** TypeScript, JavaScript, SCSS
 - **Web3 Libraries:** `ethers.js`, `@solana/web3.js`, `@ton/ton`, `tronweb`, `bitcoinjs-lib`, `xrpl`, `@1inch/cross-chain-sdk`
 - **WebAssembly (WASM):** High-performance cryptography and barcode/QR scanning modules
+
+---
+
+## 📖 Documentation
+
+Comprehensive guides, hardware NFC card protocols, security architecture, and API references are available in the **[GitHub Wiki](https://github.com/PVMaxim/unnetopensource/wiki)**:
+
+- 🏠 **[Getting Started & Developer Guide](https://github.com/PVMaxim/unnetopensource/wiki/Home)**
+- 💳 **[Card Interaction (FIDO & WebNFC)](https://github.com/PVMaxim/unnetopensource/wiki/card-interection)**
+- 🌐 **[Supported Networks & Manifests](https://github.com/PVMaxim/unnetopensource/wiki/supported-networks)**
+- 🔒 **[PIN Code & Card Security](https://github.com/PVMaxim/unnetopensource/wiki/pin-code)**
+- 🔑 **[Seed Phrases Generation & Recovery](https://github.com/PVMaxim/unnetopensource/wiki/seed-phrase-generation)**
+- 🔄 **[Swap Overview & DEX Aggregation](https://github.com/PVMaxim/unnetopensource/wiki/swap-overview)**
+- 📱 **[Mobile Application Guidelines](https://github.com/PVMaxim/unnetopensource/wiki/mobile-application)**
+- 📚 **[Full API Reference](https://github.com/PVMaxim/unnetopensource/wiki/api)**
 
 ---
 
