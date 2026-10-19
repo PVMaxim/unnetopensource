@@ -47,16 +47,15 @@ A modern, high-performance non-custodial Web3 application for managing digital a
 
 ## Documentation
 
-Comprehensive guides, hardware NFC card protocols, security architecture, and API references are available in the **[GitHub Wiki](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki)**:
+Comprehensive guides, hardware NFC card protocols, blockchain management, and security architecture are available in the **[GitHub Wiki](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki)**:
 
 - **[Getting Started & Developer Guide](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/Home)**
 - **[Card Interaction (FIDO & WebNFC)](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/card-interection)**
-- **[Supported Networks & Manifests](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/supported-networks)**
+- **[Supported Networks & Chain Management](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/supported-networks)**
+- **[Blockchain Manifest Files](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/manifest-file)**
 - **[PIN Code & Card Security](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/pin-code)**
 - **[Seed Phrases Generation & Recovery](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/seed-phrase-generation)**
 - **[Swap Overview & DEX Aggregation](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/swap-overview)**
-- **[Mobile Application Guidelines](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/mobile-application)**
-- **[Full API Reference](https://github.com/unitednetwork-wallet/United-Network-Wallet/wiki/api)**
 
 ---
 
@@ -146,7 +145,7 @@ The application will be accessible at:
 
 ---
 
-## 🌐 Blockchain Manifests & Network Configuration (`src/api/manifests/`)
+## Blockchain Manifests & Network Configuration (`src/api/manifests/`)
 
 United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all supported blockchains. Instead of hardcoding node endpoints, block explorers, and asset lists inside UI components, every blockchain is completely configured via a self-contained JSON manifest in [`src/api/manifests/`](src/api/manifests/) and validated at runtime using Zod schemas in [`src/api/manifests.ts`](src/api/manifests.ts).
 
@@ -329,13 +328,9 @@ By default, extended token lists can be loaded from any public token registry or
 
 ## Contributing
 
-Contributions are welcome! Please feel free to open an Issue or submit a Pull Request.
+We welcome community contributions! Please review our [Contributing Guidelines](CONTRIBUTING.md) for local development setup, coding standards, and pull request procedures.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Before contributing, please review our [Code of Conduct](CODE_OF_CONDUCT.md). For responsible security vulnerability disclosures, refer to [SECURITY.md](SECURITY.md).
 
 ---
 
