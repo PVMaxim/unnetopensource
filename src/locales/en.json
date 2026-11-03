@@ -7,18 +7,13 @@
     "settings": "Settings",
     "restore-card": "Restore card",
     "wallet-connect": "Wallet connect",
-    "connect-to-app": "Connect to app",
-    "connected-apps": "Connected apps",
     "signOut": "Sign out",
-    "swap": "Swap",
-    "feedback": "Feedback"
+    "swap": "Swap"
   },
   "title": {
     "authorization": "Authorization",
     "restore-card": "Restore card",
-    "registration-wallet": "Wallet registration",
     "registration-card": "Card registration",
-    "registration": "Registration",
     "dashboard": "My Wallet",
     "send": "Send",
     "receive": "Receive",
@@ -27,18 +22,14 @@
     "not-found": "404 Not found",
     "swap": "Swap",
     "wallet-connect": "Wallet connect",
-    "connect-to-app": "Connect to app",
-    "connected-apps": "Connected apps",
     "not-supported-device": "Device not supported",
     "re-registration-card": "Card reset",
     "not-supported-browser-only-app": "Use only in app"
   },
   "description": {
     "restore-card": "Restore card",
-    "registration-wallet": "Wallet registration",
     "registration-card": "Card registration",
     "authorization": "Authorization",
-    "registration": "Registration",
     "dashboard": "My Wallet",
     "send": "Send",
     "receive": "Receive",
@@ -94,8 +85,6 @@
       },
       "connectCard": "Connect Card",
       "restoreCard": "Restore card",
-      "noCard": "No card yet?",
-      "getYours": "Get yours here",
       "nfc": {
         "title": "Hold card to your phone",
         "subtitle": "Keep card at the back of your phone to authorize"
@@ -223,12 +212,6 @@
       "selectToken": "Select Token",
       "search": "Search",
       "notFound": "Not found"
-    },
-    "connectToApp": {
-      "scanAppLink": "Scan app connect link:",
-      "specifyManually": "Or specify app connect link manually:",
-      "connect": "Connect",
-      "cameraPermissionError": "Reload a page. You need to grant a camera access permission."
     },
     "dashboard": {
       "tokens": "Tokens",
@@ -371,13 +354,6 @@
     "reject": "Reject",
     "close": "Close"
   },
-  "yes": "yes",
-  "no": "no",
-  "submit": "submit",
-  "order": "Order",
-  "apple": "Apple app store",
-  "google": "google app store",
-  "presentation_download": "Presentation download",
   "go_home": "Go home",
   "swap": {
     "loader": {
@@ -398,291 +374,6 @@
     },
     "errors": {
       "invalidAmount": "Incorrect amount."
-    }
-  },
-  "enterprise_v2": {
-    "hero": {
-      "badge": "White-Label Partnership",
-      "titleP1": "Unlock New Revenue Models",
-      "titleP2": "With a Branded Card Wallet.",
-      "subtitle": "White-Label Card Wallet tailored for your Business, Ecosystem, Clients, Users, and Partners — free of hardware development or supply chain headaches.",
-      "micronote": "Flexible Package Offerings · Custom Integration Opportunities",
-      "ctaPrimary": "Schedule a Partnership Call",
-      "ctaSecondary": "Email Us",
-      "trust1": "25,000+ cards shipped",
-      "trust2": "20+ active partnerships",
-      "trust3": "EAL6+ certified"
-    },
-    "whatWeOffer": {
-      "label": "What We Offer",
-      "title": "Your brand.",
-      "titleHighlight": "Everywhere it matters.",
-      "f1": {
-        "title": "End-to-End Solution",
-        "desc": "A complete, end-to-end hybrid solution — ready to deliver and distribute from day one."
-      },
-      "f2": {
-        "title": "Full White-Label",
-        "desc": "Customization across card wallet, packaging, and app interface — logo, colors, and design, completely yours."
-      },
-      "f3": {
-        "title": "Custom Integration",
-        "desc": "Plug it into your existing product or launch it as a standalone branded experience. Custom software integration included."
-      }
-    },
-    "b2bValueProps": {
-      "label": "Why Partner With Us",
-      "title": "Everything to launch.",
-      "titleHighlight": "Nothing to build.",
-      "description": "We've already solved the hard parts of hardware wallet deployment — so you don't have to.",
-      "items": {
-        "turnkey": {
-          "title": "Turn-Key Solution",
-          "desc": "We handle everything — card manufacturing, secure element provisioning, firmware, and global logistics. You focus on your users."
-        },
-        "brand": {
-          "title": "Your Brand, Our Tech",
-          "desc": "Fully custom-branded cards with your logo, colors, and design. Your users see your brand — powered by our proven security infrastructure."
-        },
-        "pricing": {
-          "title": "Enterprise Pricing",
-          "desc": "Volume-based pricing that makes hardware wallets accessible for your entire user base. Contact us for a custom quote tailored to your scale."
-        },
-        "traction": {
-          "title": "Proven Traction",
-          "desc": "25,000+ cards deployed across exchanges, blockchain ecosystems, and Web3 infrastructure platforms. Battle-tested at scale."
-        }
-      }
-    },
-    "whatYouGain": {
-      "label": "What You Gain",
-      "title": "Six reasons to",
-      "titleHighlight": "partner.",
-      "mysteryTitle": "Reason #6",
-      "mysteryDesc": "This one's best explained in person. We'll let you discover it yourself — but trust us, it's worth the conversation.",
-      "mysteryCta": "Schedule a Call",
-      "items": {
-        "revenue": {
-          "title": "New Revenue Streams",
-          "desc": "Turn your brand into an on-chain revenue engine. Every user interaction within your ecosystem becomes a monetization opportunity — with fees flowing back to you across integrated financial services and third-party connections. Net-positive ROI, from day one.",
-          "highlight": "Net-positive ROI"
-        },
-        "onboarding": {
-          "title": "User Onboarding",
-          "desc": "A familiar card format removes the barrier to Web3 entry. No cables required — just tap. FIDO2-secured NFC makes self-custody as simple as a payment, bringing any user onchain under 30 secs.",
-          "highlight": "Onchain under 30 secs"
-        },
-        "retention": {
-          "title": "User Retention, LTV & Engagement",
-          "desc": "Hardware ownership creates a physical bond between your user and your brand. Tap-to-sign transactions, dApp connectivity, and multichain access keep users active, engaged, and coming back — long after the first interaction.",
-          "highlight": "Physical brand bond"
-        },
-        "exposure": {
-          "title": "Brand Exposure",
-          "desc": "From fully branded card wallet and packaging to a custom-domain front-end (wallet.yourbrand.com / brandedwallet.xyz) and your own AppStore / Play Market listing — your identity is present at every touchpoint. On the desk, in the hand, and on the screen.",
-          "highlight": "Every touchpoint"
-        },
-        "product": {
-          "title": "Product Offering",
-          "desc": "Expand what your business delivers. Embed the wallet interface into your existing product, make a cross-software integration or launch it as a standalone branded solution — hardware-backed, multichain-ready, and built for stablecoins, RWAs, DID verification, NFTs, token-gated access and even CBDCs.",
-          "highlight": "Multichain-ready"
-        }
-      }
-    },
-    "useCases": {
-      "label": "Use Cases",
-      "title": "Built for",
-      "titleHighlight": "every vertical.",
-      "description": "From exchanges to ecosystems, our white-label solution adapts to your needs.",
-      "items": {
-        "exchanges": {
-          "title": "Crypto Exchanges",
-          "desc": "Offer branded hardware wallets as a premium add-on for your users. Increase retention and reduce withdrawal-related support tickets."
-        },
-        "ecosystems": {
-          "title": "Blockchain Ecosystems",
-          "desc": "Distribute branded cards to your community. Perfect for ecosystem grants, conference giveaways, and developer incentive programs."
-        },
-        "projects": {
-          "title": "Token Projects",
-          "desc": "Branded wallet cards for your token holders. Physical engagement with your digital community. Ideal for loyalty programs and airdrops."
-        },
-        "infra": {
-          "title": "Web3 Infrastructure",
-          "desc": "Integrate NFC wallet cards into your platform's security layer. Browser SDK and open API for seamless integration with your existing stack."
-        }
-      }
-    },
-    "techSpecs": {
-      "label": "Technical Specs",
-      "title": "Enterprise-grade",
-      "titleHighlight": "infrastructure.",
-      "description": "Built for security-first organizations that don't compromise.",
-      "items": {
-        "security": {
-          "label": "Security",
-          "value": "EAL6+",
-          "desc": "Common Criteria certified secure element — the highest standard used by government and military applications."
-        },
-        "auth": {
-          "label": "Authentication",
-          "value": "FIDO2",
-          "desc": "Passwordless authentication standard. Your users can use the same card for Web3 signing and Web2 login."
-        },
-        "chains": {
-          "label": "Blockchains",
-          "value": "13+",
-          "desc": "Bitcoin, Ethereum, Solana, Polygon, Arbitrum, Avalanche, BASE, TON, BNB, Tron, Venom, and growing."
-        },
-        "integration": {
-          "label": "Integration",
-          "value": "SDK",
-          "desc": "Browser-based Web NFC SDK. Integrate tap-to-sign into your dApp or platform in days, not months."
-        },
-        "tokens": {
-          "label": "Tokens",
-          "value": "20,000+",
-          "desc": "Support for ERC-20, SPL, BEP-20, and native tokens across all supported blockchains."
-        },
-        "connectivity": {
-          "label": "Connectivity",
-          "value": "NFC",
-          "desc": "No cables, no Bluetooth, no batteries. Tap-to-sign via Web NFC works with any modern smartphone."
-        }
-      }
-    },
-    "positioning": {
-      "label": "Your Business, Your Way",
-      "title": "You know your business — ",
-      "titleHighlight": "you decide how you position it.",
-      "items": {
-        "ecosystem": {
-          "title": "Ecosystem Product",
-          "desc": "Embed the wallet into your existing platform as a native feature. Seamless integration with your product, your UX, your user accounts. The card becomes part of your ecosystem — enhancing what you already offer."
-        },
-        "techyMerch": {
-          "title": "Techy-Merch",
-          "desc": "Card-as-merch for events, launches, and community building. Branded hardware your users actually use daily — not another t-shirt that sits in a drawer. Real utility meets premium brand presence."
-        },
-        "standalone": {
-          "title": "Standalone Turnkey Business",
-          "desc": "Launch a complete wallet business under your brand. Your domain, your app listing, your revenue stream. We handle manufacturing, provisioning, and infrastructure — you focus on growth."
-        }
-      }
-    },
-    "pricing": {
-      "label": "Pricing",
-      "title": "Volume",
-      "titleHighlight": "Pricing",
-      "description": "Transparent partnership tiers. All plans include manufacturing, security, and logistics.",
-      "tiers": {
-        "starter": {
-          "name": "Starter",
-          "volume": "100–499 units",
-          "price": "Contact us",
-          "f1": "Custom card design",
-          "f2": "Standard packaging",
-          "f3": "Browser SDK access",
-          "f4": "Email support"
-        },
-        "growth": {
-          "name": "Growth",
-          "volume": "500–4,999 units",
-          "price": "Contact us",
-          "f1": "Everything in Starter",
-          "f2": "Custom packaging",
-          "f3": "Co-branded app",
-          "f4": "Dedicated account manager",
-          "f5": "24hr response SLA"
-        },
-        "enterprise": {
-          "name": "Enterprise",
-          "volume": "5,000+ units",
-          "price": "Contact us",
-          "f1": "Everything in Growth",
-          "f2": "Full white-label app",
-          "f3": "Custom integrations",
-          "f4": "On-site support",
-          "f5": "NDA & exclusivity options"
-        }
-      }
-    },
-    "distribution": {
-      "label": "Distribution Partnership",
-      "title": "Distribute Under",
-      "titleHighlight": "United Wallet Brand",
-      "description": "Don't want to build your own brand? Become a distribution partner and sell United Wallet cards directly to your audience. We handle product, support, and branding — you focus on sales.",
-      "cta": "Become a Distribution Partner",
-      "items": {
-        "retail": {
-          "title": "Retail Partnership",
-          "desc": "Carry United Wallet cards in your physical or online store. Wholesale pricing, drop-shipping available, zero inventory risk."
-        },
-        "regional": {
-          "title": "Regional Distribution",
-          "desc": "Become the exclusive United Wallet distributor in your country or region. Territory rights, marketing support, co-branded materials."
-        },
-        "benefits": {
-          "title": "Partnership Benefits",
-          "desc": "Attractive margins, ready-to-sell product, established brand trust, full technical support, and marketing materials provided."
-        }
-      }
-    },
-    "merch": {
-      "label": "Exclusive Pack",
-      "title": "Card-as-a-Merch:",
-      "titleHighlight": "Beyond White-Label",
-      "taglineMain": "A familiar card becomes a unique merch item that empowers brands with a Web3 tool.",
-      "taglineSub": "Launch your own branded merch item that won't be left in a warehouse or discarded after your event. Your branded NFC card-wallet provides real value: a secure, convenient self-custody wallet.",
-      "includedHeader": "What's Included",
-      "whyTitle": "Why Card-as-a-Merch?",
-      "whyDesc": "Launch unique merch that won't be left in a warehouse — your branded NFC card-wallet provides <span class='font-semibold text-text-primary'>real value</span> and extends your personalized ecosystem.",
-      "cta": "Request Merch Pack Info",
-      "steps": {
-        "s1": {
-          "title": "A la carte service",
-          "desc": "Full-cycle support from pilot to rollout — just submit your request and approve your design."
-        },
-        "s2": {
-          "title": "Branded NFC card",
-          "desc": "Transform a standard card form factor into a unique merch item that engages your audience and boosts loyalty."
-        },
-        "s3": {
-          "title": "Custom packaging",
-          "desc": "Make your merch exclusive with branded envelopes or pouches — turning your card into a premium gift with real utility."
-        },
-        "s4": {
-          "title": "Next-level engagement",
-          "desc": "Turn every wallet interaction into personalized on-chain experiences, unlocking a whole new level of community engagement."
-        }
-      },
-      "benefits": {
-        "b1": {
-          "label": "Not forgotten merch",
-          "text": "Functional hardware that users keep and use"
-        },
-        "b2": {
-          "label": "Brand loyalty",
-          "text": "Every transaction reminds them of your brand"
-        },
-        "b3": {
-          "label": "Community utility",
-          "text": "Token-gated access, rewards, exclusive experiences"
-        },
-        "b4": {
-          "label": "Premium positioning",
-          "text": "Hardware merch = perceived value far above cost"
-        }
-      }
-    },
-    "cta": {
-      "label": "Get Started",
-      "title": "Ready to explore a ",
-      "titleHighlight": "partnership?",
-      "description": "Whether you're deploying 1,000 cards or 100,000, we'll tailor a solution to your platform. Let's talk.",
-      "btnPrimary": "Schedule a Call",
-      "btnSecondary": "Email Us",
-      "note": "Typical response time: 24 hours. NDA available on request."
     }
   },
   "permissions": {

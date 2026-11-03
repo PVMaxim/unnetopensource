@@ -28,14 +28,7 @@ import { registerCustomTokenStore } from '../store/modules/dynamicCustomToken.js
 import i18n from "../plugins/i18n";
 
 export const getHost = (): string => {
-  switch (window.location.hostname) {
-    case 'bitrend.com':
-      return 'bitrend.com';
-    case 'samekey.dev':
-      return 'samekey.dev';
-    default:
-      return 'united.network';
-  }
+  return window.location.hostname;
 };
 
 export const prefixStore = ref<string | null>(null);
