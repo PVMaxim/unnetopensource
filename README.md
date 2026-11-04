@@ -87,12 +87,29 @@ Copy the example configuration file:
 cp .env.example .env
 ```
 
-Open `.env` and configure the following variables:
+#### Minimum Settings Required to Run Locally Without Errors:
 
-| Variable | Required | Description | Example |
+1. **`UNITED_CONNECT_PROJECT_ID`**: Required for WalletConnect v2 features. Register a free account at [cloud.reown.com](https://cloud.reown.com) (formerly WalletConnect Cloud) and paste your Project ID.
+2. **`VITE_RPC_SOLANA`**: The official default endpoint `https://api.mainnet-beta.solana.com` restricts browser origin requests with HTTP `403 Forbidden`. To query Solana balances and tokens locally without errors, set this variable to an open public node such as `https://solana-rpc.publicnode.com` or your personal endpoint from Helius / QuickNode / Alchemy.
+3. **`VITE_1INCH_API_URL`**: 1inch developer endpoints require an API token. To use 1inch cross-chain swaps, obtain a free key at [portal.1inch.dev](https://portal.1inch.dev) and route via a proxy. If you do not configure 1inch, other swap providers (Bridgers, Changelly, SWFT) and all core wallet functionalities work out of the box.
+
+#### Complete Environment Configuration Reference:
+
+| Variable | Required | Default Value | Description |
 |---|---|---|---|
-| `UNITED_CONNECT_PROJECT_ID` | **Yes** | WalletConnect Cloud Project ID. Required for WalletConnect v2 relay protocol, pairing with dApps, and signing sessions. Get a free project ID at [cloud.walletconnect.com](https://cloud.walletconnect.com). | `a63fbec4294db4608b7ad03d159949f2` |
-| `VITE_WALLET_CONNECT_URL` | Optional | Custom origin/URL broadcasted in WalletConnect session metadata. If left blank, it automatically defaults to `window.location.origin`. | `https://your-wallet-domain.com` |
+| `UNITED_CONNECT_PROJECT_ID` | **Yes** | `""` | WalletConnect / Reown Cloud Project ID for dApp pairing and transaction signing. |
+| `VITE_WALLET_CONNECT_URL` | Optional | `window.location.origin` | Custom metadata origin URL passed during WalletConnect pairing sessions. |
+| `VITE_COINGECKO_API_URL` | Optional | `https://api.coingecko.com` | Base URL for token prices and market valuation. |
+| `VITE_1INCH_API_URL` | Optional | `https://api.1inch.dev` | Base URL for 1inch Classic and Fusion Plus swap aggregation APIs. |
+| `VITE_CHANGELLY_API_URL` | Optional | `https://api.changelly.com/v2` | Base URL for Changelly cross-currency exchange JSON-RPC. |
+| `VITE_BRIDGERS_API_URL` | Optional | `https://api.bridgers.xyz/api` | Base URL for Bridgers cross-chain swap protocol. |
+| `VITE_TON_API_URL` | Optional | `https://tonapi.io/v2` | Base URL for TonApi indexing and account traces. |
+| `VITE_OMNIBRIDGE_API_URL` | Optional | `https://www.swftc.info/api` | Base URL for SWFT AllChain Swap API. |
+| `VITE_THIRD_PARTY_PROXY_URL` | Optional | `""` | Optional CORS proxy URL for third-party media and metadata. |
+| `VITE_TOKEN_ICONS_CDN_URL` | Optional | `""` | Optional CDN URL prefix for custom token logos. |
+| `VITE_WEBVIEW_UA` | Optional | `""` | Optional User-Agent filter string for embedded Flutter WebView container detection. |
+| `VITE_RPC_*` | Optional | Defined in manifests | Optional custom JSON-RPC URLs for any network (e.g. `VITE_RPC_ETHEREUM`, `VITE_RPC_SOLANA`). |
+| `VITE_SCANNER_*` | Optional | Defined in manifests | Optional custom block explorer scanner API endpoints (e.g. `VITE_SCANNER_ETHEREUM`). |
 
 ### 5. Run Local Development Server
 
@@ -100,8 +117,10 @@ Open `.env` and configure the following variables:
 npm run dev
 ```
 
-The application will be accessible at:  
-**`http://localhost:8080`** (or `8081`)
+By default, Vite starts the development server at:  
+**`http://localhost:8080`**
+
+If port `8080` is in use by another application, Vite automatically selects the next sequential available port (e.g. `http://localhost:8081`).
 
 ---
 
@@ -149,25 +168,25 @@ United Wallet uses a declarative, **Manifest-Driven Architecture** to manage all
 
 ### Supported Chains & Manifest Mapping
 
-| Blockchain | RPC Identifier | Manifest File | Network Type (`type`) |
-|---|---|---|---|
-| **Ethereum** | `ETH` | [`src/api/manifests/ethereum.json`](src/api/manifests/ethereum.json) | `evm` |
-| **BNB Smart Chain** | `BSC` | [`src/api/manifests/binance.json`](src/api/manifests/binance.json) | `evm` |
-| **Polygon** | `POLYGON` | [`src/api/manifests/polygon.json`](src/api/manifests/polygon.json) | `evm` |
-| **Arbitrum One** | `ARBITRUM` | [`src/api/manifests/arbitrum.json`](src/api/manifests/arbitrum.json) | `evm` |
-| **Base** | `BASE` | [`src/api/manifests/base.json`](src/api/manifests/base.json) | `evm` |
-| **Avalanche C-Chain** | `AVALANCHE` | [`src/api/manifests/avalanche.json`](src/api/manifests/avalanche.json) | `evm` |
-| **Katana** | `KATANA` | [`src/api/manifests/katana.json`](src/api/manifests/katana.json) | `evm` |
-| **Solana** | `SOLANA` | [`src/api/manifests/solana.json`](src/api/manifests/solana.json) | `solana` |
-| **Solana Devnet** | `SOLANA_DEVNET` | [`src/api/manifests/solana-devnet.json`](src/api/manifests/solana-devnet.json) | `solana` |
-| **TON Network** | `TON` | [`src/api/manifests/ton.json`](src/api/manifests/ton.json) | `ton` |
-| **TRON** | `TRON` | [`src/api/manifests/tron.json`](src/api/manifests/tron.json) | `tron` |
-| **Bitcoin** | `BTC` | [`src/api/manifests/bitcoin.json`](src/api/manifests/bitcoin.json) | `bitcoin` |
-| **Bitcoin Testnet** | `BTC_TESTNET` | [`src/api/manifests/bitcoin-testnet.json`](src/api/manifests/bitcoin-testnet.json) | `bitcoin` |
-| **XRP Ledger** | `XRP` | [`src/api/manifests/xrpl.json`](src/api/manifests/xrpl.json) | `xrpl` |
-| **Venom** | `VENOM` | [`src/api/manifests/venom.json`](src/api/manifests/venom.json) | `venom` |
-| **COTI** | `COTI` | [`src/api/manifests/coti.json`](src/api/manifests/coti.json) | `coti` |
-| **Cross-Chain Swap Assets** | — | [`src/api/manifests/swap-tokens.json`](src/api/manifests/swap-tokens.json) | Aggregated catalog |
+| Blockchain | RPC Identifier | Manifest File | Network Type (`type`) | Default RPC / Node Endpoint |
+|---|---|---|---|---|
+| **Ethereum** | `ETH` | [`src/api/manifests/ethereum.json`](src/api/manifests/ethereum.json) | `evm` | `https://ethereum-rpc.publicnode.com` |
+| **BNB Smart Chain** | `BSC` | [`src/api/manifests/binance.json`](src/api/manifests/binance.json) | `evm` | `https://bsc-dataseed.binance.org` |
+| **Polygon** | `POLYGON` | [`src/api/manifests/polygon.json`](src/api/manifests/polygon.json) | `evm` | `https://polygon-bor-rpc.publicnode.com` |
+| **Arbitrum One** | `ARBITRUM` | [`src/api/manifests/arbitrum.json`](src/api/manifests/arbitrum.json) | `evm` | `https://arb1.arbitrum.io/rpc` |
+| **Base** | `BASE` | [`src/api/manifests/base.json`](src/api/manifests/base.json) | `evm` | `https://mainnet.base.org` |
+| **Avalanche C-Chain** | `AVALANCHE` | [`src/api/manifests/avalanche.json`](src/api/manifests/avalanche.json) | `evm` | `https://api.avax.network/ext/bc/C/rpc` |
+| **Katana** | `KATANA` | [`src/api/manifests/katana.json`](src/api/manifests/katana.json) | `evm` | `https://rpc.katana.network` |
+| **Solana** | `SOLANA` | [`src/api/manifests/solana.json`](src/api/manifests/solana.json) | `solana` | `https://api.mainnet-beta.solana.com` |
+| **Solana Devnet** | `SOLANA_DEVNET` | [`src/api/manifests/solana-devnet.json`](src/api/manifests/solana-devnet.json) | `solana` | `https://api.devnet.solana.com` |
+| **TON Network** | `TON` | [`src/api/manifests/ton.json`](src/api/manifests/ton.json) | `ton` | `https://toncenter.com/` |
+| **TRON** | `TRON` | [`src/api/manifests/tron.json`](src/api/manifests/tron.json) | `tron` | `https://api.trongrid.io` |
+| **Bitcoin** | `BTC` | [`src/api/manifests/bitcoin.json`](src/api/manifests/bitcoin.json) | `bitcoin` | `https://mempool.space` |
+| **Bitcoin Testnet** | `BTC_TESTNET` | [`src/api/manifests/bitcoin-testnet.json`](src/api/manifests/bitcoin-testnet.json) | `bitcoin` | `https://mempool.space/testnet/` |
+| **XRP Ledger** | `XRP` | [`src/api/manifests/xrpl.json`](src/api/manifests/xrpl.json) | `xrpl` | `wss://xrplcluster.com/` |
+| **Venom** | `VENOM` | [`src/api/manifests/venom.json`](src/api/manifests/venom.json) | `venom` | `https://jrpc.venom.foundation/rpc` |
+| **COTI** | `COTI` | [`src/api/manifests/coti.json`](src/api/manifests/coti.json) | `coti` | `https://mainnet.coti.io/rpc` |
+| **Cross-Chain Swap Assets** | — | [`src/api/manifests/swap-tokens.json`](src/api/manifests/swap-tokens.json) | Aggregated catalog | Multi-provider |
 
 ---
 
@@ -185,7 +204,7 @@ Each manifest conforms to `BlockchainManifestSchema` ([`src/api/manifests.ts`](s
   "priceProvider": {
     "type": "coingecko",
     "blockchain": "ethereum",
-    "url": "https://api.coingecko.com/api/v3"
+    "url": "https://api.coingecko.com"
   },
   "nativeToken": {
     "name": "Ether",
@@ -202,7 +221,7 @@ Each manifest conforms to `BlockchainManifestSchema` ([`src/api/manifests.ts`](s
         "ticker": "usd-coin"
       }
     ],
-    "all": "https://tokens.uniswap.org"
+    "all": "/manifests/ethereum-tokens.json"
   },
   "blockExplorer": {
     "transaction": "https://etherscan.io/tx/{id}"
@@ -213,7 +232,7 @@ Each manifest conforms to `BlockchainManifestSchema` ([`src/api/manifests.ts`](s
 - **`priceProvider`**: Defines where token and coin market prices are fetched from (`type: "coingecko"`, `blockchain`: platform ID on CoinGecko, `url`: price API URL).
 - **`nativeToken`**: Native currency metadata used for primary account balances and gas estimations.
 - **`tokens.mandatory`**: An array of tokens automatically displayed on the main dashboard for all users.
-- **`tokens.all`**: Either an array of token objects or a remote URL pointing to a standard token list JSON (e.g. Uniswap token list format).
+- **`tokens.all`**: Relative path to the local token catalog JSON file (e.g. `"/manifests/ethereum-tokens.json"`) served from `public/manifests/`, or an absolute HTTP(S) URL to an external token list.
 - **`blockExplorer.transaction`**: URL pattern used for "View in Explorer" links; `{id}` is replaced with the transaction hash/ID.
 
 #### 2. Network-Specific Fields (`type`)
@@ -261,22 +280,22 @@ All active blockchains across the entire application (header network selector, s
 // file: src/api/constants-types.ts
 
 export const rpcList: RpcListItem[] = [
-  { name: RPC_NAMES.SOLANA, type: 's', swapChain: SWAP_CHAINS.SOLANA, serialnumber: 1 },
-  { name: RPC_NAMES.BTC, type: 'b', swapChain: SWAP_CHAINS.BTC, serialnumber: 2 },
-  { name: RPC_NAMES.ETH, type: 't', swapChain: SWAP_CHAINS.ETH, serialnumber: 3 },
-  { name: RPC_NAMES.BSC, type: 't', swapChain: SWAP_CHAINS.BSC, serialnumber: 4 },
-  { name: RPC_NAMES.TRON, type: 't', swapChain: SWAP_CHAINS.TRON, serialnumber: 5 },
-  { name: RPC_NAMES.TON, type: 't', swapChain: SWAP_CHAINS.TON, serialnumber: 6 },
-  { name: RPC_NAMES.ARBITRUM, type: 't', swapChain: SWAP_CHAINS.ARBITRUM, serialnumber: 7 },
-  { name: RPC_NAMES.BASE, type: 't', swapChain: SWAP_CHAINS.BASE, serialnumber: 8 },
-  { name: RPC_NAMES.POLYGON, type: 't', swapChain: SWAP_CHAINS.POLYGON, serialnumber: 9 },
-  { name: RPC_NAMES.AVALANCHE, type: 't', swapChain: SWAP_CHAINS.AVALANCHE, serialnumber: 10 },
-  { name: RPC_NAMES.XRP, type: 't', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
+  { name: RPC_NAMES.SOLANA, type: 'solana', swapChain: SWAP_CHAINS.SOLANA, serialnumber: 1 },
+  { name: RPC_NAMES.BTC, type: 'bitcoin', swapChain: SWAP_CHAINS.BTC, serialnumber: 2 },
+  { name: RPC_NAMES.ETH, type: 'evm', swapChain: SWAP_CHAINS.ETH, serialnumber: 3 },
+  { name: RPC_NAMES.BSC, type: 'evm', swapChain: SWAP_CHAINS.BSC, serialnumber: 4 },
+  { name: RPC_NAMES.TRON, type: 'tron', swapChain: SWAP_CHAINS.TRON, serialnumber: 5 },
+  { name: RPC_NAMES.TON, type: 'ton', swapChain: SWAP_CHAINS.TON, serialnumber: 6 },
+  { name: RPC_NAMES.ARBITRUM, type: 'evm', swapChain: SWAP_CHAINS.ARBITRUM, serialnumber: 7 },
+  { name: RPC_NAMES.BASE, type: 'evm', swapChain: SWAP_CHAINS.BASE, serialnumber: 8 },
+  { name: RPC_NAMES.POLYGON, type: 'evm', swapChain: SWAP_CHAINS.POLYGON, serialnumber: 9 },
+  { name: RPC_NAMES.AVALANCHE, type: 'evm', swapChain: SWAP_CHAINS.AVALANCHE, serialnumber: 10 },
+  { name: RPC_NAMES.XRP, type: 'xrpl', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
 
   // To disable any blockchain, simply comment out its line:
-  // { name: RPC_NAMES.COTI, type: 't', swapChain: undefined, serialnumber: 12 },
-  // { name: RPC_NAMES.KATANA, type: 't', swapChain: undefined, serialnumber: 13 },
-  // { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
+  // { name: RPC_NAMES.COTI, type: 'coti', swapChain: undefined, serialnumber: 12 },
+  // { name: RPC_NAMES.KATANA, type: 'evm', swapChain: undefined, serialnumber: 13 },
+  // { name: RPC_NAMES.VENOM, type: 'venom', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
 ];
 ```
 

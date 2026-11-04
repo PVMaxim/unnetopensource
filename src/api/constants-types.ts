@@ -80,32 +80,42 @@ export const ALLOWED_PING_LENGTH = [4, 6, 8];
 export type RpcName = typeof RPC_NAMES[keyof typeof RPC_NAMES] | (string & {});
 export type SwapChain = typeof SWAP_CHAINS[keyof typeof SWAP_CHAINS] | (string & {});
 
+export type BlockchainType =
+  | 'bitcoin'
+  | 'evm'
+  | 'coti'
+  | 'solana'
+  | 'tron'
+  | 'ton'
+  | 'venom'
+  | 'xrpl';
+
 export type RpcNamesType = RpcName;
 export type SwapChainsType = typeof SWAP_CHAINS;
 
 export interface RpcListItem {
   name: RpcName;
-  type: 'b' | 's' | 't' | 'v';
+  type: BlockchainType;
   swapChain?: SwapChain;
   serialnumber: number;
   displayName?: string;
 }
 
 export const rpcList: RpcListItem[] = [
-  { name: RPC_NAMES.SOLANA, type: 's', swapChain: SWAP_CHAINS.SOLANA, serialnumber: 1 },
-  { name: RPC_NAMES.BTC, type: 'b', swapChain: SWAP_CHAINS.BTC, serialnumber: 2 },
-  { name: RPC_NAMES.ETH, type: 't', swapChain: SWAP_CHAINS.ETH, serialnumber: 3 },
-  { name: RPC_NAMES.BSC, type: 't', swapChain: SWAP_CHAINS.BSC, serialnumber: 4 },
-  { name: RPC_NAMES.TRON, type: 't', swapChain: SWAP_CHAINS.TRON, serialnumber: 5 },
-  { name: RPC_NAMES.TON, type: 't', swapChain: SWAP_CHAINS.TON, serialnumber: 6 },
-  { name: RPC_NAMES.ARBITRUM, type: 't', swapChain: SWAP_CHAINS.ARBITRUM, serialnumber: 7 },
-  { name: RPC_NAMES.BASE, type: 't', swapChain: SWAP_CHAINS.BASE, serialnumber: 8 },
-  { name: RPC_NAMES.POLYGON, type: 't', swapChain: SWAP_CHAINS.POLYGON, serialnumber: 9 },
-  { name: RPC_NAMES.AVALANCHE, type: 't', swapChain: SWAP_CHAINS.AVALANCHE, serialnumber: 10 },
-  { name: RPC_NAMES.XRP, type: 't', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
-  { name: RPC_NAMES.COTI, type: 't', swapChain: undefined, serialnumber: 12 },
-  { name: RPC_NAMES.KATANA, type: 't', swapChain: undefined, serialnumber: 13 },
-  { name: RPC_NAMES.VENOM, type: 'v', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
+  { name: RPC_NAMES.SOLANA, type: 'solana', swapChain: SWAP_CHAINS.SOLANA, serialnumber: 1 },
+  { name: RPC_NAMES.BTC, type: 'bitcoin', swapChain: SWAP_CHAINS.BTC, serialnumber: 2 },
+  { name: RPC_NAMES.ETH, type: 'evm', swapChain: SWAP_CHAINS.ETH, serialnumber: 3 },
+  { name: RPC_NAMES.BSC, type: 'evm', swapChain: SWAP_CHAINS.BSC, serialnumber: 4 },
+  { name: RPC_NAMES.TRON, type: 'tron', swapChain: SWAP_CHAINS.TRON, serialnumber: 5 },
+  { name: RPC_NAMES.TON, type: 'ton', swapChain: SWAP_CHAINS.TON, serialnumber: 6 },
+  { name: RPC_NAMES.ARBITRUM, type: 'evm', swapChain: SWAP_CHAINS.ARBITRUM, serialnumber: 7 },
+  { name: RPC_NAMES.BASE, type: 'evm', swapChain: SWAP_CHAINS.BASE, serialnumber: 8 },
+  { name: RPC_NAMES.POLYGON, type: 'evm', swapChain: SWAP_CHAINS.POLYGON, serialnumber: 9 },
+  { name: RPC_NAMES.AVALANCHE, type: 'evm', swapChain: SWAP_CHAINS.AVALANCHE, serialnumber: 10 },
+  { name: RPC_NAMES.XRP, type: 'xrpl', swapChain: SWAP_CHAINS.XRP, serialnumber: 11 },
+  { name: RPC_NAMES.COTI, type: 'coti', swapChain: undefined, serialnumber: 12 },
+  { name: RPC_NAMES.KATANA, type: 'evm', swapChain: undefined, serialnumber: 13 },
+  { name: RPC_NAMES.VENOM, type: 'venom', swapChain: SWAP_CHAINS.VENOM, serialnumber: 14, displayName: "Venom (Old)" }
 ];
 
 export type rpcListType = RpcListItem;
