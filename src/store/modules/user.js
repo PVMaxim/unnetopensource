@@ -9,7 +9,6 @@ import {
   preloadEncryptedDBKeys,
   initStorageShutdownHandlers
 } from '@/api/indexeddb-storage';
-import { removeSessionEncrypted } from '@/api/session-storage';
 import { STORAGE_KEYS } from '@/api/storage-keys';
 import { purgeAllSeedTraces, saveOnboardingSecret, restoreOnboardingSecret } from '@/api/onboarding-vault';
 import { savePinSession, getPinSession, purgePinSession } from '@/api/pin-session-vault';
@@ -136,9 +135,6 @@ export default {
         STORAGE_KEYS.REGISTERED,
         STORAGE_KEYS.PIN_PUBLIC_KEY,
         STORAGE_KEYS.SEED_PHRASE,
-        STORAGE_KEYS.TOKEN_BALANCE,
-        STORAGE_KEYS.SELECTED_TOKEN,
-        STORAGE_KEYS.TOKENS_DATA,
         ...granularBalanceKeys,
         ...granularSelectedKeys,
         ...granularDataKeys,
@@ -166,8 +162,6 @@ export default {
         Promise.all(granularDataKeys.map(k => readEncryptedDB(k, null))),
       ]);
 
-      removeSessionEncrypted(STORAGE_KEYS.PIN_HASH);
-
       let finalSeedPhrase = seedPhrase;
       if (registered || (publicKeyCard && publicKeyCard.ed25519)) {
         if (seedPhrase) {
@@ -185,75 +179,29 @@ export default {
 
       const baseTokenBalance = getCustomTokenBase();
       const normalizedTokenBalance = { ...baseTokenBalance };
-      const hasGranularBalance = granularBalances.some(item => item !== null);
-
-      if (hasGranularBalance) {
-        rpcList.forEach((rpc, idx) => {
-          if (Array.isArray(granularBalances[idx])) {
-            normalizedTokenBalance[rpc.name] = granularBalances[idx]
-              .filter(item => item !== undefined)
-              .sort((a, b) => (Number(b?.balance) || 0) - (Number(a?.balance) || 0));
-          }
-        });
-      } else {
-        const legacyBalance = await readEncryptedDB(STORAGE_KEYS.TOKEN_BALANCE, null);
-        if (legacyBalance && typeof legacyBalance === 'object') {
-          for (const chainKey of Object.keys(baseTokenBalance)) {
-            if (Array.isArray(legacyBalance[chainKey])) {
-              normalizedTokenBalance[chainKey] = legacyBalance[chainKey]
-                .filter(item => item !== undefined)
-                .sort((a, b) => (Number(b?.balance) || 0) - (Number(a?.balance) || 0));
-              writeEncryptedDB(getTokenBalanceKey(chainKey), normalizedTokenBalance[chainKey]).catch(() => {});
-            }
-          }
+      rpcList.forEach((rpc, idx) => {
+        if (Array.isArray(granularBalances[idx])) {
+          normalizedTokenBalance[rpc.name] = granularBalances[idx]
+            .filter(item => item !== undefined)
+            .sort((a, b) => (Number(b?.balance) || 0) - (Number(a?.balance) || 0));
         }
-      }
+      });
 
       const baseSelectedToken = getSelectedToken();
       const normalizedSelectedToken = { ...baseSelectedToken };
-      const hasGranularSelected = granularSelected.some(item => item !== null);
-
-      if (hasGranularSelected) {
-        rpcList.forEach((rpc, idx) => {
-          if (granularSelected[idx] !== null && granularSelected[idx] !== undefined) {
-            normalizedSelectedToken[rpc.name] = granularSelected[idx];
-          }
-        });
-      } else {
-        const legacySelected = await readEncryptedDB(STORAGE_KEYS.SELECTED_TOKEN, null);
-        if (legacySelected && typeof legacySelected === 'object') {
-          for (const chainKey of Object.keys(baseSelectedToken)) {
-            if (Object.prototype.hasOwnProperty.call(legacySelected, chainKey)) {
-              normalizedSelectedToken[chainKey] = legacySelected[chainKey];
-              if (legacySelected[chainKey] !== null) {
-                writeEncryptedDB(getSelectedTokenKey(chainKey), legacySelected[chainKey]).catch(() => {});
-              }
-            }
-          }
+      rpcList.forEach((rpc, idx) => {
+        if (granularSelected[idx] !== null && granularSelected[idx] !== undefined) {
+          normalizedSelectedToken[rpc.name] = granularSelected[idx];
         }
-      }
+      });
 
       const baseTokensData = getCustomTokenBase();
       const normalizedTokensData = { ...baseTokensData };
-      const hasGranularData = granularData.some(item => item !== null);
-
-      if (hasGranularData) {
-        rpcList.forEach((rpc, idx) => {
-          if (granularData[idx] !== null && granularData[idx] !== undefined) {
-            normalizedTokensData[rpc.name] = granularData[idx];
-          }
-        });
-      } else {
-        const legacyData = await readEncryptedDB(STORAGE_KEYS.TOKENS_DATA, null);
-        if (legacyData && typeof legacyData === 'object') {
-          for (const chainKey of Object.keys(baseTokensData)) {
-            if (legacyData[chainKey] !== undefined) {
-              normalizedTokensData[chainKey] = legacyData[chainKey];
-              writeEncryptedDB(getTokensDataKey(chainKey), legacyData[chainKey]).catch(() => {});
-            }
-          }
+      rpcList.forEach((rpc, idx) => {
+        if (granularData[idx] !== null && granularData[idx] !== undefined) {
+          normalizedTokensData[rpc.name] = granularData[idx];
         }
-      }
+      });
 
       commit('INITIALIZE_STATE', {
         publicKeyCard,
@@ -313,7 +261,6 @@ export default {
         const ttlMs = pinHash.date ? Math.max(0, pinHash.date - Date.now()) : undefined;
         await savePinSession(pinHash.pin, ttlMs);
       }
-      removeSessionEncrypted(STORAGE_KEYS.PIN_HASH);
     },
     async resetToken({ commit }) {
       commit(types.RESET_TOKEN);
@@ -322,10 +269,7 @@ export default {
         deleteEncryptedDB(STORAGE_KEYS.PUBLIC_KEY_CARD),
         deleteEncryptedDB(STORAGE_KEYS.ACCOUNT_ADDRESS),
         deleteEncryptedDB(STORAGE_KEYS.REGISTERED),
-        deleteEncryptedDB(STORAGE_KEYS.TOKEN_BALANCE),
-        deleteEncryptedDB(STORAGE_KEYS.SELECTED_TOKEN),
         deleteEncryptedDB(STORAGE_KEYS.PIN_PUBLIC_KEY),
-        deleteEncryptedDB(STORAGE_KEYS.TOKENS_DATA),
         deleteEncryptedDB(STORAGE_KEYS.SEED_PHRASE)
       ];
       for (const rpc of rpcList) {
@@ -334,13 +278,11 @@ export default {
         deletePromises.push(deleteEncryptedDB(getTokensDataKey(rpc.name)));
       }
       await Promise.all(deletePromises);
-      removeSessionEncrypted(STORAGE_KEYS.PIN_HASH);
       await purgeAllSeedTraces();
       await purgePinSession();
     },
     async resetPinHash({ commit }) {
       commit(types.RESET_PIN_HASH);
-      removeSessionEncrypted(STORAGE_KEYS.PIN_HASH);
       await purgePinSession();
     },
     async resetTokenBalance({ commit }) {
@@ -348,7 +290,6 @@ export default {
       await flushEncryptedDB();
       await Promise.all([
         ...rpcList.map(rpc => deleteEncryptedDB(getTokenBalanceKey(rpc.name))),
-        deleteEncryptedDB(STORAGE_KEYS.TOKEN_BALANCE)
       ]);
     },
     async setSeedPhrase({ commit }, seedPhrase) {

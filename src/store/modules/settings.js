@@ -1,6 +1,5 @@
 import * as types from '../mutation-types';
 import { rpcList } from '@/api/constants-types';
-import { removeEncrypted } from '@/api/encrypt-decrypt';
 import { readEncryptedDB, writeEncryptedDB, deleteEncryptedDB } from '@/api/indexeddb-storage';
 import { STORAGE_KEYS } from '@/api/storage-keys';
 
@@ -67,14 +66,10 @@ export default {
         deleteEncryptedDB(STORAGE_KEYS.RPC_PROVIDER),
         deleteEncryptedDB(STORAGE_KEYS.CARD_VERSION),
       ]);
-      removeEncrypted(STORAGE_KEYS.CARD_READER_PRIORITY);
-      removeEncrypted(STORAGE_KEYS.RPC_PROVIDER);
-      removeEncrypted(STORAGE_KEYS.CARD_VERSION);
     },
     async resetCardVersion({ commit }) {
       commit(types.RESET_CARD_VERSION);
       await deleteEncryptedDB(STORAGE_KEYS.CARD_VERSION);
-      removeEncrypted(STORAGE_KEYS.CARD_VERSION);
     },
   }
 }

@@ -1,4 +1,3 @@
-import { encryptData, decryptData } from './encrypt-decrypt';
 import { IndexedDBWriteManager } from '../utils/indexeddb-write-manager';
 import { STORAGE_KEYS, DYNAMIC_KEYS } from './storage-keys';
 
@@ -149,22 +148,18 @@ export const encryptStringDB = async (
   _storageKey?: string,
 ): Promise<EncryptedPayload> => {
   const cryptoObj = getWebCrypto();
-  if (cryptoObj?.subtle) {
-    try {
-      const key = await getEncryptionKey();
-      const iv = cryptoObj.getRandomValues(new Uint8Array(12));
-      const encoded = new TextEncoder().encode(data);
-      const encryptedBuffer = await cryptoObj.subtle.encrypt(
-        { name: 'AES-GCM', iv },
-        key,
-        encoded,
-      );
-      return { iv: Array.from(iv), data: encryptedBuffer };
-    } catch {}
+  if (!cryptoObj?.subtle) {
+    throw new Error('WebCrypto subtle is not available in this environment');
   }
-  const encrypted = await encryptData(data);
-  if (!encrypted) throw new Error('Encryption failed');
-  return { data: encrypted };
+  const key = await getEncryptionKey();
+  const iv = cryptoObj.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(data);
+  const encryptedBuffer = await cryptoObj.subtle.encrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    encoded,
+  );
+  return { iv: Array.from(iv), data: encryptedBuffer };
 };
 
 export const decryptStringDB = async (
@@ -173,14 +168,7 @@ export const decryptStringDB = async (
 ): Promise<string | null> => {
   if (!encrypted) return null;
 
-  if (typeof encrypted === 'string' && encrypted.length > 0) {
-    return (await decryptData(encrypted)) || null;
-  }
   const encObj = encrypted as { v?: number; kid?: string; iv?: unknown; data?: unknown };
-  if (typeof encObj?.data === 'string' && encObj.data.length > 0) {
-    return (await decryptData(encObj.data)) || null;
-  }
-
   const cryptoObj = getWebCrypto();
   if (cryptoObj?.subtle && encObj.iv && encObj.data) {
     try {
@@ -208,10 +196,6 @@ export const decryptStringDB = async (
       );
       return new TextDecoder().decode(decryptedData);
     } catch {}
-  }
-
-  if (encObj?.data && typeof encObj.data === 'string') {
-    return (await decryptData(encObj.data)) || null;
   }
 
   return null;
@@ -258,10 +242,7 @@ export function isCoalescingKey(key: string): boolean {
     key.includes('swap-tokens') ||
     key === STORAGE_KEYS.SWAP_HISTORY ||
     key === DYNAMIC_KEYS.TX_NOTIFICATIONS ||
-    key.includes('txN0t1f1c4t10ns') ||
-    key.includes('token_balance') ||
-    key.includes('tokens_data') ||
-    key.includes('swap_balances') ||
+    key.includes(DYNAMIC_KEYS.TX_NOTIFICATIONS) ||
     key.includes(DYNAMIC_KEYS.CUSTOM_TOKEN)
   ) {
     return true;

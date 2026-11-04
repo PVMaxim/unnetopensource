@@ -41,13 +41,6 @@ export default async ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   const isProductionBuild = mode === 'production';
 
-  let derivedKeyHex = '';
-  let legacyDerivedKeyHex = '';
-  if (env.UNITED_CARDS_KEY) {
-    derivedKeyHex = crypto.pbkdf2Sync(env.UNITED_CARDS_KEY, 'salt', 600000, 32, 'sha1').toString('hex');
-    legacyDerivedKeyHex = crypto.pbkdf2Sync(env.UNITED_CARDS_KEY, 'salt', 100, 32, 'sha1').toString('hex');
-  }
-
   return defineConfig({
     server: {
       port: 8080,
@@ -57,10 +50,6 @@ export default async ({ mode }) => {
       },
     },
     define: {
-      UNITED_CARDS_KEY: JSON.stringify(env.UNITED_CARDS_KEY),
-      UNITED_CARDS_DERIVED_KEY: JSON.stringify(derivedKeyHex),
-      UNITED_CARDS_LEGACY_DERIVED_KEY: JSON.stringify(legacyDerivedKeyHex),
-      UNITED_CARDS_IV_KEY: JSON.stringify(env.UNITED_CARDS_IV_KEY),
       UNITED_CONNECT_PROJECT_ID: JSON.stringify(env.UNITED_CONNECT_PROJECT_ID || process.env.UNITED_CONNECT_PROJECT_ID || '')
     },
     plugins: [
@@ -78,6 +67,7 @@ export default async ({ mode }) => {
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
+        'everscale-standalone-client': resolve(__dirname, 'node_modules/everscale-standalone-client/index.js'),
       },
       extensions: [
         '.js',

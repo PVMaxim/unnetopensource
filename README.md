@@ -92,8 +92,6 @@ Open `.env` and configure the following variables:
 | Variable | Required | Description | Example |
 |---|---|---|---|
 | `UNITED_CONNECT_PROJECT_ID` | **Yes** | WalletConnect Cloud Project ID. Required for WalletConnect v2 relay protocol, pairing with dApps, and signing sessions. Get a free project ID at [cloud.walletconnect.com](https://cloud.walletconnect.com). | `a63fbec4294db4608b7ad03d159949f2` |
-| `UNITED_CARDS_KEY` | **Yes** | Master passphrase used by PBKDF2 to derive 256-bit AES-CBC encryption keys for card secrets in browser localStorage. In production, provide a strong random secret (32+ chars). | `your-secure-encryption-passphrase-32+` |
-| `UNITED_CARDS_IV_KEY` | **Yes** | 32-character string used as a fallback initialization vector (IV) for local decryption compatibility. | `example-iv-fallback-32-chars-long!` |
 | `VITE_WALLET_CONNECT_URL` | Optional | Custom origin/URL broadcasted in WalletConnect session metadata. If left blank, it automatically defaults to `window.location.origin`. | `https://your-wallet-domain.com` |
 
 ### 5. Run Local Development Server

@@ -194,36 +194,16 @@ export async function restoreOnboardingSecret(): Promise<string[] | null> {
       }
     });
 
-    let decrypted: ArrayBuffer;
-    if (storedKey) {
-      const additionalData = buildOnboardingAadBytes(secretBytes, currentInstanceId);
-      if (record.v === 2) {
-        decrypted = await cryptoObj.subtle.decrypt(
-          { name: 'AES-GCM', iv: new Uint8Array(record.iv), additionalData },
-          storedKey,
-          record.data
-        );
-      } else {
-        decrypted = await cryptoObj.subtle.decrypt(
-          { name: 'AES-GCM', iv: new Uint8Array(record.iv) },
-          storedKey,
-          record.data
-        );
-      }
-    } else {
-      const legacyKey = await cryptoObj.subtle.importKey(
-        'raw',
-        secretBytes,
-        { name: 'AES-GCM' },
-        false,
-        ['decrypt']
-      );
-      decrypted = await cryptoObj.subtle.decrypt(
-        { name: 'AES-GCM', iv: new Uint8Array(record.iv) },
-        legacyKey,
-        record.data
-      );
+    if (!storedKey) {
+      return null;
     }
+
+    const additionalData = buildOnboardingAadBytes(secretBytes, currentInstanceId);
+    const decrypted = await cryptoObj.subtle.decrypt(
+      { name: 'AES-GCM', iv: new Uint8Array(record.iv), additionalData },
+      storedKey,
+      record.data
+    );
 
     const parsed: OnboardingPayload = JSON.parse(new TextDecoder().decode(decrypted));
 

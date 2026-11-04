@@ -17,7 +17,6 @@ coverage
 Dockerfile
 docker-compose.yml
 .dockerignore
-package-lock.json
 
 /cypress/videos/
 /cypress/screenshots/
@@ -45,7 +44,4 @@ package-lock.json
 AGENTS.md
 opencode.json
 .opencode
-
-# Developer tools and card simulator
-/scripts
 

@@ -27,10 +27,6 @@ declare module 'vuex' {
   export function useStore<S = unknown>(): Store<S>;
 }
 
-declare const UNITED_CARDS_KEY: string | undefined;
-declare const UNITED_CARDS_DERIVED_KEY: string | undefined;
-declare const UNITED_CARDS_LEGACY_DERIVED_KEY: string | undefined;
-declare const UNITED_CARDS_IV_KEY: string;
 declare const UNITED_CONNECT_PROJECT_ID: string;
 
 interface ImportMeta {
