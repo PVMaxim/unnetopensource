@@ -6,7 +6,7 @@
   "priceProvider": {
     "type": "coingecko",
     "blockchain": "solana",
-    "url": "https://coingecko.worker.united.network"
+    "url": "https://api.coingecko.com"
   },
 
   "nativeToken": {
@@ -151,7 +151,7 @@
     "transaction": "https://solscan.io/tx/{id}"
   },
 
-  "rpcUrl": "https://solana.worker.united.network",
-  "rpcWsUrl": "wss://solana-websocket.worker.united.network",
-  "scannerApiUrl": "https://solscan.worker.united.network/"
+  "rpcUrl": "https://api.mainnet-beta.solana.com",
+  "rpcWsUrl": "wss://api.mainnet-beta.solana.com",
+  "scannerApiUrl": "https://public-api.solscan.io/"
 }

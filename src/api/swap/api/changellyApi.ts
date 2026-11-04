@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 type ChangellyToken =   {
     name: string;
     ticker: string;
@@ -66,7 +67,7 @@ type GetTransactionsResponse = {
 }
 
 export const changellyApi = () =>  {
-    const apiUrlPrefix = 'https://changelly.worker.united.network/v2'
+    const apiUrlPrefix = ENDPOINTS.changelly;
     const defaultHeaders = { 'Content-Type': 'application/json' };
 
     const getCurrencies = async (): Promise<ChangellyToken[]> => {

@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import {
   GetQuoteParamsV1,
   GetQuoteParamsV2,
@@ -9,7 +10,7 @@ import {
 import { QuoterResponse } from "@1inch/fusion-sdk";
 
 const oneInchFusionApi = () => {
-  const apiUrlPrefix = "https://1inch.worker.united.network";
+  const apiUrlPrefix = ENDPOINTS.oneInch;
   const defaultHeaders = { "Content-Type": "application/json" };
 
   const getQuoteV2 = async (

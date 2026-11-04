@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "the-open-network",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {
@@ -67,5 +67,5 @@
         "transaction": "https://tonscan.org/tx/{id}"
     },
 
-    "apiBaseUrl": "https://ton.worker.united.network"
+    "apiBaseUrl": "https://toncenter.com/"
 }

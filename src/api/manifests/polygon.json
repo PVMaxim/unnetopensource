@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "polygon-pos",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {
@@ -115,7 +115,7 @@
     },
 
     "chainId": 137,
-    "rpcUrl": "https://polygon.worker.test.united.network",
-    "scannerApiUrl": "https://etherscan.worker.test.united.network/?chainid=137",
+    "rpcUrl": "https://polygon-bor-rpc.publicnode.com",
+    "scannerApiUrl": "https://api.etherscan.io/v2/api?chainid=137",
     "multicallAddress": "0xcA11bde05977b3631167028862bE2a173976CA11"
 }

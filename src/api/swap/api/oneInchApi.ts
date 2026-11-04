@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { FusionQuote } from "../types";
 import { MessageTypes, TypedMessage } from "@metamask/eth-sig-util";
 import { HashLock } from "@1inch/cross-chain-sdk";
@@ -353,7 +354,7 @@ interface SolanaEscrowParams {
 }
 
 const oneInchApi = () => {
-  const apiUrlPrefix = "https://1inch.worker.united.network";
+  const apiUrlPrefix = ENDPOINTS.oneInch;
   const defaultHeaders = { "Content-Type": "application/json" };
 
   const getTokens = async (

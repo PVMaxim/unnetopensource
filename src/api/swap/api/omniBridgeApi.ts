@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 type Coin = {
     coinAllCode: string,
     coinCode: string,
@@ -147,7 +148,7 @@ type BatchQueryOrderStatRespnse = {
     }[],
 }
 export const omniBridgeApi = () =>  {
-    const apiUrlPrefix = 'https://omnibridge.proxy.united.network/api';
+    const apiUrlPrefix = ENDPOINTS.omniBridge;
     const defaultHeaders = { 'Content-Type': 'application/json' };
 
     const getQueryCoins = async (): Promise<GetQueryCoinsResponse> => {

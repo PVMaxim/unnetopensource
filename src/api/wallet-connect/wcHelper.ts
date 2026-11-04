@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { IWalletKit, WalletKit } from "@reown/walletkit";
 import { Core } from "@walletconnect/core";
 import { getSdkError, parseUri } from "@walletconnect/utils";
@@ -297,7 +298,9 @@ export function invalidateConnectedAppsCache() {
 
 export function getProxiedUrl(url: string | undefined, type: 'image' | 'api' = 'api'): string {
   if (!url) return '';
-  if (url.startsWith('data:') || url.includes('.united.network')) return url;
-
-  return `https://getthirdparty.worker.united.network/proxy?url=${encodeURIComponent(url)}&type=${type}`;
+  if (url.startsWith('data:')) return url;
+  if (ENDPOINTS.thirdPartyProxy) {
+    return `${ENDPOINTS.thirdPartyProxy}?url=${encodeURIComponent(url)}&type=${type}`;
+  }
+  return url;
 }

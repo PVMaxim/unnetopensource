@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "tron",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {
@@ -74,7 +74,7 @@
         "transaction": "https://tronscan.org/#/transaction/{id}"
     },
 
-    "rpcUrl": "https://tron.worker.united.network",
-    "scannerApiHost": "https://tronscan.worker.united.network",
+    "rpcUrl": "https://api.trongrid.io",
+    "scannerApiHost": "https://apilist.tronscanapi.com",
     "multicallAddress": "TEazPvZwDjDtFeJupyo7QunvnrnUjPH8ED"
 }

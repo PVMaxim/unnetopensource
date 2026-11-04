@@ -1,9 +1,9 @@
 import { initDB } from './indexeddb-storage';
 
-export const ONBOARDING_STORE_KEY = 'temp_seed_onboarding';
-export const SESSION_KEY_NAME = 'UNITED_ONBOARDING_KEY';
-export const SESSION_INSTANCE_ID = 'UNITED_ONBOARDING_INSTANCE_ID';
-export const ONBOARDING_IDB_KEY_ID = 'ephemeralSeedKey';
+export const ONBOARDING_STORE_KEY = 'zP4nL8wQ2tVb';
+export const SESSION_KEY_NAME = 'wX9rM3kP7tNb';
+export const SESSION_INSTANCE_ID = 'jR2tN5vW8kLm';
+export const ONBOARDING_IDB_KEY_ID = 'bL6mP9vX1tQz';
 export const ONBOARDING_TTL_MS = 15 * 60 * 1000;
 
 export interface OnboardingPayload {

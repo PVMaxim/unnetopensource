@@ -1,7 +1,8 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { TonApiTransaction, TonApiTransactionWithTrace } from "./tonApi.types";
 
 const tonApi = () => {
-  const apiUrlPrefix = "https://tonapi.worker.united.network/v2";
+  const apiUrlPrefix = ENDPOINTS.tonApi;
   const defaultHeaders = { "Content-Type": "application/json" };
 
   const getAccountTransactions = async (

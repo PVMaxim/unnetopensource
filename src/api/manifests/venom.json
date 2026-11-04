@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "venom",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {

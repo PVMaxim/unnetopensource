@@ -11,8 +11,15 @@ import { getTokenIcon } from '@/api/token-icons';
 export { getTokenIcon };
 
 export const isWebViewApp = (): boolean => {
-  return typeof window !== 'undefined' && 'flutter_inappwebview' in window && navigator.userAgent.toLowerCase().indexOf("united.network") !== -1;
-}
+  if (typeof window === 'undefined' || !('flutter_inappwebview' in window)) {
+    return false;
+  }
+  const uaFilter = import.meta.env.VITE_WEBVIEW_UA;
+  if (uaFilter) {
+    return navigator.userAgent.toLowerCase().includes(uaFilter.toLowerCase());
+  }
+  return true;
+};
 
 export const deniteAndroid201 = (): boolean => {
   return store.state.settings.cardVersion === '00000201' && isMobileAndroidDevice && !isWebViewApp();

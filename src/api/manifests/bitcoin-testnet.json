@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "bitcoin-ecosystem",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {

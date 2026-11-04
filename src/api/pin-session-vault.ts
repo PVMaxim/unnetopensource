@@ -1,9 +1,9 @@
 import { initDB } from './indexeddb-storage';
 
-export const PIN_SESSION_STORE_KEY = 'temp_pin_session';
-export const PIN_SESSION_KEY_NAME = 'UNITED_PIN_SESSION_KEY';
-export const PIN_SESSION_INSTANCE_ID = 'UNITED_PIN_INSTANCE_ID';
-export const PIN_SESSION_IDB_KEY_ID = 'ephemeralPinKey';
+export const PIN_SESSION_STORE_KEY = 'k9XqT2mW8bVn';
+export const PIN_SESSION_KEY_NAME = 'qL7mP4vZ9rKd';
+export const PIN_SESSION_INSTANCE_ID = 'vB3wN8tX1jQm';
+export const PIN_SESSION_IDB_KEY_ID = 'mK5rY9tP2nLw';
 export const DEFAULT_PIN_TTL_MS = 15 * 60 * 1000;
 
 export interface PinSessionPayload {

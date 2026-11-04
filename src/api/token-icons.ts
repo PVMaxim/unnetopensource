@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { markRaw, defineAsyncComponent, defineComponent, h } from 'vue';
 import { getOrCreateManager } from '@/api/ApiHandler';
 import noneIcon from '@/components/svg/none.vue';
@@ -309,7 +310,11 @@ function getCacheKey(arg: any): string {
 
 export const getCoinGeckoIconUrl = (ticker: string): string => {
   if (!ticker) return '';
-  return `https://coingecko.worker.united.network/__icons/${encodeURIComponent(ticker)}`;
+  if (ENDPOINTS.tokenIconsCdn) {
+    const base = ENDPOINTS.tokenIconsCdn.endsWith('/') ? ENDPOINTS.tokenIconsCdn : `${ENDPOINTS.tokenIconsCdn}/`;
+    return `${base}${encodeURIComponent(ticker)}`;
+  }
+  return '';
 };
 
 function resolveRpcName(raw: string): string | null {

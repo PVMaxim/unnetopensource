@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { GetSwapDataResponse, XRPGetSwapDataResponse } from '../types';
 
 type GetExchangeRateParams = {
@@ -88,7 +89,7 @@ type GetHistoryByAddressResponse = {
 }
 
 const bridgersApi = () => {
-  const apiUrlPrefix = "https://apibridgersxyz.worker.united.network/api";
+  const apiUrlPrefix = ENDPOINTS.bridgers;
   const defaultHeaders = { "Content-Type": "application/json" };
 
   const getQuote = async (params: GetExchangeRateParams, signal: AbortSignal) => {

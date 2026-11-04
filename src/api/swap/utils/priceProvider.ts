@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/config/endpoints";
 import { HttpClient } from "../../http-client";
 import { SwapToken } from "../types";
 import { SWAP_CHAINS, SWAP_NATIVE_ADDRESS, WRAPPED_VENOM_ADDRESS } from "../../constants-types";
@@ -41,7 +42,8 @@ export class SwapPriceProvider {
     private _cachedTimes: Map<string, number>;
 
     constructor() {
-        this._coingeckoClient = new HttpClient({ baseUrl: "https://coingecko.worker.united.network/" });
+        const cgBase = ENDPOINTS.coingecko.endsWith("/") ? ENDPOINTS.coingecko : ENDPOINTS.coingecko + "/";
+        this._coingeckoClient = new HttpClient({ baseUrl: cgBase });
         this._web3Client = new HttpClient({ baseUrl: "https://api.web3.world/v1/" });
         this._cachedPrices = new Map();
         this._cachedTimes = new Map();

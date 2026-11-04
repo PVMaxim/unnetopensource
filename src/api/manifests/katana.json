@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "katana",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {
@@ -55,5 +55,5 @@
 
     "chainId": 747474,
     "rpcUrl": "https://rpc.katana.network",
-    "scannerApiUrl": "https://etherscan.worker.test.united.network/?chainid=747474"
+    "scannerApiUrl": "https://api.etherscan.io/v2/api?chainid=747474"
 }

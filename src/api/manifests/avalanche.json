@@ -6,7 +6,7 @@
     "priceProvider": {
         "type": "coingecko",
         "blockchain": "avalanche",
-        "url": "https://coingecko.worker.united.network"
+        "url": "https://api.coingecko.com"
     },
 
     "nativeToken": {
@@ -82,7 +82,7 @@
     },
 
     "chainId": 43114,
-    "rpcUrl": "https://avalanche.worker.test.united.network",
-    "scannerApiUrl": "https://etherscan.worker.test.united.network/?chainid=43114",
+    "rpcUrl": "https://api.avax.network/ext/bc/C/rpc",
+    "scannerApiUrl": "https://api.etherscan.io/v2/api?chainid=43114",
     "multicallAddress": "0xcA11bde05977b3631167028862bE2a173976CA11"
 }

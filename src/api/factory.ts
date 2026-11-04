@@ -11,6 +11,7 @@ import { TonManager } from "./ton/manager";
 import { TronManager } from "./tron/manager";
 import { VenomWalletManager } from "./venom/manager";
 import { XrplManager } from "./xrpl/manager";
+import { applyManifestOverrides } from "@/config/endpoints";
 
 export function createPriceProvider(args: {
     type: string,
@@ -34,7 +35,7 @@ export function createManager(args: {
 }): BlockchainManager {
     let manifest: z.infer<typeof BlockchainManifestSchema>;
     try {
-        manifest = BlockchainManifestSchema.parse(args.manifest);
+        manifest = BlockchainManifestSchema.parse(applyManifestOverrides(args.manifest));
     } catch (err) {
         throw new UniError("INVALID_ARGUMENT", "Invalid blockchain manifest");
     }
