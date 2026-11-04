@@ -255,11 +255,11 @@
             }).catch((err) => {
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
             });
-            store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
+            await isTheSamePublicKey(publicKeyCard.value);
+            await store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
             }).catch((err) => {
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
             });
-            isTheSamePublicKey(publicKeyCard.value);
             getStorePrefix();
             if (store.hasModule(`${prefixStore.value}.customtoken`)) {
               pinLength.value = store.state[`${prefixStore.value}.customtoken`]?.pinLength;
@@ -302,8 +302,8 @@
           if (result.value === null || nfcCancel.value === true) { 
             return false;
           }
-          isTheSamePublicKey(result.value?.keys);
-          store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
+          await isTheSamePublicKey(result.value?.keys);
+          await store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
           }).catch((err) => {
             throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: err}});
           });

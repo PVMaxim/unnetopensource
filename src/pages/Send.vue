@@ -87,7 +87,7 @@
   import SendForm from '@/components/SendForm.vue';
   import SendReceiveSwapPanel from '@/components/SendReceiveSwapPanel.vue';
   import SendReceiveSwapTabs from '@/components/SendReceiveSwapTabs.vue';
-  import { setDefaultSelectedToken, getToken, setTokensBalances, 
+  import { setDefaultSelectedToken, getToken, setTokenBalance, setTokensBalances, 
     isValidWalletAddress, checkNfcSupport,
     getNativeCoinSymbol, getStorePrefix, prefixStore } from '../api/ApiHandler';
   import { sha256, roundNumber, isWebViewApp, getErrorMessage, roundNumberIntMin } from '@/api/sub-utils';
@@ -285,27 +285,29 @@
           throw new Error(t('errors.cardResponse'),{ cause: {errorSubtitle: t('errors.transferError'), errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
         }
 
+        const activeProviderName = store.state.settings.rpcProvider?.name;
+        const sentTokenRoot = store.state.user.selectedToken?.[activeProviderName]?.root;
+        if (sentTokenRoot && activeProviderName) {
+          setTokenBalance(sentTokenRoot, activeProviderName, true).catch(() => {});
+        }
+
         if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-          store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
-          }).catch((err) => {
-          });
+          store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 15) }).catch(() => {});
         }
         pinPre.value = null;
         success.value = true;
         isLoading.value = false;
       };
 
-      const submitPinSelectHandler = async(event) => {
+      const submitPinSelectHandler = async (event) => {
         formData.amount = event.amount;
         formData.wallet = event.wallet;
         formData.tokenList = event.tokenList;
-        if ( store.state.user.pinHash !== null && (store.state.user.pinHash?.date - Date.now()) > 0 ) {
+        if (store.state.user.pinHash !== null && (store.state.user.pinHash?.date - Date.now()) > 0) {
           pinPre.value = store.state.user.pinHash?.pin;
           await submitFormOrderHandler();
         } else {
-          store.dispatch('user/resetPinHash').then(() => {
-          }).catch((err) => {
-          });
+          store.dispatch('user/resetPinHash').catch(() => {});
           pinState.value = true;
         }
       }
@@ -319,7 +321,7 @@
         price.gazPriceToken = null;
         price.gazPriceUsd = null;
         price.priceUsd = null;
-        setTokensBalances(true).catch(() => {});
+        setTokensBalances(false).catch(() => {});
         nativeToken.value = await getNativeCoinSymbol();
         formData.wallet = '';
         formData.amount = '';

@@ -24,7 +24,8 @@ export class HttpClient {
         headers?: Record<string, string>,
     }): Promise<z.infer<SchemaType>> {
         const params = new URLSearchParams(args.params ?? {});
-        const url = `${args.url ?? ""}?${params.toString()}`;
+        const paramStr = params.toString();
+        const url = paramStr ? `${args.url ?? ""}?${paramStr}` : (args.url ?? "");
 
         const response = await this.fetch({
             url,
@@ -45,7 +46,8 @@ export class HttpClient {
         headers?: Record<string, string>,
     }): Promise<z.infer<SchemaType>> {
         const params = new URLSearchParams(args.params ?? {});
-        const url = `${args.url ?? ""}?${params.toString()}`;
+        const paramStr = params.toString();
+        const url = paramStr ? `${args.url ?? ""}?${paramStr}` : (args.url ?? "");
 
         const response = await this.fetch({
             url,
@@ -114,11 +116,22 @@ export class HttpClient {
         response: Response,
         schema: SchemaType,
     }): Promise<z.infer<SchemaType>> {
+        let jsData: unknown;
         try {
-            const jsData = await args.response.json();
-            return await args.schema.parseAsync(jsData);
-        } catch(err) {
-            throw new UniError("SERVER_ERROR", "Invalid server response");
+            jsData = await args.response.json();
+        } catch(jsonErr) {
+            throw new UniError("SERVER_ERROR", "Invalid server response: not JSON");
         }
+
+        const parseResult = await args.schema.safeParseAsync(jsData);
+        if( !parseResult.success ) {
+            const firstIssue = parseResult.error.issues[0];
+            const detail = firstIssue
+                ? `${firstIssue.path.join(".") || "root"}: ${firstIssue.message}`
+                : parseResult.error.message;
+            throw new UniError("SERVER_ERROR", `Invalid server response: ${detail}`);
+        }
+
+        return parseResult.data;
     }
 }

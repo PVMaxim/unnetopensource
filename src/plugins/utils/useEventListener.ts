@@ -58,8 +58,8 @@ export function useEventListener<EventType = Event>(
   options?: MaybeRefOrGetter<boolean | AddEventListenerOptions>
 ): Fn
 
-export function useEventListener(...args: any[]) {
-  const cleanups: Function[] = []
+export function useEventListener(...args: unknown[]) {
+  const cleanups: Array<() => void> = []
   const cleanup = () => {
     cleanups.forEach(fn => fn())
     cleanups.length = 0
@@ -68,7 +68,7 @@ export function useEventListener(...args: any[]) {
   const register = (
     el: EventTarget,
     event: string,
-    listener: any,
+    listener: EventListenerOrEventListenerObject,
     options: boolean | AddEventListenerOptions | undefined,
   ) => {
     el.addEventListener(event, listener, options)
@@ -76,17 +76,21 @@ export function useEventListener(...args: any[]) {
   }
 
   const firstParamTargets = computed(() => {
-    const test = toArray(toValue(args[0])).filter((e: any) => e != null)
-    return test.every((e: any) => typeof e !== 'string') ? test : undefined
+    const test = toArray(toValue(args[0])).filter((e: unknown) => e != null)
+    return test.every((e: unknown) => typeof e !== 'string') ? test : undefined
   })
 
   const stopWatch = watchImmediate(
-    () => [
-      firstParamTargets.value?.map((e: any) => unrefElement(e as never)) ?? [defaultWindow].filter((e: any) => e != null),
-      toArray(toValue(firstParamTargets.value ? args[1] : args[0])) as unknown as string[],
-      toArray(unref(firstParamTargets.value ? args[2] : args[1])) as Function[],
-      toValue((firstParamTargets.value ? args[3] : args[2]) as any) as boolean | AddEventListenerOptions | undefined,
-    ] as const,
+    () => {
+      const rawList = (firstParamTargets.value?.map((e: unknown) => unrefElement(e as never)) ?? [defaultWindow]) as Array<EventTarget | null | undefined>;
+      const targets: EventTarget[] = rawList.filter((e): e is EventTarget => e != null);
+      return [
+        targets,
+        toArray(toValue(firstParamTargets.value ? args[1] : args[0])) as unknown as string[],
+        toArray(unref(firstParamTargets.value ? args[2] : args[1])) as EventListenerOrEventListenerObject[],
+        toValue(firstParamTargets.value ? args[3] : args[2]) as boolean | AddEventListenerOptions | undefined,
+      ] as const;
+    },
     ([raw_targets, raw_events, raw_listeners, raw_options]) => {
       cleanup()
 
@@ -95,9 +99,9 @@ export function useEventListener(...args: any[]) {
 
       const optionsClone = isObject(raw_options) ? { ...raw_options } : raw_options
       cleanups.push(
-        ...raw_targets.flatMap((el: any) =>
-          raw_events.flatMap((event: any) =>
-            raw_listeners.map((listener: any) => register(el, event, listener, optionsClone)),
+        ...raw_targets.flatMap((el: EventTarget) =>
+          raw_events.flatMap((event: string) =>
+            raw_listeners.map((listener: EventListenerOrEventListenerObject) => register(el, event, listener, optionsClone)),
           ),
         ),
       )

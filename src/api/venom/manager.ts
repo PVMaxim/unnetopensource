@@ -60,6 +60,7 @@ export class VenomWalletManager extends BlockchainManagerBase implements Blockch
                 message: {
                     retryTransfers: false,
                 },
+                initInput: {} as any,
             }),
             forceUseFallback: true,
         });

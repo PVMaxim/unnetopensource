@@ -14,6 +14,7 @@ export function useSwapFormState() {
   const toToken      = computed(() => store.state.swap.toToken);
 
   const isLoading              = computed(() => store.state.swap.isLoading);
+  const isTokensLoading        = computed(() => store.state.swap.isTokensLoading);
   const isError                = computed(() => store.state.swap.isError);
   const quoteData              = computed(() => store.state.swap.quoteData);
   const inputError             = computed(() => store.state.swap.inputError);
@@ -45,6 +46,7 @@ export function useSwapFormState() {
     fromToken,
     toToken,
     isLoading,
+    isTokensLoading,
     isError,
     quoteData,
     inputError,

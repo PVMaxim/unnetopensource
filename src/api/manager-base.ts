@@ -63,6 +63,15 @@ export abstract class BlockchainManagerBase {
         return this._createToken(metadata);
     }
 
+    async findTokenInManifest(address: string): Promise<TokenMetadataInput | undefined> {
+        if( !this._lazyTokenManifest ) {
+            return undefined;
+        }
+
+        const manifest = await this._lazyTokenManifest.get();
+        return manifest.byAddress.get(this._normalizeAddress(address));
+    }
+
     async findTokens(text: string): Promise<Token[]> {
         const canBeAddress = this._isValidTokenAddress(text);
         const textAsNormAddress = this._normalizeAddress(text);

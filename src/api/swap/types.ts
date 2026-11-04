@@ -155,6 +155,7 @@ export type GetQuoteOutcome = {
 };
 
 export interface ICoreSwapService {
+    getManifestTokens(): SwapToken[];
     getQuote(params: GetQuoteParams, signal: AbortSignal): Promise<GetQuoteOutcome>;
     getTokens(): Promise<SwapToken[]>;
     createTransaction(

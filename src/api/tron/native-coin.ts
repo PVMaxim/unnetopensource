@@ -11,18 +11,23 @@ import { calcTronAddress, TronRequest, TRON_NATIVE_TOKEN_DECIMALS } from "./requ
 import { SWAP_NATIVE_ADDRESS } from "../constants-types";
 import BigNumber from "bignumber.js";
 
+const TransferItemSchema = z.object({
+    hash: z.string(),
+    timestamp: z.coerce.number().int().nonnegative().optional().default(0),
+    ownerAddress: z.string().optional().default(""),
+    toAddress: z.string().optional().default(""),
+    confirmed: z.boolean().optional().default(true),
+    result: z.string().optional().default(""),
+    amount: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    contractType: z.coerce.number().int().optional().default(0),
+});
+
 const TransfersSchema = z.object({
-    total: z.number(),
-    data: z.object({
-        hash: z.string(),
-        timestamp: z.number().int(),
-        ownerAddress: z.string(),
-        toAddress: z.string(),
-        confirmed: z.boolean(),
-        result: z.string(),
-        amount: z.coerce.bigint(),
-        contractType: z.number().int(),
-    }).array(),
+    total: z.coerce.number().optional().default(0),
+    data: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TransferItemSchema)),
 });
 
 const CONTRACT_TYPE_TRANSFER_TRX = 1;

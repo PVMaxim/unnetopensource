@@ -60,7 +60,7 @@
                 "ticker": "ston-2"
             }
         ],
-        "all": "https://united.network/manifests/ton-tokens.json"
+        "all": "/manifests/ton-tokens.json"
     },
 
     "blockExplorer": {

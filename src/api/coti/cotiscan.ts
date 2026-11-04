@@ -5,16 +5,18 @@ import { assert } from "../errors";
 import { EtherScanHistory } from "../evm/providers/etherscan";
 import { default as IPrivateERC20 } from "./abi/IPrivateERC20.json";
 
+const LogItemSchema = z.object({
+    address: z.string().optional().default(""),
+    data: z.string().optional().default(""),
+    timeStamp: z.coerce.number().int().nonnegative().optional().default(0),
+    topics: z.string().nullable().array().optional().default([]),
+    transactionHash: z.string(),
+});
+
 const LogsSchema = z.object({
-    status: z.string(),
-    message: z.string(),
-    result: z.object({
-        address: z.string(),
-        data: z.string(),
-        timeStamp: z.coerce.number().int().positive(),
-        topics: z.string().nullable().array(),
-        transactionHash: z.string(),
-    }).array(),
+    status: z.coerce.string().optional().default("0"),
+    message: z.string().optional().default(""),
+    result: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(LogItemSchema)),
 });
 
 export class CotiScanHistory extends EtherScanHistory {
@@ -73,7 +75,7 @@ export class CotiScanHistory extends EtherScanHistory {
             },
         });
 
-        if( data.status !== "1" ) {
+        if( data.status !== "1" || !Array.isArray(data.result) ) {
             return [];
         }
 

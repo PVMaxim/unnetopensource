@@ -370,7 +370,7 @@ export default defineComponent({
           responseData.value = await startAuthentication(fidoRequest, false);
         } catch (err) {
           throw new Error(t('errors.cardRequest'), {
-            cause: { errorSubtitle: 'Prepare FIDO request', errorBody: responseData.value },
+            cause: { errorSubtitle: 'Prepare FIDO request', errorBody: err?.message || err },
           });
         }
         if (!responseData.value?.response?.signature) {

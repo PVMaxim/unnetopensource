@@ -1,5 +1,5 @@
 <template>
-  <div ref="iconContainer" class="swap-token-icon-wrapper" :class="iconClass">
+  <div class="swap-token-icon-wrapper" :class="iconClass">
     <component
       v-if="localIcon"
       :is="localIcon"
@@ -9,15 +9,14 @@
     <template v-else>
       <img
         v-if="iconUrl && !hasError"
-        v-show="isImageLoaded && shouldLoad"
-        :src="shouldLoad ? iconUrl : undefined"
+        :src="iconUrl"
+        loading="lazy"
         class="swap-token-icon-inner"
         :class="iconClass"
-        @load="onImageLoad"
         @error="onImageError"
       />
       <noneIcon
-        v-show="!isImageLoaded || hasError || !iconUrl"
+        v-else
         class="swap-token-icon-inner"
         :class="iconClass"
       />
@@ -26,8 +25,12 @@
 </template>
 
 <script>
-import { ref, computed, defineComponent, onMounted, watch, onUnmounted } from "vue";
-import { getTokenIcon as getLocalTokenSvg, getRemoteTokenIconUrl } from "@/api/token-icons";
+import { ref, computed, defineComponent, onMounted, watch } from "vue";
+import {
+  getTokenIcon as getLocalTokenSvg,
+  getRemoteTokenIconUrl,
+  getCachedTokenIconUrlSync,
+} from "@/api/token-icons";
 import noneIcon from "@/components/svg/none.vue";
 
 export default defineComponent({
@@ -50,123 +53,82 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isImageLoaded = ref(false);
-    const hasError = ref(false);
-    const iconUrl = ref(null);
-    const shouldLoad = ref(!props.lazy);
-    const iconContainer = ref(null);
-    let observer = null;
+    const cleanSymbol = computed(() => {
+      if (!props.token?.symbol) return "";
+      return props.token.symbol.replace(/\s*\([^)]*\)\s*$/, "").trim();
+    });
 
     const localIcon = computed(() => {
       if (props.token?.logoURI) return null;
       if (!props.token?.symbol) return null;
-      return getLocalTokenSvg(props.token.symbol, false, true);
+      return (
+        getLocalTokenSvg(props.token, false, true) ||
+        (cleanSymbol.value ? getLocalTokenSvg(cleanSymbol.value, false, true) : null)
+      );
     });
 
-    const onImageLoad = () => {
-      isImageLoaded.value = true;
-      hasError.value = false;
-    };
+    const initialSyncUrl = computed(() => {
+      if (localIcon.value) return null;
+      return getCachedTokenIconUrlSync(props.token, props.token?.logoURI);
+    });
+
+    const hasError = ref(false);
+    const asyncIconUrl = ref(null);
+
+    const iconUrl = computed(() => {
+      return initialSyncUrl.value || asyncIconUrl.value;
+    });
 
     const onImageError = () => {
-      isImageLoaded.value = false;
       hasError.value = true;
     };
 
     const loadIconUrl = async (token) => {
-      isImageLoaded.value = false;
       hasError.value = false;
       if (!token) {
-        iconUrl.value = null;
+        asyncIconUrl.value = null;
         return;
       }
       if (token.logoURI) {
-        iconUrl.value = token.logoURI;
+        asyncIconUrl.value = token.logoURI;
         return;
       }
-      if (token.symbol && getLocalTokenSvg(token.symbol, false, true) !== null) {
-        iconUrl.value = null;
+      if (localIcon.value) {
+        asyncIconUrl.value = null;
+        return;
+      }
+      if (initialSyncUrl.value) {
         return;
       }
       try {
         const url = await getRemoteTokenIconUrl(token);
         if (!url || (typeof url === "string" && url.includes("unknownTokenIcon.svg"))) {
-          iconUrl.value = null;
+          asyncIconUrl.value = null;
         } else {
-          iconUrl.value = url;
+          asyncIconUrl.value = url;
         }
       } catch {
-        iconUrl.value = null;
+        asyncIconUrl.value = null;
         hasError.value = true;
       }
     };
 
-    const setupIntersectionObserver = () => {
-      if (!props.lazy || shouldLoad.value || !iconContainer.value) {
-        return;
-      }
-
-      if (typeof window === "undefined" || !window.IntersectionObserver) {
-        shouldLoad.value = true;
-        return;
-      }
-
-      observer = new window.IntersectionObserver(
-        (entries) => {
-          const [entry] = entries;
-          if (entry && entry.isIntersecting) {
-            shouldLoad.value = true;
-            observer.disconnect();
-            observer = null;
-          }
-        },
-        { rootMargin: "120px 0px" }
-      );
-
-      observer.observe(iconContainer.value);
-    };
-
     onMounted(() => {
-      setupIntersectionObserver();
-      if (shouldLoad.value) {
-        loadIconUrl(props.token);
-      }
+      loadIconUrl(props.token);
     });
 
     watch(
       () => props.token,
       (newToken) => {
-        isImageLoaded.value = false;
-        hasError.value = false;
-        if (!shouldLoad.value) {
-          return;
-        }
         loadIconUrl(newToken);
       },
       { deep: true },
     );
 
-    watch(shouldLoad, (isVisible) => {
-      if (isVisible) {
-        loadIconUrl(props.token);
-      }
-    });
-
-    onUnmounted(() => {
-      if (observer) {
-        observer.disconnect();
-        observer = null;
-      }
-    });
-
     return {
       localIcon,
-      isImageLoaded,
       hasError,
       iconUrl,
-      shouldLoad,
-      iconContainer,
-      onImageLoad,
       onImageError,
     };
   },

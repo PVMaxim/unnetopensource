@@ -4,14 +4,16 @@ import { HistoryProvider, TransactionInfo, TokenTransactionInfo } from "../../co
 import { UniError } from "../../errors";
 import { HttpClient } from "../../http-client";
 
+const TatumTxItemSchema = z.object({
+    timestamp: z.coerce.number().int().nonnegative().optional().default(0),
+    hash: z.string(),
+    amount: z.string().optional().default("0"),
+    transactionType: z.string().optional().default(""),
+    transactionSubtype: z.string().optional().default(""),
+});
+
 const TatumTxListSchema = z.object({
-    result: z.object({
-        timestamp: z.coerce.number().int().positive(),
-        hash: z.string(),
-        amount: z.string(),
-        transactionType: z.string(),
-        transactionSubtype: z.string(),
-    }).array(),
+    result: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TatumTxItemSchema)),
 });
 
 export class TatumEvmHistory implements HistoryProvider {

@@ -3,16 +3,21 @@ import { z } from "zod";
 import { TransactionInfo, TokenTransactionInfo } from "../common";
 import { HttpClient } from "../http-client";
 
+const TransferItemSchema = z.object({
+    trans_id: z.string(),
+    block_time: z.coerce.number().optional().default(0),
+    token_address: z.string().optional().default(""),
+    token_decimals: z.coerce.number().optional().default(0),
+    amount: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    flow: z.string().optional().default(""),
+});
+
 const TransfersResponseSchema = z.object({
-    success: z.boolean(),
-    data: z.object({
-        trans_id: z.string(),
-        block_time: z.number(),
-        token_address: z.string(),
-        token_decimals: z.number(),
-        amount: z.coerce.bigint(),
-        flow: z.string(),
-    }).array().nullish(),
+    success: z.boolean().optional().default(true),
+    data: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TransferItemSchema)),
 });
 
 export class SolScan {

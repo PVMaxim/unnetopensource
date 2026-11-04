@@ -3,15 +3,16 @@
     <component v-if="localIcon" :is="localIcon" class="icon"></component>
     <template v-else>
       <img
-        v-if="resolvedIconUrl && !hasError && !isUnknown(resolvedIconUrl)"
+        v-if="displayUrl && !hasError"
         v-show="isImageLoaded"
-        :src="resolvedIconUrl"
+        ref="imgRef"
+        :src="displayUrl"
         class="icon"
-        @load="isImageLoaded = true"
-        @error="hasError = true"
+        @load="onImageLoad"
+        @error="onImageError"
       />
       <noneIcon
-        v-show="!isImageLoaded || hasError || !resolvedIconUrl || isUnknown(resolvedIconUrl)"
+        v-show="!isImageLoaded || hasError || !displayUrl"
         class="icon"
       />
     </template>
@@ -19,9 +20,23 @@
 </template>
 
 <script>
-import { ref, computed, defineComponent, onMounted, watch } from 'vue';
-import { getTokenIcon, getRemoteTokenIconUrl } from '@/api/token-icons';
+import { ref, computed, defineComponent, onMounted, watch, nextTick } from 'vue';
+import {
+  getTokenIcon,
+  preloadTokenIconUrl,
+  isImageUrlCached,
+  markImageUrlCached,
+} from '@/api/token-icons';
 import noneIcon from '@/components/svg/none.vue';
+
+function cleanIconUrl(url) {
+  if (!url || typeof url !== 'string') return null;
+  const clean = url.trim();
+  if (!clean || clean.includes('unknownTokenIcon.svg')) return null;
+  return clean.replace(/(\/__icons\/)([^/?#]+)/i, (_, prefix, ticker) => {
+    return prefix + encodeURIComponent(decodeURIComponent(ticker).toLowerCase().trim());
+  });
+}
 
 export default defineComponent({
   name: 'TokenIcon',
@@ -45,42 +60,68 @@ export default defineComponent({
     noneIcon,
   },
   setup(props) {
-    const isImageLoaded = ref(false);
+    const imgRef = ref(null);
     const hasError = ref(false);
-    const resolvedIconUrl = ref(props.tokenIconUrl || null);
-
-    const isUnknown = (url) => typeof url === 'string' && url.includes('unknownTokenIcon.svg');
 
     const localIcon = computed(() => {
       if (!props.tokenIconSymbol) return null;
       return getTokenIcon(props.tokenIconSymbol, false, true);
     });
 
-    const resolveUrl = async () => {
-      isImageLoaded.value = false;
+    const displayUrl = computed(() => {
+      if (localIcon.value) return null;
+      return cleanIconUrl(props.tokenIconUrl);
+    });
+
+    const isImageLoaded = ref(Boolean(displayUrl.value && isImageUrlCached(displayUrl.value)));
+
+    const onImageLoad = () => {
+      isImageLoaded.value = true;
       hasError.value = false;
-      if (props.tokenIconUrl) {
-        resolvedIconUrl.value = props.tokenIconUrl;
-      } else if (props.tokenIconSymbol && !localIcon.value) {
-        resolvedIconUrl.value = await getRemoteTokenIconUrl(props.tokenIconSymbol);
-      } else {
-        resolvedIconUrl.value = null;
+      if (displayUrl.value) {
+        markImageUrlCached(displayUrl.value);
       }
     };
 
-    onMounted(resolveUrl);
+    const onImageError = () => {
+      hasError.value = true;
+      isImageLoaded.value = false;
+    };
+
+    const checkLoadedState = () => {
+      hasError.value = false;
+      if (!displayUrl.value) {
+        isImageLoaded.value = false;
+        return;
+      }
+      if (isImageUrlCached(displayUrl.value)) {
+        isImageLoaded.value = true;
+        return;
+      }
+      preloadTokenIconUrl(displayUrl.value);
+      isImageLoaded.value = false;
+      nextTick(() => {
+        if (imgRef.value?.complete && imgRef.value?.naturalWidth > 0) {
+          onImageLoad();
+        }
+      });
+    };
+
+    onMounted(checkLoadedState);
 
     watch(
-      () => [props.tokenIconUrl, props.tokenIconSymbol],
-      resolveUrl
+      () => [displayUrl.value, props.tokenIconSymbol],
+      checkLoadedState
     );
 
     return {
+      imgRef,
       localIcon,
-      resolvedIconUrl,
+      displayUrl,
       isImageLoaded,
       hasError,
-      isUnknown,
+      onImageLoad,
+      onImageError,
     };
   },
 });

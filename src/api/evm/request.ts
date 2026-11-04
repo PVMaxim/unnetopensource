@@ -47,16 +47,32 @@ export class EvmRequest implements Request {
         tx: ethers.TransactionRequest,
         publicKey: string,
     }): Promise<EvmRequest> {
+        if (typeof args.tx.to === 'string') {
+            const toRaw: unknown = args.tx.to;
+            if (!ethers.isAddress(toRaw) && !(typeof toRaw === 'string' && toRaw.includes('.'))) {
+                throw new UniError("INVALID_ARGUMENT", `Invalid destination address: ${String(toRaw)}`);
+            }
+        }
+
         const address = ethers.computeAddress(`0x${args.publicKey}`);
         const voidSigner = new ethers.VoidSigner(address, args.provider);
 
         const populated = await voidSigner.populateTransaction(args.tx);
         delete populated.from;
 
-        const gas = await args.provider.estimateGas({
-            ...args.tx,
-            from: address,
-        });
+        let gas: bigint;
+        try {
+            gas = await args.provider.estimateGas({
+                ...args.tx,
+                from: address,
+            });
+        } catch (err: any) {
+            if (args.tx.gasLimit) {
+                gas = BigInt(args.tx.gasLimit.toString());
+            } else {
+                throw err;
+            }
+        }
 
         const fee = await estimateFee(args.provider, gas);
         const totalAmount = BigInt(args.tx.value ?? "0") + fee;

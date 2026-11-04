@@ -144,7 +144,7 @@
         "ticker": "world-liberty-financial"
       }
     ],
-    "all": "https://united.network/manifests/solana-tokens.json"
+    "all": "/manifests/solana-tokens.json"
   },
 
   "blockExplorer": {

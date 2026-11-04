@@ -50,10 +50,13 @@
     <div v-else class="token-column last">
       <div class="token-col right mrr">
         <div class="token-balance">
-          {{ roundNumber(tokenData.balance, 6) }}
+          <template v-if="tokenData.balance !== null && tokenData.balance !== undefined">
+            {{ roundNumber(tokenData.balance, 6) }}
+          </template>
+          <Loading v-else :size=18 :borderWidth=3 />
         </div>
         <div class="token-balance-usd">
-          <span v-if="tokenData.price?.usdPrice" class="text-gray">
+          <span v-if="tokenData.price?.usdPrice && tokenData.balance !== null && tokenData.balance !== undefined" class="text-gray">
             ${{ roundNumber(getPriceMultiplie(tokenData.balance, tokenData.price.usdPrice), 2) }}
           </span>
           <span v-else class="text-gray">-</span>
@@ -122,7 +125,7 @@ export default defineComponent({
     TokenIcon,
     narrow,
   },
-  async setup(props, { emit }) {
+  setup(props, { emit }) {
     const store = useStore();
     const router = useRouter();
     const tokenData = computed(() => {
@@ -166,8 +169,11 @@ export default defineComponent({
       }
     };
 
-    if (Object.keys(tokenData.value).length > 0) {
-      setTokenBalance(props.tokenId, props.rpcProviderName );
+    if (
+      Object.keys(tokenData.value).length > 0 &&
+      (tokenData.value.balance === null || tokenData.value.balance === undefined)
+    ) {
+      setTokenBalance(props.tokenId, props.rpcProviderName);
     }
 
     const allowUseToken = async() => {
@@ -214,13 +220,6 @@ export default defineComponent({
       emit('unlockCotiToken', unlockCotiObject.value);
       unlockCotiTokenButton.value = false;
     }
-
-    watchEffect(async() => {
-      if ( props.rpcProviderChange === true ) {
-        setTokenBalance(props.tokenId, props.rpcProviderName);
-        emit('update:rpcProviderChange', false );
-      }
-    });
 
     watchEffect(() => {
       if (tokenData.value.additionalData?.isEnoughRootTokenBalance === false) {

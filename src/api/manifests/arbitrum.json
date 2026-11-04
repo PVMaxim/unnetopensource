@@ -123,7 +123,7 @@
                 "ticker": "arbitrum-bridged-weth-arbitrum-one"
             }
         ],
-        "all": "https://united.network/manifests/arbitrum-tokens.json"
+        "all": "/manifests/arbitrum-tokens.json"
     },
 
     "blockExplorer": {

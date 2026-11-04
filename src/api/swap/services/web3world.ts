@@ -244,7 +244,10 @@ class Web3WorldService extends SwapService implements ISwapService {
           userAddress: address,
         })
         .then((res) => {
-          return res.transactions.map((tx: any) => tx);
+          return res?.transactions?.map((tx: any) => tx) ?? [];
+        })
+        .catch(() => {
+          return [];
         });
     });
     const orders = (await Promise.all(ordersPromises)).flat();

@@ -74,7 +74,7 @@
                 "ticker": "gmx"
             }
         ],
-        "all": "https://united.network/manifests/avalanche-tokens.json"
+        "all": "/manifests/avalanche-tokens.json"
     },
 
     "blockExplorer": {

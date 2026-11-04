@@ -116,7 +116,7 @@
                 "ticker": "united-stables"
             }
         ],
-        "all": "https://united.network/manifests/binance-tokens.json"
+        "all": "/manifests/binance-tokens.json"
     },
 
     "blockExplorer": {

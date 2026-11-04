@@ -2,24 +2,39 @@ import { markRaw, defineAsyncComponent, defineComponent, h } from 'vue';
 import { getOrCreateManager } from '@/api/ApiHandler';
 import noneIcon from '@/components/svg/none.vue';
 import { rpcList, SWAP_NATIVE_ADDRESS } from '@/api/constants-types';
+import store from '@/store';
 
-const providerIcons = import.meta.glob('../components/svg/provider/*.vue');
-const tokenIcons = import.meta.glob('../components/svg/tokens/*/*.vue');
+const providerIcons = import.meta.glob('../components/svg/provider/*.vue', { eager: true });
+const tokenSymbolIcons = import.meta.glob('../components/svg/tokens/*.vue', { eager: true });
+const tokenIcons = import.meta.glob('../components/svg/tokens/*/*.vue', { eager: true });
 
 const providerComponentsMap = new Map<string, any>();
-for (const [path, loader] of Object.entries(providerIcons)) {
+for (const [path, mod] of Object.entries(providerIcons)) {
   const match = path.match(/\/([^/]+)\.vue$/);
   if (match) {
-    providerComponentsMap.set(match[1].toLowerCase(), markRaw(defineAsyncComponent(loader as any)));
+    const comp = (mod as any)?.default || mod;
+    providerComponentsMap.set(match[1].toLowerCase(), markRaw(comp));
+  }
+}
+
+for (const [path, mod] of Object.entries(tokenSymbolIcons)) {
+  const match = path.match(/\/([^/]+)\.vue$/);
+  if (match) {
+    const key = match[1].toLowerCase();
+    const comp = (mod as any)?.default || mod;
+    if (!providerComponentsMap.has(key)) {
+      providerComponentsMap.set(key, markRaw(comp));
+    }
   }
 }
 
 const tokenComponentsMap = new Map<string, any>();
-for (const [path, loader] of Object.entries(tokenIcons)) {
+for (const [path, mod] of Object.entries(tokenIcons)) {
   const match = path.match(/tokens\/([^/]+)\/([^/]+)\.vue$/);
   if (match) {
     const key = `${match[1].toLowerCase()}/${match[2].toLowerCase()}`;
-    tokenComponentsMap.set(key, markRaw(defineAsyncComponent(loader as any)));
+    const comp = (mod as any)?.default || mod;
+    tokenComponentsMap.set(key, markRaw(comp));
   }
 }
 
@@ -30,9 +45,49 @@ for (const rpc of rpcList) {
   if (rpc.swapChain) aliasToProviderKey.set(rpc.swapChain.toLowerCase(), target);
   if (rpc.displayName) aliasToProviderKey.set(rpc.displayName.toLowerCase(), target);
 }
+aliasToProviderKey.set('bnb', 'bnb chain');
+aliasToProviderKey.set('sol', 'solana');
+aliasToProviderKey.set('matic', 'polygon');
+aliasToProviderKey.set('pol', 'polygon');
+aliasToProviderKey.set('avax', 'avalanche');
+aliasToProviderKey.set('shib', 'shiba');
 
 const localResolutionCache = new Map<string, any>();
 const remoteComponentCache = new Map<string, any>();
+
+const loadedImageUrls = new Set<string>();
+const preloadedImages = new Map<string, HTMLImageElement>();
+
+export function isImageUrlCached(url?: string | null): boolean {
+  if (!url || typeof url !== 'string') return false;
+  return loadedImageUrls.has(url.trim());
+}
+
+export function markImageUrlCached(url?: string | null): void {
+  if (!url || typeof url !== 'string') return;
+  const clean = url.trim();
+  if (!clean || clean.includes('unknownTokenIcon.svg')) return;
+  loadedImageUrls.add(clean);
+}
+
+export function preloadTokenIconUrl(url?: string | null): void {
+  if (!url || typeof url !== 'string') return;
+  const clean = url.trim();
+  if (!clean || clean.includes('unknownTokenIcon.svg') || loadedImageUrls.has(clean)) return;
+  if (typeof Image === 'undefined' || preloadedImages.has(clean)) return;
+  try {
+    const img = new Image();
+    img.onload = () => {
+      loadedImageUrls.add(clean);
+    };
+    img.src = clean;
+    if (img.complete && img.naturalWidth > 0) {
+      loadedImageUrls.add(clean);
+    }
+    preloadedImages.set(clean, img);
+  } catch {
+  }
+}
 
 function resolveLocalTokenIcon(arg: any): any {
   if (!arg) return null;
@@ -111,6 +166,75 @@ const unknownTokenIcon = () =>
 
 const urlCache = new Map<string, string | null>();
 const fetchingMap = new Map<string, Promise<string | null>>();
+
+function findStoreTokenIcon(chain: string, address?: string, symbol?: string): string | null {
+  try {
+    const rpcName = resolveRpcName(chain) || chain;
+    const userTokens = store?.state?.user?.tokenBalance?.[rpcName];
+    if (Array.isArray(userTokens)) {
+      const match = userTokens.find((item: any) => {
+        if (!item) return false;
+        if (address && item.root && item.root.toLowerCase() === address.toLowerCase()) return true;
+        if (symbol && item.symbol && item.symbol.toLowerCase() === symbol.toLowerCase()) return true;
+        return false;
+      });
+      if (match?.iconUrl && typeof match.iconUrl === 'string' && !match.iconUrl.includes('unknownTokenIcon.svg')) {
+        return match.iconUrl;
+      }
+    }
+    const swapTokens = store?.state?.swap?.tokens?.[chain];
+    if (Array.isArray(swapTokens)) {
+      const match = swapTokens.find((item: any) => {
+        if (!item) return false;
+        if (address && item.address && item.address.toLowerCase() === address.toLowerCase()) return true;
+        if (symbol && item.symbol && item.symbol.toLowerCase() === symbol.toLowerCase()) return true;
+        return false;
+      });
+      const icon = match?.logoURI || match?.iconUrl || match?.icon;
+      if (icon && typeof icon === 'string' && !icon.includes('unknownTokenIcon.svg')) {
+        return icon;
+      }
+    }
+  } catch {
+  }
+  return null;
+}
+
+export function getCachedTokenIconUrl(arg: any): string | null {
+  if (!arg) return null;
+  if (typeof arg === 'object' && arg !== null) {
+    const directIcon = arg.iconUrl || arg.logoURI || arg.icon || arg.image || arg.imageUrl;
+    if (typeof directIcon === 'string' && directIcon.trim()) {
+      preloadTokenIconUrl(directIcon.trim());
+      return directIcon.trim();
+    }
+    if (arg.chain) {
+      const storeIcon = findStoreTokenIcon(arg.chain, arg.address, arg.symbol);
+      if (storeIcon) {
+        preloadTokenIconUrl(storeIcon);
+        return storeIcon;
+      }
+    }
+    if (typeof arg.changellyTicker === 'string' && arg.changellyTicker.trim() && !resolveLocalTokenIcon(arg)) {
+      const url = `https://cdn.changelly.com/icons/${arg.changellyTicker.toLowerCase().trim()}.png`;
+      preloadTokenIconUrl(url);
+      return url;
+    }
+  }
+  const key = getCacheKey(arg);
+  if (urlCache.has(key)) {
+    return urlCache.get(key) || null;
+  }
+  if (typeof arg === 'object' && typeof arg.symbol === 'string' && arg.symbol.trim()) {
+    const symKey = arg.symbol.toLowerCase().trim();
+    if (urlCache.has(symKey)) {
+      return urlCache.get(symKey) || null;
+    }
+  }
+  return null;
+}
+
+export const getCachedTokenIconUrlSync = getCachedTokenIconUrl;
 
 export function toXrplCanonicalCurrencyCode(rawCode: string): string {
   if (!rawCode) return '';
@@ -209,6 +333,11 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
       return directIcon.trim();
     }
 
+    if (arg.chain) {
+      const storeIcon = findStoreTokenIcon(arg.chain, arg.address, arg.symbol);
+      if (storeIcon) return storeIcon;
+    }
+
     if (typeof arg.tip3?.getIconUrl === 'function') {
       try {
         const icon = await arg.tip3.getIconUrl();
@@ -250,7 +379,7 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
           } catch {
           }
         }
-        return getCoinGeckoIconUrl(arg);
+        return null;
       }
 
       if (typeof arg === 'object' && arg !== null) {
@@ -298,13 +427,31 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
                 });
               }
 
-              if (!token && typeof mgr.createToken === 'function') {
+              if (!token && typeof (mgr as any).findTokenInManifest === 'function') {
+                try {
+                  const manifestMeta = await (mgr as any).findTokenInManifest(address);
+                  if (manifestMeta) {
+                    if (manifestMeta.icon) {
+                      return manifestMeta.icon;
+                    }
+                    token = mgr.createToken({
+                      ...manifestMeta,
+                      ticker: manifestMeta.ticker,
+                    });
+                  }
+                } catch {
+                }
+              }
+
+              const explicitTicker = arg.ticker || arg.coinGeckoId || arg.coingeckoId;
+              if (!token && (isXrplChain || explicitTicker) && typeof mgr.createToken === 'function') {
                 try {
                   token = mgr.createToken({
                     address,
                     name: arg.name || '',
                     symbol: arg.symbol || '',
                     decimals: arg.decimals || 0,
+                    ticker: explicitTicker,
                   });
                 } catch {
                 }
@@ -326,6 +473,10 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
         if (typeof ticker === 'string' && ticker.trim()) {
           return getCoinGeckoIconUrl(ticker.toLowerCase().trim());
         }
+
+        if (typeof arg.changellyTicker === 'string' && arg.changellyTicker.trim()) {
+          return `https://cdn.changelly.com/icons/${arg.changellyTicker.toLowerCase().trim()}.png`;
+        }
       }
 
       return null;
@@ -337,6 +488,15 @@ export async function getRemoteTokenIconUrl(arg: any): Promise<string> {
   fetchingMap.set(key, fetchPromise);
   const resolved = await fetchPromise;
   urlCache.set(key, resolved);
+  if (resolved && typeof arg === 'object' && typeof arg.symbol === 'string' && arg.symbol.trim()) {
+    const symKey = arg.symbol.toLowerCase().trim();
+    if (!urlCache.has(symKey)) {
+      urlCache.set(symKey, resolved);
+    }
+  }
+  if (resolved) {
+    preloadTokenIconUrl(resolved);
+  }
   fetchingMap.delete(key);
 
   return resolved || unknownTokenIcon();

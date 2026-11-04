@@ -50,7 +50,7 @@ export default async ({ mode }) => {
 
   return defineConfig({
     server: {
-      port: 8081,
+      port: 8080,
       host: true,
       watch: {
         usePolling: true
@@ -99,7 +99,6 @@ export default async ({ mode }) => {
         },
       },
     },
-    // assetsInclude: ['**/*.wasm'], //AI
     root: 'src',
     build: {
       minify: 'terser',
@@ -161,4 +160,6 @@ export default async ({ mode }) => {
       },
     },
   })
+}
+
 }

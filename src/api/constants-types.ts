@@ -144,13 +144,13 @@ export interface CustomTokenBase {
 
 export function getSelectedToken(): SelectedTokenList {
   return Object.fromEntries(
-    Object.values(RPC_NAMES).map(name => [name, null])
+    rpcList.map(rpc => [rpc.name, null])
   ) as SelectedTokenList;
 }
 
 export function getCustomTokenBase(): CustomTokenBase {
   return Object.fromEntries(
-    Object.values(RPC_NAMES).map(name => [name, []])
+    rpcList.map(rpc => [rpc.name, []])
   ) as CustomTokenBase;
 }
 

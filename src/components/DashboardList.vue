@@ -45,7 +45,7 @@
 <script>
 import { defineComponent, ref, shallowRef, computed } from 'vue';
 import { useStore } from 'vuex';
-import { setTokenBalance, getTokensList, prefixStore } from '@/api/ApiHandler';
+import { setTokenBalance, setTokensBalances, seedProviderTokenList, prefixStore } from '@/api/ApiHandler';
 import { useEventsBus } from '@/plugins/eventBus.js';
 import { RPC_NAMES } from '../api/constants-types';
 import DashboardListItem from '@/components/DashboardListItem.vue';
@@ -69,7 +69,7 @@ export default defineComponent({
       required: false
     },
   },
-  async setup() {
+  setup() {
     const store = useStore();
     const titleLoad = ref('Please wait.');
     const messageLoad = ref('Loading tokens data.');
@@ -104,20 +104,17 @@ export default defineComponent({
 
     const fetchTokenList = async (isForced = false) => {
       try {
-        const inputDataNew = getTokensList(isForced);
-        const responseParsed = inputDataNew.map((item) => ({
-          root: item?.id,
-        }));
-        await store.dispatch('user/setTokenBalance', {
-          provider: storeProvider.value?.name,
-          value: responseParsed,
-        });
+        const providerName = storeProvider.value?.name;
+        if (!providerName) return;
+        await seedProviderTokenList(providerName, isForced);
+        setTokensBalances(false, providerName).catch(() => {});
       } catch (error) {
       }
     };
 
-    if ( typeof store.state.user.tokenBalance[storeProvider.value?.name] === 'object' && store.state.user.tokenBalance[storeProvider.value?.name]?.length === 0 ) {
-      fetchTokenList();
+    if (storeProvider.value?.name) {
+      seedProviderTokenList(storeProvider.value.name, false).catch(() => {});
+      setTokensBalances(false, storeProvider.value.name).catch(() => {});
     }
 
     const changePinLength = () => {
@@ -181,12 +178,10 @@ export default defineComponent({
         throw new Error('Card response',{ cause: {errorSubtitle: 'Transaction error.', errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
       }
 
-      setTokenBalance(trustLimitObject.value.token_id, trustLimitObject.value.rpc );
+      setTokenBalance(trustLimitObject.value.token_id, trustLimitObject.value.rpc, true );
 
       if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-        store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
-        }).catch((err) => {
-        });
+        store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 15) }).catch(() => {});
       }
       trustLimitObject.value = null;
       pinPre.value = null;
@@ -214,12 +209,10 @@ export default defineComponent({
         throw new Error('Card response',{ cause: {errorSubtitle: 'Transaction error.', errorBody:typeof err === 'object' ? JSON.stringify(err) : err} });
       }
 
-      setTokenBalance(unlockCotiTokenObject.value.token_id, unlockCotiTokenObject.value.rpc );
+      setTokenBalance(unlockCotiTokenObject.value.token_id, unlockCotiTokenObject.value.rpc, true );
 
       if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
-        store.dispatch('user/setPinHash', {"pin":pinPre.value, "date":Date.now() + (1000 * 60 * 5)}).then(() => {
-        }).catch((err) => {
-        });
+        store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 15) }).catch(() => {});
       }
       unlockCotiTokenObject.value = null;
       pinPre.value = null;
@@ -228,10 +221,7 @@ export default defineComponent({
     };
 
     useEventsBus().on('rpcProviderChange', async () => {
-      if ( typeof store.state.user.tokenBalance[storeProvider.value?.name] === 'object' && store.state.user.tokenBalance[storeProvider.value?.name]?.length === 0 ) {
-        fetchTokenList(true);
-      }
-      rpcProviderChange.value = true;
+      await fetchTokenList(false);
     });
 
     return { storeProvider, tokenBalanceList, titleLoad, messageLoad, rpcProviderChange, RPC_NAMES, nfcHandlerWindow, getPinCodeCoti, 
@@ -250,11 +240,11 @@ export default defineComponent({
 .loader-box {
   display: flex;
   width: 100%;
-  height: calc(100% - 20px);
+  flex: 1;
+  min-height: 200px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: v-bind(minHeight);
 }
 .keyboard-wrap{
   position: absolute;

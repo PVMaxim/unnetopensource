@@ -94,7 +94,7 @@
                 "ticker": "wrapped-venom"
             }
         ],
-        "all": "https://united.network/manifests/venom-tokens.json"
+        "all": "/manifests/venom-tokens.json"
     },
 
     "blockExplorer": {

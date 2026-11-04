@@ -401,24 +401,24 @@ const oneInchApi = () => {
   };
 
   const getHistory = async (
-    chainIds: string[],
+    _chainIds: string[],
     address: string
   ): Promise<HistoryResponse> => {
-    const response = await fetch(
-      apiUrlPrefix + `/history/v2.0/history/${address}/events`,
-      {
-        method: 'POST',
-        headers: defaultHeaders,
-        body: JSON.stringify({
-          filter: {
-            chain_ids: chainIds,
-            transaction_types: ["SwapExactInput"],
-            limit: 200,
-          },
-        }),
+    try {
+      const response = await fetch(
+        apiUrlPrefix + `/history/v2.0/history/${address}/events?limit=100`,
+        {
+          method: "GET",
+          headers: defaultHeaders,
+        }
+      );
+      if (!response.ok) {
+        return { cacheCounter: 0, items: [] };
       }
-    );
-    return response.json();
+      return response.json();
+    } catch {
+      return { cacheCounter: 0, items: [] };
+    }
   };
 
   const buildEvmOrder = async (

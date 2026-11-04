@@ -1,4 +1,6 @@
-import { encryptData, decryptData, readEncrypted, readLegacyEncrypted, writeEncrypted, removeEncrypted } from './encrypt-decrypt';
+import { encryptData, decryptData } from './encrypt-decrypt';
+import { IndexedDBWriteManager } from '../utils/indexeddb-write-manager';
+import { STORAGE_KEYS, DYNAMIC_KEYS } from './storage-keys';
 
 const DB_NAME = 'UnitedNetworkDB';
 const DB_VERSION = 1;
@@ -56,37 +58,96 @@ function idbOp<T>(
   });
 }
 
-const getEncryptionKey = async (): Promise<CryptoKey> => {
-  const db = await initDB();
+let encryptionKeyPromise: Promise<CryptoKey> | null = null;
 
-  const existing = await idbOp<CryptoKey | undefined>(
-    db, 'KeyStore', 'readonly',
-    (store) => store.get('masterKey'),
-  );
-  if (existing) return existing;
+export const getEncryptionKey = async (): Promise<CryptoKey> => {
+  if (encryptionKeyPromise) return encryptionKeyPromise;
 
-  const newKey = await window.crypto.subtle.generateKey(
-    { name: 'AES-GCM', length: 256 },
-    false, 
-    ['encrypt', 'decrypt'],
-  );
+  encryptionKeyPromise = (async () => {
+    const db = await initDB();
 
-  await idbOp<void>(
-    db, 'KeyStore', 'readwrite',
-    (store) => store.put(newKey, 'masterKey'),
-  );
+    const existing = await idbOp<CryptoKey | undefined>(
+      db,
+      'KeyStore',
+      'readonly',
+      (store) => store.get('masterKey'),
+    );
+    if (existing) return existing;
 
-  return newKey;
+    const cryptoObj = getWebCrypto();
+    const newKey = await cryptoObj.subtle.generateKey(
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['encrypt', 'decrypt'],
+    );
+
+    await idbOp<void>(
+      db,
+      'KeyStore',
+      'readwrite',
+      (store) => store.put(newKey, 'masterKey'),
+    );
+
+    return newKey;
+  })().catch((err) => {
+    encryptionKeyPromise = null;
+    throw err;
+  });
+
+  return encryptionKeyPromise;
 };
 
-const getWebCrypto = (): Crypto => {
+export const getWebCrypto = (): Crypto => {
   if (typeof window !== 'undefined' && window.crypto) {
     return window.crypto;
   }
   return globalThis.crypto;
 };
 
-export const encryptStringDB = async (data: string): Promise<any> => {
+export interface EncryptedPayload {
+  v?: number;
+  kid?: string;
+  iv?: number[];
+  data: ArrayBuffer | string;
+}
+
+export function extractCardPrefix(storageKey?: string): string | null {
+  if (!storageKey || typeof storageKey !== 'string') return null;
+  const dotIdx = storageKey.indexOf('.');
+  if (dotIdx >= 4 && dotIdx <= 32) {
+    const prefix = storageKey.slice(0, dotIdx);
+    if (/^[a-fA-F0-9]+$/.test(prefix)) {
+      return prefix.toLowerCase();
+    }
+  }
+  return null;
+}
+
+export function resolveKeyStoreId(storageKey?: string): string {
+  const prefix = extractCardPrefix(storageKey);
+  return prefix ? `cardKey:${prefix}` : 'masterKey';
+}
+
+function normalizeUint8Array(input: unknown): Uint8Array {
+  if (input instanceof Uint8Array) {
+    return input;
+  }
+  if (input instanceof ArrayBuffer) {
+    return new Uint8Array(input);
+  }
+  if (ArrayBuffer.isView(input)) {
+    return new Uint8Array(input.buffer, input.byteOffset, input.byteLength);
+  }
+  if (Array.isArray(input)) {
+    return new Uint8Array(input);
+  }
+  return new Uint8Array(Array.from(input as ArrayLike<number>));
+}
+
+export const encryptStringDB = async (
+  data: string,
+  _storageKey?: string,
+): Promise<EncryptedPayload> => {
   const cryptoObj = getWebCrypto();
   if (cryptoObj?.subtle) {
     try {
@@ -96,52 +157,48 @@ export const encryptStringDB = async (data: string): Promise<any> => {
       const encryptedBuffer = await cryptoObj.subtle.encrypt(
         { name: 'AES-GCM', iv },
         key,
-        encoded
+        encoded,
       );
       return { iv: Array.from(iv), data: encryptedBuffer };
-    } catch {
-    }
+    } catch {}
   }
   const encrypted = await encryptData(data);
   if (!encrypted) throw new Error('Encryption failed');
   return { data: encrypted };
 };
 
-export const decryptStringDB = async (encrypted: any): Promise<string | null> => {
+export const decryptStringDB = async (
+  encrypted: unknown,
+  storageKey?: string,
+): Promise<string | null> => {
   if (!encrypted) return null;
 
   if (typeof encrypted === 'string' && encrypted.length > 0) {
     return (await decryptData(encrypted)) || null;
   }
-  if (typeof encrypted?.data === 'string' && encrypted.data.length > 0) {
-    return (await decryptData(encrypted.data)) || null;
+  const encObj = encrypted as { v?: number; kid?: string; iv?: unknown; data?: unknown };
+  if (typeof encObj?.data === 'string' && encObj.data.length > 0) {
+    return (await decryptData(encObj.data)) || null;
   }
 
   const cryptoObj = getWebCrypto();
-  if (cryptoObj?.subtle && encrypted.iv && encrypted.data) {
+  if (cryptoObj?.subtle && encObj.iv && encObj.data) {
     try {
       const key = await getEncryptionKey();
-      let ivBuffer: Uint8Array;
-      if (encrypted.iv instanceof Uint8Array) {
-        ivBuffer = encrypted.iv;
-      } else if (Array.isArray(encrypted.iv)) {
-        ivBuffer = new Uint8Array(encrypted.iv);
-      } else {
-        ivBuffer = new Uint8Array(Array.from(encrypted.iv as ArrayLike<number>));
-      }
+      const ivBuffer = normalizeUint8Array(encObj.iv);
+      const dataBuffer = normalizeUint8Array(encObj.data);
 
-      let dataBuffer: ArrayBuffer;
-      if (encrypted.data instanceof ArrayBuffer) {
-        dataBuffer = encrypted.data;
-      } else if (ArrayBuffer.isView(encrypted.data)) {
-        dataBuffer = encrypted.data.buffer.slice(
-          encrypted.data.byteOffset,
-          encrypted.data.byteOffset + encrypted.data.byteLength
-        );
-      } else if (Array.isArray(encrypted.data)) {
-        dataBuffer = new Uint8Array(encrypted.data).buffer;
-      } else {
-        dataBuffer = new Uint8Array(Array.from(encrypted.data as ArrayLike<number>)).buffer;
+      if (encObj.v === 2 && storageKey) {
+        const keyId = encObj.kid || 'masterKey';
+        const aad = new TextEncoder().encode(`united:idb:v2:${keyId}:${storageKey}`);
+        try {
+          const decryptedData = await cryptoObj.subtle.decrypt(
+            { name: 'AES-GCM', iv: ivBuffer, additionalData: aad },
+            key,
+            dataBuffer,
+          );
+          return new TextDecoder().decode(decryptedData);
+        } catch {}
       }
 
       const decryptedData = await cryptoObj.subtle.decrypt(
@@ -150,24 +207,29 @@ export const decryptStringDB = async (encrypted: any): Promise<string | null> =>
         dataBuffer,
       );
       return new TextDecoder().decode(decryptedData);
-    } catch {
-    }
+    } catch {}
+  }
+
+  if (encObj?.data && typeof encObj.data === 'string') {
+    return (await decryptData(encObj.data)) || null;
   }
 
   return null;
 };
 
-export async function readEncryptedDB<T>(key: string, fallback: T): Promise<T> {
+async function rawReadEncryptedDB<T>(key: string, fallback: T): Promise<T> {
   try {
     const db = await initDB();
-    const encrypted = await idbOp<any>(
-      db, 'EncryptedStore', 'readonly',
+    const encrypted = await idbOp<unknown>(
+      db,
+      'EncryptedStore',
+      'readonly',
       (store) => store.get(key),
     );
 
     if (encrypted) {
-      const decryptedString = await decryptStringDB(encrypted);
-      if (decryptedString !== null && decryptedString !== undefined) {
+      const decryptedString = await decryptStringDB(encrypted, key);
+      if (decryptedString) {
         try {
           return JSON.parse(decryptedString) as T;
         } catch {
@@ -176,66 +238,172 @@ export async function readEncryptedDB<T>(key: string, fallback: T): Promise<T> {
       }
     }
 
-    let localVal: T | undefined = await readEncrypted<T>(key, undefined as unknown as T);
-    if (localVal === undefined) {
-      localVal = await readLegacyEncrypted<T>(key, undefined as unknown as T);
-    }
-    if (localVal === undefined && typeof localStorage !== 'undefined') {
-      const raw = localStorage.getItem(key);
-      if (raw && raw !== 'undefined') {
-        try {
-          localVal = JSON.parse(raw) as T;
-        } catch {
-          localVal = raw as unknown as T;
-        }
-      }
-    }
-
-    if (localVal !== undefined && localVal !== null) {
-      await writeEncryptedDB(key, localVal);
-      removeEncrypted(key);
-      if (typeof localStorage !== 'undefined') {
-        localStorage.removeItem(key);
-      }
-      return localVal;
-    }
     return fallback;
   } catch {
-    return await readEncrypted<T>(key, fallback);
+    return fallback;
   }
 }
 
-export async function writeEncryptedDB(key: string, value: unknown): Promise<void> {
-  try {
-    const db = await initDB();
-    const encrypted = await encryptStringDB(JSON.stringify(value));
-    if (encrypted) {
-      await idbOp<void>(
-        db, 'EncryptedStore', 'readwrite',
-        (store) => store.put(encrypted, key),
-      );
-    }
-    removeEncrypted(key);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem(key);
-    }
-  } catch {
-    await writeEncrypted(key, value);
+export function isCoalescingKey(key: string): boolean {
+  if (!key) return false;
+  if (
+    key === STORAGE_KEYS.TOKEN_BALANCE ||
+    key.includes(STORAGE_KEYS.TOKEN_BALANCE) ||
+    key === STORAGE_KEYS.TOKENS_DATA ||
+    key.includes(STORAGE_KEYS.TOKENS_DATA) ||
+    key === STORAGE_KEYS.SELECTED_TOKEN ||
+    key.includes(STORAGE_KEYS.SELECTED_TOKEN) ||
+    key === STORAGE_KEYS.SWAP_BALANCES ||
+    key.includes(STORAGE_KEYS.SWAP_BALANCES) ||
+    key.includes('swap-tokens') ||
+    key === STORAGE_KEYS.SWAP_HISTORY ||
+    key === DYNAMIC_KEYS.TX_NOTIFICATIONS ||
+    key.includes('txN0t1f1c4t10ns') ||
+    key.includes('token_balance') ||
+    key.includes('tokens_data') ||
+    key.includes('swap_balances') ||
+    key.includes(DYNAMIC_KEYS.CUSTOM_TOKEN)
+  ) {
+    return true;
   }
+  return false;
+}
+
+async function writeBatchDirect(entries: Array<[string, unknown]>): Promise<void> {
+  if (entries.length === 0) return;
+  const db = await initDB();
+  const encryptedEntries = await Promise.all(
+    entries.map(async ([key, val]) => {
+      const encrypted = await encryptStringDB(JSON.stringify(val), key);
+      return [key, encrypted] as const;
+    }),
+  );
+
+  await new Promise<void>((resolve, reject) => {
+    try {
+      const tx = db.transaction('EncryptedStore', 'readwrite');
+      const store = tx.objectStore('EncryptedStore');
+      let pendingCount = 0;
+      let settled = false;
+
+      const finishSuccess = () => {
+        if (!settled) {
+          settled = true;
+          resolve();
+        }
+      };
+
+      const finishError = (err: unknown) => {
+        if (!settled) {
+          settled = true;
+          reject(err);
+        }
+      };
+
+      for (const [key, enc] of encryptedEntries) {
+        if (enc) {
+          pendingCount++;
+          const req = store.put(enc, key);
+          req.onsuccess = () => {
+            pendingCount--;
+            if (pendingCount === 0) {
+              finishSuccess();
+            }
+          };
+          req.onerror = () => finishError(req.error);
+        }
+      }
+
+      tx.oncomplete = () => finishSuccess();
+      tx.onerror = () => finishError(tx.error);
+      tx.onabort = () => finishError(tx.error);
+
+      if (pendingCount === 0) {
+        finishSuccess();
+      }
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+export const idbWriteManager = new IndexedDBWriteManager({
+  debounceDelayMs: 25,
+  maxBatchSize: 100,
+  writeBatchDirect,
+  deleteDirect: async (key: string) => {
+    const db = await initDB();
+    await idbOp<void>(db, 'EncryptedStore', 'readwrite', (store) => store.delete(key));
+  },
+});
+
+export async function readEncryptedDB<T>(key: string, fallback: T): Promise<T> {
+  const peek = idbWriteManager.peekMemory(key);
+  if (peek.has) {
+    return peek.value as T;
+  }
+  return rawReadEncryptedDB(key, fallback);
+}
+
+export async function preloadEncryptedDBKeys(_keys: readonly string[]): Promise<void> {}
+
+export async function writeEncryptedDB(
+  key: string,
+  value: unknown,
+  options?: { immediate?: boolean },
+): Promise<void> {
+  const immediate = options?.immediate ?? !isCoalescingKey(key);
+  return idbWriteManager.scheduleWrite(key, value, immediate);
+}
+
+export async function writeEncryptedDBImmediate(key: string, value: unknown): Promise<void> {
+  return idbWriteManager.scheduleWrite(key, value, true);
 }
 
 export async function deleteEncryptedDB(key: string): Promise<void> {
-  try {
-    const db = await initDB();
-    await idbOp<void>(
-      db, 'EncryptedStore', 'readwrite',
-      (store) => store.delete(key),
-    );
-  } catch {
-  } finally {
-    removeEncrypted(key);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem(key);
-    }
+  return idbWriteManager.scheduleDelete(key);
+}
+
+export async function flushEncryptedDB(): Promise<void> {
+  await idbWriteManager.flush();
+}
+
+export async function flushEncryptedDBKey(key: string): Promise<void> {
+  await idbWriteManager.flushKey(key);
+}
+
+export function hasPendingEncryptedWrite(key: string): boolean {
+  return idbWriteManager.hasPendingWrite(key);
+}
+
+export function getPendingEncryptedValue<T>(key: string): T | undefined {
+  const peek = idbWriteManager.peekMemory(key);
+  return peek.has ? (peek.value as T) : undefined;
+}
+
+export async function purgeCardStorageByPrefix(cardPrefix: string): Promise<void> {
+  if (!cardPrefix || typeof cardPrefix !== 'string') return;
+  const normalizedPrefix = cardPrefix.toLowerCase();
+  const suffixKeys = Object.values(DYNAMIC_KEYS).map((suffix) => `${normalizedPrefix}.${suffix}`);
+  await Promise.all(suffixKeys.map((k) => deleteEncryptedDB(k)));
+}
+
+let shutdownHandlersInitialized = false;
+
+export function initStorageShutdownHandlers(): void {
+  if (shutdownHandlersInitialized || typeof window === 'undefined') return;
+  shutdownHandlersInitialized = true;
+
+  const flushHandler = () => {
+    void idbWriteManager.flush();
+  };
+  window.addEventListener('beforeunload', flushHandler);
+  window.addEventListener('pagehide', flushHandler);
+  if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        flushHandler();
+      }
+    });
   }
 }

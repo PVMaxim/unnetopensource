@@ -30,6 +30,7 @@ export default {
     tokens: null,
     balances: {},
     isLoading: false,
+    isTokensLoading: false,
     isOpenSuccessModal: false,
     successSwapData: null,
     titleLoad: "",
@@ -80,7 +81,18 @@ export default {
   },
   mutations: {
     [types.SET_TOKENS](state, tokens) {
-      state.tokens = tokens;
+      if (tokens && typeof tokens === 'object') {
+        const frozen = {};
+        for (const [chain, list] of Object.entries(tokens)) {
+          frozen[chain] = Array.isArray(list) ? Object.freeze([...list]) : list;
+        }
+        state.tokens = Object.freeze(frozen);
+      } else {
+        state.tokens = tokens;
+      }
+    },
+    [types.SET_SWAP_IS_TOKENS_LOADING](state, isTokensLoading) {
+      state.isTokensLoading = isTokensLoading;
     },
     [types.SET_SWAP_TOKEN_BALANCE](state, { token, balance }) {
       state.balances[`${token.chain}-${token.address}`] = {
@@ -201,7 +213,7 @@ export default {
     },
     async setBalance({ commit, state }, { token, balance }) {
       commit(types.SET_SWAP_TOKEN_BALANCE, { token, balance });
-      await writeEncryptedDB(STORAGE_KEYS.SWAP_BALANCES, state.balances);
+      writeEncryptedDB(STORAGE_KEYS.SWAP_BALANCES, state.balances);
     },
     async resetBalances({ commit }) {
       commit(types.RESET_SWAP_TOKEN_BALANCE);
@@ -240,7 +252,13 @@ export default {
       }
 
       if (state.tokens === null) {
-        await dispatch("getTokens");
+        const manifestTokens = CoreSwapService.getManifestTokens();
+        const sortedByChainsTokens = sortTokensByChainIds(manifestTokens);
+        const sortedByProviderTokens =
+          sortTokensByProviderTokens(sortedByChainsTokens);
+        commit(types.SET_TOKENS, sortedByProviderTokens);
+
+        dispatch("getTokens");
       }
 
       if (headerStoreProvider) {
@@ -259,21 +277,18 @@ export default {
         dispatch("setToProvider", targetProvider);
       }
     },
-    async getTokens({ dispatch, state }) {
+    async getTokens({ commit, dispatch, state }) {
+      if (state.isTokensLoading) return;
+      commit(types.SET_SWAP_IS_TOKENS_LOADING, true);
       try {
-        dispatch("openLoading", { title: "Loading tokens" });
         let tokens = await CoreSwapService.getTokens();
         const sortedByChainsTokens = sortTokensByChainIds(tokens);
         const sortedByProviderTokens =
           sortTokensByProviderTokens(sortedByChainsTokens);
         dispatch("setTokens", sortedByProviderTokens);
-      } catch (error) {
-        dispatch("setError", {
-          title: "Get tokens error",
-          message: "Something went wrong. Please try again.",
-        });
+      } catch {
       } finally {
-        dispatch("closeLoading");
+        commit(types.SET_SWAP_IS_TOKENS_LOADING, false);
       }
     },
 

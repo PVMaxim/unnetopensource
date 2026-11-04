@@ -95,7 +95,7 @@ export async function getTransfers(args: {
     });
 
     if( data.status !== "success" ) {
-        throw new UniError("SERVER_ERROR", "Invalid server response");
+        return [];
     }
 
     const result: TransactionInfo[] = [];

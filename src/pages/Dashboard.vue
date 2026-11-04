@@ -18,7 +18,7 @@
         <div v-if="activeTab === firstTabName" class="history-box">
           <div class="balance-sum text-gray">{{ $t('pages.dashboard.totalBalance') }} <span class="text-white">≈ ${{ roundNumber(tokensBalance ?? 0, 6) }}</span></div>
           <div ref="historyElement" class="history">
-            <PullToRefresh :loading='loadingRefresh' @refresh='refreshHandler'>
+            <PullToRefresh :isLoading="loadingRefresh" @refresh="refreshHandler">
             <SearchTokens
               ref="searchComponent"
               :placeholder="$t('pages.dashboard.searchPlaceholder')"
@@ -42,8 +42,8 @@
           </PullToRefresh>
           </div>
         </div>
-        <div v-if="activeTab === secondTabName" class="history-box" ref="historyBox">
-          <div ref="historyElement" class="history all-transactions">
+        <div v-if="activeTab === secondTabName" class="history-box">
+          <div ref="historyBox" class="history all-transactions">
             <div class="history-title">{{ $t('pages.dashboard.historyColon') }} [{{ storeProvider?.name }}]</div>
               <ProviderTransactionList v-if="historyPageLimit"
                 :historyPageLimit="historyPageLimit"
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-  import { ref, shallowRef, onMounted, computed, onErrorCaptured, watchEffect } from 'vue';
+  import { ref, shallowRef, onMounted, computed, onErrorCaptured } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { useStore } from 'vuex';
   import { useRouter } from 'vue-router';
@@ -136,24 +136,20 @@
       const secondTabName = computed(() => t('pages.send.tabs.history'));
       const storeProvider = computed(() => { return store.state.settings.rpcProvider });
       const tokensBalance = computed(() => { return store.state.user.tokensData?.[store.state.settings.rpcProvider?.name]?.providerUSDBalance;});
-      const historyElementComp = computed(() => { 
-        if ( historyElement.value?.clientHeight ) {
-          return `${Number((historyElement.value?.clientHeight - 108).toFixed())}px`;
-        }
-        return null;
-      });
+      const historyElementComp = computed(() => 'calc(100% - 108px)');
       const historyBox = ref(null);
+
       const historyPageLimit = computed(() => { 
-        if ( historyBox.value?.clientHeight ) {
-          return Number(roundNumberIntMin((historyBox.value?.clientHeight - 69) / 50));
+        if (historyBox.value?.clientHeight && historyBox.value.clientHeight > 69) {
+          return Number(roundNumberIntMin((historyBox.value.clientHeight - 69) / 50));
         }
         return null;
       });
       const minHeightComp = computed(() => {
-        if ( historyBox.value?.clientHeight) {
-          return `${Number((historyBox.value?.clientHeight-100).toFixed())}px`;
+        if (historyBox.value?.clientHeight && historyBox.value.clientHeight > 100) {
+          return `${Number((historyBox.value.clientHeight - 100).toFixed())}px`;
         }
-        return 'initial'
+        return '200px';
       });
 
       const errorImg = new URL(`@/assets/images/errorcode.svg`, import.meta.url).href;
@@ -221,17 +217,21 @@
         router.push({ name: 'send' });
       }
 
-      const refreshHandler = () => {
-        loadingRefresh.value = true
-        setTokensBalances();
-        loadingRefresh.value = false
+      const refreshHandler = async () => {
+        loadingRefresh.value = true;
+        try {
+          await setTokensBalances(true);
+        } finally {
+          loadingRefresh.value = false;
+        }
       }
 
       onMounted( async () => {
-        if ( store.state.user?.seedPhrase !== null ) {
+        if (!store.state.user.isMnemonicNeedSave) {
           store.dispatch('user/resetSeedPhrase');
         }
         balance.value = store.state.user.tokenBalance;
+        setTokensBalances(false).catch(() => {});
       });
 
       onErrorCaptured(async(err) => {
@@ -362,8 +362,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  width: calc(100% - 40px);
+  width: calc(100% - 0px);
   min-height: calc(100% - 52px);
+  flex: 1;
   height: initial;
   padding: 20px 20px 0px;
   border-radius: 16px;
@@ -371,16 +372,30 @@
   background-color: $color-black-23;
   z-index: 6;
   position: relative;
+  box-sizing: border-box;
+
+  :deep(.pull-to-refresh-wrapper),
+  :deep(.pull-to-refresh-container) {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+  }
 
   &.all-transactions {
-    min-height: calc(100% - 22px);
+    height: calc(100% - 0px);
+    min-height: calc(100% - 0px);
+    box-sizing: border-box;
+    padding: 20px;
   }
 }
 
 .history-group {
   width: 100%;
-  height: initial;
-  min-height: v-bind(historyElementComp);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100% - 108px);
 
   &.search {
     overflow-y: auto;

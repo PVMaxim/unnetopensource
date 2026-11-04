@@ -19,8 +19,8 @@
   </div>
 
   <Teleport to="body">
-    <div v-if="isOpen" class="backdrop">
-      <div class="select-token-modal-content" v-if="isOpen">
+    <div v-if="isOpen" class="backdrop" @click.self="toggleModal">
+      <div class="select-token-modal-content">
         <div class="select-token-modal-header">
           <h3>
             {{ $t("pages.selectToken.selectToken") }} <span>{{ title }}</span>
@@ -36,13 +36,17 @@
           />
           <searchIcon />
         </div>
-        <div v-if="filteredTokens.length === 0" class="option-not-found">
+        <div v-if="isTokensLoading && filteredTokens.length === 0" class="select-token-loading">
+          <div class="loader"></div>
+          <span>{{ $t("pages.selectToken.loading") || "Loading tokens..." }}</span>
+        </div>
+        <div v-else-if="filteredTokens.length === 0" class="option-not-found">
           {{ $t("pages.selectToken.notFound") }}
         </div>
         <div v-else class="options">
           <SelectTokenItem
-            v-for="token in filteredTokens"
-            :key="token?.symbol"
+            v-for="token in displayedTokens"
+            :key="`${token.chain}-${token.address}`"
             :token="token"
             :disabled="
               disabledToken?.address === token.address &&
@@ -50,6 +54,13 @@
             "
             @click="selectToken(token, $event)"
           />
+          <div
+            v-if="hasMoreTokens"
+            v-intersect="loadMoreTokens"
+            class="options-scroll-sentinel"
+          >
+            <div class="sentinel-loader"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -65,6 +76,7 @@ import SelectTokenItem from "@/components/SelectTokenItem.vue";
 import { getOwnerAddress } from "@/api/swap/utils/ownerAddress";
 import { useStore } from "vuex";
 import { SET_SWAP_TOKEN_BALANCE } from "../store/mutation-types";
+import { useDebounceFn } from "@/plugins/utils/useDebounceFn";
 import SwapTokenIcon from "./SwapTokenIcon.vue";
 
 export default {
@@ -89,15 +101,27 @@ export default {
 
     const isOpen = ref(false);
     const searchText = ref("");
+    const searchQuery = ref("");
     const ownerAddress = ref(null);
+    const displayLimit = ref(30);
+
+    const isTokensLoading = computed(() => !!store.state.swap?.isTokensLoading);
+
+    const debouncedSearch = useDebounceFn((value) => {
+      searchQuery.value = (value || "").trim().toLowerCase();
+      displayLimit.value = 30;
+    }, 200);
 
     const onChangeSearchText = (event) => {
       searchText.value = event.target.value;
+      debouncedSearch(event.target.value);
     };
 
     const toggleModal = () => {
       if (isOpen.value) {
         searchText.value = "";
+        searchQuery.value = "";
+        displayLimit.value = 30;
       }
       isOpen.value = !isOpen.value;
     };
@@ -105,71 +129,119 @@ export default {
     const selectToken = (token, event) => {
       event.stopPropagation();
       searchText.value = "";
+      searchQuery.value = "";
+      displayLimit.value = 30;
       isOpen.value = false;
       props.setToken(token);
     };
 
-    onMounted(async () => {
-      tokens.value = [...store.state.swap?.tokens[props?.provider?.swapChain]];
-      ownerAddress.value = await getOwnerAddress(
-        props.provider,
-        store.state.user.publicKeyCard
-      );
-    });
+    const onKeydown = (event) => {
+      if (event.key === "Escape" && isOpen.value) {
+        toggleModal();
+      }
+    };
 
-    watch(
-      () => props.provider.swapChain,
-      async (newChain) => {
-        tokens.value = [...store.state.swap?.tokens[newChain]];
+    const updateTokensList = async () => {
+      const chain = props.provider?.swapChain;
+      if (!chain) {
+        tokens.value = [];
+        return;
+      }
+      const chainTokens = store.state.swap?.tokens?.[chain];
+      if (!Array.isArray(chainTokens) || chainTokens.length === 0) {
+        tokens.value = [];
+        return;
+      }
+      const balances = store.state.swap?.balances || {};
+      const sorted = [...chainTokens].sort((a, b) => {
+        const balA = parseFloat(balances[`${chain}-${a.address}`]?.amount || "0");
+        const balB = parseFloat(balances[`${chain}-${b.address}`]?.amount || "0");
+        return balB - balA;
+      });
+      tokens.value = sorted;
+
+      if (!ownerAddress.value && store.state.user?.publicKeyCard) {
         ownerAddress.value = await getOwnerAddress(
           props.provider,
           store.state.user.publicKeyCard
         );
-        const balancesByChainId = store.getters["swap/tokenBalancesByChainId"]({
-          ownerAddress: ownerAddress.value,
-          chainId: props.provider.swapChain,
-        });
-        tokens.value = tokens.value.sort((a, b) => {
-          return (
-            parseFloat(balancesByChainId[b.address] || "0") -
-            parseFloat(balancesByChainId[a.address] || "0")
-          );
-        });
+      }
+    };
+
+    onMounted(async () => {
+      window.addEventListener("keydown", onKeydown);
+      await updateTokensList();
+    });
+
+    watch(
+      () => props.provider?.swapChain,
+      async () => {
+        await updateTokensList();
       }
     );
 
-    const unsubscribe = store.subscribe((mutation, state) => {
+    watch(
+      () => store.state.swap?.tokens,
+      async () => {
+        await updateTokensList();
+      },
+      { deep: false }
+    );
+
+    const debouncedSort = useDebounceFn(async () => {
+      await updateTokensList();
+    }, 350);
+
+    const unsubscribe = store.subscribe((mutation) => {
       if (
         mutation.type === `swap/${SET_SWAP_TOKEN_BALANCE}` &&
-        props.provider.swapChain
+        mutation.payload?.token?.chain === props.provider?.swapChain
       ) {
-        const balancesByChainId = store.getters["swap/tokenBalancesByChainId"]({
-          ownerAddress: ownerAddress.value,
-          chainId: props.provider.swapChain,
-        });
-        tokens.value = tokens.value.sort((a, b) => {
-          return (
-            parseFloat(balancesByChainId[b.address] || "0") -
-            parseFloat(balancesByChainId[a.address] || "0")
-          );
-        });
+        debouncedSort();
       }
     });
 
     onUnmounted(() => {
+      window.removeEventListener("keydown", onKeydown);
       unsubscribe();
     });
 
     const filteredTokens = computed(() => {
-      if (!searchText.value) {
+      const query = searchQuery.value;
+      if (!query) {
         return tokens.value;
       }
-      return tokens.value.filter(
-        (token) =>
-          token.name.toLowerCase().includes(searchText.value.toLowerCase()) ||
-          token.symbol.toLowerCase().includes(searchText.value.toLowerCase())
-      );
+      const matches = [];
+      const lowerQuery = query.toLowerCase();
+      for (const token of tokens.value) {
+        const symbol = token.symbol?.toLowerCase();
+        const name = token.name?.toLowerCase();
+        const address = token.address?.toLowerCase();
+        if (symbol === lowerQuery || address === lowerQuery) {
+          matches.unshift(token);
+        } else if (symbol?.startsWith(lowerQuery)) {
+          matches.push(token);
+        } else if (name?.includes(lowerQuery) || symbol?.includes(lowerQuery)) {
+          matches.push(token);
+        }
+        if (matches.length >= 40) break;
+      }
+      return matches;
     });
+
+    const displayedTokens = computed(() => {
+      return filteredTokens.value.slice(0, displayLimit.value);
+    });
+
+    const hasMoreTokens = computed(() => {
+      return displayedTokens.value.length < filteredTokens.value.length;
+    });
+
+    const loadMoreTokens = () => {
+      if (hasMoreTokens.value) {
+        displayLimit.value += 25;
+      }
+    };
 
     return {
       isOpen,
@@ -178,6 +250,10 @@ export default {
       searchText,
       onChangeSearchText,
       filteredTokens,
+      displayedTokens,
+      hasMoreTokens,
+      loadMoreTokens,
+      isTokensLoading,
       ownerAddress,
     };
   },
@@ -297,6 +373,50 @@ export default {
   text-align: center;
 }
 
+.select-token-loading {
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+
+  .loader {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 3px solid;
+    border-color: $color-orange #0000;
+    box-sizing: border-box;
+    animation: s1 0.5s infinite;
+  }
+}
+
+.options-scroll-sentinel {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sentinel-loader {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid;
+    border-color: $color-orange #0000;
+    box-sizing: border-box;
+    animation: s1 0.5s infinite;
+  }
+}
+
+@keyframes s1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
 @media (max-width: 690px) {
   .select-token-modal-content {
     left: 32px;
@@ -314,4 +434,3 @@ export default {
   border-radius: 50%;
 }
 </style>
-

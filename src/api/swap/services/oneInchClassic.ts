@@ -113,42 +113,49 @@ class OneInchClassicService extends SwapService implements ISwapService {
     async getSwapHistory(addresses: string[]): Promise<HistoryTransaction[]> {
         const chainIds = this._suportedProviders.map(chain => ONE_INCH_CHAIN_IDS[chain].toString());
         const historyPromises = addresses.map(address =>
-            oneInchApi().getHistory(chainIds, address).then(data => data.items)
+            oneInchApi()
+                .getHistory(chainIds, address)
+                .then(data => data?.items ?? [])
+                .catch(() => [])
         );
 
         const results = (await Promise.all(historyPromises)).flat(3);
-        const history = results.map((order) => {
-            const firstTokenAction = order.details.tokenActions.find(action => action.direction === "Out");
-            if (!firstTokenAction) {
-                throw new Error("Invalid order data: missing 'In' token action");
+        const history: HistoryTransaction[] = [];
+        for (const order of results) {
+            if (!order?.details?.tokenActions || !Array.isArray(order.details.tokenActions)) {
+                continue;
             }
-            const lastTokenAction = order.details.tokenActions.find(action => action.direction === "In");
+            const firstTokenAction = order.details.tokenActions.find((action: any) => action.direction === "Out");
+            if (!firstTokenAction) {
+                continue;
+            }
+            const lastTokenAction = order.details.tokenActions.find((action: any) => action.direction === "In");
             if (!lastTokenAction) {
-                throw new Error("Invalid order data: missing 'Out' token action");
+                continue;
             }
             const fromTokenChain = getChainByEvmId(Number(firstTokenAction.chainId));
             if (!fromTokenChain) {
-                throw new Error("Unsupported from token chain");
+                continue;
             }
             const toTokenChain = getChainByEvmId(Number(lastTokenAction.chainId));
             if (!toTokenChain) {
-                throw new Error("Unsupported to token chain");
+                continue;
             }
 
             const fromToken = tokens.find(
                 (token) => token.chain === fromTokenChain && token.address.toLowerCase() === firstTokenAction.address.toLowerCase()
             );
             if (!fromToken) {
-                throw new Error("From token not found in manifest");
+                continue;
             }
             const toToken = tokens.find(
                 (token) => token.chain === toTokenChain && token.address.toLowerCase() === lastTokenAction.address.toLowerCase()
             );
             if (!toToken) {
-                throw new Error("To token not found in manifest");
+                continue;
             }
 
-            return {
+            history.push({
                 fromChain: fromTokenChain,
                 toChain: toTokenChain,
                 id: order.id,
@@ -165,8 +172,8 @@ class OneInchClassicService extends SwapService implements ISwapService {
                 fromTokenSymbol: fromToken.symbol,
                 toTokenSymbol: toToken.symbol,
                 provider: SWAP_SERVICES.OneInch,
-            };
-        });
+            });
+        }
 
         return history;
     }

@@ -2,6 +2,7 @@ import { rpcList } from '@/api/constants-types';
 import { getOrCreateManager } from '../api/ApiHandler';
 import { store } from '../store/index.js';
 import { router } from '../router/index.js';
+import { ensureInitialized } from '@/api/init';
 
 interface AppContext { }
 
@@ -52,13 +53,14 @@ class TokenCountCheckHandler extends AbstractAppCheckHandler {
 
       for (const rpc of rpcList) {
         try {
-          const mgr = getOrCreateManager(rpc.name, false);
-          const manifestTokens = mgr.getTokens();
           const currentList = Array.isArray(updatedBalance[rpc.name]) ? updatedBalance[rpc.name] : [];
 
           if (currentList.length === 0) {
             continue;
           }
+
+          const mgr = getOrCreateManager(rpc.name, false);
+          const manifestTokens = mgr.getTokens();
 
           let hasMissing = false;
           const mergedList = [...currentList];
@@ -99,6 +101,8 @@ class SanityCheckHandler extends AbstractAppCheckHandler {
 }
 
 export async function runApplicationChecks() {
+  await ensureInitialized();
+
   const providerCountCheck = new ProviderCountCheckHandler();
   const tokenCountCheck = new TokenCountCheckHandler();
   const sanityCheck = new SanityCheckHandler();

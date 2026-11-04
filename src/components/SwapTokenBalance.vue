@@ -37,11 +37,14 @@ export default {
     const balanceInUsd = ref(0);
     const getBalance = async () => {
       balance.value = 0;
-      const tokenBalance = await getTokenBalance(props.token);
-      const formattedBalance = formatAmount(tokenBalance);
-      balance.value = formattedBalance;
-      if (props.amount) {
-        balanceInUsd.value = await getTokenPrice(props.token, props.amount);
+      try {
+        const tokenBalance = await getTokenBalance(props.token);
+        const formattedBalance = formatAmount(tokenBalance);
+        balance.value = formattedBalance;
+        if (props.amount) {
+          balanceInUsd.value = await getTokenPrice(props.token, props.amount);
+        }
+      } catch {
       }
     };
 

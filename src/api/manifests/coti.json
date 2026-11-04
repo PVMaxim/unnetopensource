@@ -52,7 +52,7 @@
                 "decimals": 6
             }
         ],
-        "all": "https://united.network/manifests/coti-tokens.json"
+        "all": "/manifests/coti-tokens.json"
     },
 
     "blockExplorer": {

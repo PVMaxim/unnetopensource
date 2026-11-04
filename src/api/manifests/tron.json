@@ -67,7 +67,7 @@
                 "ticker": "usd1-wlfi"
             }
         ],
-        "all": "https://united.network/manifests/tron-tokens.json"
+        "all": "/manifests/tron-tokens.json"
     },
 
     "blockExplorer": {

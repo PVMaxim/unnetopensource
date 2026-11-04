@@ -51,12 +51,12 @@
             <div class="seeds-grid" v-if="seedPhrasesArray?.length > 0">
               <div class="seeds-column">
                 <div class="seeds-item" v-for="(item, index) in seedPhrasesArray.slice(0, 6)" :key="index">
-                    <div class="number">{{ index + 1 }}.  </div><div class="word">{{ item }}</div>
+                    <div class="number">{{ index + 1 }}.  </div><div class="word" translate="no">{{ item }}</div>
                 </div>
               </div>
               <div class="seeds-column">
                 <div class="seeds-item" v-for="(item, index) in seedPhrasesArray.slice(6, 12)" :key="index + 6">
-                    <div class="number">{{ index + 7 }}.  </div><div class="word">{{ item }}</div>
+                    <div class="number">{{ index + 7 }}.  </div><div class="word" translate="no">{{ item }}</div>
                 </div>
               </div>
             </div>
@@ -118,6 +118,7 @@
     import { setUniSettings }  from '@/api/global-settings';
     import { getWallet, prefixStore, getStorePrefix } from '../api/ApiHandler';
     import { getErrorMessage, isTheSamePublicKey } from '@/api/sub-utils';
+    import { saveOnboardingSecret, restoreOnboardingSecret, purgeAllSeedTraces } from '@/api/onboarding-vault';
     import Loading from '@/components/Loading.vue';
     import Panel from '@/components/Panel.vue';
     import NFCHandlerWindow from '@/components/NFCHandlerWindow.vue';
@@ -172,10 +173,19 @@
         const errorImg = new URL(`@/assets/images/errorcode.svg`, import.meta.url).href;
 
         const initial = async() => {
-          if ( typeof store.state.user.seedPhrase === null || (typeof store.state.user.seedPhrase === 'object' && store.state.user.seedPhrase?.length !== 12)) {
-            createSeed();
+          try {
+            const restoredSeed = await restoreOnboardingSecret();
+            if (Array.isArray(restoredSeed) && restoredSeed.length === 12) {
+              store.commit('user/SET_SEED_PHRASE', restoredSeed);
+            } else if (!store.state.user.seedPhrase || store.state.user.seedPhrase.length !== 12) {
+              await createSeed();
+            } else {
+              await saveOnboardingSecret(store.state.user.seedPhrase);
+            }
+          } catch (e) {
+          } finally {
+            isLoading.value = false;
           }
-          isLoading.value = false;
         }
 
         const changePinLength = (event) => {
@@ -247,10 +257,15 @@
           store.dispatch('user/setSeedPhrase',  seedPhrases );
         }
 
-        const copyToClip = () => {
-          navigator.clipboard.writeText(seedPhrasesArray.value.toString());
-          copied.value = true;
-          setTimeout(() => copied.value = false, 2000);
+        const copyToClip = async () => {
+          if (seedPhrasesString.value && navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+              await navigator.clipboard.writeText(seedPhrasesString.value);
+              copied.value = true;
+              setTimeout(() => { copied.value = false; }, 2000);
+            } catch (e) {
+            }
+          }
         };
 
         const enterPinCode = () => {
@@ -340,17 +355,17 @@
               break
           }
           if (/^[a-fA-F0-9]{64}$/.test(result.value?.keys?.ed25519) && result.value?.keys?.ed25519!== '0000000000000000000000000000000000000000000000000000000000000000' ) {
-            isTheSamePublicKey(result.value?.keys);
-            store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
+            await isTheSamePublicKey(result.value?.keys);
+            await store.dispatch('user/setPublicKeyCard',  result.value?.keys ).then(() => {
             }).catch((err) => {
               throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
-          });
-          if (result.value?.ioPublicKey) {
-            store.dispatch('user/setPinPublicKey',  result.value?.keys.ioPublicKey ).then(() => {
-            }).catch((err) => {
-                throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
             });
-          }
+            if (result.value?.ioPublicKey) {
+              store.dispatch('user/setPinPublicKey',  result.value?.keys.ioPublicKey ).then(() => {
+              }).catch((err) => {
+                throw new Error('Browser error',{ cause: {errorSubtitle: 'Can not process keys.', errorBody: err}});
+              });
+            }
             getStorePrefix();
             try {
               accountAddress.value = await getWallet(result.value?.keys);
@@ -364,11 +379,14 @@
             if (store.hasModule(`${prefixStore.value}.customtoken`)) {
               store.dispatch(`${prefixStore.value}.customtoken/setPinLength`, Number(pinLength.value));
             }
+            await purgeAllSeedTraces();
+            store.dispatch('user/resetSeedPhrase');
+            isLoading.value = false;
+            successMessage.value = `Press OK to continue`;
+            success.value = true;
+          } else {
+            throw new Error(t('errors.restoreCardError'),{ cause: {errorSubtitle: t('pages.authorization.errors.validError')}});
           }
-          store.dispatch('user/resetSeedPhrase');
-          isLoading.value = false;
-          successMessage.value = `Press OK to continue`;
-          success.value = true;
         }
 
         onMounted(() => {
@@ -440,6 +458,8 @@
                 width: 100%;
                 flex-wrap: wrap;
                 align-content: flex-start;
+                user-select: none;
+                -webkit-user-select: none;
 
                 .seeds-column {
                   display: flex;

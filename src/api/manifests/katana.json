@@ -46,7 +46,7 @@
                 "ticker": "vaultbridge-bridged-usdt-katana"
             }
         ],
-        "all": "https://united.network/manifests/katana-tokens.json"
+        "all": "/manifests/katana-tokens.json"
     },
 
     "blockExplorer": {

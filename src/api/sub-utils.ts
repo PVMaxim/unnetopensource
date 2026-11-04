@@ -1,4 +1,5 @@
 import { clearData, getStorePrefixByKey, getTokenSymbolById, getNativeCoinId, getNativeCoinSymbol } from '@/api/ApiHandler';
+import type { PublicKeyCardType } from '@/api/constants-types';
 import { store } from '@/store/index.js';
 import noneIcon from '@/components/svg/none.vue';
 import { router } from '@/router/index.js';
@@ -10,7 +11,7 @@ import { getTokenIcon } from '@/api/token-icons';
 export { getTokenIcon };
 
 export const isWebViewApp = (): boolean => {
-  return 'flutter_inappwebview' in window && navigator.userAgent.toLowerCase().indexOf("united.network") !== -1;
+  return typeof window !== 'undefined' && 'flutter_inappwebview' in window && navigator.userAgent.toLowerCase().indexOf("united.network") !== -1;
 }
 
 export const deniteAndroid201 = (): boolean => {
@@ -86,22 +87,50 @@ export async function wait(interval: number): Promise<void> {
   });
 }
 
-export const isTheSamePublicKey = (key: any): boolean => {
-  if (((store.state.user.publicKeyCard?.secp256k1 === key?.secp256k1) && (typeof key?.secp256k1 !== 'undefined' && key?.secp256k1 !== null)) || ((store.state.user.publicKeyCard?.ed25519 === key?.ed25519) && (typeof key?.ed25519 !== 'undefined' && key?.ed25519 !== null))) {
+export const isTheSamePublicKey = async (key?: PublicKeyCardType | null): Promise<boolean> => {
+  const currentKey = store.state.user.publicKeyCard;
+  if (!currentKey?.secp256k1 && !currentKey?.ed25519) {
+    return true;
+  }
+
+  const isSecpMatch =
+    currentKey?.secp256k1 &&
+    key?.secp256k1 &&
+    currentKey.secp256k1 === key.secp256k1;
+  const isEdMatch =
+    currentKey?.ed25519 &&
+    key?.ed25519 &&
+    currentKey.ed25519 === key.ed25519;
+
+  if (isSecpMatch || isEdMatch) {
     return true;
   } else {
-    const prefix = getStorePrefixByKey(store.state.user.publicKeyCard);
+    const prefix = getStorePrefixByKey(currentKey);
     unRegisterCustomTokenStore(prefix || null);
-    clearData();
+    await clearData();
     return false;
   }
 }
 
-export const isTheSamePublicKeyGuard = (key: any): boolean | void => {
-  if (((store.state.user.publicKeyCard?.secp256k1 === key?.secp256k1) && (typeof key?.secp256k1 !== 'undefined' && key?.secp256k1 !== null)) || ((store.state.user.publicKeyCard?.ed25519 === key?.ed25519) && (typeof key?.ed25519 !== 'undefined' && key?.ed25519 !== null))) {
+export const isTheSamePublicKeyGuard = async (key?: PublicKeyCardType | null): Promise<boolean | void> => {
+  const currentKey = store.state.user.publicKeyCard;
+  if (!currentKey?.secp256k1 && !currentKey?.ed25519) {
+    return true;
+  }
+
+  const isSecpMatch =
+    currentKey?.secp256k1 &&
+    key?.secp256k1 &&
+    currentKey.secp256k1 === key.secp256k1;
+  const isEdMatch =
+    currentKey?.ed25519 &&
+    key?.ed25519 &&
+    currentKey.ed25519 === key.ed25519;
+
+  if (isSecpMatch || isEdMatch) {
     return true;
   } else {
-    clearData();
+    await clearData();
     router.push({ name: 'authorization' });
     useEventsBus().emit('useAnotherCard', true);
     return false;
@@ -113,22 +142,24 @@ export const getDecodedVersion = (data: string): string | null => {
   return data.toString().match(/.{1,2}/g)?.map((item) => parseInt(item, 16)).join(".") ?? null;
 }
 
-export const getErrorTokenId = (err: any): string | null => {
-  let errorBody: any = null;
+export const getErrorTokenId = (err: unknown): string | null => {
+  const errObj = err as Record<string, unknown> | null | undefined;
+  const causeObj = errObj?.cause as Record<string, unknown> | null | undefined;
+  let errorBody: Record<string, unknown> | null = null;
   try {
-    errorBody = typeof err?.cause?.errorBody === 'string' ? JSON.parse(err.cause.errorBody) : err?.cause?.errorBody;
-  } catch (e) {
-    errorBody = err?.cause?.errorBody;
+    errorBody = typeof causeObj?.errorBody === 'string' ? JSON.parse(causeObj.errorBody) : (causeObj?.errorBody as Record<string, unknown> | null);
+  } catch (_e) {
+    errorBody = causeObj?.errorBody as Record<string, unknown> | null;
   }
 
-  if (err?.tokenId !== null && err?.tokenId !== undefined) {
-    return err.tokenId;
+  if (errObj?.tokenId !== null && errObj?.tokenId !== undefined) {
+    return String(errObj.tokenId);
   }
   if (errorBody?.tokenId !== null && errorBody?.tokenId !== undefined) {
-    return errorBody.tokenId;
+    return String(errorBody.tokenId);
   }
-  if (typeof err?.message === 'string') {
-    const match = err.message.match(/tokenId=([^\s,]+)/);
+  if (typeof errObj?.message === 'string') {
+    const match = errObj.message.match(/tokenId=([^\s,]+)/);
     if (match && match[1]) {
       return match[1];
     }
@@ -143,34 +174,43 @@ export const getErrorMessage = async (err: any, moduleName: string | null = null
 
   if (!err) return { title: null, message: null };
 
+  const errObj = err as Record<string, unknown>;
+  const causeObj = errObj?.cause as Record<string, unknown> | null | undefined;
+
   let errorBody: any = null;
   try {
-    errorBody = typeof err?.cause?.errorBody === 'string' ? JSON.parse(err.cause.errorBody) : err?.cause?.errorBody;
-  } catch (e) {
-    errorBody = err?.cause?.errorBody;
+    errorBody = typeof causeObj?.errorBody === 'string' ? JSON.parse(causeObj.errorBody) : causeObj?.errorBody;
+  } catch (_e) {
+    errorBody = causeObj?.errorBody;
   }
-  if (!errorBody && err?.code) {
+  if (!errorBody && errObj?.code) {
     errorBody = err;
   }
 
-  const errMessage = err?.message || err?.cause?.errorSubtitle || '';
+  const errBodyObj = errorBody as Record<string, unknown> | null | undefined;
+  const errMessage = typeof errObj?.message === 'string'
+    ? errObj.message
+    : (typeof causeObj?.errorSubtitle === 'string' ? causeObj.errorSubtitle : '');
+
+  const errTitle = typeof errObj?.message === 'string' ? errObj.message : null;
+  const errSubtitle = typeof causeObj?.errorSubtitle === 'string' ? causeObj.errorSubtitle : null;
 
   switch (true) {
     case errorBody?.toString() === '1' || errorBody?.code?.toString() === '1' || errorBody?.errorCode?.toString() === '1':
       store.dispatch('user/resetPinHash');
       if (moduleName === 'changePinCode') {
-        return { title: err?.message, message: t('errors.oldPinIncorrect') };
+        return { title: errTitle, message: t('errors.oldPinIncorrect') };
       }
-      return { title: err?.message, message: t('errors.wrongPin') };
+      return { title: errTitle, message: t('errors.wrongPin') };
     case errorBody?.toString() === '2' || errorBody?.code?.toString() === '2' || errorBody?.errorCode?.toString() === '2':
-      return { title: err?.message, message: t('errors.cardBlocked') };
+      return { title: errTitle, message: t('errors.cardBlocked') };
     case errorBody?.toString() === '4' || errorBody?.code?.toString() === '4' || errorBody?.errorCode?.toString() === '4':
-      return { title: err?.message, message: t('errors.networkError') };
+      return { title: errTitle, message: t('errors.networkError') };
     case errorBody === 'Error: Low balance of native coins':
-      return { title: err?.message, message: t('errors.lowNativeBalance') };
+      return { title: errTitle, message: t('errors.lowNativeBalance') };
     case errorBody === 'Error: Low token balance':
-      return { title: err?.message, message: t('errors.lowTokenBalance') };
-    case errorBody?.code === 'INSUFFICIENT_FUNDS' || errorBody?.code === 'LOW_BALANCE' || err?.code === 'LOW_BALANCE' || err?.code === 'INSUFFICIENT_FUNDS' || (typeof errMessage === 'string' && (errMessage.includes('Low balance') || errMessage.toLowerCase().includes('insufficient balance') || errMessage.toLowerCase().includes('is not enough balance'))): {
+      return { title: errTitle, message: t('errors.lowTokenBalance') };
+    case errorBody?.code === 'INSUFFICIENT_FUNDS' || errorBody?.code === 'LOW_BALANCE' || errObj?.code === 'LOW_BALANCE' || errObj?.code === 'INSUFFICIENT_FUNDS' || (typeof errMessage === 'string' && (errMessage.includes('Low balance') || errMessage.toLowerCase().includes('insufficient balance') || errMessage.toLowerCase().includes('is not enough balance'))): {
       const tokenId = getErrorTokenId(err);
       const nativeCoinId = await getNativeCoinId();
       const tokenName = (tokenId && tokenId !== '_' && tokenId !== nativeCoinId)
@@ -182,33 +222,43 @@ export const getErrorMessage = async (err: any, moduleName: string | null = null
         : t('errors.insufficientBalance', { token: tokenName });
       return { title: t('errors.balanceError'), message: amountError };
     }
-    case errorBody?.code === 'AMOUNT_TOO_SMALL' || errorBody?.code === 'NUMERIC_FAULT' || err?.code === 'AMOUNT_TOO_SMALL':
-      return { title: t('errors.amountTooSmall', { amount: '' }), message: t('errors.amountTooSmall', { amount: (errorBody?.minAmount || err?.minAmount) ? t('errors.minimalAmountIs') + ' ' + (errorBody?.minAmount || err?.minAmount) : '' }) };
-    case errorBody?.code === 'TOO_MANY_DECIMALS' || err?.code === 'TOO_MANY_DECIMALS':
-      return { title: t('errors.tooManyDecimals', { decimals: '' }), message: t('errors.tooManyDecimals', { decimals: (errorBody?.maxDecimals || err?.maxDecimals) ? t('errors.minimalDecimalsIs') + ' ' + (errorBody?.maxDecimals || err?.maxDecimals) : '' }) };
-    case errorBody?.code === 'LOW_DST_LIMIT':
-      return { title: err?.message, message: t('errors.lowDstLimit') };
-    case errorBody?.code === 'SAME_SENDER_AND_RECIPIENT':
-      return { title: err?.message, message: t('errors.sameSenderRecipient') };
+    case errBodyObj?.code === 'AMOUNT_TOO_SMALL' || errBodyObj?.code === 'NUMERIC_FAULT' || errObj?.code === 'AMOUNT_TOO_SMALL': {
+      const minAmount = String(errBodyObj?.minAmount ?? errObj?.minAmount ?? '');
+      return { title: t('errors.amountTooSmall', { amount: '' }), message: t('errors.amountTooSmall', { amount: minAmount ? t('errors.minimalAmountIs') + ' ' + minAmount : '' }) };
+    }
+    case errBodyObj?.code === 'TOO_MANY_DECIMALS' || errObj?.code === 'TOO_MANY_DECIMALS': {
+      const maxDecimals = String(errBodyObj?.maxDecimals ?? errObj?.maxDecimals ?? '');
+      return { title: t('errors.tooManyDecimals', { decimals: '' }), message: t('errors.tooManyDecimals', { decimals: maxDecimals ? t('errors.minimalDecimalsIs') + ' ' + maxDecimals : '' }) };
+    }
+    case errBodyObj?.code === 'LOW_DST_LIMIT':
+      return { title: errTitle, message: t('errors.lowDstLimit') };
+    case errBodyObj?.code === 'SAME_SENDER_AND_RECIPIENT':
+      return { title: errTitle, message: t('errors.sameSenderRecipient') };
     case errorBody === 'Error: Wallet already deployed':
-      return { title: err?.message, message: t('errors.walletAlreadyDeployed') };
+      return { title: errTitle, message: t('errors.walletAlreadyDeployed') };
     case errorBody === 'Error: Internal error':
-      return { title: err?.message, message: t('errors.internalError') };
+      return { title: errTitle, message: t('errors.internalError') };
     case errorBody === 'Error: Invalid card response':
-      return { title: err?.message, message: t('errors.invalidCardResponse') };
+      return { title: errTitle, message: t('errors.invalidCardResponse') };
     case errorBody === 'Error: Invalid argument':
-      return { title: err?.message, message: t('errors.invalidArgument') };
+      return { title: errTitle, message: t('errors.invalidArgument') };
     case errorBody === 'Error: Card wallet is not deployed':
-      return { title: err?.message, message: t('errors.walletNotDeployed') };
+      return { title: errTitle, message: t('errors.walletNotDeployed') };
     case errorBody === 'Error: Public key mismatch':
-      return { title: err?.message, message: t('errors.publicKeyMismatch') };
-    case (errorBody?.code?.toString() === 'INVALID_ARGUMENT' && errorBody?.message?.toString() === 'No ioPublicKey'):
-      return { title: err?.message, message: t('errors.noIoPublicKey') };
-    default:
-      if (!err?.cause?.errorBody && !err?.cause?.errorSubtitle) {
-        return { title: err?.message || t('errors.internalError'), message: err?.message ? t('pages.send.pressOkToTryAgain') : null };
+      return { title: errTitle, message: t('errors.publicKeyMismatch') };
+    case (String(errBodyObj?.code) === 'INVALID_ARGUMENT' && String(errBodyObj?.message) === 'No ioPublicKey'):
+      return { title: errTitle, message: t('errors.noIoPublicKey') };
+    case typeof errMessage === 'string' && (errMessage.includes('504') || errMessage.includes('502') || errMessage.includes('503') || errMessage.toLowerCase().includes('gateway time-out') || errMessage.toLowerCase().includes('gateway timeout') || errMessage.toLowerCase().includes('failed to fetch')):
+      return { title: t('errors.networkError'), message: t('pages.send.pressOkToTryAgain') };
+    default: {
+      const isHtml = (str: string | null) => typeof str === 'string' && /<[a-z][\s\S]*>/i.test(str);
+      const safeTitle = isHtml(errTitle) ? t('errors.networkError') : errTitle;
+      const safeSubtitle = isHtml(errSubtitle) ? t('pages.send.pressOkToTryAgain') : errSubtitle;
+      if (!causeObj?.errorBody && !causeObj?.errorSubtitle) {
+        return { title: safeTitle || t('errors.internalError'), message: safeTitle ? t('pages.send.pressOkToTryAgain') : null };
       }
-      return { title: err?.message, message: err?.cause?.errorSubtitle };
+      return { title: safeTitle, message: safeSubtitle };
+    }
   }
 }
 

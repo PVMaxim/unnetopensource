@@ -1,15 +1,20 @@
 export default {
   mounted(el, binding) {
+    const handler = typeof binding.value === 'function' ? binding.value : binding.value?.handler;
+    const customOptions = typeof binding.value === 'object' && binding.value?.options ? binding.value.options : {};
     const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1.0,
+      root: customOptions.root || null,
+      rootMargin: customOptions.rootMargin || '50px',
+      threshold: typeof customOptions.threshold !== 'undefined' ? customOptions.threshold : 0.1,
     };
 
     const callback = (entries, observer) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          binding.value(entry, observer);
+        if (entry.isIntersecting && handler) {
+          handler(entry, observer);
+          if (binding.modifiers?.once) {
+            observer.unobserve(el);
+          }
         }
       });
     };

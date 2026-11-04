@@ -83,8 +83,14 @@ export const updateAndGetTokenBalance = async (
   ownerAddress: string,
   token: SwapToken
 ) => {
-  let balance = await __fetchTokenBalance(ownerAddress, token);
-  store.dispatch("swap/setBalance", { token, balance });
+  try {
+    const balance = await __fetchTokenBalance(ownerAddress, token);
+    store.dispatch("swap/setBalance", { token, balance });
+    return balance;
+  } catch {
+    const cacheKey = `${token?.chain}-${token?.address}`;
+    return store.state.swap?.balances?.[cacheKey]?.amount ?? "0";
+  }
 };
 
 export const getTokenBalance = async (token: SwapToken) => {

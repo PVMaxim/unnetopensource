@@ -107,7 +107,7 @@
                 "decimals": 18
             }
         ],
-        "all": "https://united.network/manifests/polygon-tokens.json"
+        "all": "/manifests/polygon-tokens.json"
     },
 
     "blockExplorer": {

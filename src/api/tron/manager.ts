@@ -14,21 +14,26 @@ import { TronNativeCoin } from "./native-coin";
 import { calcTronAddress, TRON_NATIVE_TOKEN_DECIMALS } from "./request";
 import { Trc20Token } from "./trc20-token";
 
+const Trc20TransferItemSchema2 = z.object({
+    transaction_id: z.string(),
+    block_ts: z.coerce.number().optional().default(0),
+    from_address: z.string().optional().default(""),
+    to_address: z.string().optional().default(""),
+    quant: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    confirmed: z.boolean().optional().default(true),
+    finalResult: z.string().optional().default(""),
+    tokenInfo: z.object({
+        tokenId: z.string(),
+        tokenDecimal: z.coerce.number().nonnegative().optional().default(0),
+    }).optional().default({ tokenId: "", tokenDecimal: 0 }),
+});
+
 export const Trc20TransfersSchema2 = z.object({
-    total: z.number(),
-    token_transfers: z.object({
-        transaction_id: z.string(),
-        block_ts: z.number(),
-        from_address: z.string(),
-        to_address: z.string(),
-        quant: z.coerce.bigint(),
-        confirmed: z.boolean(),
-        finalResult: z.string(),
-        tokenInfo: z.object({
-            tokenId: z.string(),
-            tokenDecimal: z.number().nonnegative(),
-        }),
-    }).array(),
+    total: z.coerce.number().optional().default(0),
+    token_transfers: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(Trc20TransferItemSchema2)),
 });
 
 export class TronManager extends BlockchainManagerBase implements BlockchainManager {

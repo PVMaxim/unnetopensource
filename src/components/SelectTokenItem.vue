@@ -1,6 +1,6 @@
 <template>
   <div
-    v-intersect="(entries) => onIntersect(entries, token)"
+    v-intersect.once="(entry) => onIntersect(entry, token)"
     class="option"
     :class="{ 'disable-option': disabled }"
   >
@@ -12,16 +12,19 @@
 
     <span>{{ token.symbol }}</span>
     <span v-if="balance !== null" class="option-subtitle">{{ balance }}</span>
-
-    <div v-else class="loader"></div>
+    <div v-else-if="isLoadingBalance" class="loader"></div>
   </div>
 </template>
 
 <script>
 import { getTokenBalance } from "@/api/swap/utils/tokenBalances";
-import { ref , onMounted } from "vue";
+import { ref, onMounted } from "vue";
+import { useStore } from "vuex";
 import { formatAmount } from "../api/swap/utils/formatting";
+import { useDebounceFn } from "@/plugins/utils/useDebounceFn";
+import { rpcList } from "@/api/constants-types";
 import SwapTokenIcon from "./SwapTokenIcon.vue";
+
 export default {
   name: "SelectTokenItem",
   components: {
@@ -35,29 +38,63 @@ export default {
     },
   },
   setup(props) {
+    const store = useStore();
     const balance = ref(null);
+    const isLoadingBalance = ref(false);
 
-    const onIntersect = async (entry, token) => {
-      if (
-        entry.isIntersecting &&
-        !token.isUsersToken &&
-        balance.value === null
-      ) {
+    const checkExistingBalance = () => {
+      if (!props.token?.chain || !props.token?.address) return false;
+      const cacheKey = `${props.token.chain}-${props.token.address}`;
+      const cached = store.state.swap?.balances?.[cacheKey];
+      if (cached && typeof cached.amount !== "undefined") {
+        balance.value = formatAmount(cached.amount);
+        return true;
+      }
+      const provider = rpcList.find((rpc) => rpc.swapChain === props.token.chain);
+      if (provider) {
+        const userTokens = store.state.user?.tokenBalance?.[provider.name];
+        if (Array.isArray(userTokens)) {
+          const found = userTokens.find((item) =>
+            item?.symbol?.toLowerCase() === props.token.symbol?.toLowerCase() ||
+            item?.root?.toLowerCase() === props.token.address?.toLowerCase()
+          );
+          if (found && typeof found.balance !== "undefined") {
+            balance.value = formatAmount(found.balance);
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    const debouncedFetchBalance = useDebounceFn(async (token) => {
+      if (balance.value !== null || isLoadingBalance.value) return;
+      isLoadingBalance.value = true;
+      try {
         const tokenBalance = await getTokenBalance(token);
-        const formattedBalance = formatAmount(tokenBalance);
-        balance.value = formattedBalance;
+        balance.value = formatAmount(tokenBalance);
+      } catch {
+      } finally {
+        isLoadingBalance.value = false;
+      }
+    }, 250);
+
+    const onIntersect = (entry, token) => {
+      if (entry.isIntersecting && balance.value === null) {
+        debouncedFetchBalance(token);
       }
     };
 
     onMounted(() => {
-      if (props.token && props.token.isUsersToken) {
-        getTokenBalance(props.token).then((bal) => {
-          balance.value = formatAmount(bal);
-        });
+      const hasBalance = checkExistingBalance();
+      if (!hasBalance && props.token?.isUsersToken) {
+        debouncedFetchBalance(props.token);
       }
     });
+
     return {
       balance,
+      isLoadingBalance,
       onIntersect,
     };
   },

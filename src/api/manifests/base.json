@@ -156,7 +156,7 @@
                 "decimals": 18
             }
         ],
-        "all": "https://united.network/manifests/base-tokens.json"
+        "all": "/manifests/base-tokens.json"
     },
 
     "blockExplorer": {

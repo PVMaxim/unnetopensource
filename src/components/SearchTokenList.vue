@@ -58,11 +58,11 @@ export default defineComponent({
 .loader-box, .error-box {
   display: flex;
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 200px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: v-bind(minHeight);
 }
 
 .error-box {

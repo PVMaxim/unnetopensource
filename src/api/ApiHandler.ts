@@ -98,15 +98,33 @@ const chainRegistry: Record<string, ChainConfig> = {
   [RPC_NAMES.KATANA]: { manifest: katanaManifest, ref: shallowRef(undefined), hasExtraTokens: true },
 };
 
+interface ManagerWithMetadataToken {
+  addTokenByMetadata(args: { address: string }): void | Promise<unknown>;
+}
+
+interface CotiManagerType {
+  performOnBoarding(keys: unknown): Promise<string>;
+  isOnBoarded(keys: unknown): Promise<boolean>;
+}
+
+function hasAddTokenByMetadata(mgr: unknown): mgr is ManagerWithMetadataToken {
+  return typeof mgr === 'object' && mgr !== null && 'addTokenByMetadata' in mgr && typeof (mgr as { addTokenByMetadata: unknown }).addTokenByMetadata === 'function';
+}
+
+function isCotiManager(mgr: unknown): mgr is CotiManagerType {
+  return typeof mgr === 'object' && mgr !== null && 'performOnBoarding' in mgr;
+}
+
 export const syncCustomTokensWithManagers = (customTokens?: CustomTokenBase) => {
   if (!customTokens || typeof customTokens !== 'object') return;
   for (const [rpcName, tokens] of Object.entries(customTokens)) {
     const config = chainRegistry[rpcName];
     if (config?.ref?.value && Array.isArray(tokens)) {
-      for (const address of tokens) {
-        if (address && typeof (config.ref.value as any).addTokenByMetadata === 'function') {
+      for (const tokenItem of tokens) {
+        const address = typeof tokenItem === 'string' ? tokenItem : tokenItem?.root;
+        if (address && hasAddTokenByMetadata(config.ref.value)) {
           try {
-            (config.ref.value as any).addTokenByMetadata({ address });
+            config.ref.value.addTokenByMetadata({ address: String(address) });
           } catch (e) {
           }
         }
@@ -151,9 +169,9 @@ export function getOrCreateManager(rpcName: string, isForced = false): Blockchai
   } else {
     if (Array.isArray(extraTokens) && extraTokens.length > 0 && config.ref.value) {
       for (const address of extraTokens) {
-        if (address && typeof (config.ref.value as any).addTokenByMetadata === 'function') {
+        if (address && hasAddTokenByMetadata(config.ref.value)) {
           try {
-            (config.ref.value as any).addTokenByMetadata({ address });
+            config.ref.value.addTokenByMetadata({ address });
           } catch (e) {
           }
         }
@@ -254,7 +272,10 @@ export const getNativeCoinId = async (): Promise<string | null> => {
 export const getCotiSecret = async (isForced = false): Promise<string | null> => {
   try {
     const mgr = getOrCreateManager(RPC_NAMES.COTI, isForced);
-    const secretKey = await (mgr as any).performOnBoarding(store.state.user.publicKeyCard);
+    if (!isCotiManager(mgr)) {
+      throw new Error('Coti manager not available');
+    }
+    const secretKey = await mgr.performOnBoarding(store.state.user.publicKeyCard);
     return secretKey;
   } catch (err) {
     throw new Error(i18n.global.t('errors.tokenLimit'), { cause: { errorSubtitle: i18n.global.t('messages.messageXrpMinBalance'), errorBody: err } });
@@ -308,7 +329,7 @@ export const setDefaultSelectedToken = async (isForced = false): Promise<void> =
   ]);
 
   const tokenObject: TokenType = {
-    "root": mgr.nativeCoin.id,
+    "root": mgr.nativeCoin?.id ?? null,
     "symbol": symbolResult.status === 'fulfilled' ? symbolResult.value : null,
     "balance": balance,
     "price": priceResult.status === 'fulfilled' ? (priceResult.value ?? null) : null,
@@ -340,8 +361,90 @@ const safeCall = async <T>(fn: () => Promise<T>, _label?: string): Promise<T | n
 };
 
 const pendingTokenFetches = new Map<string, Promise<void>>();
+const pendingProviderBalances = new Map<string, Promise<void>>();
 const lastTokenFetchTimestamp = new Map<string, number>();
 const GLOBAL_TOKEN_FETCH_COOLDOWN_MS = 5000;
+
+interface InternalTokenFields {
+  _symbol?: string;
+  _symbolOverride?: string;
+  _name?: string;
+  _nameOverride?: string;
+  _icon?: string;
+  _iconOverride?: string;
+}
+
+export const seedProviderTokenList = async (
+  rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name,
+  isForced = false
+): Promise<TokenType[]> => {
+  if (!rpcProvider) return [];
+  const mgr = getOrCreateManager(rpcProvider as string, false);
+  const tokens = mgr.getTokens();
+  const currentList: TokenType[] = Array.isArray(store.state.user.tokenBalance?.[rpcProvider])
+    ? store.state.user.tokenBalance[rpcProvider]
+    : [];
+
+  const existingByRoot = new Map<string, TokenType>();
+  for (const item of currentList) {
+    if (item && item.root) {
+      existingByRoot.set(item.root, item);
+    }
+  }
+
+  const activeTokenIds = new Set<string>(tokens.map((t) => t.id));
+  let changed = false;
+  const nextList: TokenType[] = [];
+
+  for (const existing of currentList) {
+    if (!existing || !existing.root) continue;
+    if (!activeTokenIds.has(existing.root) && isForced) {
+      changed = true;
+      continue;
+    }
+    if (existing.symbol === undefined && existing.isMandatory === undefined) {
+      const token = mgr.getToken(existing.root);
+      const raw = (token as unknown as InternalTokenFields) || {};
+      changed = true;
+      nextList.push({
+        ...existing,
+        symbol: raw._symbol ?? raw._symbolOverride ?? null,
+        name: raw._name ?? raw._nameOverride ?? null,
+        iconUrl: raw._icon ?? raw._iconOverride ?? null,
+        isMandatory: token?.isMandatory,
+        additionalData: existing.additionalData || {},
+      });
+    } else {
+      nextList.push(existing);
+    }
+  }
+
+  for (const token of tokens) {
+    if (!existingByRoot.has(token.id)) {
+      changed = true;
+      const raw = (token as unknown as InternalTokenFields) || {};
+      nextList.push({
+        root: token.id,
+        symbol: raw._symbol ?? raw._symbolOverride ?? null,
+        balance: null,
+        price: null,
+        name: raw._name ?? raw._nameOverride ?? null,
+        isMandatory: token.isMandatory,
+        iconUrl: raw._icon ?? raw._iconOverride ?? null,
+        additionalData: {},
+      });
+    }
+  }
+
+  if (changed || currentList.length === 0) {
+    await store.dispatch('user/setTokenBalance', {
+      provider: rpcProvider,
+      value: nextList,
+    });
+  }
+
+  return nextList;
+};
 
 export const setTokenBalance = async (
   id: string,
@@ -356,14 +459,14 @@ export const setTokenBalance = async (
     return;
   }
 
-  if (pendingTokenFetches.has(key)) {
+  if (!isForced && pendingTokenFetches.has(key)) {
     return pendingTokenFetches.get(key)!;
   }
 
   const promise = (async () => {
     try {
       lastTokenFetchTimestamp.set(key, Date.now());
-      await _executeSetTokenBalance(id, rpcProvider);
+      await _executeSetTokenBalance(id, rpcProvider, isForced);
     } finally {
       pendingTokenFetches.delete(key);
     }
@@ -375,98 +478,210 @@ export const setTokenBalance = async (
 
 const _executeSetTokenBalance = async (
   id: string,
-  rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name
+  rpcProvider: RpcName | string = store.state.settings.rpcProvider?.name,
+  isForced = false
 ): Promise<void> => {
   const mgr = getOrCreateManager(rpcProvider as string, false);
-  const token: any = await getTokenObject(id, rpcProvider);
+  if (isForced) {
+    const mgrWithReader = mgr as unknown as { _balanceReader?: { clearCache?: () => void } };
+    if (typeof mgrWithReader?._balanceReader?.clearCache === 'function') {
+      mgrWithReader._balanceReader.clearCache();
+    }
+  }
+
+  const token: Token | undefined = await getTokenObject(id, rpcProvider);
+  if (!token) return;
 
   const walletAddress = await getCachedWalletAddress(rpcProvider as string);
 
-  const [symbolResult, balanceResult, priceResult, nameResult, iconUrlResult] = await Promise.allSettled([
-    token?.getSymbol() ?? Promise.resolve(null),
-    token?.getAvailableBalance(walletAddress) ?? Promise.resolve(null),
-    token?.getPrice() ?? Promise.resolve(null),
-    token?.getName() ?? Promise.resolve(null),
-    token?.getIconUrl() ?? Promise.resolve(null),
+  interface XrpTokenLike {
+    getTrustLimit(address: string): Promise<string>;
+  }
+
+  interface CotiTokenLike {
+    isSecure(): Promise<boolean>;
+  }
+
+  const existingList: TokenType[] = Array.isArray(store.state.user.tokenBalance?.[rpcProvider])
+    ? store.state.user.tokenBalance[rpcProvider]
+    : [];
+  const existingItem = existingList.find((item) => item?.root === id) || null;
+  const rawToken = (token as unknown as InternalTokenFields) || {};
+
+  let resolvedPrice: TokenType['price'] = existingItem?.price ?? null;
+  let resolvedIconUrl: string | null = existingItem?.iconUrl ?? rawToken._icon ?? rawToken._iconOverride ?? null;
+
+  const priceAndIconPromise = Promise.allSettled([
+    token.getPrice(),
+    resolvedIconUrl ? Promise.resolve(resolvedIconUrl) : token.getIconUrl(),
+  ]).then(([priceRes, iconRes]) => {
+    if (priceRes.status === 'fulfilled' && priceRes.value !== undefined) {
+      resolvedPrice = priceRes.value ?? resolvedPrice;
+    }
+    if (iconRes.status === 'fulfilled' && iconRes.value) {
+      resolvedIconUrl = iconRes.value;
+    }
+  });
+
+  const [symbolResult, balanceResult, nameResult] = await Promise.allSettled([
+    rawToken._symbol || rawToken._symbolOverride
+      ? Promise.resolve(rawToken._symbol ?? rawToken._symbolOverride ?? null)
+      : token.getSymbol(),
+    walletAddress ? token.getAvailableBalance(walletAddress) : Promise.resolve(null),
+    rawToken._name || rawToken._nameOverride
+      ? Promise.resolve(rawToken._name ?? rawToken._nameOverride ?? null)
+      : token.getName(),
   ]);
 
   const tokenObject: TokenType = {
     root: id,
-    symbol: symbolResult.status === 'fulfilled' ? symbolResult.value : null,
-    balance: balanceResult.status === 'fulfilled' ? balanceResult.value : null,
-    price: priceResult.status === 'fulfilled' ? priceResult.value : null,
-    name: nameResult.status === 'fulfilled' ? nameResult.value : null,
-    isMandatory: token?.isMandatory,
-    iconUrl: iconUrlResult.status === 'fulfilled' ? iconUrlResult.value : null,
-    additionalData: {},
+    symbol:
+      symbolResult.status === 'fulfilled' && symbolResult.value !== null
+        ? symbolResult.value
+        : (existingItem?.symbol ?? null),
+    balance:
+      balanceResult.status === 'fulfilled' && balanceResult.value !== null
+        ? balanceResult.value
+        : (existingItem?.balance ?? null),
+    price: resolvedPrice,
+    name:
+      nameResult.status === 'fulfilled' && nameResult.value !== null
+        ? nameResult.value
+        : (existingItem?.name ?? null),
+    isMandatory: token.isMandatory,
+    iconUrl: resolvedIconUrl,
+    additionalData: { ...(existingItem?.additionalData || {}) },
   };
 
   if (rpcProvider === RPC_NAMES.XRP && tokenObject) {
-    if (!token?.isNative) {
+    if (!token.isNative) {
       tokenObject.additionalData.tokenLimits =
-        await safeCall(() => token.getTrustLimit(walletAddress), "getTrustLimit");
+        'getTrustLimit' in token && walletAddress
+          ? await safeCall(() => (token as unknown as XrpTokenLike).getTrustLimit(walletAddress), "getTrustLimit")
+          : (existingItem?.additionalData?.tokenLimits ?? null);
     } else {
       tokenObject.additionalData.isEnoughRootTokenBalance =
-        tokenObject?.balance !== undefined && Number(tokenObject?.balance) >= 1;
+        tokenObject.balance !== undefined && tokenObject.balance !== null && Number(tokenObject.balance) >= 1;
     }
   }
 
   if (rpcProvider === RPC_NAMES.COTI) {
-    tokenObject.additionalData.cotiIsSecureToken = await safeCall(() => token.isSecure(), "isSecure");
-    tokenObject.additionalData.isOnBoarded = await safeCall(() => (mgr as any).isOnBoarded(store.state.user.publicKeyCard), "isOnBoarded");
+    tokenObject.additionalData.cotiIsSecureToken = 'isSecure' in token
+      ? await safeCall(() => (token as unknown as CotiTokenLike).isSecure(), "isSecure")
+      : false;
+    tokenObject.additionalData.isOnBoarded = isCotiManager(mgr)
+      ? await safeCall(() => mgr.isOnBoarded(store.state.user.publicKeyCard), "isOnBoarded")
+      : false;
   }
 
-  try {
-    await store.dispatch('user/setTokenBalanceItem', {
-      provider: rpcProvider,
-      key: id,
-      value: tokenObject,
-      action: "updateToken",
-    });
-  } catch (err) {
-  }
-
-  const selected = store.state.user.selectedToken?.[rpcProvider];
-  if (selected?.root === tokenObject?.root && selected?.balance !== tokenObject?.balance) {
+  const commitTokenUpdate = async (snapshot: TokenType) => {
     try {
-      await store.dispatch('user/setSelectedToken', { key: rpcProvider, value: tokenObject });
+      await store.dispatch('user/setTokenBalanceItem', {
+        provider: rpcProvider,
+        key: id,
+        value: snapshot,
+        action: "updateToken",
+      });
     } catch (err) {
     }
+
+    const selected = store.state.user.selectedToken?.[rpcProvider];
+    if (selected?.root === snapshot?.root && selected?.balance !== snapshot?.balance) {
+      try {
+        await store.dispatch('user/setSelectedToken', { key: rpcProvider, value: snapshot });
+      } catch (err) {
+      }
+    }
+  };
+
+  await commitTokenUpdate({ ...tokenObject });
+  if (tokenObject.price) {
+    setProviderUSDBalance(rpcProvider);
   }
 
-  setProviderUSDBalance(rpcProvider);
+  await priceAndIconPromise;
+  if (resolvedPrice !== tokenObject.price || resolvedIconUrl !== tokenObject.iconUrl) {
+    tokenObject.price = resolvedPrice;
+    tokenObject.iconUrl = resolvedIconUrl;
+    await commitTokenUpdate({ ...tokenObject });
+    if (tokenObject.price) {
+      setProviderUSDBalance(rpcProvider);
+    }
+  }
 };
 
-export const getTokensList = (isForced = false): any[] => {
+export const getTokensList = (isForced = false): Token[] => {
   const mgr = getOrCreateManager(store.state.settings.rpcProvider?.name, isForced);
   return mgr.getTokens();
 };
 
-export const getToken = (id: string): any => {
+export const getToken = (id: string): Token | undefined => {
   const mgr = getOrCreateManager(store.state.settings.rpcProvider?.name);
   return mgr.getToken(id);
 };
 
-export const setTokensBalances = async (isForced = false): Promise<void> => {
-  if (isForced) {
-    walletAddressCache.clear();
-    lastTokenFetchTimestamp.clear();
-    store.dispatch('user/resetTokenBalance').catch((_err: unknown) => {
-    });
-  }
-  const mgr = getOrCreateManager(store.state.settings.rpcProvider?.name, isForced);
-  const tokens = mgr.getTokens();
+export const setTokensBalances = async (
+  isForced = false,
+  targetProvider?: RpcName | string
+): Promise<void> => {
+  const rpcProvider = targetProvider || store.state.settings.rpcProvider?.name;
+  if (!rpcProvider) return;
 
-  const batchSize = 3;
-  for (let i = 0; i < tokens.length; i += batchSize) {
-    const batch = tokens.slice(i, i + batchSize);
-    await Promise.allSettled(batch.map(tokenItem => setTokenBalance(tokenItem.id, store.state.settings.rpcProvider?.name, isForced)));
+  if (!isForced && pendingProviderBalances.has(rpcProvider as string)) {
+    return pendingProviderBalances.get(rpcProvider as string)!;
   }
+
+  const runRefresh = (async () => {
+    try {
+      if (isForced) {
+        walletAddressCache.delete(rpcProvider as string);
+        for (const key of lastTokenFetchTimestamp.keys()) {
+          if (key.startsWith(`${rpcProvider}:`)) {
+            lastTokenFetchTimestamp.delete(key);
+          }
+        }
+      }
+
+      await seedProviderTokenList(rpcProvider, isForced);
+
+      const mgr = getOrCreateManager(rpcProvider as string, false);
+      if (isForced) {
+        const mgrWithReader = mgr as unknown as { _balanceReader?: { clearCache?: () => void } };
+        if (typeof mgrWithReader?._balanceReader?.clearCache === 'function') {
+          mgrWithReader._balanceReader.clearCache();
+        }
+      }
+
+      const tokens = mgr.getTokens();
+      if (tokens.length === 0) return;
+
+      const concurrencyLimit = 6;
+      let cursor = 0;
+      const workers = Array.from({ length: Math.min(concurrencyLimit, tokens.length) }, async () => {
+        while (cursor < tokens.length) {
+          const currentIndex = cursor++;
+          const tokenItem = tokens[currentIndex];
+          if (tokenItem) {
+            await setTokenBalance(tokenItem.id, rpcProvider, isForced);
+          }
+        }
+      });
+
+      await Promise.allSettled(workers);
+      setProviderUSDBalance(rpcProvider);
+    } finally {
+      pendingProviderBalances.delete(rpcProvider as string);
+    }
+  })();
+
+  pendingProviderBalances.set(rpcProvider as string, runRefresh);
+  return runRefresh;
 };
-export const clearData = (): boolean => {
+
+export const clearData = async (): Promise<boolean> => {
   walletAddressCache.clear();
-  store.dispatch('user/resetToken');
-  store.dispatch('swap/resetBalances');
+  await store.dispatch('user/resetToken');
+  await store.dispatch('swap/resetBalances');
 
   return true;
 };

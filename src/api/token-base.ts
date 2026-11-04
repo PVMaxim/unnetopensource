@@ -62,11 +62,11 @@ export abstract class NativeTokenBase {
         return this._icon;
     }
 
-    getAvailableBalance(owner: string): Promise<string> {
-        return this.getBalance(owner);
+    getAvailableBalance(owner: string, force?: boolean): Promise<string> {
+        return this.getBalance(owner, force);
     }
 
-    abstract getBalance(owner: string): Promise<string>;
+    abstract getBalance(owner: string, force?: boolean): Promise<string>;
 }
 
 export abstract class GenericTokenBase<MetadataType extends BasicTokenMetadata = BasicTokenMetadata> {
@@ -151,8 +151,8 @@ export abstract class GenericTokenBase<MetadataType extends BasicTokenMetadata =
         return this._priceProvider.getIconUrl(ticker);
     }
 
-    getAvailableBalance(owner: string): Promise<string> {
-        return this.getBalance(owner);
+    getAvailableBalance(owner: string, force?: boolean): Promise<string> {
+        return this.getBalance(owner, force);
     }
 
     setPriceProvider(priceProvider: PriceProvider): void {
@@ -178,7 +178,7 @@ export abstract class GenericTokenBase<MetadataType extends BasicTokenMetadata =
         return this._lazyMetadata.get();
     }
 
-    abstract getBalance(owner: string): Promise<string>;
+    abstract getBalance(owner: string, force?: boolean): Promise<string>;
 
     protected abstract _doGetMetadata(): Promise<MetadataType>;
 }

@@ -148,8 +148,12 @@ export class EvmManager extends BlockchainManagerBase implements BlockchainManag
         }
 
         const offset = args.offset ?? 0;
-        const nativeTxs = await this._history.getNativeTransactions(args.owner);
-        const tokenTxs = await this._history.getAllTokenTransactions(args.owner);
+        const [nativeResult, tokenResult] = await Promise.allSettled([
+            this._history.getNativeTransactions(args.owner),
+            this._history.getAllTokenTransactions(args.owner),
+        ]);
+        const nativeTxs = nativeResult.status === "fulfilled" ? nativeResult.value : [];
+        const tokenTxs = tokenResult.status === "fulfilled" ? tokenResult.value : [];
 
         const txs = [
             ...tokenTxs.filter(x => allowedTokens.includes(x.tokenId)),

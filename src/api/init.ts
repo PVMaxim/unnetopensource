@@ -8,11 +8,27 @@ export function ensureInitialized(): Promise<void> {
     initPromise = (async () => {
       try {
         await runDataMigration();
+      } catch (err) {
+      }
+
+      try {
         await store.dispatch('lang/initializeLang');
+      } catch (err) {
+      }
+
+      try {
         await store.dispatch('settings/initializeSettings');
+      } catch (err) {
+      }
+
+      try {
         await store.dispatch('user/initialize');
+      } catch (err) {
+      }
+
+      try {
         await store.dispatch('swapHistory/initializeHistory');
-      } catch (e) {
+      } catch (err) {
       }
     })();
   }

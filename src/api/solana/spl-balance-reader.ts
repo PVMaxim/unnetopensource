@@ -14,16 +14,20 @@ export class SplBalanceReader {
     }
 
     async getBalance(mint: PublicKey, owner: PublicKey): Promise<string> {
-        const ownerStr = owner.toString();
-        let cachedBalances = this._cache.get(ownerStr);
+        try {
+            const ownerStr = owner.toString();
+            let cachedBalances = this._cache.get(ownerStr);
 
-        if( !cachedBalances ) {
-            cachedBalances = new CachedValue(() => this._getBalances(owner), this.MAX_CACHE_AGE);
-            this._cache.set(ownerStr, cachedBalances);
+            if( !cachedBalances ) {
+                cachedBalances = new CachedValue(() => this._getBalances(owner), this.MAX_CACHE_AGE);
+                this._cache.set(ownerStr, cachedBalances);
+            }
+
+            const balances = await cachedBalances.get();
+            return balances.get(mint.toString()) ?? "0";
+        } catch {
+            return "0";
         }
-
-        const balances = await cachedBalances.get();
-        return balances.get(mint.toString()) ?? "0";
     }
 
     private async _getBalances(owner: PublicKey): Promise<Map<string, string>> {
@@ -38,15 +42,18 @@ export class SplBalanceReader {
         programId: PublicKey,
         balances: Map<string, string>,
     ): Promise<void> {
-        const response = await this._rpc.getParsedTokenAccountsByOwner(owner, { programId });
+        try {
+            const response = await this._rpc.getParsedTokenAccountsByOwner(owner, { programId });
 
-        for( const item of response.value ) {
-            const mint: string | undefined = item.account.data.parsed.info?.mint;
-            const amount: string | undefined = item.account.data.parsed.info?.tokenAmount?.uiAmountString;
+            for( const item of response.value ) {
+                const mint: string | undefined = item.account.data.parsed.info?.mint;
+                const amount: string | undefined = item.account.data.parsed.info?.tokenAmount?.uiAmountString;
 
-            if( mint && amount ) {
-                balances.set(mint, amount);
+                if( mint && amount ) {
+                    balances.set(mint, amount);
+                }
             }
+        } catch {
         }
     }
 }

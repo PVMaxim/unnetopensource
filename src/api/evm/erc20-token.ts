@@ -57,12 +57,8 @@ export class EvmErc20Token extends GenericTokenBase implements Token {
             await contract.symbol();
             await contract.decimals();
         }
-        catch(e: any) {
-            if( e.code === "BAD_DATA" ) {
-                return false;
-            } else {
-                throw e;
-            }
+        catch (e: any) {
+            return false;
         }
 
         return true;

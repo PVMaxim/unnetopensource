@@ -200,7 +200,7 @@
                 "ticker": "book-of-ethereum"
             }
         ],
-        "all": "https://united.network/manifests/ethereum-tokens.json"
+        "all": "/manifests/ethereum-tokens.json"
     },
 
     "blockExplorer": {

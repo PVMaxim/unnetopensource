@@ -67,17 +67,22 @@ export const TRC20_ABI = [
     }
 ];
 
+const Trc20TransferItemSchema = z.object({
+    transaction_id: z.string(),
+    block_ts: z.coerce.number().optional().default(0),
+    from_address: z.string().optional().default(""),
+    to_address: z.string().optional().default(""),
+    quant: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    confirmed: z.boolean().optional().default(true),
+    finalResult: z.string().optional().default(""),
+});
+
 const Trc20TransfersSchema = z.object({
-    total: z.number(),
-    token_transfers: z.object({
-        transaction_id: z.string(),
-        block_ts: z.number(),
-        from_address: z.string(),
-        to_address: z.string(),
-        quant: z.coerce.bigint(),
-        confirmed: z.boolean(),
-        finalResult: z.string(),
-    }).array(),
+    total: z.coerce.number().optional().default(0),
+    token_transfers: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(Trc20TransferItemSchema)),
 });
 
 export class Trc20Token extends GenericTokenBase implements Token {

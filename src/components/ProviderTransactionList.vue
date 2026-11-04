@@ -1,5 +1,5 @@
 <template>
-  <PullToRefresh :loading="loadingRefresh" @refresh="refreshHandler">
+  <PullToRefresh :isLoading="loadingRefresh" @refresh="refreshHandler">
     <div class="transaction-history">
       <div v-if="isLoading" class="transaction-history-list center">
         <Loading />
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, shallowRef, reactive, computed } from 'vue';
+import { defineComponent, ref, shallowRef, reactive, computed, watch } from 'vue';
 import { useStore } from 'vuex';
 import { initialManager, getToken } from '@/api/ApiHandler';
 import { useEventsBus } from '@/plugins/eventBus.js';
@@ -149,7 +149,7 @@ export default defineComponent({
     });
 
     const storeSelectedToken = computed(() => store.state.user.selectedToken?.[store.state.settings.rpcProvider?.name]);
-    const minHeightComp = computed(() => props.minHeight || 'initial');
+    const minHeightComp = computed(() => props.minHeight || '200px');
 
     const maxPage = computed(() => {
       if (!pagination.total || pagination.total <= 0) return 0;
@@ -265,6 +265,14 @@ export default defineComponent({
       await fetchTransactions();
     });
 
+    watch(() => props.historyPageLimit, async (newLimit) => {
+      if (newLimit && newLimit > 0 && newLimit !== pagination.limit) {
+        pagination.limit = newLimit;
+        pagination.page = 1;
+        await fetchTransactions();
+      }
+    });
+
     fetchTransactions();
 
     return { 
@@ -287,11 +295,16 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-  .transaction-history, .transaction-history-list {
+  .transaction-history {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
   .transaction-history-list {
+    width: 100%;
+    height: 100%;
     min-height: v-bind(minHeightComp);
   }
 
@@ -300,6 +313,8 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex: 1;
+    min-height: v-bind(minHeightComp);
   } 
 
   .transaction-history-item {

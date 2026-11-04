@@ -112,6 +112,10 @@ class CoreSwapService implements ICoreSwapService {
     };
   }
 
+  getManifestTokens(): SwapToken[] {
+    return manifestTokensList;
+  }
+
   async getTokens(): Promise<SwapToken[]> {
     const seen = new Set(
       manifestTokensList.map((t) => tokenDedupKey(t.chain, t.address)),

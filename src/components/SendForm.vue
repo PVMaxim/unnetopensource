@@ -210,9 +210,6 @@ export default defineComponent({
       const tokenBalance = computed(() => {
         const providerName = store.state.settings.rpcProvider?.name;
         let tokens = store.state.user.tokenBalance?.[providerName] || [];
-        if (tokens.length === 0) {
-          setTokensBalances();
-        }
         return tokens.map((token) => {
           return {
             ...token,
@@ -470,6 +467,11 @@ export default defineComponent({
       }
 
       onMounted(async() => {
+        const providerName = store.state.settings.rpcProvider?.name;
+        const currentTokens = store.state.user.tokenBalance?.[providerName] || [];
+        if (currentTokens.length === 0) {
+          setTokensBalances(false).catch(() => {});
+        }
         getEstimateFee(formData.amount);
       });
 

@@ -40,6 +40,7 @@ const BlockchainBaseManifestSchema = z.object({
 
         all: z.union([
             z.string().url(),
+            z.string().regex(/^\//),
             z.array(TokenSchema),
         ]).optional(),
     }).optional(),

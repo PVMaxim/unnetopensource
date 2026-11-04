@@ -221,7 +221,15 @@ export const setLocaleAlternate = (locales: string[]) => {
   });
 };
 
-export const setCanonical = (to = null as any) => {
+export interface MetaTagPluginOptions {
+  preconnect?: string[];
+  defaultLocale?: string;
+  textCallback?: (text: string) => string;
+  locales?: string[];
+  defaultName?: string;
+}
+
+export const setCanonical = (to: RouteLocationNormalized | { fullPath?: string } | null = null) => {
   const url = typeof window !== 'undefined' ? `${window.location.origin}${to?.fullPath || ''}` : '';
     const preconnectLink = document.querySelector(
       `link[rel="canonical"]`
@@ -269,20 +277,20 @@ export const setupMetaTagsHandler = (router: Router) => {
 };
 
 export const metaTagPlugin = {
-  install: (_app: App, options: any, router: Router) => {
-    if (options.preconnect) {
+  install: (_app: App, options: MetaTagPluginOptions, router: Router) => {
+    if (options?.preconnect?.length) {
       preconnect.push(...options.preconnect);
     }
-    if (options.defaultLocale) {
+    if (options?.defaultLocale) {
       setLocaleToUse(options.defaultLocale);
     }
-    if (options.textCallback) {
+    if (options?.textCallback) {
       textCallback = options.textCallback;
     }
-    if (options.locales) {
+    if (options?.locales) {
       locales = options.locales;
     }
-    if (options.defaultName) {
+    if (options?.defaultName) {
       defaultName = options.defaultName;
     }
     setupMetaTagsHandler(router);

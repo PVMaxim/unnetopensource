@@ -34,8 +34,12 @@ export class SolanaNativeCoin extends NativeTokenBase implements Token {
             return "0";
         }
 
-        const balance = await this._core.rpc.getBalance(ownerPublicKey);
-        return fromBlockchainUnits(balance, SOLANA_NATIVE_DECIMALS);
+        try {
+            const balance = await this._core.rpc.getBalance(ownerPublicKey);
+            return fromBlockchainUnits(balance, SOLANA_NATIVE_DECIMALS);
+        } catch {
+            return "0";
+        }
     }
 
     async getTransactions(args: {

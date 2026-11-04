@@ -19,7 +19,7 @@ const BlockTimestampSchema = z.object({
 const UtxoSchema = z.object({
     txid: z.string(),
     vout: z.number(),
-    value: z.number().int().nonnegative().pipe(z.coerce.bigint()),
+    value: z.preprocess(v => (v === null || v === undefined ? 0n : v), z.coerce.bigint().nonnegative()),
     status: z.object({
         confirmed: z.boolean(),
         block_height: z.number().int().positive().optional(),
@@ -30,43 +30,43 @@ const UtxoSchema = z.object({
 
 const TransactionSchema = z.object({
     txid: z.string(),
-    version: z.number(),
-    locktime: z.number(),
-    size: z.number().int(),
-    weight: z.number().int(),
-    fee: z.number().int(),
+    version: z.number().optional().default(1),
+    locktime: z.number().optional().default(0),
+    size: z.number().int().optional().default(0),
+    weight: z.number().int().optional().default(0),
+    fee: z.coerce.number().int().optional().default(0),
     status: z.object({
-        confirmed: z.boolean(),
-        block_height: z.number().int().positive().optional(),
+        confirmed: z.boolean().optional().default(false),
+        block_height: z.number().int().nonnegative().optional(),
         block_hash: z.string().optional(),
-        block_time: z.number().int().positive().optional(),
+        block_time: z.number().int().nonnegative().optional(),
     }),
     vin: z.object({
-        txid: z.string(),
-        vout: z.number(),
+        txid: z.string().optional().default(""),
+        vout: z.number().optional().default(0),
         prevout: z.object({
-            scriptpubkey: z.string(),
-            scriptpubkey_asm: z.string(),
-            scriptpubkey_type: z.string(),
+            scriptpubkey: z.string().optional().default(""),
+            scriptpubkey_asm: z.string().optional().default(""),
+            scriptpubkey_type: z.string().optional().default(""),
             scriptpubkey_address: z.string().optional(),
-            value: z.number().int().nonnegative().pipe(z.coerce.bigint()),
+            value: z.preprocess(v => (v === null || v === undefined ? 0n : v), z.coerce.bigint().nonnegative()),
         }).nullish(),
-        scriptsig: z.string(),
-        scriptsig_asm: z.string(),
-        is_coinbase: z.boolean(),
-        sequence: z.number(),
-    }).array(),
+        scriptsig: z.string().optional().default(""),
+        scriptsig_asm: z.string().optional().default(""),
+        is_coinbase: z.boolean().optional().default(false),
+        sequence: z.number().optional().default(0),
+    }).array().optional().default([]),
     vout: z.object({
-        scriptpubkey: z.string(),
-        scriptpubkey_asm: z.string(),
-        scriptpubkey_type: z.string(),
+        scriptpubkey: z.string().optional().default(""),
+        scriptpubkey_asm: z.string().optional().default(""),
+        scriptpubkey_type: z.string().optional().default(""),
         scriptpubkey_address: z.string().optional(),
-        value: z.number().int().nonnegative().pipe(z.coerce.bigint()),
-    }).array(),
+        value: z.preprocess(v => (v === null || v === undefined ? 0n : v), z.coerce.bigint().nonnegative()),
+    }).array().optional().default([]),
 });
 
-const AddressUtxoListSchema = z.array(UtxoSchema);
-const AddressTransactionsSchema = z.array(TransactionSchema);
+const AddressUtxoListSchema = z.preprocess((val) => Array.isArray(val) ? val : [], z.array(UtxoSchema));
+const AddressTransactionsSchema = z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TransactionSchema));
 
 export type Utxo = z.infer<typeof UtxoSchema>;
 
@@ -74,8 +74,8 @@ export class MempoolClient {
 
     private readonly _httpClient: HttpClient;
 
-    constructor(host: string) {
-        this._httpClient = new HttpClient({baseUrl: host});
+    constructor(host: string, timeout: number = 30 * 1000) {
+        this._httpClient = new HttpClient({baseUrl: host, timeout});
     }
 
     getLatestBlock() {

@@ -3,32 +3,45 @@ import { z } from "zod";
 import { HistoryProvider, TransactionInfo, TokenTransactionInfo } from "../../common";
 import { HttpClient } from "../../http-client";
 
+const TxItemSchema = z.object({
+    timeStamp: z.coerce.number().int().nonnegative().optional().default(0),
+    hash: z.string(),
+    from: z.string().nullable().optional().transform(v => v ?? ""),
+    to: z.string().nullable().optional().transform(v => v ?? ""),
+    value: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    isError: z.coerce.string().optional().default("0"),
+    txreceipt_status: z.coerce.string().optional().default("1"),
+});
+
+const TokenTxItemSchema = z.object({
+    timeStamp: z.coerce.number().int().nonnegative().optional().default(0),
+    hash: z.string(),
+    from: z.string().nullable().optional().transform(v => v ?? ""),
+    to: z.string().nullable().optional().transform(v => v ?? ""),
+    value: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 0n : v),
+        z.coerce.bigint().nonnegative().default(0n)
+    ),
+    contractAddress: z.string().nullable().optional().transform(v => v ?? ""),
+    tokenDecimal: z.preprocess(
+        v => (v === null || v === undefined || v === "" ? 18 : Number(v)),
+        z.number().int().nonnegative().default(18)
+    ),
+});
+
 const TxListSchema = z.object({
-    status: z.string(),
-    message: z.string(),
-    result: z.object({
-        timeStamp: z.coerce.number().int().positive(),
-        hash: z.string(),
-        from: z.string(),
-        to: z.string(),
-        value: z.coerce.bigint().nonnegative(),
-        isError: z.string(),
-        txreceipt_status: z.string(),
-    }).array(),
+    status: z.coerce.string().optional().default("0"),
+    message: z.string().optional().default(""),
+    result: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TxItemSchema)),
 });
 
 const TokenTxSchema = z.object({
-    status: z.string(),
-    message: z.string(),
-    result: z.object({
-        timeStamp: z.coerce.number().int().positive(),
-        hash: z.string(),
-        from: z.string(),
-        to: z.string(),
-        value: z.coerce.bigint().nonnegative(),
-        contractAddress: z.string(),
-        tokenDecimal: z.coerce.number().int().nonnegative(),
-    }).array(),
+    status: z.coerce.string().optional().default("0"),
+    message: z.string().optional().default(""),
+    result: z.preprocess((val) => Array.isArray(val) ? val : [], z.array(TokenTxItemSchema)),
 });
 
 export class EtherScanHistory implements HistoryProvider {
@@ -61,7 +74,7 @@ export class EtherScanHistory implements HistoryProvider {
             },
         });
 
-        if( data.status !== "1" ) {
+        if( data.status !== "1" || !Array.isArray(data.result) ) {
             return [];
         }
 
@@ -97,7 +110,7 @@ export class EtherScanHistory implements HistoryProvider {
             },
         });
 
-        if( data.status !== "1" ) {
+        if( data.status !== "1" || !Array.isArray(data.result) ) {
             return [];
         }
 
@@ -127,7 +140,7 @@ export class EtherScanHistory implements HistoryProvider {
             },
         });
 
-        if( data.status !== "1" ) {
+        if( data.status !== "1" || !Array.isArray(data.result) ) {
             return [];
         }
 

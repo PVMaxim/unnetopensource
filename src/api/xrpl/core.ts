@@ -167,6 +167,8 @@ export class XrplCore {
         const response = await provider.request({
             command: "account_tx",
             account: owner,
+            ledger_index_min: -1,
+            ledger_index_max: -1,
             limit: 100,
             binary: false,
         });
@@ -212,6 +214,8 @@ export class XrplCore {
         const response = await provider.request({
             command: "account_tx",
             account: owner,
+            ledger_index_min: -1,
+            ledger_index_max: -1,
             limit: 100,
             binary: false,
         });

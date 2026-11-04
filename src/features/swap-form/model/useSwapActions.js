@@ -146,6 +146,12 @@ export function useSwapActions({ signTransaction, clearPin }) {
     try {
       store.dispatch('swap/openLoading', { title: t('swap.loader.checkingAmounts') });
       checkAmount();
+      if (!quoteData.value?.txData) {
+        throw new Error(t('swap.errors.noQuote') || 'No quote data available');
+      }
+      if (selectedQuoteServiceName.value && quoteData.value.txData.dex && selectedQuoteServiceName.value !== quoteData.value.txData.dex) {
+        throw new Error('Quote mismatch with selected DEX');
+      }
       store.dispatch('swap/setLoadTitle', t('swap.loader.getQuote'));
       const { providerManager } = await createProviderManagerAndToken(
         fromProvider.value,

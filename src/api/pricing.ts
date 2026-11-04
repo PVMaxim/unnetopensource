@@ -6,9 +6,9 @@ import { CachedValue } from "./utils";
 const SimplePriceSchema = z.record(
     z.string(),
     z.object({
-        usd: z.number().nonnegative().nullish(),
+        usd: z.number().nullish(),
         usd_24h_change: z.number().nullish(),
-    }),
+    }).passthrough(),
 );
 
 const CoinDataSchema = z.object({
@@ -42,6 +42,7 @@ export class PriceProvider {
     private readonly _platform: string;
     private readonly _registeredTokens: string[];
     private readonly _cachedCoinList: CachedValue<CoinSearchItem[]>;
+    private readonly _tickerByAddressCache: Map<string, Promise<string | undefined>>;
     private _cachedPrices: Map<string, TokenPriceInfo>;
     private _lastUpdateTime: number;
     private _pending?: Promise<void>;
@@ -55,6 +56,7 @@ export class PriceProvider {
         this._platform = args.platform;
         this._registeredTokens = [];
         this._cachedPrices = new Map();
+        this._tickerByAddressCache = new Map();
         this._lastUpdateTime = 0;
         this._pendingNumTokens = 0;
         this._cachedCoinList = new CachedValue(() => this._getCoinList(), this.COIN_LIST_CACHE_TIME);
@@ -75,29 +77,43 @@ export class PriceProvider {
     }
 
     async getTickerByAddress(address: string): Promise<string | undefined> {
-        if( !this._platform ) {
+        if( !this._platform || this._platform === "_" || !address ) {
             return undefined;
         }
 
-        const response = await this._client.fetch({
-            url: `api/v3/coins/${this._platform}/contract/${address}`,
-            validateStatus: (status: number)=> status === 200 || status === 404,
-        });
+        const key = address.toLowerCase();
+        if (this._tickerByAddressCache.has(key)) {
+            return this._tickerByAddressCache.get(key)!;
+        }
 
-        if( response.status === 404 ) {
+        const promise = (async () => {
+            try {
+                const response = await this._client.fetch({
+                    url: `api/v3/coins/${this._platform}/contract/${address}`,
+                    validateStatus: (status: number)=> status === 200 || status === 404,
+                });
+
+                if( response.status === 404 ) {
+                    return undefined;
+                }
+
+                const data = await HttpClient.parseTypedResponse({
+                    response,
+                    schema: CoinDataSchema,
+                });
+
+                if( data.platforms[this._platform]?.toLowerCase() === address.toLowerCase() ) {
+                    return data.id;
+                }
+            } catch {
+                return undefined;
+            }
+
             return undefined;
-        }
+        })();
 
-        const data = await HttpClient.parseTypedResponse({
-            response,
-            schema: CoinDataSchema,
-        });
-
-        if( data.platforms[this._platform] === address ) {
-            return data.id;
-        }
-
-        return undefined;
+        this._tickerByAddressCache.set(key, promise);
+        return promise;
     }
 
     async getPrice(ticker: string): Promise<TokenPriceInfo | undefined> {
@@ -111,7 +127,10 @@ export class PriceProvider {
             this._pendingNumTokens = this._registeredTokens.length;
             this._pending = (async () => {
                 try {
-                    this._cachedPrices = await this._doGetPrices();
+                    const fetchedPrices = await this._doGetPrices();
+                    for (const [k, v] of fetchedPrices) {
+                        this._cachedPrices.set(k, v);
+                    }
                     this._lastUpdateTime = Date.now();
                 } catch(err) {
                 } finally {
@@ -208,10 +227,10 @@ export class PriceProvider {
 
         const result: Map<string, TokenPriceInfo> = new Map();
         for( const ticker of this._registeredTokens ) {
-            const price = data[ticker]?.usd || 0;
+            const price = data[ticker]?.usd;
             const change = data[ticker]?.usd_24h_change || 0;
 
-            if( !!price ) {
+            if( price !== undefined && price !== null ) {
                 result.set(ticker, { 
                     usdPrice: price.toString(), 
                     usd24hChange: change.toString(),

@@ -84,7 +84,11 @@ export class SplToken extends GenericTokenBase<SplTokenMetadata> implements Toke
             return "0";
         }
 
-        return this._core.splBalanceReader.getBalance(this._mint, ownerPublicKey);
+        try {
+            return await this._core.splBalanceReader.getBalance(this._mint, ownerPublicKey);
+        } catch {
+            return "0";
+        }
     }
 
     async getTransactions(args: {
