@@ -161,5 +161,3 @@ export default async ({ mode }) => {
     },
   })
 }
-
-}
