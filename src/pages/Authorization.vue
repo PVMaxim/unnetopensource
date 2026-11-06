@@ -141,23 +141,23 @@
           messageLoad.value = t('pages.authorization.status.submitSign');
           publicKeyCard.value = resultAuth.value?.keys;
           if (resultAuth.value?.version) {
-            store.dispatch('settings/setCardVersion',  resultAuth.value?.version ).then(() => {
+            await store.dispatch('settings/setCardVersion',  resultAuth.value?.version ).then(() => {
             }).catch((err) => {
             });
           }
           if (resultAuth.value?.isNewCard !== undefined) {
-            store.dispatch('user/setRegistered',  resultAuth.value?.isNewCard);
+            await store.dispatch('user/setRegistered',  resultAuth.value?.isNewCard);
           }
         }
 
-        isTheSamePublicKey(publicKeyCard.value);
+        await isTheSamePublicKey(publicKeyCard.value);
 
         if (publicKeyCard.value !== null && publicKeyCard.value?.ioPublicKey) {
-          store.dispatch('user/setPinPublicKey',  publicKeyCard.value?.ioPublicKey ).then(() => {
+          await store.dispatch('user/setPinPublicKey',  publicKeyCard.value?.ioPublicKey ).then(() => {
           });
         }
 
-        store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
+        await store.dispatch('user/setPublicKeyCard',  publicKeyCard.value ).then(() => {
         }).catch((err) => {
           throw new Error(t('errors.authorizationError'),{ cause: {errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
         });
@@ -175,7 +175,7 @@
             throw new Error(t('errors.authorizationError'),{ cause: {errorSubtitle: t('pages.authorization.errors.walletError'), errorBody:err}});
           }
 
-          store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
+          await store.dispatch('user/setAccountAddress',  accountAddress.value ).then(() => {
           }).catch((err) => {
             throw new Error(t('errors.browserError'),{ cause: {errorSubtitle: t('pages.authorization.errors.processError'), errorBody: typeof err === 'object' || typeof err === 'array' ? JSON.stringify(err) : err}});
           });

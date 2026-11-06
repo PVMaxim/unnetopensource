@@ -16,7 +16,7 @@ const wasmMiddleware = () => {
     name: 'wasm-middleware',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
-        if (req.url.endsWith('venom_card_extra_wasm_bg.wasm') || req.url.endsWith('zxing_reader.wasm')) {
+        if (req.url.endsWith('zxing_reader.wasm')) {
           const wasmPath = path.join(__dirname, 'src/api/pkg/', path.basename(req.url));
           const wasmFile = fs.readFileSync(wasmPath);
           res.setHeader('Content-Type', 'application/wasm');

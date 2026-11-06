@@ -2,12 +2,15 @@ import { CardErrorCode, CardKeys, RequestChunk } from "./common";
 import { CmdSignSecp256k1, CmdSignEd25519, CmdBatchSignSecp256k1 } from "./card-io";
 import { UniError } from "./errors";
 import { getEd25519Key, getSecp256k1Key } from "./utils";
+import { prepareCardSignIsolated, processCardResponseIsolated } from "./hardware-bridge";
 
 abstract class BasicRequestChunkBase implements RequestChunk {
 
     readonly command: CmdSignSecp256k1 | CmdSignEd25519;
     readonly hash: string;
     readonly expectedPublicKey?: string;
+    protected abstract readonly curve: 'secp256k1' | 'ed25519';
+    private _sessionId?: string;
     private _publicKey?: string;
     private _signature?: string;
 
@@ -37,13 +40,24 @@ abstract class BasicRequestChunkBase implements RequestChunk {
         return this.command.getExpectedResponseSize();
     }
 
-    buildCardRequest(args: {
+    async buildCardRequest(args: {
         pin: string,
     }): Promise<Uint8Array> {
-        return this.command.buildRequest({
-            dataHash: this.hash,
-            pin: args.pin,
-        });
+        try {
+            const plan = await prepareCardSignIsolated({
+                curve: this.curve,
+                dataHash: this.hash,
+                expectedPublicKey: this.expectedPublicKey,
+                pin: args.pin,
+            });
+            this._sessionId = plan.sessionId;
+            return plan.apduBytes;
+        } catch {
+            return this.command.buildRequest({
+                dataHash: this.hash,
+                pin: args.pin,
+            });
+        }
     }
 
     processCardResponse(rawData: Uint8Array | ArrayBuffer): {
@@ -51,13 +65,26 @@ abstract class BasicRequestChunkBase implements RequestChunk {
         keys: CardKeys,
         pinRemaining: number,
     } {
-        const { errorCode, keys, signature, pinRemaining } = this.command.parseResponse(rawData);
+        const rawBuffer = rawData instanceof Uint8Array ? rawData : new Uint8Array(rawData);
 
-        if( errorCode === CardErrorCode.Success ) {
+        // Hardware Bridge reconciliation if active session exists
+        if (this._sessionId) {
+            processCardResponseIsolated(this._sessionId, rawBuffer, {
+                curve: this.curve,
+                dataHash: this.hash,
+                expectedPublicKey: this.expectedPublicKey,
+                pin: '',
+            }).catch(() => {
+            });
+        }
+
+        const { errorCode, keys, signature, pinRemaining } = this.command.parseResponse(rawBuffer);
+
+        if (errorCode === CardErrorCode.Success) {
             const publicKey = this.getPublicKey(keys);
 
-            if( !!this.expectedPublicKey && 
-                publicKey.toLowerCase() !== this.expectedPublicKey?.toLowerCase() 
+            if (!!this.expectedPublicKey &&
+                publicKey.toLowerCase() !== this.expectedPublicKey?.toLowerCase()
             ) {
                 throw new UniError("PUBLIC_KEY_MISMATCH");
             }
@@ -77,6 +104,8 @@ abstract class BasicRequestChunkBase implements RequestChunk {
 }
 
 export class Secp256k1RequestChunk extends BasicRequestChunkBase {
+    protected readonly curve = 'secp256k1' as const;
+
     constructor(args: {
         hash: string,
         expectedPublicKey?: string,
@@ -93,6 +122,8 @@ export class Secp256k1RequestChunk extends BasicRequestChunkBase {
 }
 
 export class Ed25519RequestChunk extends BasicRequestChunkBase {
+    protected readonly curve = 'ed25519' as const;
+
     constructor(args: {
         hash: string,
         expectedPublicKey?: string,
@@ -161,16 +192,16 @@ export class BatchSecp256k1RequestChunk implements RequestChunk {
     } {
         const { errorCode, keys, signatures, pinRemaining } = this._command.parseResponse(rawData);
 
-        if( errorCode === CardErrorCode.Success ) {
+        if (errorCode === CardErrorCode.Success) {
             const publicKey = getSecp256k1Key(keys);
 
-            if( !!this._expectedPublicKey &&
+            if (!!this._expectedPublicKey &&
                 publicKey.toLowerCase() !== this._expectedPublicKey?.toLowerCase()
             ) {
                 throw new UniError("PUBLIC_KEY_MISMATCH");
             }
 
-            if( signatures.length !== this.hashes.length ) {
+            if (signatures.length !== this.hashes.length) {
                 throw new UniError("INVALID_CARD_RESPONSE");
             }
 
