@@ -91,6 +91,12 @@
     "@intlify/bundle-utils": {
       "@intlify/shared": "11.4.12",
       "@intlify/message-compiler": "11.4.12"
+    },
+    "@metaplex-foundation/umi-eddsa-web3js": {
+      "@metaplex-foundation/umi": "$@metaplex-foundation/umi"
+    },
+    "@metaplex-foundation/umi-web3js-adapters": {
+      "@metaplex-foundation/umi": "$@metaplex-foundation/umi"
     }
   }
 }
