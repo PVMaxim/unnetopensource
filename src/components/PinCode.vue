@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { defineComponent, watchEffect, ref} from 'vue'
+import { defineComponent, watchEffect, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useI18n } from 'vue-i18n';
 import { useStore } from 'vuex';
 import DeleteIcon from '@/components/svg/deleteIcon.vue'
@@ -166,11 +166,65 @@ export default defineComponent({
       }
 
       const storePinCodeHandle = async(event) => {
+        if (!storePinCode.value) {
+          // User manually unchecked the box -> immediately purge stored PIN
+          store.dispatch('user/resetPinHash').catch(() => {});
+        }
         emit('isStore', {
           value: storePinCode.value,
           srcEvent: 'storePin'
-        })
-      }
+        });
+      };
+
+      const checkPinStatus = () => {
+        const hash = store.state.user.pinHash;
+        if (hash && hash.pin && typeof hash.date === 'number') {
+          if (hash.date > Date.now()) {
+            storePinCode.value = true;
+            return true;
+          } else {
+            // Expired after 15 minutes
+            store.dispatch('user/resetPinHash').catch(() => {});
+          }
+        }
+        storePinCode.value = false;
+        return false;
+      };
+
+      let timer = null;
+
+      onMounted(() => {
+        const active = checkPinStatus();
+        emit('isStore', {
+          value: active,
+          srcEvent: 'storePin'
+        });
+
+        timer = setInterval(() => {
+          const wasActive = storePinCode.value;
+          const isActiveNow = checkPinStatus();
+          if (wasActive && !isActiveNow) {
+            emit('isStore', {
+              value: false,
+              srcEvent: 'storePin'
+            });
+          }
+        }, 1000);
+      });
+
+      onUnmounted(() => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      });
+
+      watch(
+        () => store.state.user.pinHash,
+        () => {
+          checkPinStatus();
+        }
+      );
 
       const handleKeyPress = async (e) => {
         const num = ref(e.currentTarget?.getAttribute('data-num'));

@@ -338,7 +338,8 @@ By default, extended token lists can be loaded from any public token registry or
 ## Security & Privacy
 
 - **Client-Side Cryptography:** Private keys never touch any centralized servers. Keys remain in the hardware security element or are generated and held purely in client-side ephemeral memory.
-- **Encrypted Local Storage:** Sensitive persisted preferences are encrypted using AES-CBC with PBKDF2 derived keys via the standard WebCrypto API.
+- **Encrypted Local Storage (AES-256-GCM):** Persisted application preferences and user data are encrypted client-side using authenticated AES-256-GCM with unique 96-bit IVs and non-extractable keys via the standard WebCrypto API.
+- **Split-Secret Vault Architecture:** Sensitive temporary credentials (PIN session and onboarding seed phrase) utilize a Split-Secret design: dynamic HKDF-SHA-256 key derivation between a non-extractable IndexedDB HMAC key and an in-memory  token with strict 15-minute TTL and automated lifecycle purging.
 - **No Telemetry Tracking:** The application does not collect user tracking or telemetry metrics.
 
 ---

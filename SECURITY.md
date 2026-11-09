@@ -41,5 +41,6 @@ To help us triage and resolve the issue quickly, please include:
 ## Security Best Practices for Users & Developers
 
 - **Non-Custodial Guarantee:** Never share your seed phrase, private keys, or PIN code with anyone. Official maintainers will never ask for them.
-- **Client-Side Storage:** Verify that private keys and seeds remain encrypted client-side using WebCrypto (AES-CBC + PBKDF2).
+- **Client-Side Cryptography & Split-Secret Vault:** Ephemeral PIN sessions and onboarding mnemonic words are protected using True Split-Secret Key Derivation (v3): a hardware/browser non-extractable HMAC-SHA-256 CryptoKey in IndexedDB KeyStore combined dynamically with a 256-bit ephemeral session token in  via HKDF-SHA-256 to derive single-use AES-256-GCM keys. Secrets are never persisted in plaintext or with single-point extractable keys, and are automatically purged upon session expiry (15-minute TTL) or tab closure.
+- **Persistent Local Storage:** Stored wallet identifiers, accounts, and cached balances in IndexedDB are authenticated and encrypted using non-extractable AES-256-GCM with unique 96-bit initialization vectors (IV).
 - **Environment Isolation:** Do not expose sensitive API keys or RPC credentials in frontend source code.

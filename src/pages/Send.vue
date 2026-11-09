@@ -293,6 +293,8 @@
 
         if (pinPre.value !== null && storePin.value === true && store.state.user.pinHash === null) {
           store.dispatch('user/setPinHash', { pin: pinPre.value, date: Date.now() + (1000 * 60 * 15) }).catch(() => {});
+        } else if (storePin.value === false && store.state.user.pinHash !== null) {
+          store.dispatch('user/resetPinHash').catch(() => {});
         }
         pinPre.value = null;
         success.value = true;

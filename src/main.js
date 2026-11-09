@@ -5,6 +5,13 @@ import { store } from './store/index';
 import i18n, { initI18n } from "./plugins/i18n";
 import router from './router/index';
 import { registerLayouts } from './layouts/index';
+import { sweepExpiredPinVault } from '@/api/pin-session-vault';
+import { sweepExpiredOnboardingVault } from '@/api/onboarding-vault';
+
+// Startup sweep of ephemeral vaults before mount
+sweepExpiredPinVault().catch(() => {});
+sweepExpiredOnboardingVault().catch(() => {});
+
 
 const app = createApp(App);
 app.use(store);
