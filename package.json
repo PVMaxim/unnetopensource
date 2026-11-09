@@ -87,6 +87,9 @@
     "vue-eslint-parser": "^8.0.0",
     "vue-tsc": "^2.1.0"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.22.4"
+  },
   "overrides": {
     "@intlify/bundle-utils": {
       "@intlify/shared": "11.4.12",

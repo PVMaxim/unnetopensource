@@ -17,6 +17,7 @@ coverage
 Dockerfile
 docker-compose.yml
 .dockerignore
+package-lock.json
 
 /cypress/videos/
 /cypress/screenshots/
